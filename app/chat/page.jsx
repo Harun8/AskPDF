@@ -7,19 +7,21 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.js",
   import.meta.url
 ).toString();
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "@/public/styles/chat.css";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
 import TextField from "@/components/TextField";
 import ConversationDisplay from "@/components/ConversationDisplay";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { redirect } from "next/navigation";
 
 export default function chat() {
   const [conversation, setConversation] = useState([]);
   const [numPages, setNumPages] = useState();
   const [pageNumber, setPageNumber] = useState(1);
   const [pdf, setPdf] = useState();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
@@ -27,6 +29,29 @@ export default function chat() {
 
   const pdfURL = "/pdf.pdf";
   const supabase = createClientComponentClient();
+
+  useEffect(() => {
+    const getAuth = async () => {
+      try {
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
+        console.log("session", session);
+
+        if (session) {
+          setIsAuthenticated(true);
+        } else {
+          //   redirect("/");
+          console.log("THE USER AINT AUTHENTICATED REDIRRRREEECCCTT MFFF");
+        }
+      } catch (error) {
+        console.error("Error checking authentication", error);
+        // Handle error as appropriate
+      }
+    };
+
+    getAuth();
+  }, []);
 
   const sendMessage = (messageText) => {
     console.log("msgTExt", messageText);
@@ -109,10 +134,15 @@ export default function chat() {
           </p>
         )}
       </div>
-      <div>
-        <ConversationDisplay conversation={conversation} />
 
-        <TextField onSendMessage={sendMessage}></TextField>
+      <div className="flex flex-col justify-between h-full">
+        <div className="flex-grow overflow-y-auto">
+          <ConversationDisplay conversation={conversation} />
+        </div>
+
+        <div className="mt-4">
+          <TextField onSendMessage={sendMessage}></TextField>
+        </div>
       </div>
     </div>
   );
