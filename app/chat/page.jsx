@@ -14,7 +14,7 @@ import "react-pdf/dist/Page/TextLayer.css";
 import TextField from "@/components/TextField";
 import ConversationDisplay from "@/components/ConversationDisplay";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function chat() {
   const [conversation, setConversation] = useState([]);
@@ -22,7 +22,7 @@ export default function chat() {
   const [pageNumber, setPageNumber] = useState(1);
   const [pdf, setPdf] = useState();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
+  const router = useRouter();
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
   }
@@ -41,7 +41,7 @@ export default function chat() {
         if (session) {
           setIsAuthenticated(true);
         } else {
-          //   redirect("/");
+          router.push("/");
           console.log("THE USER AINT AUTHENTICATED REDIRRRREEECCCTT MFFF");
         }
       } catch (error) {
@@ -75,20 +75,43 @@ export default function chat() {
         upsert: false,
       });
   };
+
+  const onFileSelect = (event) => {
+    console.log("file chosen, upload it to db", event);
+    const fileSizeLimit = 5 * 1024 * 1024; // 5MB
+    if (event.target.files[0].size > fileSizeLimit) {
+      console.log("SHIT IS TOO BIGG FAMALAM");
+      event.target.value = "";
+    } else {
+      setPdf(event.target.files[0]); // call method
+    }
+  };
   return (
     <div className="mx-12 grid gap-4 grid-cols-2">
-      <div>
+      <div className="rounded-lg border shadow5">
         {pdf ? (
-          <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>
-            <Page pageNumber={pageNumber} />
-          </Document>
+          <div className="w-1/2">
+            <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>
+              <Page width={600} pageNumber={pageNumber} />
+            </Document>
+            <button
+              disabled={pageNumber === numPages ? true : false}
+              onClick={() => setPageNumber((prev) => prev + 1)}>
+              Right
+            </button>
+            <button
+              disabled={pageNumber === 1 ? true : false}
+              onClick={() => setPageNumber((prev) => prev - 1)}>
+              Left
+            </button>
+          </div>
         ) : (
-          // THis is not working for some reason
-          //   <object
-          //     type="application/pdf"
-          //     data={pdf}
-          //     height="900"
-          //     width="900"></object>
+          //THis is not working for some reason
+          // <object
+          //   type="application/pdf"
+          //   data={pdf}
+          //   height="900"
+          //   width="900"></object>
           <div className="flex justify-center mt-48">
             <label class="custum-file-upload " for="file">
               <div class="icon">
@@ -115,10 +138,8 @@ export default function chat() {
                 <span>Click to upload PDF</span>
               </div>
               <input
-                onChange={(event) => {
-                  console.log("file chosen, upload it to db", event);
-                  setPdf(event.target.files[0]); // call method
-                }}
+                size="100"
+                onChange={(event) => onFileSelect(event)}
                 type="file"
                 id="file"
                 accept="application/pdf"></input>

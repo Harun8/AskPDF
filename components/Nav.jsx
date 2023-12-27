@@ -2,25 +2,22 @@
 
 import Image from "next/image";
 import { supabase } from "@/lib/supabase";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Session } from "@supabase/auth-helpers-nextjs";
-const Nav = (props) => {
-  const [session, setSession] = useState();
+const Nav = ({ session }) => {
+  // const [session, setSession] = useState();
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
-  useEffect(() => {
-    supabase.auth
-      .getSession()
-      .then((session) => setSession(session.data.session ?? null))
-      .catch((err) => {
-        console.log("ERROR GET SESSION: ", err);
-      });
-  }, []);
+  // useEffect(() => {
+  //   console.log("YOOOO REFRESH THE MFF PAGE");
+  //   router.refresh();
+  // }, [session]);
 
   return (
-    <nav className="bg-gray-800">
+    <nav className="">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -73,7 +70,7 @@ const Nav = (props) => {
               <div className="flex space-x-4">
                 <Link
                   href="/"
-                  className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                  className="  dark:bg-gray-800 dark:text-white hover:text-slate-500	text-black rounded-md px-3 py-2 text-base font-medium"
                   aria-current="page">
                   Home page
                 </Link>
@@ -81,13 +78,13 @@ const Nav = (props) => {
                 {session ? (
                   <Link
                     href="chat"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+                    className="  dark:bg-gray-800 dark:text-white  hover:text-slate-500	text-black rounded-md px-3 py-2 text-base font-medium">
                     Chat
                   </Link>
                 ) : (
                   <Link
                     href="/pricing"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+                    className="  dark:bg-gray-800 dark:text-white  hover:text-slate-500	text-black rounded-md px-3 py-2 text-base font-medium">
                     Pricing
                   </Link>
                 )}
@@ -107,7 +104,8 @@ const Nav = (props) => {
                     setLoading(true);
                     const { error } = await supabase.auth.signOut();
                     setLoading(false);
-                    if (!error) setSession(null);
+                    router.refresh();
+                    // if (!error) setSession(null);
                   }}
                   disabled={loading}>
                   {loading ? "Loading" : "Logout"}
@@ -116,13 +114,13 @@ const Nav = (props) => {
             ) : (
               <Link
                 href="/login"
-                className="bg-slate-900 font-semibold rounded mr-3 px-4 py-2 text-white">
+                className=" bg-slate-300 hover:bg-slate-800 hover:dark:bg-gray-800 dark:text-white  hover:text-white hover:font-bold dark:bg-gray-800 font-semibold rounded mr-3 px-4 py-2 text-black">
                 Login
               </Link>
             )}
             <button
               type="button"
-              className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+              className="relative rounded-full bg-slate-300 dark:bg-gray-800 p-1 text-black hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
               <span className="absolute -inset-1.5"></span>
               <span className="sr-only">View notifications</span>
               <svg
@@ -141,8 +139,6 @@ const Nav = (props) => {
             </button>
 
             <div className="relative ml-3">
-   
-
               {/* <div
                 className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                 role="menu"
