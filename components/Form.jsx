@@ -43,18 +43,18 @@ const Forms = (props) => {
         // }}
       >
         {({ errors, touched }) => (
-          <Form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 align-middle mt-60 ">
-            <h1 className="flex justify-center text-3xl font-bold		">
+          <Form className=" dark:bg-gray-900 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 align-middle mt-60 ">
+            <h1 className="dark:text-gray-400 flex justify-center text-3xl font-bold		">
               {props.title}
             </h1>
 
             <label
-              class="block text-gray-700 text-sm font-bold mb-2"
+              class=" dark:text-white block text-gray-700 text-sm font-bold mb-2"
               for="email">
               Email
             </label>
             <Field
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className=" dark:bg-gray-700 dark:text-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="email"
               name="email"
               id="email"
@@ -66,12 +66,12 @@ const Forms = (props) => {
             {/* <ErrorMessage name="email" component="div" /> */}
 
             <label
-              class="block text-gray-700 text-sm font-bold mb-2 mt-3"
+              class=" dark:text-white block text-gray-700 text-sm font-bold mb-2"
               for="password">
               Password
             </label>
             <Field
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className=" dark:bg-gray-700 dark:text-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="password"
               name="password"
               id="password"

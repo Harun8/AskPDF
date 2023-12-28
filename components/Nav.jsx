@@ -9,6 +9,7 @@ import { Session } from "@supabase/auth-helpers-nextjs";
 const Nav = ({ session }) => {
   // const [session, setSession] = useState();
   const [loading, setLoading] = useState(false);
+  const [toggleDropDown, setToggleDropDown] = useState(false);
   const router = useRouter();
 
   // useEffect(() => {
@@ -22,6 +23,7 @@ const Nav = ({ session }) => {
         <div className="relative flex h-16 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
             <button
+              onClick={() => setToggleDropDown((prev) => !prev)}
               type="button"
               className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
               aria-controls="mobile-menu"
@@ -114,13 +116,13 @@ const Nav = ({ session }) => {
             ) : (
               <Link
                 href="/login"
-                className=" bg-slate-300 hover:bg-slate-800 hover:dark:bg-gray-800 dark:text-white  hover:text-white hover:font-bold dark:bg-gray-800 font-semibold rounded mr-3 px-4 py-2 text-black">
+                className=" bg-slate-300 hover:bg-slate-800 hover:dark:bg-gray-700 dark:text-white  hover:text-white hover:font-bold dark:bg-gray-800 font-semibold rounded mr-3 px-4 py-2 text-black">
                 Login
               </Link>
             )}
             <button
               type="button"
-              className="relative rounded-full bg-slate-300 dark:bg-gray-800 p-1 text-black hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+              className="relative rounded-full bg-slate-300 dark:bg-gray-800 p-1 text-black dark:text-white hover:dark:text-slate-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
               <span className="absolute -inset-1.5"></span>
               <span className="sr-only">View notifications</span>
               <svg
@@ -137,69 +139,35 @@ const Nav = ({ session }) => {
                 />
               </svg>
             </button>
-
-            <div className="relative ml-3">
-              {/* <div
-                className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                role="menu"
-                aria-orientation="vertical"
-                aria-labelledby="user-menu-button"
-                tabindex="-1">
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-700"
-                  role="menuitem"
-                  tabindex="-1"
-                  id="user-menu-item-0">
-                  Your Profile
-                </a>
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-700"
-                  role="menuitem"
-                  tabindex="-1"
-                  id="user-menu-item-1">
-                  Settings
-                </a>
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-700"
-                  role="menuitem"
-                  tabindex="-1"
-                  id="user-menu-item-2">
-                  Sign out
-                </a>
-              </div> */}
-            </div>
           </div>
         </div>
       </div>
 
-      <div className="sm:hidden" id="mobile-menu">
-        <div className="space-y-1 px-2 pb-3 pt-2">
-          <a
-            href="#"
-            className="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
-            aria-current="page">
-            Dashboard
-          </a>
-          <a
-            href="#"
-            className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
-            Team
-          </a>
-          <a
-            href="#"
-            className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
-            Projects
-          </a>
-          <a
-            href="#"
-            className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
-            Calendar
-          </a>
+      {toggleDropDown && (
+        <div className="sm:hidden" id="mobile-menu">
+          <div className="space-y-1 px-2 pb-3 pt-2">
+            <Link
+              href="/"
+              className="block dark:bg-gray-800 dark:text-white hover:text-slate-500 text-black rounded-md px-3 py-2 text-base font-medium"
+              aria-current="page">
+              Home page
+            </Link>
+            {session ? (
+              <Link
+                href="chat"
+                className="block dark:bg-gray-800 dark:text-white hover:text-slate-500 text-black rounded-md px-3 py-2 text-base font-medium">
+                Chat
+              </Link>
+            ) : (
+              <Link
+                href="/pricing"
+                className="block dark:bg-gray-800 dark:text-white hover:text-slate-500 text-black rounded-md px-3 py-2 text-base font-medium">
+                Pricing
+              </Link>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </nav>
   );
 };

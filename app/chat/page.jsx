@@ -15,6 +15,7 @@ import TextField from "@/components/TextField";
 import ConversationDisplay from "@/components/ConversationDisplay";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
+import sendFileToOpenAi from "@/util/openai";
 
 export default function chat() {
   const [conversation, setConversation] = useState([]);
@@ -90,11 +91,24 @@ export default function chat() {
     <div className="mx-12 grid gap-4 grid-cols-2">
       <div className="rounded-lg border shadow5">
         {pdf ? (
-          <div className="w-1/2">
+          <div className=" p-12 bg-gray h-[800px] overflow-y-auto  ">
             <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>
-              <Page width={600} pageNumber={pageNumber} />
+              {Array.apply(null, Array(numPages))
+                .map((x, i) => i + 1)
+                .map((page) => {
+                  return (
+                    <Page
+                      className="mb-12"
+                      pageNumber={page}
+                      renderTextLayer={false}
+                      renderAnnotationLayer={false}
+                    />
+                  );
+                })}
             </Document>
-            <button
+            <button onClick={() => sendFileToOpenAi(pdf)}>OpenAi</button>
+
+            {/* <button
               disabled={pageNumber === numPages ? true : false}
               onClick={() => setPageNumber((prev) => prev + 1)}>
               Right
@@ -103,7 +117,7 @@ export default function chat() {
               disabled={pageNumber === 1 ? true : false}
               onClick={() => setPageNumber((prev) => prev - 1)}>
               Left
-            </button>
+            </button> */}
           </div>
         ) : (
           //THis is not working for some reason
