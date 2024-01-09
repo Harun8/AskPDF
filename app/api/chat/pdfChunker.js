@@ -1,7 +1,31 @@
+"use server"; // move
 const fs = require("fs");
 const pdf = require("pdf-parse");
 const { OpenAIApi, Configuration } = require("openai");
 
+let dataBuffer = fs.readFileSync("path to PDF file...");
+
+function pdfParser(file) {
+  pdf(file).then(function (data) {
+    // number of pages
+    console.log(data.numpages);
+    // number of rendered pages
+    console.log(data.numrender);
+    // PDF info
+    console.log(data.info);
+    // PDF metadata
+    console.log(data.metadata);
+    // PDF.js version
+    // check https://mozilla.github.io/pdf.js/getting_started/
+    console.log(data.version);
+    // PDF text
+    console.log(data.text);
+  });
+}
+
+module.exports = pdfParser;
+
+/*
 async function readPdf(filePath) {
   let dataBuffer = fs.readFileSync(filePath);
   return pdf(dataBuffer); // returns a promise
@@ -65,3 +89,5 @@ const apiKey = "your-openai-api-key";
 processPdf(filePath, apiKey).then((responses) => {
   console.log(responses);
 });
+
+*/

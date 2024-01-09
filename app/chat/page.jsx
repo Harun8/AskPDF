@@ -77,7 +77,7 @@ export default function chat() {
       });
   };
 
-  const onFileSelect = (event) => {
+  const onFileSelect = async (event) => {
     console.log("file chosen, upload it to db", event);
     const fileSizeLimit = 5 * 1024 * 1024; // 5MB
     if (event.target.files[0].size > fileSizeLimit) {
@@ -85,6 +85,26 @@ export default function chat() {
       event.target.value = "";
     } else {
       setPdf(event.target.files[0]); // call method
+
+      try {
+        const formData = new FormData();
+        // a web API that allows you to easily construct a set of key/value pairs representing form fields and their values
+        formData.append("file", event.target.files[0]);
+
+        const response = await fetch("/api/chat", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        // const result = await response.json();
+        // console.log(result); // handle the response
+      } catch (error) {
+        console.log("error in chat page", error);
+      }
     }
   };
   return (
