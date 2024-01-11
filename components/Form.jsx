@@ -49,8 +49,8 @@ const Forms = (props) => {
             </h1>
 
             <label
-              class=" dark:text-white block text-gray-700 text-sm font-bold mb-2"
-              for="email">
+              className=" dark:text-white block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="email">
               Email
             </label>
             <Field
@@ -66,8 +66,8 @@ const Forms = (props) => {
             {/* <ErrorMessage name="email" component="div" /> */}
 
             <label
-              class=" dark:text-white block text-gray-700 text-sm font-bold mb-2"
-              for="password">
+              className=" dark:text-white block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="password">
               Password
             </label>
             <Field
@@ -85,15 +85,15 @@ const Forms = (props) => {
 
             {props.title === "Login" && (
               <a
-                class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+                className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
                 href="#">
                 Forgot Password?
               </a>
             )}
 
-            <div class="flex justify-center mt-5">
+            <div className="flex justify-center mt-5">
               <button
-                class=" rounded-lg bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className=" rounded-lg bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
                 // disabled={isSubmitting}
               >
@@ -102,7 +102,7 @@ const Forms = (props) => {
             </div>
 
             <Link
-              class=" mt-2 inline-block align-baseline font-bold text-sm text-gray-400 hover:text-text-800"
+              className=" mt-2 inline-block align-baseline font-bold text-sm text-gray-400 hover:text-text-800"
               href={props.link}>
               {props.redirect}
             </Link>
