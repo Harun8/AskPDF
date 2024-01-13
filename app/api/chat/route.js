@@ -40,10 +40,33 @@ export default async function handler(req, res) {
       const splitData = await processChunks(splitIntoChunks(pdfData.text));
       console.log("split data....", splitData.pdfIds);
 
-      return new Response({
+      // console.log(
+      //   "RESPONSEE ",
+      //   new Response({
+      //     message: "PDF processed",
+      //     pdfIds: splitData.pdfIds,
+      //   })
+      // );
+
+      // refactor this to one return new response json.stringify....
+      const responseObject = {
         message: "PDF processed",
         pdfIds: splitData.pdfIds,
+      };
+
+      const response = new Response(JSON.stringify(responseObject), {
+        status: 200, // Set the status code to 200 (OK)
+        headers: {
+          "Content-Type": "application/json", // Set the Content-Type header to 'application/json'
+        },
       });
+
+      return response;
+
+      // return new Response({
+      //   message: "PDF processed",
+      //   pdfIds: splitData.pdfIds,
+      // });
 
       // return res.status(200).json({
 

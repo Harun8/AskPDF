@@ -113,10 +113,26 @@ export default function chat() {
           body: formData,
         });
 
+        console.log("Content-Type: ", response.headers.get("Content-Type"));
+
         if (response.ok) {
-          const data = await JSON.parse(response);
-          console.log("DATAAAAQ", data);
-          // setCurrentPdfId(data.pdfId);
+          try {
+            const textResponse = await response.text(); // Read response as text
+            console.log("Response Text: ", textResponse);
+
+            // If you still need to parse JSON from the text
+            try {
+              const data = JSON.parse(textResponse); // Try parsing as JSON
+              console.log("Parsed Data: ", data);
+            } catch (jsonError) {
+              console.error("Error parsing JSON from text: ", jsonError);
+              // Handle case where text is not JSON
+            }
+          } catch (error) {
+            console.error("Error reading text response: ", error);
+          }
+        } else {
+          console.log("Response not OK: ", response.status);
         }
 
         // const result = await response.json();
