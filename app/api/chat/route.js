@@ -2,12 +2,19 @@ import fs from "fs";
 import pdf from "pdf-parse";
 import { promisify } from "util";
 const readFileAsync = promisify(fs.readFile);
+const { createClient } = require("@supabase/supabase-js");
+
+const supabaseUrl = "https://hjtlrhjfabtavtcdtvuf.supabase.co";
+const supabaseKey =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqdGxyaGpmYWJ0YXZ0Y2R0dnVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDMyNTgwNzQsImV4cCI6MjAxODgzNDA3NH0.AO_McXBnZ5ifxBko66NXN4OdWAs8536SS6W4DtpdG2s";
+
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 const OpenAI = require("openai");
 require("dotenv").config();
 
 const openai = new OpenAI({
-  apiKey: "", // api key
+  apiKey: "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", // api key
   dangerouslyAllowBrowser: true, // should be false
 });
 
@@ -29,15 +36,31 @@ export default async function handler(req, res) {
       const buffer = Buffer.from(bytes);
       const pdfData = await pdf(buffer);
       console.log("PDF text", pdfData.text);
-      splitIntoChunks(pdfData.text);
-      return res
-        .status(200)
-        .json({ message: "PDF processed", text: pdfData.text });
+
+      const splitData = await processChunks(splitIntoChunks(pdfData.text));
+      console.log("split data....", splitData.pdfIds);
+
+      return new Response({
+        message: "PDF processed",
+        pdfIds: splitData.pdfIds,
+      });
+
+      // return res.status(200).json({
+
+      // });
+
+      // splitIntoChunks(pdfData.text);
+
+      // return res
+      //   .status(200)
+      //   .json({ message: "PDF processed", text: pdfData.text });
     } else {
       console.log("SHIT AINT A FILE MFF");
     }
   } catch (error) {
     console.error("Error processing form data:", error.message);
+    return res.status(500).json({ error: error });
+
     // If form data parsing fails, proceed to handle as text input
   }
 
@@ -75,8 +98,8 @@ function splitIntoChunks(text, maxChars = 2000) {
   }
 
   // call openapi chat completion here
-  processChunks(chunks);
-  console.log("chunks", chunks);
+  // processChunks(chunks); // Reason for my chunk being saved in the db twice
+  // console.log("chunks", chunks);
 
   return chunks;
 }
@@ -86,32 +109,52 @@ async function chatCompletion(chunk, text) {
     messages: [
       { role: "system", content: "You are a helpful assistant." },
       { role: "user", content: chunk },
-      {
-        role: "user",
-        content: text,
-      }, // checker that it got all chunks
+      // {
+      //   role: "user",
+      //   content: text,
+      // }, // checker that it got all chunks
     ],
     model: "gpt-3.5-turbo-0301",
   });
 
-  console.log(completion.choices[0].message.content);
+  console.log("GPT RESPONSE", completion.choices[0].message.content);
+
   return completion.choices[0].message.content;
 }
-
 async function processChunks(chunks) {
+  const pdfText = [];
   const responses = [];
+  const pdfIds = [];
 
   for (const chunk of chunks) {
-    try {
-      const response = await chatCompletion(chunk);
-      responses.push(response);
-    } catch (error) {
-      console.error("Error in processing chunk: ", error);
-      // Handle the error (e.g., break the loop, skip this chunk, etc.)
+    const response = await chatCompletion(chunk);
+    responses.push(response);
+    pdfText.push(chunk);
+  }
+  try {
+    // Save the chat completion response
+
+    // Database insertion for each chunk
+    const { data, error } = await supabase
+      .from("pdfs")
+      .insert([
+        { text: pdfText, userId: "50b570bd-0f1d-4c00-aeeb-49cb082f89f6" },
+      ]) // FIXXX HARDCODED USERID
+      .select();
+
+    if (error) {
+      throw error;
     }
+
+    // Assuming the response contains the ID of the inserted record
+    console.log("Inserted data", data);
+    const insertedPdfId = data[0].id;
+    pdfIds.push(insertedPdfId);
+  } catch (error) {
+    console.error("Error in processing chunk: ", error);
   }
 
-  return responses;
+  return { pdfIds };
 }
 
 export { handler as POST };

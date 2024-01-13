@@ -23,6 +23,8 @@ export default function chat() {
   const [pageNumber, setPageNumber] = useState(1);
   const [pdf, setPdf] = useState();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [currentPdfId, setCurrentPdfId] = useState(null);
+
   const router = useRouter();
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
@@ -63,7 +65,7 @@ export default function chat() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ message: messageText }),
+      body: JSON.stringify({ message: messageText, pdfId: 2 }),
     });
 
     // should be after the if statement
@@ -111,8 +113,10 @@ export default function chat() {
           body: formData,
         });
 
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
+        if (response.ok) {
+          const data = await JSON.parse(response);
+          console.log("DATAAAAQ", data);
+          // setCurrentPdfId(data.pdfId);
         }
 
         // const result = await response.json();
