@@ -61,7 +61,7 @@ export default function chat() {
     console.log("msgTExt", messageText);
     if (!messageText.trim()) return;
 
-    const sendMessage = await fetch("api/chat", {
+    const sendMessage = await fetch("/api/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

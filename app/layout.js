@@ -23,7 +23,7 @@ export default async function RootLayout({ children }) {
   console.log("Session layout", session);
 
   return (
-    <html class="dark" lang="en">
+    <html class="" lang="en">
       <body className=" bg-slate-400	 dark:bg-gray-800 	">
         <Nav session={session}></Nav>
         {children}

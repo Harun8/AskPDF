@@ -25,12 +25,15 @@ export default async function handler(req, res) {
     return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 
+  console.log("REQ", req);
+
   try {
     // Attempt to parse as form data
     const data = await req.formData();
     const file = data.get("file");
 
     if (file) {
+      console.log("ITS IS A FILE");
       // Handle file processing
       const bytes = await file.arrayBuffer();
       const buffer = Buffer.from(bytes);
@@ -68,7 +71,7 @@ export default async function handler(req, res) {
     }
   } catch (error) {
     console.error("Error processing form data:", error.message);
-    return res.status(500).json({ error: error });
+    // return res.status(500).json({ error: error });
 
     // If form data parsing fails, proceed to handle as text input
   }
@@ -79,11 +82,18 @@ export default async function handler(req, res) {
     console.log("Received text data:", textData);
 
     // chatCompletion(textData.message);
-    chatMessage(chatId, userId, pdfIds);
+    console.log("YOOO");
+    chatMessage(textData.message, textData.pdfId);
 
-    res.status(200).json({ message: "Text processed", data: textData });
+    // res.status(200).json({ message: "Text processed", data: textData });
+
+    const response = new Response({
+      status: 200, // Set the status code to 200 (OK)
+    });
+
+    return response;
   } catch (innerError) {
-    console.error("Error processing text data:", innerError.message);
+    console.error("Error  96:", innerError.message);
     res.status(500).json({ error: innerError.message });
   }
 }
@@ -119,21 +129,39 @@ async function chatMessage(text, pdfId) {
   // send chunk in a for loop
   // ignore the text coming from the chunk
   // send
-  const completion = await openai.chat.completions.create({
-    messages: [
-      { role: "system", content: "You are a helpful assistant." },
-      { role: "user", content: chunk },
-      // {
-      //   role: "user",
-      //   content: text,
-      // }, // checker that it got all chunks
-    ],
-    model: "gpt-3.5-turbo-0301",
-  });
 
-  console.log("GPT RESPONSE", completion.choices[0].message.content);
+  console.log("pdfId", pdfId);
+  try {
+    let { data: pdfs, error } = await supabase
+      .from("pdfs")
+      .select("*")
+      .eq("id", pdfId);
 
-  return completion.choices[0].message.content;
+    if (error) {
+      console.log("error at line 134");
+      throw error;
+    }
+    console.log("pdfs", typeof pdfs[0].text);
+    console.log("text length", pdfs.length);
+  } catch (error) {
+    console.log(error);
+  }
+
+  // const completion = await openai.chat.completions.create({
+  //   messages: [
+  //     { role: "system", content: "You are a helpful assistant." },
+  //     { role: "user", content: chunk },
+  //     // {
+  //     //   role: "user",
+  //     //   content: text,
+  //     // }, // checker that it got all chunks
+  //   ],
+  //   model: "gpt-3.5-turbo-0301",
+  // });
+
+  // console.log("GPT RESPONSE", completion.choices[0].message.content);
+
+  // return completion.choices[0].message.content;
 }
 
 async function chatCompletion(chunk, text) {
