@@ -63,21 +63,6 @@ export default async function handler(req, res) {
       });
 
       return response;
-
-      // return new Response({
-      //   message: "PDF processed",
-      //   pdfIds: splitData.pdfIds,
-      // });
-
-      // return res.status(200).json({
-
-      // });
-
-      // splitIntoChunks(pdfData.text);
-
-      // return res
-      //   .status(200)
-      //   .json({ message: "PDF processed", text: pdfData.text });
     } else {
       console.log("SHIT AINT A FILE MFF");
     }
@@ -93,7 +78,8 @@ export default async function handler(req, res) {
     const textData = await req.json(); // Assuming text data if not form data
     console.log("Received text data:", textData);
 
-    chatCompletion(textData.message);
+    // chatCompletion(textData.message);
+    chatMessage(chatId, userId, pdfIds);
 
     res.status(200).json({ message: "Text processed", data: textData });
   } catch (innerError) {
@@ -126,6 +112,28 @@ function splitIntoChunks(text, maxChars = 2000) {
   // console.log("chunks", chunks);
 
   return chunks;
+}
+
+async function chatMessage(text, pdfId) {
+  // get chunk
+  // send chunk in a for loop
+  // ignore the text coming from the chunk
+  // send
+  const completion = await openai.chat.completions.create({
+    messages: [
+      { role: "system", content: "You are a helpful assistant." },
+      { role: "user", content: chunk },
+      // {
+      //   role: "user",
+      //   content: text,
+      // }, // checker that it got all chunks
+    ],
+    model: "gpt-3.5-turbo-0301",
+  });
+
+  console.log("GPT RESPONSE", completion.choices[0].message.content);
+
+  return completion.choices[0].message.content;
 }
 
 async function chatCompletion(chunk, text) {

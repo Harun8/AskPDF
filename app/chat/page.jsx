@@ -24,6 +24,7 @@ export default function chat() {
   const [pdf, setPdf] = useState();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentPdfId, setCurrentPdfId] = useState(null);
+  const [chatId, setChatId] = useState("");
 
   const router = useRouter();
   function onDocumentLoadSuccess({ numPages }) {
@@ -65,7 +66,11 @@ export default function chat() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ message: messageText, pdfId: currentPdfId }),
+      body: JSON.stringify({
+        message: messageText,
+        pdfId: currentPdfId,
+        chatId: chatId,
+      }),
     });
 
     // should be after the if statement
@@ -125,6 +130,7 @@ export default function chat() {
               const data = JSON.parse(textResponse); // Try parsing as JSON
               console.log("Parsed Data: ", data);
               setCurrentPdfId(data.pdfIds[0]);
+              setChatId(data.chatId);
               history.replaceState(data, "convo", `/chat/${data.pdfIds[0]}`);
 
               // router.replace(`/chat/${132}`, undefined, { shallow: true });
