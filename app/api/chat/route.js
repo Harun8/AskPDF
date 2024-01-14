@@ -38,7 +38,7 @@ export default async function handler(req, res) {
       console.log("PDF text", pdfData.text);
 
       const splitData = await processChunks(splitIntoChunks(pdfData.text));
-      console.log("split data....", splitData.pdfIds);
+      console.log("split data....", splitData);
 
       // console.log(
       //   "RESPONSEE ",
@@ -48,10 +48,11 @@ export default async function handler(req, res) {
       //   })
       // );
 
-      // refactor this to one return new response json.stringify....
+      // refactor this to one return
       const responseObject = {
         message: "PDF processed",
         pdfIds: splitData.pdfIds,
+        chatId: splitData.chatId,
       };
 
       const response = new Response(JSON.stringify(responseObject), {
@@ -148,20 +149,41 @@ async function processChunks(chunks) {
   const pdfText = [];
   const responses = [];
   const pdfIds = [];
+  let chatId;
 
   for (const chunk of chunks) {
     const response = await chatCompletion(chunk);
     responses.push(response);
     pdfText.push(chunk);
   }
+
   try {
+    const { data: chatData, error: chatError } = await supabase
+      .from("chats")
+      .insert([{}]) // Replace with actual data if necessary
+      .select();
+
+    if (chatError) {
+      console.error("Error inserting chat:", chatError);
+      return; // Exit if there's an error
+    }
+
+    // console.log("chatData", chatData);
+
     // Save the chat completion response
 
     // Database insertion for each chunk
+
+    chatId = chatData[0].id;
+
     const { data, error } = await supabase
       .from("pdfs")
       .insert([
-        { text: pdfText, userId: "50b570bd-0f1d-4c00-aeeb-49cb082f89f6" },
+        {
+          text: pdfText,
+          userId: "50b570bd-0f1d-4c00-aeeb-49cb082f89f6",
+          chatId: chatId,
+        },
       ]) // FIXXX HARDCODED USERID
       .select();
 
@@ -177,7 +199,7 @@ async function processChunks(chunks) {
     console.error("Error in processing chunk: ", error);
   }
 
-  return { pdfIds };
+  return { pdfIds, chatId };
 }
 
 export { handler as POST };

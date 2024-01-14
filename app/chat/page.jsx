@@ -14,7 +14,7 @@ import "react-pdf/dist/Page/TextLayer.css";
 import TextField from "@/components/TextField";
 import ConversationDisplay from "@/components/ConversationDisplay";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import sendFileToOpenAi from "@/util/openai";
 
 export default function chat() {
@@ -65,7 +65,7 @@ export default function chat() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ message: messageText, pdfId: 2 }),
+      body: JSON.stringify({ message: messageText, pdfId: currentPdfId }),
     });
 
     // should be after the if statement
@@ -84,15 +84,15 @@ export default function chat() {
     // setConversation((prevConversation) => [...prevConversation, response]);
   };
 
-  const sendPDF = async () => {
-    // const pdf = event.target.files[0];
-    const { data, error } = await supabase.storage
-      .from("pdfs")
-      .upload(`${pdfURL}`, {
-        cacheControl: "3600",
-        upsert: false,
-      });
-  };
+  // const sendPDF = async () => {
+  //   // const pdf = event.target.files[0];
+  //   const { data, error } = await supabase.storage
+  //     .from("pdfs")
+  //     .upload(`${pdfURL}`, {
+  //       cacheControl: "3600",
+  //       upsert: false,
+  //     });
+  // };
 
   const onFileSelect = async (event) => {
     console.log("file chosen, upload it to db", event);
@@ -124,6 +124,10 @@ export default function chat() {
             try {
               const data = JSON.parse(textResponse); // Try parsing as JSON
               console.log("Parsed Data: ", data);
+              setCurrentPdfId(data.pdfIds[0]);
+              history.replaceState(data, "convo", `/chat/${data.pdfIds[0]}`);
+
+              // router.replace(`/chat/${132}`, undefined, { shallow: true });
             } catch (jsonError) {
               console.error("Error parsing JSON from text: ", jsonError);
               // Handle case where text is not JSON
