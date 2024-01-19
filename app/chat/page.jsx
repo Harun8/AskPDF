@@ -58,8 +58,12 @@ export default function chat() {
   }, []);
 
   const sendMessage = async (messageText) => {
+    let answer;
     console.log("msgTExt", messageText);
     if (!messageText.trim()) return;
+
+    const newMessage = { type: "user", text: messageText };
+    setConversation([...conversation, newMessage]);
 
     const sendMessage = await fetch("/api/chat", {
       method: "POST",
@@ -74,15 +78,26 @@ export default function chat() {
     });
 
     // should be after the if statement
-    const newMessage = { type: "user", text: messageText };
-    setConversation([...conversation, newMessage]);
 
     if (!sendMessage.ok) {
       throw new Error("Sending message to api failed");
     }
 
+    if (sendMessage.ok) {
+      try {
+        const textResponse = await sendMessage.text(); // Read response as text
+        const data = JSON.parse(textResponse); // Try parsing as JSON
+        console.log("Response Text: ", data);
+        answer = data.answer;
+      } catch (error) {}
+    }
+
     // Add user message to conversation
-    // const newMessage = { type: "user", text: messageText };
+    const response = {
+      type: "response",
+      text: answer.split(" ").forEach((word) => word),
+    };
+    setConversation((prevConversation) => [...prevConversation, response]);
 
     // Dummy response for demonstration
     // const response = { type: "response", text: `Response to: ${messageText}` };
@@ -133,7 +148,7 @@ export default function chat() {
               setChatId(data.chatId);
               history.replaceState(data, "convo", `/chat/${data.pdfIds[0]}`);
 
-              // router.replace(`/chat/${132}`, undefined, { shallow: true });
+              // router.replace(`/chat/${data.pdfIds[0]}`, undefined, { shallow: true });
             } catch (jsonError) {
               console.error("Error parsing JSON from text: ", jsonError);
               // Handle case where text is not JSON
