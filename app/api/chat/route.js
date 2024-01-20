@@ -25,22 +25,29 @@ export default async function handler(req, res) {
     return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 
-  console.log("REQ", req);
+  console.log("REQ", req.body);
 
   try {
     // Attempt to parse as form data
     const data = await req.formData();
     const file = data.get("file");
+    const file_id = data.get("file_id");
 
-    if (file) {
-      console.log("ITS IS A FILE");
+    if (file && file_id) {
+      console.log("It is a file with file_id:", file_id);
       // Handle file processing
       const bytes = await file.arrayBuffer();
       const buffer = Buffer.from(bytes);
-      const pdfData = await pdf(buffer);
-      console.log("PDF text", pdfData.text);
 
-      const splitData = await processChunks(splitIntoChunks(pdfData.text));
+      const pdfData = await pdf(buffer);
+
+      console.log("PDF text", pdfData.text);
+      console.log("file_id", file_id);
+      // let filePath = `50b570bd-0f1d-4c00-aeeb-49cb082f89f6/${pdfData.info.Title}`; // HARDCODEDE USERID
+
+      const { chunks } = splitIntoChunks(pdfData.text, file_id);
+      const splitData = await processChunks(chunks, file_id);
+
       console.log("split data....", splitData);
 
       // console.log(
@@ -105,7 +112,7 @@ export default async function handler(req, res) {
 }
 
 // Error Handling in Chunking: Add error handling in the splitIntoChunks function to manage any unexpected scenarios.
-function splitIntoChunks(text, maxChars = 2000) {
+function splitIntoChunks(text, file_id, maxChars = 2000) {
   // https://chatgptdetector.co/chatgpt-character-limit/
   let chunks = [];
   let currentChunk = "";
@@ -127,7 +134,7 @@ function splitIntoChunks(text, maxChars = 2000) {
   // processChunks(chunks); // Reason for my chunk being saved in the db twice
   // console.log("chunks", chunks);
 
-  return chunks;
+  return { chunks, file_id };
 }
 
 async function chatMessage(text, pdfId) {
@@ -212,7 +219,8 @@ async function chatCompletion(chunk, text) {
 
   return completion.choices[0].message.content;
 }
-async function processChunks(chunks) {
+async function processChunks(chunks, file_id) {
+  console.log("file_id", file_id);
   const pdfText = [];
   const responses = [];
   const pdfIds = [];
@@ -250,6 +258,7 @@ async function processChunks(chunks) {
           text: pdfText,
           userId: "50b570bd-0f1d-4c00-aeeb-49cb082f89f6",
           chatId: chatId,
+          file_id: file_id,
         },
       ]) // FIXXX HARDCODED USERID
       .select();

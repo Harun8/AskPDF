@@ -25,6 +25,7 @@ export default function chat() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentPdfId, setCurrentPdfId] = useState(null);
   const [chatId, setChatId] = useState("");
+  const [userId, setUserId] = useState(null);
 
   const router = useRouter();
   function onDocumentLoadSuccess({ numPages }) {
@@ -43,6 +44,7 @@ export default function chat() {
         // console.log("session", session);
 
         if (session) {
+          setUserId(session.user.id);
           setIsAuthenticated(true);
         } else {
           router.push("/");
@@ -115,18 +117,35 @@ export default function chat() {
   // };
 
   const onFileSelect = async (event) => {
+    let filePath;
+    let file_id;
     console.log("file chosen, upload it to db", event);
     const fileSizeLimit = 5 * 1024 * 1024; // 5MB
     if (event.target.files[0].size > fileSizeLimit) {
       console.log("SHIT IS TOO BIGG FAMALAM");
       event.target.value = "";
     } else {
+      filePath = `${userId}/${event.target.files[0].name}`;
+      console.log("userid", userId);
       setPdf(event.target.files[0]); // call method
+      const { data, error } = await supabase.storage
+        .from("pdfs")
+        .upload(filePath, event.target.files[0]);
+      if (error) {
+        // Handle error
+        console.log("error", error);
+      } else {
+        console.log("File upload success", data);
+        console.log("data.id", data.id);
+        file_id = data.id;
+        // Handle success
+      }
 
       try {
         const formData = new FormData();
         // a web API that allows you to easily construct a set of key/value pairs representing form fields and their values
         formData.append("file", event.target.files[0]);
+        formData.append("file_id", file_id);
 
         const response = await fetch("/api/chat", {
           method: "POST",
@@ -186,7 +205,7 @@ export default function chat() {
                   );
                 })}
             </Document>
-            <button onClick={() => sendFileToOpenAi(pdf)}>OpenAi</button>
+            {/* <button onClick={() => sendFileToOpenAi(pdf)}>OpenAi</button> */}
 
             {/* <button
               disabled={pageNumber === numPages ? true : false}
