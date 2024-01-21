@@ -16,6 +16,12 @@ import ConversationDisplay from "@/components/ConversationDisplay";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { redirect, useRouter } from "next/navigation";
 import sendFileToOpenAi from "@/util/openai";
+import OpenAI from "openai";
+
+const openai = new OpenAI({
+  apiKey: "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", // api key
+  dangerouslyAllowBrowser: true, // should be false
+});
 
 export default function chat() {
   const [conversation, setConversation] = useState([]);
@@ -60,61 +66,150 @@ export default function chat() {
   }, []);
 
   const sendMessage = async (messageText) => {
-    let answer;
+    let answer = [];
+    let pdfTexts;
     console.log("msgTExt", messageText);
     if (!messageText.trim()) return;
 
     const newMessage = { type: "user", text: messageText };
     setConversation([...conversation, newMessage]);
 
-    const sendMessage = await fetch("/api/chat", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        message: messageText,
-        pdfId: currentPdfId,
-        chatId: chatId,
-      }),
-    });
+    // const sendMessage = await fetch("/api/chat", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     message: messageText,
+    //     pdfId: currentPdfId,
+    //     chatId: chatId,
+    //   }),
+    // });
 
-    // should be after the if statement
+    try {
+      let { data: pdfs, error } = await supabase
+        .from("pdfs")
+        .select("*")
+        .eq("id", currentPdfId);
 
-    if (!sendMessage.ok) {
-      throw new Error("Sending message to api failed");
+      if (error) {
+        console.log("Error", error);
+        throw error;
+      }
+
+      if (pdfs.length === 0) {
+        console.log("No PDF found with the given ID.");
+        return;
+      }
+
+      pdfTexts = pdfs.map((pdf) => pdf.text);
+      console.log("PDF text type", typeof pdfTexts[0]);
+      console.log("Number of PDFs", pdfTexts.length);
+    } catch (error) {
+      console.log(error);
+      return;
     }
 
-    if (sendMessage.ok) {
-      try {
-        const textResponse = await sendMessage.text(); // Read response as text
-        const data = JSON.parse(textResponse); // Try parsing as JSON
-        console.log("Response Text: ", data);
-        answer = data.answer;
-      } catch (error) {}
+    let flattenedPdfTexts = pdfTexts.flat();
+
+    let messages = [
+      { role: "system", content: "You are a helpful assistant." },
+      ...flattenedPdfTexts.map((pdfText) => ({
+        role: "user",
+        content: pdfText,
+      })),
+      { role: "user", content: messageText },
+    ];
+
+    console.log("messages ", messages);
+    // Add the user's query at the end
+    messages.push({ role: "user", content: messageText });
+
+    // Call the OpenAI API
+    let completion;
+    try {
+      let currentResponse = ""; // Initialize an empty string to accumulate the content
+
+      completion = await openai.chat.completions.create({
+        model: "gpt-3.5-turbo-0301",
+        messages: messages,
+        stream: true,
+      });
+
+      for await (const chunk of completion) {
+        
+        if (typeof chunk.choices[0].delta.content != undefined) {
+          const content = chunk.choices[0].delta.content;
+
+          // Accumulate the content.
+          currentResponse += content;
+          console.log(currentResponse);
+          setConversation((prevConversation) => {
+            let updatedConversation = [...prevConversation];
+
+            // Check if the last entry is a response and update it, or create a new response entry
+            if (
+              updatedConversation.length > 0 &&
+              updatedConversation[updatedConversation.length - 1].type ===
+                "response"
+            ) {
+              updatedConversation[updatedConversation.length - 1].text +=
+                currentResponse;
+            } else {
+              updatedConversation.push({
+                type: "response",
+                text: currentResponse,
+              });
+            }
+
+            currentResponse = ""; // Clear currentResponse after updating the conversation.
+            return updatedConversation;
+          });
+        }
+      }
+    } catch (error) {
+      console.error("Error calling OpenAI API:", error);
+      return;
     }
 
-    // Add user message to conversation
-    const response = {
-      type: "response",
-      text: answer.split(" ").forEach((word) => word),
-    };
-    setConversation((prevConversation) => [...prevConversation, response]);
+    // Once the streaming is done, you may want to append any remaining text to the conversation.
+    if (currentResponse.length > 0) {
+      setConversation((prevConversation) => [
+        ...prevConversation,
+        { type: "response", text: currentResponse },
+      ]);
+    }
 
-    // Dummy response for demonstration
-    // const response = { type: "response", text: `Response to: ${messageText}` };
+    // Additional code (if needed)
+
+    //------------------------
+
+    // // should be after the if statement
+
+    // if (!sendMessage.ok) {
+    //   throw new Error("Sending message to api failed");
+    // }
+
+    // if (sendMessage.ok) {
+    //   try {
+    //     const textResponse = await sendMessage.text(); // Read response as text
+    //     const data = JSON.parse(textResponse); // Try parsing as JSON
+    //     console.log("Response Text: ", data);
+    //     answer = data.answer;
+    //   } catch (error) {}
+    // }
+
+    // // Add user message to conversation
+    // const response = {
+    //   type: "response",
+    //   text: answer.split(" ").forEach((word) => word),
+    // };
     // setConversation((prevConversation) => [...prevConversation, response]);
-  };
 
-  // const sendPDF = async () => {
-  //   // const pdf = event.target.files[0];
-  //   const { data, error } = await supabase.storage
-  //     .from("pdfs")
-  //     .upload(`${pdfURL}`, {
-  //       cacheControl: "3600",
-  //       upsert: false,
-  //     });
-  // };
+    // // Dummy response for demonstration
+    // // const response = { type: "response", text: `Response to: ${messageText}` };
+    // // setConversation((prevConversation) => [...prevConversation, response]);
+  };
 
   const onFileSelect = async (event) => {
     let filePath;

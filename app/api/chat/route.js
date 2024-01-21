@@ -150,7 +150,7 @@ async function chatMessage(text, pdfId) {
       .eq("id", pdfId);
 
     if (error) {
-      console.log("Error at line 134");
+      console.log("Error", error);
       throw error;
     }
 
