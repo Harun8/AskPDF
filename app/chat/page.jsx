@@ -74,18 +74,6 @@ export default function chat() {
     const newMessage = { type: "user", text: messageText };
     setConversation([...conversation, newMessage]);
 
-    // const sendMessage = await fetch("/api/chat", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     message: messageText,
-    //     pdfId: currentPdfId,
-    //     chatId: chatId,
-    //   }),
-    // });
-
     try {
       let { data: pdfs, error } = await supabase
         .from("pdfs")
@@ -137,7 +125,6 @@ export default function chat() {
       });
 
       for await (const chunk of completion) {
-        
         if (typeof chunk.choices[0].delta.content != undefined) {
           const content = chunk.choices[0].delta.content;
 
@@ -179,36 +166,6 @@ export default function chat() {
         { type: "response", text: currentResponse },
       ]);
     }
-
-    // Additional code (if needed)
-
-    //------------------------
-
-    // // should be after the if statement
-
-    // if (!sendMessage.ok) {
-    //   throw new Error("Sending message to api failed");
-    // }
-
-    // if (sendMessage.ok) {
-    //   try {
-    //     const textResponse = await sendMessage.text(); // Read response as text
-    //     const data = JSON.parse(textResponse); // Try parsing as JSON
-    //     console.log("Response Text: ", data);
-    //     answer = data.answer;
-    //   } catch (error) {}
-    // }
-
-    // // Add user message to conversation
-    // const response = {
-    //   type: "response",
-    //   text: answer.split(" ").forEach((word) => word),
-    // };
-    // setConversation((prevConversation) => [...prevConversation, response]);
-
-    // // Dummy response for demonstration
-    // // const response = { type: "response", text: `Response to: ${messageText}` };
-    // // setConversation((prevConversation) => [...prevConversation, response]);
   };
 
   const onFileSelect = async (event) => {
