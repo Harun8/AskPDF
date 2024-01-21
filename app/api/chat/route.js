@@ -137,70 +137,70 @@ function splitIntoChunks(text, file_id, maxChars = 2000) {
   return { chunks, file_id };
 }
 
-async function chatMessage(text, pdfId) {
-  let answer;
-  console.log("the text that i want to prompt ", text);
-  let pdfTexts;
+// async function chatMessage(text, pdfId) {
+//   let answer;
+//   console.log("the text that i want to prompt ", text);
+//   let pdfTexts;
 
-  console.log("pdfId", pdfId);
-  try {
-    let { data: pdfs, error } = await supabase
-      .from("pdfs")
-      .select("*")
-      .eq("id", pdfId);
+//   console.log("pdfId", pdfId);
+//   try {
+//     let { data: pdfs, error } = await supabase
+//       .from("pdfs")
+//       .select("*")
+//       .eq("id", pdfId);
 
-    if (error) {
-      console.log("Error", error);
-      throw error;
-    }
+//     if (error) {
+//       console.log("Error", error);
+//       throw error;
+//     }
 
-    if (pdfs.length === 0) {
-      console.log("No PDF found with the given ID.");
-      return;
-    }
+//     if (pdfs.length === 0) {
+//       console.log("No PDF found with the given ID.");
+//       return;
+//     }
 
-    // Assuming pdfs is an array of objects and each object has a 'text' property
-    pdfTexts = pdfs.map((pdf) => pdf.text);
-    console.log("PDF text type", typeof pdfTexts[0]);
-    console.log("Number of PDFs", pdfTexts.length);
-  } catch (error) {
-    console.log(error);
-    return;
-  }
+//     // Assuming pdfs is an array of objects and each object has a 'text' property
+//     pdfTexts = pdfs.map((pdf) => pdf.text);
+//     console.log("PDF text type", typeof pdfTexts[0]);
+//     console.log("Number of PDFs", pdfTexts.length);
+//   } catch (error) {
+//     console.log(error);
+//     return;
+//   }
 
-  // Flatten the array of arrays into a single array of strings
-  let flattenedPdfTexts = pdfTexts.flat();
+//   // Flatten the array of arrays into a single array of strings
+//   let flattenedPdfTexts = pdfTexts.flat();
 
-  let messages = [
-    { role: "system", content: "You are a helpful assistant." },
-    ...flattenedPdfTexts.map((pdfText) => ({ role: "user", content: pdfText })),
-    { role: "user", content: text },
-  ];
+//   let messages = [
+//     { role: "system", content: "You are a helpful assistant." },
+//     ...flattenedPdfTexts.map((pdfText) => ({ role: "user", content: pdfText })),
+//     { role: "user", content: text },
+//   ];
 
-  console.log("messages ", messages);
-  // Add the user's query at the end
-  messages.push({ role: "user", content: text });
+//   console.log("messages ", messages);
+//   // Add the user's query at the end
+//   messages.push({ role: "user", content: text });
 
-  // Call the OpenAI API
-  let completion;
-  try {
-    completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo-0301",
-      messages: messages,
-    });
-  } catch (error) {
-    console.error("Error calling OpenAI API:", error);
-    return;
-  }
+//   // Call the OpenAI API
+//   let completion;
+//   try {
+//     completion = await openai.chat.completions.create({
+//       model: "gpt-3.5-turbo-0301",
+//       messages: messages,
+//     });
+//   } catch (error) {
+//     console.error("Error calling OpenAI API:", error);
+//     return;
+//   }
 
-  if (completion && completion.choices && completion.choices.length > 0) {
-    console.log("GPT Response", completion.choices[0].message.content);
-    answer = completion.choices[0].message.content;
-  } else {
-    console.log("No response from GPT");
-  }
-  return answer;
-}
+//   if (completion && completion.choices && completion.choices.length > 0) {
+//     console.log("GPT Response", completion.choices[0].message.content);
+//     answer = completion.choices[0].message.content;
+//   } else {
+//     console.log("No response from GPT");
+//   }
+//   return answer;
+// }
 
 async function chatCompletion(chunk, text) {
   const completion = await openai.chat.completions.create({
