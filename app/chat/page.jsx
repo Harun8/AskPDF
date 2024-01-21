@@ -158,6 +158,8 @@ export default function chat() {
       console.error("Error calling OpenAI API:", error);
       return;
     }
+    console.log("convo", conversation);
+    saveMessages();
 
     // Once the streaming is done, you may want to append any remaining text to the conversation.
     if (currentResponse.length > 0) {
@@ -166,6 +168,25 @@ export default function chat() {
         { type: "response", text: currentResponse },
       ]);
     }
+  };
+
+  const saveMessages = async () => {
+    console.log("In save message fn");
+    console.log("convo", conversation);
+
+    //     try {
+
+    // const { data, error } = await supabase
+    // .from('messages')
+    // .insert([
+    //   { some_column: 'someValue' },
+    //   { some_column: 'otherValue' },
+    // ])
+    // .select()
+
+    //     } catch (error) {
+
+    //     }
   };
 
   const onFileSelect = async (event) => {
@@ -257,26 +278,8 @@ export default function chat() {
                   );
                 })}
             </Document>
-            {/* <button onClick={() => sendFileToOpenAi(pdf)}>OpenAi</button> */}
-
-            {/* <button
-              disabled={pageNumber === numPages ? true : false}
-              onClick={() => setPageNumber((prev) => prev + 1)}>
-              Right
-            </button>
-            <button
-              disabled={pageNumber === 1 ? true : false}
-              onClick={() => setPageNumber((prev) => prev - 1)}>
-              Left
-            </button> */}
           </div>
         ) : (
-          //THis is not working for some reason
-          // <object
-          //   type="application/pdf"
-          //   data={pdf}
-          //   height="900"
-          //   width="900"></object>
           <div className="flex justify-center mt-48">
             <label className="custum-file-upload " htmlFor="file">
               <div className="icon">
@@ -311,8 +314,6 @@ export default function chat() {
             </label>
           </div>
         )}
-
-        {/* <button onClick={sendPDF}> save pdf</button> */}
 
         {pdf && (
           <p>

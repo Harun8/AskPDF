@@ -27,10 +27,12 @@ export default function LoginPage() {
   };
 
   return (
-    <Forms
-      onSubmit={login}
-      link="signin"
-      title="Login"
-      redirect="Don't have an account? Sign up?"></Forms>
+    <div className="flex justify-center">
+      <Forms
+        onSubmit={login}
+        link="signin"
+        title="Login"
+        redirect="Don't have an account? Sign up?"></Forms>
+    </div>
   );
 }
