@@ -20,6 +20,19 @@ const openai = new OpenAI({
 
 // change to post instead of handler??
 export default async function handler(req, res) {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session) {
+    return new Response(JSON.stringify({ msg: "user not authenticated" }), {
+      status: 200, // Set the status code to 200 (OK)
+      headers: {
+        "Content-Type": "application/json", // Set the Content-Type header to 'application/json'
+      },
+    });
+  }
+
   if (req.method !== "POST") {
     res.setHeader("Allow", ["POST"]);
     return res.status(405).end(`Method ${req.method} Not Allowed`);

@@ -100,11 +100,6 @@ const ChatPage = () => {
       .select("path_tokens")
       .eq("id", file_id);
 
-    // const { data, error } = await supabase
-    // .storage
-    // .from('pdfs')
-    // .download('folder/avatar1.png')
-
     if (error) throw new Error(error.message);
 
     console.log("publicURL", data);
