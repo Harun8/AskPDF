@@ -125,7 +125,8 @@ const Preview = () => {
       });
 
       for await (const chunk of completion) {
-        if (typeof chunk.choices[0].delta.content != undefined) {
+        console.log("chunk", chunk);
+        if (chunk.choices[0].delta.content != null) {
           const content = chunk.choices[0].delta.content;
 
           // Accumulate the content.
@@ -160,12 +161,12 @@ const Preview = () => {
     }
 
     // Once the streaming is done, you may want to append any remaining text to the conversation.
-    if (currentResponse.length > 0) {
-      setConversation((prevConversation) => [
-        ...prevConversation,
-        { type: "response", text: currentResponse },
-      ]);
-    }
+    // if (currentResponse.length > 0) {
+    //   setConversation((prevConversation) => [
+    //     ...prevConversation,
+    //     { type: "response", text: currentResponse },
+    //   ]);
+    // }
   };
   return (
     <div className="mx-12 grid gap-4 grid-cols-2">
