@@ -84,11 +84,19 @@ const Nav = ({ session }) => {
                     Chat
                   </Link>
                 ) : (
-                  <Link
-                    href="/pricing"
-                    className="  dark:bg-gray-800 dark:text-white  hover:text-slate-500	text-black rounded-md px-3 py-2 text-base font-medium">
-                    Pricing
-                  </Link>
+                  <>
+                    <Link
+                      href="/pricing"
+                      className="  dark:bg-gray-800 dark:text-white  hover:text-slate-500	text-black rounded-md px-3 py-2 text-base font-medium">
+                      Pricing
+                    </Link>
+
+                    <Link
+                      href="/preview"
+                      className="  dark:bg-gray-800 dark:text-white  hover:text-slate-500	text-black rounded-md px-3 py-2 text-base font-medium">
+                      Preview
+                    </Link>
+                  </>
                 )}
               </div>
             </div>
