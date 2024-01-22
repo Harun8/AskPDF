@@ -124,15 +124,17 @@ export default function chat() {
         stream: true,
       });
 
+      let updatedConversation;
+
       for await (const chunk of completion) {
-        if (typeof chunk.choices[0].delta.content != undefined) {
+        if (chunk.choices[0].delta.content != null) {
           const content = chunk.choices[0].delta.content;
 
           // Accumulate the content.
           currentResponse += content;
           console.log(currentResponse);
           setConversation((prevConversation) => {
-            let updatedConversation = [...prevConversation];
+            updatedConversation = [...prevConversation];
 
             // Check if the last entry is a response and update it, or create a new response entry
             if (
@@ -154,20 +156,19 @@ export default function chat() {
           });
         }
       }
+      console.log("Convo", updatedConversation);
+
+      if (!conversation.length > 0) {
+        console.log("convo is empty create new row and populate it");
+      } else {
+        console.log("convo is not empty update the row with the new messages");
+      }
     } catch (error) {
       console.error("Error calling OpenAI API:", error);
       return;
     }
     console.log("convo", conversation);
-    saveMessages();
-
-    // Once the streaming is done, you may want to append any remaining text to the conversation.
-    if (currentResponse.length > 0) {
-      setConversation((prevConversation) => [
-        ...prevConversation,
-        { type: "response", text: currentResponse },
-      ]);
-    }
+    // saveMessages();
   };
 
   const saveMessages = async () => {

@@ -91,8 +91,8 @@ const Preview = () => {
       }
 
       pdfTexts = pdfs.map((pdf) => pdf.text);
-      console.log("PDF text type", typeof pdfTexts[0]);
-      console.log("Number of PDFs", pdfTexts.length);
+      // console.log("PDF text type", typeof pdfTexts[0]);
+      // console.log("Number of PDFs", pdfTexts.length);
     } catch (error) {
       console.log(error);
       return;
@@ -109,7 +109,7 @@ const Preview = () => {
       { role: "user", content: messageText },
     ];
 
-    console.log("messages ", messages);
+    // console.log("messages ", messages);
     // Add the user's query at the end
     messages.push({ role: "user", content: messageText });
 
@@ -123,9 +123,9 @@ const Preview = () => {
         messages: messages,
         stream: true,
       });
-
+      let updatedConversation;
       for await (const chunk of completion) {
-        console.log("chunk", chunk);
+        // console.log("chunk", chunk);
         if (chunk.choices[0].delta.content != null) {
           const content = chunk.choices[0].delta.content;
 
@@ -133,7 +133,7 @@ const Preview = () => {
           currentResponse += content;
           console.log(currentResponse);
           setConversation((prevConversation) => {
-            let updatedConversation = [...prevConversation];
+            updatedConversation = [...prevConversation];
 
             // Check if the last entry is a response and update it, or create a new response entry
             if (
@@ -155,6 +155,8 @@ const Preview = () => {
           });
         }
       }
+      console.log("Convo", updatedConversation);
+      // console.log("Convo2", conversation);
     } catch (error) {
       console.error("Error calling OpenAI API:", error);
       return;

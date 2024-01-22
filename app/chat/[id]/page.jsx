@@ -178,16 +178,16 @@ const ChatPage = () => {
         messages: messages,
         stream: true,
       });
-
+      let updatedConversation
       for await (const chunk of completion) {
-        if (typeof chunk.choices[0].delta.content != undefined) {
+        if (chunk.choices[0].delta.content != null) {
           const content = chunk.choices[0].delta.content;
 
           // Accumulate the content.
           currentResponse += content;
           console.log(currentResponse);
           setConversation((prevConversation) => {
-            let updatedConversation = [...prevConversation];
+             updatedConversation = [...prevConversation];
 
             // Check if the last entry is a response and update it, or create a new response entry
             if (
@@ -214,13 +214,13 @@ const ChatPage = () => {
       return;
     }
 
-    // Once the streaming is done, you may want to append any remaining text to the conversation.
-    if (currentResponse.length > 0) {
-      setConversation((prevConversation) => [
-        ...prevConversation,
-        { type: "response", text: currentResponse },
-      ]);
-    }
+    // // Once the streaming is done, you may want to append any remaining text to the conversation.
+    // if (currentResponse.length > 0) {
+    //   setConversation((prevConversation) => [
+    //     ...prevConversation,
+    //     { type: "response", text: currentResponse },
+    //   ]);
+    // }
   };
   return (
     <div className="mx-12 grid gap-4 grid-cols-2">
