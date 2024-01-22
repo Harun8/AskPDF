@@ -5,6 +5,7 @@ import { cookies } from "next/headers";
 import { Inter as FontSans } from "next/font/google";
 
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import Footer from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,9 +26,10 @@ export default async function RootLayout({ children }) {
 
   return (
     <html class="dark" lang="en">
-      <body className=" bg-slate-400	 dark:bg-gray-800 	">
+      <body class="flex flex-col min-h-screen w-full bg-slate-400 dark:bg-gray-800">
         <Nav session={session}></Nav>
-        {children}
+        <main class="flex-grow">{children}</main>
+        <Footer></Footer>
       </body>
     </html>
   );
