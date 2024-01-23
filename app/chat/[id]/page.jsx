@@ -27,6 +27,8 @@ const ChatPage = () => {
   const [numPages, setNumPages] = useState();
   const [pageNumber, setPageNumber] = useState(1);
   const [pdf, setPdf] = useState(null);
+  const [chat_id, setChat_id] = useState(null);
+  const [userId, setUserId] = useState(null);
   let currentPdfId;
   const params = useParams();
   const supabase = createClientComponentClient();
@@ -44,12 +46,24 @@ const ChatPage = () => {
         console.log("session", session);
 
         if (session) {
+          setUserId(session.user.id);
           const response = await fetch(`/api/chat/${params.id}`, {
             method: "POST",
             body: JSON.stringify({
               userID: session.user.id,
             }),
           });
+
+          let { data, error } = await supabase
+            .from("pdfs")
+            .select("chatId")
+            .eq("id", params.id);
+
+          console.log("chatId", data[0].chatId);
+          setChat_id(data[0].chatId);
+
+          if (error)
+            throw new Error("could not get the chatID for this pdf file");
 
           if (!response.ok) {
             throw new Error("API call failed");
@@ -120,8 +134,11 @@ const ChatPage = () => {
       setPdf(download);
     }
   }
+
+  let question = [];
+  let answer = [];
   const sendMessage = async (messageText) => {
-    let answer = [];
+    // let answer = [];
     let pdfTexts;
     console.log("msgTExt", messageText);
     if (!messageText.trim()) return;
@@ -161,7 +178,7 @@ const ChatPage = () => {
         role: "user",
         content: pdfText,
       })),
-      { role: "user", content: messageText },
+      // { role: "user", content: messageText }, // duplicates the first input
     ];
 
     console.log("messages ", messages);
@@ -178,7 +195,7 @@ const ChatPage = () => {
         messages: messages,
         stream: true,
       });
-      let updatedConversation
+      let updatedConversation;
       for await (const chunk of completion) {
         if (chunk.choices[0].delta.content != null) {
           const content = chunk.choices[0].delta.content;
@@ -187,7 +204,7 @@ const ChatPage = () => {
           currentResponse += content;
           console.log(currentResponse);
           setConversation((prevConversation) => {
-             updatedConversation = [...prevConversation];
+            updatedConversation = [...prevConversation];
 
             // Check if the last entry is a response and update it, or create a new response entry
             if (
@@ -208,6 +225,77 @@ const ChatPage = () => {
             return updatedConversation;
           });
         }
+      }
+
+      console.log("Convo", updatedConversation);
+
+      let questionIndex = updatedConversation.length - 2;
+      let answerÍndex = updatedConversation.length - 1;
+
+      if (!conversation.length > 0) {
+        console.log(
+          "I am inserting this into the question array",
+          updatedConversation[questionIndex].text
+        );
+
+        question.push(updatedConversation[questionIndex].text);
+        answer.push(updatedConversation[answerÍndex].text);
+
+        const { data, error } = await supabase.from("messages").insert([
+          // USING PARAMS ID DOES NOT SEEM SAFE
+          {
+            chatId: chat_id,
+            question: question,
+            answer: answer,
+            user_id: userId,
+          },
+        ]);
+
+        console.log("data", data);
+        if (error) throw new Error("Message not saved in the DB");
+
+        console.log(
+          " Question that should be saved: ",
+          updatedConversation[questionIndex].type + " ",
+          updatedConversation[questionIndex].text
+        );
+
+        console.log(
+          " Answer that should be saved: ",
+          updatedConversation[answerÍndex].type + " ",
+          updatedConversation[answerÍndex].text
+        );
+      } else {
+        question.push(updatedConversation[questionIndex].text);
+        answer.push(updatedConversation[answerÍndex].text);
+
+        console.log("question", question);
+        console.log("answer", answer);
+
+        console.log("chat_id", chat_id);
+        const { data, error } = await supabase
+          .from("messages")
+          .update({
+            question: question,
+            answer: answer,
+          })
+          .eq("chatId", chat_id)
+          .select();
+
+        console.log("data", data);
+        if (error) throw new Error("Message not saved in the DB");
+
+        console.log(
+          "I am saving this: ",
+          updatedConversation[questionIndex].type + " ",
+          updatedConversation[questionIndex].text
+        );
+
+        console.log(
+          " Answer that should be saved: ",
+          updatedConversation[answerÍndex].type + " ",
+          updatedConversation[answerÍndex].text
+        );
       }
     } catch (error) {
       console.error("Error calling OpenAI API:", error);
