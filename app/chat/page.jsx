@@ -159,21 +159,14 @@ export default function chat() {
       console.log("Convo", updatedConversation);
 
       if (!conversation.length > 0) {
-        console.log(
-          "convo is empty create new row and populate it, chatID",
-          chatId
-        );
+        let answerIndex = conversation.length - 2;
+        console.log("I am saving this: ");
       } else {
-        console.log(
-          "convo is not empty update the row with the new messages, chatID",
-          chatId
-        );
       }
     } catch (error) {
       console.error("Error calling OpenAI API:", error);
       return;
     }
-    console.log("convo", conversation);
     // saveMessages();
   };
 
