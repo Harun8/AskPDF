@@ -41,16 +41,16 @@ export default async function handler(req, res) {
     file_title = data.get("file_title");
 
     if (file && file_id) {
-      console.log("file_title", file_title);
-      console.log("It is a file with file_id:", file_id);
+      // console.log("file_title", file_title);
+      // console.log("It is a file with file_id:", file_id);
       // Handle file processing
       const bytes = await file.arrayBuffer();
       const buffer = Buffer.from(bytes);
 
       const pdfData = await pdf(buffer);
 
-      console.log("PDF text", pdfData.text);
-      console.log("file_id", file_id);
+      // console.log("PDF text", pdfData.text);
+      // console.log("file_id", file_id);
 
       // let filePath = `50b570bd-0f1d-4c00-aeeb-49cb082f89f6/${pdfData.info.Title}`; // HARDCODEDE USERID
 
@@ -151,7 +151,7 @@ async function chatCompletion(chunk, text) {
     model: "gpt-3.5-turbo-0301",
   });
 
-  console.log("GPT RESPONSE", completion.choices[0].message.content);
+  // console.log("GPT RESPONSE", completion.choices[0].message.content);
 
   return completion.choices[0].message.content;
 }
@@ -205,7 +205,7 @@ async function processChunks(chunks, file_id) {
     }
 
     // Assuming the response contains the ID of the inserted record
-    console.log("Inserted data", data);
+    // console.log("Inserted data", data);
     const insertedPdfId = data[0].id;
     pdfIds.push(insertedPdfId);
   } catch (error) {
