@@ -78,11 +78,18 @@ const Nav = ({ session }) => {
                 </Link>
 
                 {session ? (
-                  <Link
-                    href="/chat"
-                    className="  dark:bg-gray-800 dark:text-white  hover:text-slate-500	text-black rounded-md px-3 py-2 text-base font-medium">
-                    Chat
-                  </Link>
+                  <>
+                    <Link
+                      href="/chat"
+                      className="  dark:bg-gray-800 dark:text-white  hover:text-slate-500	text-black rounded-md px-3 py-2 text-base font-medium">
+                      New chat
+                    </Link>
+                    <Link
+                      href="/mychats"
+                      className="  dark:bg-gray-800 dark:text-white  hover:text-slate-500	text-black rounded-md px-3 py-2 text-base font-medium">
+                      My chats
+                    </Link>
+                  </>
                 ) : (
                   <>
                     <Link

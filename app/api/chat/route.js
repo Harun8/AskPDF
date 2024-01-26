@@ -19,7 +19,13 @@ const openai = new OpenAI({
 });
 
 // change to post instead of handler??
+let file_title;
 export default async function handler(req, res) {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  console.log("data", user);
   if (req.method !== "POST") {
     res.setHeader("Allow", ["POST"]);
     return res.status(405).end(`Method ${req.method} Not Allowed`);
@@ -32,8 +38,10 @@ export default async function handler(req, res) {
     const data = await req.formData();
     const file = data.get("file");
     const file_id = data.get("file_id");
+    file_title = data.get("file_title");
 
     if (file && file_id) {
+      console.log("file_title", file_title);
       console.log("It is a file with file_id:", file_id);
       // Handle file processing
       const bytes = await file.arrayBuffer();
@@ -43,6 +51,7 @@ export default async function handler(req, res) {
 
       console.log("PDF text", pdfData.text);
       console.log("file_id", file_id);
+
       // let filePath = `50b570bd-0f1d-4c00-aeeb-49cb082f89f6/${pdfData.info.Title}`; // HARDCODEDE USERID
 
       const { chunks } = splitIntoChunks(pdfData.text, file_id);
@@ -130,87 +139,14 @@ function splitIntoChunks(text, file_id, maxChars = 2000) {
     chunks.push(currentChunk);
   }
 
-  // call openapi chat completion here
-  // processChunks(chunks); // Reason for my chunk being saved in the db twice
-  // console.log("chunks", chunks);
-
   return { chunks, file_id };
 }
-
-// async function chatMessage(text, pdfId) {
-//   let answer;
-//   console.log("the text that i want to prompt ", text);
-//   let pdfTexts;
-
-//   console.log("pdfId", pdfId);
-//   try {
-//     let { data: pdfs, error } = await supabase
-//       .from("pdfs")
-//       .select("*")
-//       .eq("id", pdfId);
-
-//     if (error) {
-//       console.log("Error", error);
-//       throw error;
-//     }
-
-//     if (pdfs.length === 0) {
-//       console.log("No PDF found with the given ID.");
-//       return;
-//     }
-
-//     // Assuming pdfs is an array of objects and each object has a 'text' property
-//     pdfTexts = pdfs.map((pdf) => pdf.text);
-//     console.log("PDF text type", typeof pdfTexts[0]);
-//     console.log("Number of PDFs", pdfTexts.length);
-//   } catch (error) {
-//     console.log(error);
-//     return;
-//   }
-
-//   // Flatten the array of arrays into a single array of strings
-//   let flattenedPdfTexts = pdfTexts.flat();
-
-//   let messages = [
-//     { role: "system", content: "You are a helpful assistant." },
-//     ...flattenedPdfTexts.map((pdfText) => ({ role: "user", content: pdfText })),
-//     { role: "user", content: text },
-//   ];
-
-//   console.log("messages ", messages);
-//   // Add the user's query at the end
-//   messages.push({ role: "user", content: text });
-
-//   // Call the OpenAI API
-//   let completion;
-//   try {
-//     completion = await openai.chat.completions.create({
-//       model: "gpt-3.5-turbo-0301",
-//       messages: messages,
-//     });
-//   } catch (error) {
-//     console.error("Error calling OpenAI API:", error);
-//     return;
-//   }
-
-//   if (completion && completion.choices && completion.choices.length > 0) {
-//     console.log("GPT Response", completion.choices[0].message.content);
-//     answer = completion.choices[0].message.content;
-//   } else {
-//     console.log("No response from GPT");
-//   }
-//   return answer;
-// }
 
 async function chatCompletion(chunk, text) {
   const completion = await openai.chat.completions.create({
     messages: [
       { role: "system", content: "You are a helpful assistant." },
       { role: "user", content: chunk },
-      // {
-      //   role: "user",
-      //   content: text,
-      // }, // checker that it got all chunks
     ],
     model: "gpt-3.5-turbo-0301",
   });
@@ -259,6 +195,7 @@ async function processChunks(chunks, file_id) {
           userId: "50b570bd-0f1d-4c00-aeeb-49cb082f89f6",
           chatId: chatId,
           file_id: file_id,
+          pdf_title: file_title,
         },
       ]) // FIXXX HARDCODED USERID
       .select();

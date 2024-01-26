@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const TextField = ({ onSendMessage }) => {
+const TextField = ({ onSendMessage, isDisabled }) => {
   const [message, setMessage] = useState("");
   const handleSend = () => {
     onSendMessage(message); // get req to API
@@ -12,6 +12,7 @@ const TextField = ({ onSendMessage }) => {
   return (
     <div className="flex flex-col justify-end h-full ">
       <textarea
+        disabled={isDisabled}
         id="message"
         rows="4"
         value={message}

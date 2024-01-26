@@ -29,6 +29,8 @@ const ChatPage = () => {
   const [pdf, setPdf] = useState(null);
   const [chat_id, setChat_id] = useState(null);
   const [userId, setUserId] = useState(null);
+  const [answer, setAnswer] = useState([]);
+  const [question, setQuestion] = useState([]);
   let currentPdfId;
   const params = useParams();
   const supabase = createClientComponentClient();
@@ -135,8 +137,30 @@ const ChatPage = () => {
     }
   }
 
-  let question = [];
-  let answer = [];
+  // useEffect(() => {
+  //   if (conversation.length >= 2) {
+  //     let questionIndex = conversation.length - 2;
+  //     let answerIndex = conversation.length - 1;
+
+  //     // Update state with new values
+  //     setAnswer((prevAnswer) => [
+  //       ...prevAnswer,
+  //       conversation[answerIndex].text,
+  //     ]);
+  //     setQuestion((prevQuestion) => [
+  //       ...prevQuestion,
+  //       conversation[questionIndex].text,
+  //     ]);
+  //   }
+  // }, [conversation]);
+
+  useEffect(() => {
+    console.log("answer", answer);
+    console.log("question", question);
+  }, [answer, question]);
+
+  // let question = [];
+  // let answer = [];
   const sendMessage = async (messageText) => {
     // let answer = [];
     let pdfTexts;
@@ -227,19 +251,23 @@ const ChatPage = () => {
         }
       }
 
-      console.log("Convo", updatedConversation);
+      // console.log("Convo", updatedConversation);
 
       let questionIndex = updatedConversation.length - 2;
       let answerÍndex = updatedConversation.length - 1;
 
-      if (!conversation.length > 0) {
-        console.log(
-          "I am inserting this into the question array",
-          updatedConversation[questionIndex].text
-        );
+      // question.push(updatedConversation[questionIndex].text);
+      // answer.push(updatedConversation[answerÍndex].text);
 
-        question.push(updatedConversation[questionIndex].text);
-        answer.push(updatedConversation[answerÍndex].text);
+      if (!conversation.length > 0) {
+        setAnswer((prevAnswer) => [
+          ...prevAnswer,
+          updatedConversation[answerÍndex].text,
+        ]);
+        setQuestion((prevQuestion) => [
+          ...prevQuestion,
+          updatedConversation[questionIndex].text,
+        ]);
 
         const { data, error } = await supabase.from("messages").insert([
           // USING PARAMS ID DOES NOT SEEM SAFE
@@ -253,26 +281,16 @@ const ChatPage = () => {
 
         console.log("data", data);
         if (error) throw new Error("Message not saved in the DB");
-
-        console.log(
-          " Question that should be saved: ",
-          updatedConversation[questionIndex].type + " ",
-          updatedConversation[questionIndex].text
-        );
-
-        console.log(
-          " Answer that should be saved: ",
-          updatedConversation[answerÍndex].type + " ",
-          updatedConversation[answerÍndex].text
-        );
       } else {
-        question.push(updatedConversation[questionIndex].text);
-        answer.push(updatedConversation[answerÍndex].text);
+        setAnswer((prevAnswer) => [
+          ...prevAnswer,
+          updatedConversation[answerÍndex].text,
+        ]);
+        setQuestion((prevQuestion) => [
+          ...prevQuestion,
+          updatedConversation[questionIndex].text,
+        ]);
 
-        console.log("question", question);
-        console.log("answer", answer);
-
-        console.log("chat_id", chat_id);
         const { data, error } = await supabase
           .from("messages")
           .update({
@@ -285,17 +303,17 @@ const ChatPage = () => {
         console.log("data", data);
         if (error) throw new Error("Message not saved in the DB");
 
-        console.log(
-          "I am saving this: ",
-          updatedConversation[questionIndex].type + " ",
-          updatedConversation[questionIndex].text
-        );
+        // console.log(
+        //   "I am saving this: ",
+        //   updatedConversation[questionIndex].type + " ",
+        //   updatedConversation[questionIndex].text
+        // );
 
-        console.log(
-          " Answer that should be saved: ",
-          updatedConversation[answerÍndex].type + " ",
-          updatedConversation[answerÍndex].text
-        );
+        // console.log(
+        //   " Answer that should be saved: ",
+        //   updatedConversation[answerÍndex].type + " ",
+        //   updatedConversation[answerÍndex].text
+        // );
       }
     } catch (error) {
       console.error("Error calling OpenAI API:", error);
