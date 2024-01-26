@@ -1,288 +1,466 @@
 export default function Pricing() {
   return (
-    <section className="bg-gray-800">
-      <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-        <div className="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
-          <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
-            Designed for business teams like yours
-          </h2>
-          <p className="mb-5 font-light text-gray-500 sm:text-xl dark:text-gray-400">
-            Here at Flowbite we focus on markets where technology, innovation,
-            and capital can unlock long-term value and drive economic growth.
-          </p>
+    <div class="sm:flex sm:flex-col sm:align-center p-10">
+      <div class="relative self-center  rounded-lg p-0.5 flex">
+        <h2 class="text-xl leading-6 font-bold dark:text-slate-100 text-slate-900">
+          Choose one of our incredible options
+        </h2>
+      </div>
+      <div class="mt-12 space-y-3 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-6 md:max-w-5xl md:mx-auto xl:grid-cols-3">
+        <div class=" bg-gray-200 dark:bg-gray-900 	 border border-slate-900 rounded-lg shadow-sm divide-y divide-slate-200">
+          <div class="p-6">
+            <h2 class="text-xl leading-6 font-bold dark:text-slate-100 text-slate-900">
+              Starter
+            </h2>
+            <p class="mt-2 text-base dark:text-slate-100  text-slate-700 leading-tight">
+              For new makers who want to fine-tune and test an idea.
+            </p>
+            <p class="mt-8">
+              <span class="text-4xl font-bold dark:text-slate-100  text-slate-900 tracking-tighter">
+                $0
+              </span>
+
+              <span class="text-base font-medium dark:text-slate-100  text-slate-500">
+                /mo
+              </span>
+            </p>
+            <a
+              href="/sign-up"
+              class="mt-8 block w-full dark:bg-slate-700 bg-slate-900 rounded-md py-2 text-sm font-semibold text-white text-center">
+              Join as a Starter
+            </a>
+          </div>
+          <div class="pt-6 pb-8 px-6">
+            <h3 class="text-sm font-bold dark:text-slate-100  text-slate-900 tracking-wide uppercase">
+              What's included
+            </h3>
+            <ul role="list" class="mt-4 space-y-3">
+              <li class="flex space-x-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-shrink-0 h-5 w-5 text-green-400"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-base dark:text-slate-100  text-slate-700">
+                  1 landing page included
+                </span>
+              </li>
+              <li class="flex space-x-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-shrink-0 h-5 w-5 text-green-400"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-base dark:text-slate-100  text-slate-700">
+                  1,000 visits/mo
+                </span>
+              </li>
+              <li class="flex space-x-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-shrink-0 h-5 w-5 text-green-400"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-base dark:text-slate-100  text-slate-700">
+                  Access to all UI blocks
+                </span>
+              </li>
+              <li class="flex space-x-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-shrink-0 h-5 w-5 text-green-400"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-base dark:text-slate-100  text-slate-700">
+                  50 conversion actions included
+                </span>
+              </li>
+              <li class="flex space-x-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-shrink-0 h-5 w-5 text-green-400"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-base dark:text-slate-100  text-slate-700">
+                  5% payment commission
+                </span>
+              </li>
+              <li class="flex space-x-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-shrink-0 h-5 w-5 text-green-400"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-base dark:text-slate-100  text-slate-700">
+                  Real-time analytics
+                </span>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div className="space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0">
-          <div className="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-200  rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 bg-gray-800 dark:text-white">
-            <h3 className="mb-4 text-2xl font-semibold">Starter</h3>
-            <p className="font-light text-gray-500 sm:text-lg dark:text-gray-400">
-              Best option for personal use & for your next project.
+        <div class=" bg-gray-200 dark:bg-gray-900 	 border border-slate-900 rounded-lg shadow-sm divide-y divide-slate-200">
+          <div class="p-6">
+            <h2 class="text-xl leading-6 font-bold dark:text-slate-100 text-slate-900">
+              Starter
+            </h2>
+            <p class="mt-2 text-base dark:text-slate-100  text-slate-700 leading-tight">
+              For new makers who want to fine-tune and test an idea.
             </p>
-            <div className="flex justify-center items-baseline my-8">
-              <span className="mr-2 text-5xl font-extrabold">$29</span>
-              <span className="text-gray-500 dark:text-gray-400">/month</span>
-            </div>
-            <ul role="list" className="mb-8 space-y-4 text-left">
-              <li className="flex items-center space-x-3">
-                <svg
-                  className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"></path>
-                </svg>
-                <span>Individual configuration</span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <svg
-                  className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"></path>
-                </svg>
-                <span>No setup, or hidden fees</span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <svg
-                  className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"></path>
-                </svg>
-                <span>
-                  Team size: <span className="font-semibold">1 developer</span>
-                </span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <svg
-                  className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"></path>
-                </svg>
-                <span>
-                  Premium support:{" "}
-                  <span className="font-semibold">6 months</span>
-                </span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <svg
-                  className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"></path>
-                </svg>
-                <span>
-                  Free updates: <span className="font-semibold">6 months</span>
-                </span>
-              </li>
-            </ul>
+            <p class="mt-8">
+              <span class="text-4xl font-bold dark:text-slate-100  text-slate-900 tracking-tighter">
+                $0
+              </span>
+
+              <span class="text-base font-medium dark:text-slate-100  text-slate-500">
+                /mo
+              </span>
+            </p>
             <a
-              href="#"
-              className="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-primary-900">
-              Get started
+              href="/sign-up"
+              class="mt-8 block w-full dark:bg-slate-700 bg-slate-900 rounded-md py-2 text-sm font-semibold text-white text-center">
+              Join as a Starter
             </a>
           </div>
-          <div className="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-200  rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 bg-gray-800 dark:text-white">
-            <h3 className="mb-4 text-2xl font-semibold">Company</h3>
-            <p className="font-light text-gray-500 sm:text-lg dark:text-gray-400">
-              Relevant for multiple users, extended & premium support.
-            </p>
-            <div className="flex justify-center items-baseline my-8">
-              <span className="mr-2 text-5xl font-extrabold">$99</span>
-              <span className="text-gray-500 dark:text-gray-400">/month</span>
-            </div>
-            <ul role="list" className="mb-8 space-y-4 text-left">
-              <li className="flex items-center space-x-3">
+          <div class="pt-6 pb-8 px-6">
+            <h3 class="text-sm font-bold dark:text-slate-100  text-slate-900 tracking-wide uppercase">
+              What's included
+            </h3>
+            <ul role="list" class="mt-4 space-y-3">
+              <li class="flex space-x-3">
                 <svg
-                  className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"></path>
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-shrink-0 h-5 w-5 text-green-400"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
                 </svg>
-                <span>Individual configuration</span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <svg
-                  className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"></path>
-                </svg>
-                <span>No setup, or hidden fees</span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <svg
-                  className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"></path>
-                </svg>
-                <span>
-                  Team size:{" "}
-                  <span className="font-semibold">10 developers</span>
+                <span class="text-base dark:text-slate-100  text-slate-700">
+                  1 landing page included
                 </span>
               </li>
-              <li className="flex items-center space-x-3">
+              <li class="flex space-x-3">
                 <svg
-                  className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"></path>
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-shrink-0 h-5 w-5 text-green-400"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
                 </svg>
-                <span>
-                  Premium support:{" "}
-                  <span className="font-semibold">24 months</span>
+                <span class="text-base dark:text-slate-100  text-slate-700">
+                  1,000 visits/mo
                 </span>
               </li>
-              <li className="flex items-center space-x-3">
+              <li class="flex space-x-3">
                 <svg
-                  className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"></path>
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-shrink-0 h-5 w-5 text-green-400"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
                 </svg>
-                <span>
-                  Free updates: <span className="font-semibold">24 months</span>
+                <span class="text-base dark:text-slate-100  text-slate-700">
+                  Access to all UI blocks
+                </span>
+              </li>
+              <li class="flex space-x-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-shrink-0 h-5 w-5 text-green-400"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-base dark:text-slate-100  text-slate-700">
+                  50 conversion actions included
+                </span>
+              </li>
+              <li class="flex space-x-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-shrink-0 h-5 w-5 text-green-400"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-base dark:text-slate-100  text-slate-700">
+                  5% payment commission
+                </span>
+              </li>
+              <li class="flex space-x-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-shrink-0 h-5 w-5 text-green-400"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-base dark:text-slate-100  text-slate-700">
+                  Real-time analytics
                 </span>
               </li>
             </ul>
+          </div>
+        </div>
+        <div class=" bg-gray-200 dark:bg-gray-900 	 border border-slate-900 rounded-lg shadow-sm divide-y divide-slate-200">
+          <div class="p-6">
+            <h2 class="text-xl leading-6 font-bold dark:text-slate-100 text-slate-900">
+              Starter
+            </h2>
+            <p class="mt-2 text-base dark:text-slate-100  text-slate-700 leading-tight">
+              For new makers who want to fine-tune and test an idea.
+            </p>
+            <p class="mt-8">
+              <span class="text-4xl font-bold dark:text-slate-100  text-slate-900 tracking-tighter">
+                $0
+              </span>
+
+              <span class="text-base font-medium dark:text-slate-100  text-slate-500">
+                /mo
+              </span>
+            </p>
             <a
-              href="#"
-              className="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-primary-900">
-              Get started
+              href="/sign-up"
+              class="mt-8 block w-full dark:bg-slate-700 bg-slate-900 rounded-md py-2 text-sm font-semibold text-white text-center">
+              Join as a Starter
             </a>
           </div>
-          <div className="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-200  rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 bg-gray-800 dark:text-white">
-            <h3 className="mb-4 text-2xl font-semibold">Enterprise</h3>
-            <p className="font-light text-gray-500 sm:text-lg dark:text-gray-400">
-              Best for large scale uses and extended redistribution rights.
-            </p>
-            <div className="flex justify-center items-baseline my-8">
-              <span className="mr-2 text-5xl font-extrabold">$499</span>
-              <span className="text-gray-500 dark:text-gray-400">/month</span>
-            </div>
-            <ul role="list" className="mb-8 space-y-4 text-left">
-              <li className="flex items-center space-x-3">
+          <div class="pt-6 pb-8 px-6">
+            <h3 class="text-sm font-bold dark:text-slate-100  text-slate-900 tracking-wide uppercase">
+              What's included
+            </h3>
+            <ul role="list" class="mt-4 space-y-3">
+              <li class="flex space-x-3">
                 <svg
-                  className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"></path>
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-shrink-0 h-5 w-5 text-green-400"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
                 </svg>
-                <span>Individual configuration</span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <svg
-                  className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"></path>
-                </svg>
-                <span>No setup, or hidden fees</span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <svg
-                  className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"></path>
-                </svg>
-                <span>
-                  Team size:{" "}
-                  <span className="font-semibold">100+ developers</span>
+                <span class="text-base dark:text-slate-100  text-slate-700">
+                  1 landing page included
                 </span>
               </li>
-              <li className="flex items-center space-x-3">
+              <li class="flex space-x-3">
                 <svg
-                  className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"></path>
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-shrink-0 h-5 w-5 text-green-400"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
                 </svg>
-                <span>
-                  Premium support:{" "}
-                  <span className="font-semibold">36 months</span>
+                <span class="text-base dark:text-slate-100  text-slate-700">
+                  1,000 visits/mo
                 </span>
               </li>
-              <li className="flex items-center space-x-3">
+              <li class="flex space-x-3">
                 <svg
-                  className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"></path>
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-shrink-0 h-5 w-5 text-green-400"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
                 </svg>
-                <span>
-                  Free updates: <span className="font-semibold">36 months</span>
+                <span class="text-base dark:text-slate-100  text-slate-700">
+                  Access to all UI blocks
+                </span>
+              </li>
+              <li class="flex space-x-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-shrink-0 h-5 w-5 text-green-400"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-base dark:text-slate-100  text-slate-700">
+                  50 conversion actions included
+                </span>
+              </li>
+              <li class="flex space-x-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-shrink-0 h-5 w-5 text-green-400"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-base dark:text-slate-100  text-slate-700">
+                  5% payment commission
+                </span>
+              </li>
+              <li class="flex space-x-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-shrink-0 h-5 w-5 text-green-400"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-base dark:text-slate-100  text-slate-700">
+                  Real-time analytics
                 </span>
               </li>
             </ul>
-            <a
-              href="#"
-              className="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-primary-900">
-              Get started
-            </a>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

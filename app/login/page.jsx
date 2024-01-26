@@ -11,8 +11,6 @@ export default function LoginPage() {
   const supabase = createClientComponentClient();
 
   const login = async (values) => {
-    console.log("signup been called", values.email, values.password);
-
     let { data, error } = await supabase.auth.signInWithPassword({
       email: values.email,
       password: values.password,
@@ -21,7 +19,8 @@ export default function LoginPage() {
     if (error) {
       console.log("error", error);
     } else {
-      router.push("/");
+      // force reload upon switching site path
+      window.location.href = "/"; // router.push() does not work
       console.log("Sucess! You're signed in!!!");
     }
   };

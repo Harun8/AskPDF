@@ -12,10 +12,6 @@ const Nav = ({ session }) => {
   const [toggleDropDown, setToggleDropDown] = useState(false);
   const router = useRouter();
 
-  // useEffect(() => {
-  //   console.log("YOOOO REFRESH THE MFF PAGE");
-  //   router.refresh();
-  // }, [session]);
 
   return (
     <nav className="">

@@ -22,7 +22,7 @@ export default async function RootLayout({ children }) {
     data: { session },
   } = await supabase.auth.getSession();
 
-  // console.log("Session layout", session);
+  console.log("Session layout", session);
 
   return (
     <html class="dark" lang="en">
