@@ -37,6 +37,7 @@ export default function chat() {
   const [userId, setUserId] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [isTextDisabled, setIsTextDisabled] = useState(true);
+  const [duplicateFileError, setDuplicateFileError] = useState(false);
 
   const router = useRouter();
   function onDocumentLoadSuccess({ numPages }) {
@@ -213,14 +214,18 @@ export default function chat() {
 
       filePath = `${userId}/${event.target.files[0].name}`;
       console.log("userid", userId);
-      setPdf(event.target.files[0]); // call method
       const { data, error } = await supabase.storage
         .from("pdfs")
         .upload(filePath, event.target.files[0]);
       if (error) {
+        setDuplicateFileError(true);
         // Handle error
-        console.log("error", error);
+        console.log("error", error.message);
+        return;
       } else {
+        setDuplicateFileError(false);
+
+        setPdf(event.target.files[0]); // call method
         console.log("Is the modal open? ", isOpen);
 
         console.log("File upload success", data);
@@ -282,6 +287,7 @@ export default function chat() {
   };
 
   function closeModal() {
+    setDuplicateFileError(false);
     setIsOpen(false);
   }
 
@@ -315,6 +321,12 @@ export default function chat() {
             <div className="text">{/* <span>Click to upload PDF</span> */}</div>
 
             <Modal
+              isDuplicate={duplicateFileError}
+              title={
+                duplicateFileError
+                  ? "You've already uploaded this file"
+                  : "Upload your image"
+              }
               isOpen={isOpen}
               closeModal={closeModal}
               openModal={openModal}

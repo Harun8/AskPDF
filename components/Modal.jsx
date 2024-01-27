@@ -1,7 +1,14 @@
 import { Dialog, Transition } from "@headlessui/react";
 import React, { Fragment, useState, useEffect } from "react";
 
-const Modal = ({ isOpen, closeModal, openModal, onFileSelect }) => {
+const Modal = ({
+  isOpen,
+  closeModal,
+  openModal,
+  onFileSelect,
+  title,
+  isDuplicate,
+}) => {
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -30,8 +37,12 @@ const Modal = ({ isOpen, closeModal, openModal, onFileSelect }) => {
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
-                    className=" flex justify-center text-lg font-medium leading-6 text-gray-900">
-                    Upload your PDF
+                    className={`flex justify-center font-medium leading-6 text-gray-900 ${
+                      isDuplicate
+                        ? " text-red-500 text-xl"
+                        : "text-gray-900 text-lg "
+                    }`}>
+                    {title}
                   </Dialog.Title>
                   <div className=" flex justify-center mt-2">
                     <p className="text-sm text-gray-500">
