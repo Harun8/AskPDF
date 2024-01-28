@@ -16,7 +16,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import OpenAI from "openai";
 
 const openai = new OpenAI({
-  apiKey: "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", // api key
+  apiKey: process.env.NEXT_PUBLIC_API_KEY, // api key
   dangerouslyAllowBrowser: true, // should be false
 });
 

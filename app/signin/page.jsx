@@ -29,11 +29,15 @@ const signUp = async (values) => {
 
 const Signin = () => {
   return (
-    <Forms
-      onSubmit={signUp}
-      title="Sign up"
-      link="login"
-      redirect="Already have an account? Log in"></Forms>
+    <div className="flex justify-center">
+       
+
+      <Forms
+        onSubmit={signUp}
+        title="Sign up"
+        link="login"
+        redirect="Already have an account? Log in"></Forms>
+    </div>
   );
 };
 

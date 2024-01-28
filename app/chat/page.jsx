@@ -22,7 +22,7 @@ import OpenAI from "openai";
 import Modal from "@/components/Modal";
 
 const openai = new OpenAI({
-  apiKey: "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", // api key
+  apiKey: process.env.NEXT_PUBLIC_API_KEY, // api key
   dangerouslyAllowBrowser: true, // should be false
 });
 
@@ -179,25 +179,7 @@ export default function chat() {
   const saveMessages = async () => {
     console.log("In save message fn");
     console.log("convo", conversation);
-
-    //     try {
-
-    // const { data, error } = await supabase
-    // .from('messages')
-    // .insert([
-    //   { some_column: 'someValue' },
-    //   { some_column: 'otherValue' },
-    // ])
-    // .select()
-
-    //     } catch (error) {
-
-    //     }
   };
-
-  // useEffect(()=>{
-
-  // },[openModal])
 
   const onFileSelect = async (event) => {
     console.log("Is the modal open? ", isOpen);
@@ -242,6 +224,7 @@ export default function chat() {
         formData.append("file", event.target.files[0]);
         formData.append("file_title", event.target.files[0].name);
         formData.append("file_id", file_id);
+        formData.append("userId", userId);
 
         const response = await fetch("/api/chat", {
           method: "POST",

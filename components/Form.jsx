@@ -42,8 +42,8 @@ const Forms = (props) => {
       // }}
     >
       {({ errors, touched }) => (
-        <Form className=" dark:bg-gray-900 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 align-middle mt-60 ">
-          <h1 className="dark:text-white flex justify-center text-3xl font-bold		">
+        <Form className=" dark:bg-gray-900 bg-white shadow-md rounded w-96 px-8 pt-6 pb-8 mb-4 align-middle mt-60 ">
+          <h1 className="dark:text-white flex justify-center text-3xl font-bold 		">
             {props.title}
           </h1>
 
@@ -53,7 +53,7 @@ const Forms = (props) => {
             Email
           </label>
           <Field
-            className=" dark:bg-gray-900 dark:text-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className=" autofill:bg-gray-900 dark:bg-gray-900 dark:text-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             type="email"
             name="email"
             id="email"

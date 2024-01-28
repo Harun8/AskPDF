@@ -17,7 +17,7 @@ import TextField from "@/components/TextField";
 import OpenAI from "openai";
 
 const openai = new OpenAI({
-  apiKey: "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", // api key
+  apiKey: process.env.NEXT_PUBLIC_API_KEY, // api key
   dangerouslyAllowBrowser: true, // should be false
 });
 
@@ -38,6 +38,8 @@ const ChatPage = () => {
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
   }
+
+
 
   useEffect(() => {
     const getInfo = async () => {
@@ -137,32 +139,12 @@ const ChatPage = () => {
     }
   }
 
-  // useEffect(() => {
-  //   if (conversation.length >= 2) {
-  //     let questionIndex = conversation.length - 2;
-  //     let answerIndex = conversation.length - 1;
-
-  //     // Update state with new values
-  //     setAnswer((prevAnswer) => [
-  //       ...prevAnswer,
-  //       conversation[answerIndex].text,
-  //     ]);
-  //     setQuestion((prevQuestion) => [
-  //       ...prevQuestion,
-  //       conversation[questionIndex].text,
-  //     ]);
-  //   }
-  // }, [conversation]);
-
   useEffect(() => {
     console.log("answer", answer);
     console.log("question", question);
   }, [answer, question]);
 
-  // let question = [];
-  // let answer = [];
   const sendMessage = async (messageText) => {
-    // let answer = [];
     let pdfTexts;
     console.log("msgTExt", messageText);
     if (!messageText.trim()) return;
@@ -202,7 +184,6 @@ const ChatPage = () => {
         role: "user",
         content: pdfText,
       })),
-      // { role: "user", content: messageText }, // duplicates the first input
     ];
 
     console.log("messages ", messages);
@@ -251,13 +232,8 @@ const ChatPage = () => {
         }
       }
 
-      // console.log("Convo", updatedConversation);
-
       let questionIndex = updatedConversation.length - 2;
       let answerÍndex = updatedConversation.length - 1;
-
-      // question.push(updatedConversation[questionIndex].text);
-      // answer.push(updatedConversation[answerÍndex].text);
 
       if (!conversation.length > 0) {
         setAnswer((prevAnswer) => [
@@ -302,31 +278,11 @@ const ChatPage = () => {
 
         console.log("data", data);
         if (error) throw new Error("Message not saved in the DB");
-
-        // console.log(
-        //   "I am saving this: ",
-        //   updatedConversation[questionIndex].type + " ",
-        //   updatedConversation[questionIndex].text
-        // );
-
-        // console.log(
-        //   " Answer that should be saved: ",
-        //   updatedConversation[answerÍndex].type + " ",
-        //   updatedConversation[answerÍndex].text
-        // );
       }
     } catch (error) {
       console.error("Error calling OpenAI API:", error);
       return;
     }
-
-    // // Once the streaming is done, you may want to append any remaining text to the conversation.
-    // if (currentResponse.length > 0) {
-    //   setConversation((prevConversation) => [
-    //     ...prevConversation,
-    //     { type: "response", text: currentResponse },
-    //   ]);
-    // }
   };
   return (
     <div className="mx-12 grid gap-4 grid-cols-2">

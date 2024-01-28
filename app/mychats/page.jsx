@@ -2,14 +2,13 @@
 const { createClient } = require("@supabase/supabase-js");
 import { useRouter } from "next/navigation";
 
-const supabaseUrl = "https://hjtlrhjfabtavtcdtvuf.supabase.co";
-const supabaseKey =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqdGxyaGpmYWJ0YXZ0Y2R0dnVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDMyNTgwNzQsImV4cCI6MjAxODgzNDA3NH0.AO_McXBnZ5ifxBko66NXN4OdWAs8536SS6W4DtpdG2s";
-
 const MyChats = async () => {
   const router = useRouter();
 
-  const supabase = createClient(supabaseUrl, supabaseKey);
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  );
 
   const { data } = await supabase.from("pdfs").select();
 

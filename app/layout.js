@@ -22,8 +22,6 @@ export default async function RootLayout({ children }) {
     data: { session },
   } = await supabase.auth.getSession();
 
-  console.log("Session layout", session);
-
   return (
     <html class="dark" lang="en">
       <body class="flex flex-col min-h-screen w-full bg-slate-400 dark:bg-gray-800">

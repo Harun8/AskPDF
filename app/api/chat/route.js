@@ -4,22 +4,22 @@ import { promisify } from "util";
 const readFileAsync = promisify(fs.readFile);
 const { createClient } = require("@supabase/supabase-js");
 
-const supabaseUrl = "https://hjtlrhjfabtavtcdtvuf.supabase.co";
-const supabaseKey =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqdGxyaGpmYWJ0YXZ0Y2R0dnVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDMyNTgwNzQsImV4cCI6MjAxODgzNDA3NH0.AO_McXBnZ5ifxBko66NXN4OdWAs8536SS6W4DtpdG2s";
-
-const supabase = createClient(supabaseUrl, supabaseKey);
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
 
 const OpenAI = require("openai");
 require("dotenv").config();
 
 const openai = new OpenAI({
-  apiKey: "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", // api key
+  apiKey: process.env.NEXT_PUBLIC_API_KEY, // api key
   dangerouslyAllowBrowser: true, // should be false
 });
 
 // change to post instead of handler??
 let file_title;
+let userId;
 export default async function handler(req, res) {
   const {
     data: { user },
@@ -31,7 +31,7 @@ export default async function handler(req, res) {
     return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 
-  console.log("REQ", req.body);
+  // console.log("REQ", req.body);
 
   try {
     // Attempt to parse as form data
@@ -39,6 +39,7 @@ export default async function handler(req, res) {
     const file = data.get("file");
     const file_id = data.get("file_id");
     file_title = data.get("file_title");
+    userId = data.get("userId");
 
     if (file && file_id) {
       // console.log("file_title", file_title);
@@ -192,7 +193,7 @@ async function processChunks(chunks, file_id) {
       .insert([
         {
           text: pdfText,
-          userId: "50b570bd-0f1d-4c00-aeeb-49cb082f89f6",
+          userId: userId,
           chatId: chatId,
           file_id: file_id,
           pdf_title: file_title,
