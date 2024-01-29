@@ -4,6 +4,7 @@ import { stripe } from "@/util/stripe/stripe";
 import { loadStripe } from "@stripe/stripe-js";
 
 export default async function Pricing() {
+  const [IsRedirecting, setIsRedirecting] = usestate(false);
   const { data: prices } = await stripe.prices.list();
   const plans = [];
 
@@ -17,13 +18,18 @@ export default async function Pricing() {
     });
   }
   async function onCheckout() {
+    setIsRedirecting(true);
     console.log("checkout FN called");
     const priceId = "price_1OdUr0BzVPtG7eO2qrV6Zn89";
     const response = await fetch(`/api/checkout/${priceId}`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json", // for example, setting Content-Type to application/json
+        // ... you can add more headers here if needed
       },
+      body: JSON.stringify({
+        priceId: priceId,
+      }),
     });
 
     if (!response.ok) {
@@ -35,6 +41,7 @@ export default async function Pricing() {
       process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
     );
     await stripe.redirectToCheckout({ sessionId: data.id });
+    setIsRedirecting(false);
   }
 
   return (
@@ -359,9 +366,10 @@ export default async function Pricing() {
               </span>
             </p>
             <button
+              disabled={IsRedirecting}
               onClick={onCheckout}
               class="mt-8 block w-full dark:bg-slate-700 bg-slate-900 rounded-md py-2 text-sm font-semibold text-white text-center">
-              Join as a ultimate user
+              {IsRedirecting ? " Loading .." : "Join as a ultimate user"}
             </button>
           </div>
           <div class="pt-6 pb-8 px-6">
