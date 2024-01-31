@@ -19,28 +19,7 @@ const Forms = (props) => {
     <Formik
       initialValues={{ email: "", password: "" }}
       validationSchema={SignupSchema}
-      // validate={(values) => {
-      //   const errors = {};
-      //   if (!values.email) {
-      //     errors.email = ""; //used to be Required
-      //   } else if (
-      //     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-      //   ) {
-      //     errors.email = "Invalid email address";
-      //   }
-      //   return errors;
-      //}}
-
-      onSubmit={(values) => props.onSubmit(values)}
-
-      // onSubmit={(values, { setSubmitting }) => {
-      //   console.log("yo");
-      //   setTimeout(() => {
-      //     alert(JSON.stringify(values, null, 2));
-      //     setSubmitting(false);
-      //   }, 400);
-      // }}
-    >
+      onSubmit={(values) => props.onSubmit(values)}>
       {({ errors, touched }) => (
         <Form className=" dark:bg-gray-900 bg-white shadow-md rounded w-96 px-8 pt-6 pb-8 mb-4 align-middle mt-60 ">
           <h1 className="dark:text-white flex justify-center text-3xl font-bold 		">
