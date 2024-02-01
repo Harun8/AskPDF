@@ -52,6 +52,7 @@ export default async function handler(req, res) {
   }
 
   console.log("event", event);
+  console.log("items", event.data.object.items);
 
   try {
     switch (event.type) {
