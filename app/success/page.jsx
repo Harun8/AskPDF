@@ -13,8 +13,8 @@ const Success = () => {
         <div class="row-span-10 ...">
           <Link className="dark:text-white border rounded" href="/signin ">
             {" "}
-            You can now access AskPDF, get started now, by creating your
-            account!
+            You can now access to your specific AskPDF plan, get started now, by
+            creating your account!
           </Link>
         </div>
         <div class="col-span-2 ...">

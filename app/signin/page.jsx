@@ -7,9 +7,10 @@ import { useEffect, useState } from "react";
 import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
 
 const Signin = () => {
-  const signUp = async (values) => {
-    const router = useRouter();
-    const supabase = createClientComponentClient();
+  const router = useRouter();
+  const supabase = createClientComponentClient();
+
+  const signUpp = async (values) => {
     console.log("signup been called", values.email, values.password);
 
     let { error } = await supabase.auth.signUp({
@@ -30,7 +31,7 @@ const Signin = () => {
   return (
     <div className="flex justify-center">
       <Forms
-        onSubmit={signUp}
+        onSubmit={signUpp}
         title="Sign up"
         link="login"
         redirect="Already have an account? Log in"></Forms>
