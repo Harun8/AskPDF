@@ -31,10 +31,19 @@ export default async function handler(req, res) {
   const signingSecret = process.env.STRIPE_SIGNING_SECRET;
 
   let event;
+  let pID;
   try {
     // const rawbody = await getRawBody(req);
     const rawbody = await req.text();
     event = stripe.webhooks.constructEvent(rawbody, signature, signingSecret);
+    // const session = event.data.object;
+    // // Note that you'll need to add an async prefix to this route handler
+    // const { line_items } = await stripe.checkout.sessions.retrieve(session.id, {
+    //   expand: ["line_items"],
+    // });
+
+    // pID = line_items;
+    // console.log("pID", line_items);
   } catch (error) {
     console.log("error in webhooks", error);
 
@@ -52,7 +61,7 @@ export default async function handler(req, res) {
   }
 
   console.log("event", event);
-  console.log("items", event.data.object.items);
+  // console.log("items", event.data.object.items);
 
   try {
     switch (event.type) {
@@ -110,7 +119,7 @@ export async function updateSubscription(event) {
       subscription_status,
       price,
     };
-    await supabase
+    const { data, error } = await supabase
       .from("profile")
       .update(updatedSubscription)
       .eq("stripe_customer_id", stripe_customer_id);
@@ -118,8 +127,29 @@ export async function updateSubscription(event) {
     const customer = await stripe.customers.retrieve(stripe_customer_id);
     const name = customer.name;
     const email = customer.email;
-    console.log("customer", customer);
-    console.log("name", name);
+    // console.log("customer", customer);
+    // console.log("name", name);
+
+    // check if they've created a profile with no stripe_id
+
+    const updatedSubscription = {
+      name,
+      stripe_customer_id,
+      subscription_status,
+      price,
+    };
+    const { data, error } = await supabase
+      .from("profile")
+      .update(updatedSubscription)
+      .eq("email", email);
+
+    if (!error) return;
+
+    if (error) {
+      console.log(
+        "tried to update a user with no customer id in their profile"
+      );
+    }
 
     const newProfile = {
       name: name,

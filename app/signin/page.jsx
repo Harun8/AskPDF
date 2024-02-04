@@ -13,12 +13,13 @@ const Signin = () => {
   const signUpp = async (values) => {
     console.log("signup been called", values.email, values.password);
 
-    let { error } = await supabase.auth.signUp({
+    let { error } = await supabase.auth.signInWithOtp({
       email: values.email,
       password: values.password,
-      options: {
-        emailRedirectTo: "http://localhost:3000/auth/callback",
-      },
+      // options: {
+      //   emailRedirectTo: "http://localhost:3000/auth/callback",
+
+      // },
     });
 
     if (error) {

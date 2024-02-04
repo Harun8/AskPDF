@@ -9,10 +9,11 @@ const Forms = (props) => {
     email: Yup.string()
       .email("Invalid email")
       .required("Must be a valid email"),
-    password: Yup.string()
-      .required("No password provided.")
-      .min(8, "Password is too short - should be 8 chars minimum.")
-      .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
+
+    // password: Yup.string()
+    //   .required("No password provided.")
+    //   .min(8, "Password is too short - should be 8 chars minimum.")
+    //   .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
   });
 
   return (
@@ -43,21 +44,25 @@ const Forms = (props) => {
           ) : null}
           {/* <ErrorMessage name="email" component="div" /> */}
 
-          <label
-            className=" dark:text-white block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="password">
-            Password
-          </label>
-          <Field
-            className=" dark:bg-gray-900 dark:text-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Password"
-          />
-          {errors.password && touched.password ? (
-            <div className="text-red-500">{errors.password}</div>
-          ) : null}
+          {props.showPassword && (
+            <>
+              <label
+                className=" dark:text-white block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="password">
+                Password
+              </label>
+              <Field
+                className=" dark:bg-gray-900 dark:text-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Password"
+              />
+              {errors.password && touched.password ? (
+                <div className="text-red-500">{errors.password}</div>
+              ) : null}
+            </>
+          )}
 
           {/* <ErrorMessage name="password" component="div" /> */}
 
@@ -73,9 +78,8 @@ const Forms = (props) => {
             <button
               className=" rounded-lg dark:bg-slate-950 bg-white dark:text-white text-black hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
-              // disabled={isSubmitting}
-            >
-              {props.title}
+              disabled={props.isSubmitting}>
+              {props.isSubmitting ? "Check your mail" : props.title}
             </button>
           </div>
 

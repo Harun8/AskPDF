@@ -83,7 +83,7 @@ export default async function Pricing() {
             <a
               href="/sign-up"
               className="mt-8 block w-full dark:bg-slate-700 bg-slate-900 rounded-md py-2 text-sm font-semibold text-white text-center">
-              Join as a Starter
+              Sign up to get started
             </a>
           </div>
           <div className="pt-6 pb-8 px-6">
