@@ -167,7 +167,7 @@ export default function chat() {
         question: "Hi, who is it written by? ",
       });
       for await (const chunk of response) {
-        const content = { type: "response", text: chunk.toString() };
+        const content = chunk;
 
         // Accumulate the content.
         currentResponse += content;
