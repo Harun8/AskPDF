@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Session } from "@supabase/auth-helpers-nextjs";
+import ToggleBtn from "./ToggleBtn";
 const Nav = ({ session }) => {
   // const [session, setSession] = useState();
   const [loading, setLoading] = useState(false);
@@ -15,7 +16,7 @@ const Nav = ({ session }) => {
   return (
     <nav className="">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <div className="relative flex h-16 items-center justify-between">
+        <div className="relative flex h-16 items-center justify-center">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
             <button
               onClick={() => setToggleDropDown((prev) => !prev)}
@@ -55,16 +56,12 @@ const Nav = ({ session }) => {
               </svg>
             </button>
           </div>
-          <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-            <div className="flex flex-shrink-0 items-center">
-              <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                alt="Your Company"
-              />
-            </div>
-            <div className="hidden sm:ml-6 sm:block">
+          <div className="">
+            <div className="  hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
+                <div className="flex flex-shrink-0 items-center mt-1">
+                  <ToggleBtn></ToggleBtn>
+                </div>
                 <Link
                   href="/"
                   className="  dark:bg-gray-800 dark:text-white hover:text-slate-500	text-black rounded-md px-3 py-2 text-base font-medium"
@@ -106,9 +103,9 @@ const Nav = ({ session }) => {
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             {session ? (
               <>
-                <p className="font-semibold mr-24 text-gray-300 ">
+                {/* <p className=" dark:text-gray-300 font-semibold mr-24 text-gray-700 ">
                   Welcome, {session.user.email}
-                </p>
+                </p> */}
                 <button
                   className="bg-slate-900 font-semibold rounded px-4 py-2 text-white"
                   onClick={async (e) => {
@@ -124,15 +121,23 @@ const Nav = ({ session }) => {
                 </button>{" "}
               </>
             ) : (
-              <Link
-                href="/login"
-                className=" bg-slate-300 hover:bg-slate-800 hover:dark:bg-gray-700 dark:text-white  hover:text-white hover:font-bold dark:bg-gray-800 font-semibold rounded mr-3 px-4 py-2 text-black">
-                Login
-              </Link>
+              <>
+                
+                <Link
+                  href="/sigin"
+                  className=" text-black hover:bg-slate-800 hover:dark:bg-gray-700 dark:text-white  hover:text-white hover:font-bold dark:bg-gray-800 font-semibold rounded mr-3 px-4 py-2 ">
+                  Sign up
+                </Link>
+                <Link
+                  href="/login"
+                  className=" bg-black text-white hover:bg-slate-800 hover:dark:bg-gray-700 dark:text-white  hover:text-white hover:font-bold dark:bg-gray-800 font-semibold  mr-3 px-4 py-2 ">
+                  Get started
+                </Link>
+              </>
             )}
-            <button
+            {/* <button
               type="button"
-              className="relative rounded-full bg-slate-300 dark:bg-gray-800 p-1 text-black dark:text-white hover:dark:text-slate-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+              className=" ml-4 relative rounded-full bg-slate-300 dark:bg-gray-800 p-1 text-black dark:text-white hover:dark:text-slate-500 hover:bg-slate-400  focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
               <span className="absolute -inset-1.5"></span>
               <span className="sr-only">View notifications</span>
               <svg
@@ -148,7 +153,7 @@ const Nav = ({ session }) => {
                   d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
                 />
               </svg>
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

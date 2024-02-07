@@ -43,6 +43,7 @@ const openai = new OpenAI({
 const llm = new ChatOpenAI({
   openAIApiKey: process.env.NEXT_PUBLIC_API_KEY,
   streaming: true,
+  // modelName: "gpt-4-0125-preview",
   //  temperature: 0.5
 });
 
@@ -71,19 +72,26 @@ export default function chat() {
   // const tweetChain = tweetPrompt.pipe(llm);
 
   // clean the user question
-  const standAloneQuestionTemplate =
-    "Given a question, convert it into a standalone question. question: {question} standalone question:";
+  const standAloneQuestionTemplate = `Given some conversation history (if any) and a question, convert it into a standalone question. 
+    conversation history: {conv_history}
+    
+    question: {question} 
+    standalone question:`;
 
   const standaloneQuestionPrompt = PromptTemplate.fromTemplate(
     standAloneQuestionTemplate
   );
 
-  const answerTemplate = `You're a helpful and enthusiastic suppport bot who can answer a given question about the context provided.
-     Try to find the answer in the context. If you really do not know the answer, 
+  const answerTemplate = `You're a helpful and enthusiastic suppport bot who can answer a given question about the context provided
+  and the conversation history.
+     Try to find the answer in the context. If the answer is not given in the context, check if the answer is in the conversation history.
+     If you really do not know the answer
      say "I'm sorry, I can not find it in the PDF".
      Do not try to make up an answer. Always speak as if you were chatting to a friend.
      context: {context}
+     conversation history: {conv_history}
      question: {question}
+     answer: 
       `;
 
   const answerPrompt = PromptTemplate.fromTemplate(answerTemplate);
@@ -108,23 +116,10 @@ export default function chat() {
     {
       context: retrieverChain,
       question: ({ original_input }) => original_input.question,
+      conv_history: ({ original_input }) => original_input.conv_history,
     },
     answerChain,
   ]);
-
-  // useEffect(() => {
-  //   const chainProgress = async () => {
-  //     const response = await chain.invoke({
-  //       question: "Hi, who is it written by? ",
-  //     });
-  //     console.log("response", response);
-  //   };
-
-  //   console.log("tweetPrompt", tweetPrompt);
-  //   console.log("tweetChain", tweetChain);
-
-  //   chainProgress();
-  // }, []);
 
   useEffect(() => {
     const getAuth = async () => {
@@ -150,28 +145,46 @@ export default function chat() {
     getAuth();
   }, []);
 
+  useEffect(() => {
+    console.log("convo", conversation);
+  }, [conversation]);
+
+  const convHistory = [];
+
+  function formatConvHistory(messages) {
+    return messages
+      .map((message, i) => {
+        if (i % 2 === 0) {
+          return `Human: ${message}`;
+        } else {
+          return `AI: ${message}`;
+        }
+      })
+      .join(`\n`);
+  }
+
   const sendMessage = async (messageText) => {
     let answerIndex = [];
     let pdfTexts;
-    console.log("msgTExt", messageText);
+    // console.log("msgTExt", messageText);
     if (!messageText.trim()) return;
-
+    const newMessage = { type: "user", text: messageText };
+    setConversation([...conversation, newMessage]);
     let updatedConversation;
     let currentResponse = ""; // Initialize an empty string to accumulate the content
+    let chunkHolder = [];
 
     try {
-      const question = { type: "user", text: messageText };
-      setConversation([...conversation, question]);
-      console.log("check check");
+      // console.log("check check");
       const response = await chain.invoke({
-        question: "Hi, who is it written by? ",
+        question: messageText,
+        conv_history: formatConvHistory(convHistory),
       });
       for await (const chunk of response) {
         const content = chunk;
-
         // Accumulate the content.
         currentResponse += content;
-        console.log(currentResponse);
+        // console.log(currentResponse);
         setConversation((prevConversation) => {
           updatedConversation = [...prevConversation];
 
@@ -181,20 +194,27 @@ export default function chat() {
             updatedConversation[updatedConversation.length - 1].type ===
               "response"
           ) {
-            updatedConversation[updatedConversation.length - 1].text +=
+            // console.log("i got here 1", currentResponse);
+            updatedConversation[updatedConversation.length - 1].text =
               currentResponse;
           } else {
+            // console.log("i got here 2");
+
             updatedConversation.push({
               type: "response",
               text: currentResponse,
             });
           }
 
-          currentResponse = ""; // Clear currentResponse after updating the conversation.
+          // currentResponse = ""; // Clear currentResponse after updating the conversation.
           return updatedConversation;
         });
       }
-      console.log("Convo", updatedConversation);
+      convHistory.push(messageText);
+      convHistory.push(currentResponse);
+      console.log("conv", convHistory);
+
+      // console.log("Convo", updatedConversation);
 
       if (!conversation.length > 0) {
         answerIndex = conversation.length - 2;
@@ -205,77 +225,6 @@ export default function chat() {
       console.log(error);
       return;
     }
-
-    // let flattenedPdfTexts = pdfTexts.flat();
-
-    // let messages = [
-    //   { role: "system", content: "You are a helpful assistant." },
-    //   ...flattenedPdfTexts.map((pdfText) => ({
-    //     role: "user",
-    //     content: pdfText,
-    //   })),
-    //   { role: "user", content: messageText },
-    // ];
-
-    // console.log("messages ", messages);
-    // // Add the user's query at the end
-    // messages.push({ role: "user", content: messageText });
-
-    // Call the OpenAI API
-    // let completion;
-    // try {
-    //   let currentResponse = ""; // Initialize an empty string to accumulate the content
-
-    //   completion = await openai.chat.completions.create({
-    //     model: "gpt-3.5-turbo-0301",
-    //     messages: messages,
-    //     stream: true,
-    //   });
-
-    //   let updatedConversation;
-
-    //   for await (const chunk of completion) {
-    //     if (chunk.choices[0].delta.content != null) {
-    //       const content = chunk.choices[0].delta.content;
-
-    //       // Accumulate the content.
-    //       currentResponse += content;
-    //       console.log(currentResponse);
-    //       setConversation((prevConversation) => {
-    //         updatedConversation = [...prevConversation];
-
-    //         // Check if the last entry is a response and update it, or create a new response entry
-    //         if (
-    //           updatedConversation.length > 0 &&
-    //           updatedConversation[updatedConversation.length - 1].type ===
-    //             "response"
-    //         ) {
-    //           updatedConversation[updatedConversation.length - 1].text +=
-    //             currentResponse;
-    //         } else {
-    //           updatedConversation.push({
-    //             type: "response",
-    //             text: currentResponse,
-    //           });
-    //         }
-
-    //         currentResponse = ""; // Clear currentResponse after updating the conversation.
-    //         return updatedConversation;
-    //       });
-    //     }
-    //   }
-    //   console.log("Convo", updatedConversation);
-
-    //   if (!conversation.length > 0) {
-    //     let answerIndex = conversation.length - 2;
-    //     console.log("I am saving this: ");
-    //   } else {
-    //   }
-    // } catch (error) {
-    //   console.error("Error calling OpenAI API:", error);
-    //   return;
-    // }
-    // saveMessages();
   };
 
   const saveMessages = async () => {

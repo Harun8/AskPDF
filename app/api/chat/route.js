@@ -4,7 +4,7 @@ import { promisify } from "util";
 const readFileAsync = promisify(fs.readFile);
 const { createClient } = require("@supabase/supabase-js");
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter"; // defaults to 1000 chars
-import { SupabaseVectorStore } from "langchain/vectorstores/supabase";
+import { SupabaseVectorStore } from "@langchain/community/vectorstores/supabase";
 import { OpenAIEmbeddings } from "@langchain/openai";
 
 const supabase = createClient(
@@ -28,17 +28,14 @@ export default async function handler(req, res) {
   try {
     const data = await req.formData();
     const file = data.get("file");
+    const file_id = data.get("file_id");
+    file_title = data.get("file_title");
+    userId = data.get("userId");
 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
     const pdfData = await pdf(buffer);
-
-    // const loader = new PDFLoader(file, {
-    //   splitPages: false,
-    // });
-
-    // const text = await loader.load();
 
     const splitter = new RecursiveCharacterTextSplitter({
       chunkSize: 500,
@@ -48,7 +45,15 @@ export default async function handler(req, res) {
 
     const output = await splitter.createDocuments([pdfData.text]);
 
-    console.log("output", output);
+    // console.log("output", output);
+
+    const documentsWithForeignKeys = output.map((document) => ({
+      ...document,
+      user_id: userId, // Assuming userId is defined elsewhere in your code
+      file_id: file_id, // Assuming file_id is defined elsewhere in your code
+    }));
+    console.log("each row", documentsWithForeignKeys);
+
 
     await SupabaseVectorStore.fromDocuments(
       output,
@@ -59,7 +64,13 @@ export default async function handler(req, res) {
         client: supabase,
         tableName: "documents",
       }
-    );
+    )
+      .then((data) => {
+        console.log("Insertion successful", data);
+      })
+      .catch((error) => {
+        console.error("Error inserting documents:", error);
+      });
     const responseObject = {
       message: "PDF processed",
     };
