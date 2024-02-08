@@ -173,7 +173,7 @@ const Preview = () => {
   return (
     <div className="mx-12 grid gap-4 grid-cols-2">
       <div className="rounded-lg border shadow5">
-        <div className=" p-12 bg-gray h-[800px] overflow-y-auto  ">
+        <div className=" p-6 bg-gray h-[800px] overflow-y-auto  ">
           {pdf ? (
             <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>
               {Array.apply(null, Array(numPages))
@@ -181,7 +181,7 @@ const Preview = () => {
                 .map((page) => {
                   return (
                     <Page
-                      className="mb-12"
+                      className=""
                       pageNumber={page}
                       renderTextLayer={false}
                       renderAnnotationLayer={false}
