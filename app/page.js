@@ -95,7 +95,8 @@ export default function Home() {
       <section className=" ">
         <div className=" flex justify-center">
           <p className=" mt-8 text-gray-900 dark:text-slate-300 font-serif font-bold text-3xl leading-tight">
-            Loved by many
+            Loved by many <br />
+            <span className="text-sm"> and by many i mean me or now</span>
           </p>
         </div>
         <div className="mt-12 flex justify-center gap-16"></div>
