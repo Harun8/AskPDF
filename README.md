@@ -10,3 +10,19 @@ Anything older/weaker than the "gpt-3.5-turbo-0125", seems to be useless, on fir
 
 ![image](https://github.com/Harun8/AskPdf/assets/66841357/82900860-52cc-42d3-8e8a-8e226a724e6b)
 
+
+
+### General thoughts through my iterations
+
+Version 1: legacy branch 
+- Used openai chat model
+- Had a timecomplexity of O(N), when it came to processing documents, fine for small documents, very bad for massive documents
+- ^^ Show code example
+
+
+Version 2: Current one
+- Using openai embddings model via langChain
+- Using a vector database
+- Trouble with appending user_id, file_id onto langChain supabaseVectorStore, nothing in documentation and i am following normal practice
+- Trying to figure out how a user who used a OTP can login without OTP the next time they want to log in.
+- 
