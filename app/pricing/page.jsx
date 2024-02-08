@@ -62,7 +62,7 @@ export default async function Pricing() {
       </div>
 
       <div className="mt-12 space-y-3 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-6 md:max-w-5xl md:mx-auto xl:grid-cols-3">
-        <div className=" bg-gray-200 dark:bg-gray-900 	 border border-slate-900 rounded-lg shadow-sm divide-y divide-slate-200">
+        <div className=" bg-zinc-100 dark:bg-gray-900 	 border border-slate-900 rounded-lg shadow-sm divide-y divide-slate-200">
           <div className="p-6">
             <h2 className="text-xl leading-6 font-bold dark:text-slate-100 text-slate-900">
               Starter
@@ -199,7 +199,7 @@ export default async function Pricing() {
             </ul>
           </div>
         </div>
-        <div className=" bg-gray-200 dark:bg-gray-900 	 border border-slate-900 rounded-lg shadow-sm divide-y divide-slate-200">
+        <div className=" bg-zinc-100 dark:bg-gray-900 	 border border-slate-900 rounded-lg shadow-sm divide-y divide-slate-200">
           <div className="p-6">
             <h2 className="text-xl leading-6 font-bold dark:text-slate-100 text-slate-900">
               {plans[1].name}
@@ -345,7 +345,7 @@ export default async function Pricing() {
             </ul>
           </div>
         </div>
-        <div className=" bg-gray-200 dark:bg-gray-900 	 border border-slate-900 rounded-lg shadow-sm divide-y divide-slate-200">
+        <div className=" bg-zinc-100 dark:bg-gray-900 	 border border-slate-900 rounded-lg shadow-sm divide-y divide-slate-200">
           <div className="p-6">
             <h2 className="text-xl leading-6 font-bold dark:text-slate-100 text-slate-900">
               {plans[0].name}
