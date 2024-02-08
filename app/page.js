@@ -8,6 +8,7 @@ import LPBI from "@/public/landingPage.svg";
 import { Button } from "@/components/ui/button";
 import Typewriter from "@/public/typewriter.svg";
 import Upload from "@/public/upload.svg";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -24,6 +25,11 @@ export default function Home() {
             <Button size="xlg" variant="homepage">
               Try AskPDF for free
             </Button>
+            <Link
+              className=" hover:text-gray-700 ml-6 my-auto font-semibold text-lg"
+              href="/preview">
+              Try the demo
+            </Link>
           </div>
         </div>
         <div class="col-span-2 ...">
@@ -42,7 +48,6 @@ export default function Home() {
         </div>
         <div></div>
       </div>
-      <h1>hi</h1>
 
       <section className=" bg-blue-950	">
         <div className=" flex justify-center">
