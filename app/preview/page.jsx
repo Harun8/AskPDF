@@ -171,7 +171,7 @@ const Preview = () => {
     // }
   };
   return (
-    <div className="mx-12 grid gap-4 grid-cols-2">
+    <div className="mx-12 grid grid-cols-2">
       <div className="rounded-lg border shadow5">
         <div className=" p-6 bg-gray h-[800px] overflow-y-auto  ">
           {pdf ? (
