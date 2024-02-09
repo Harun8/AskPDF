@@ -43,52 +43,36 @@ export default async function handler(req, res) {
       chunkOverlap: 50,
     });
 
-    // const output = await splitter.createDocuments([pdfData.text]);
+    const output = await splitter.createDocuments([pdfData.text]);
 
-    // Main async function to process PDF and insert documents
+    const embedding = await openai.embeddings.create({
+      model: "text-embedding-ada-002",
+      input: output.pageContent,
+      encoding_format: "float",
+    });
+
+    console.log(embedding);
+
+    // console.log("output", output);
+    const documentsWithForeignKeys = output.map((document) => ({
+      ...document,
+      user_id: userId, // make sure userId is defined and obtained from your context
+      file_id: file_id, // make sure file_id is defined and obtained from your context
+    }));
+
+    console.log("each row", documentsWithForeignKeys);
+
+    // Step 2: Insert documents into the Supabase table
     try {
-      const output = await splitter.createDocuments([pdfData.text]);
-
-      // Generate embeddings and add foreign keys for each document
-      const documentsWithEmbeddingsAndKeys = await Promise.all(
-        output.map(async (document) => {
-          const embedding = await generateEmbedding(document.pageContent);
-          return {
-            ...document,
-            embedding, // Add the embedding to each document
-            user_id: userId, // Assuming userId is defined and obtained from your context
-            file_id: file_id, // Assuming file_id is defined and obtained from your context
-          };
-        })
-      );
-
-      console.log("each row with embeddings", documentsWithEmbeddingsAndKeys);
-
-      // Insert documents into the Supabase table
       const { data, error } = await supabase
         .from("documents")
-        .insert(documentsWithEmbeddingsAndKeys);
+        .insert(documentsWithForeignKeys);
 
       if (error) throw error;
 
       console.log("Insertion successful", data);
     } catch (error) {
-      console.error("Error processing and inserting documents:", error);
-    }
-
-    async function generateEmbedding(content) {
-      try {
-        const response = await openai.embeddings.create({
-          model: "text-embedding-ada-002",
-          input: content,
-          encoding_format: "float",
-        });
-        // Ensure you extract the embedding correctly based on the API response structure
-        return response.data.embeddings[0].embedding; // Adjust based on actual response structure
-      } catch (error) {
-        console.error("Error generating embedding for content:", error);
-        return []; // Return an empty array or handle as appropriate
-      }
+      console.error("Error inserting documents:", error);
     }
 
     // const documentsWithForeignKeys = output.map((document) => ({

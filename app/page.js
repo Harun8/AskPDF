@@ -8,6 +8,9 @@ import LPBI from "@/public/landingPage.svg";
 import { Button } from "@/components/ui/button";
 import Typewriter from "@/public/typewriter.svg";
 import Upload from "@/public/upload.svg";
+import Answer from "@/public/answer.svg";
+import Pdf from "@/public/pdf.svg";
+
 import Link from "next/link";
 
 export default function Home() {
@@ -70,7 +73,7 @@ export default function Home() {
           <div>
             <Image
               className="mx-auto"
-              src={Upload}
+              src={Answer}
               width={50}
               height={50}
               alt="landing page main image"></Image>
@@ -81,7 +84,7 @@ export default function Home() {
           <div>
             <Image
               className="mx-auto"
-              src={Upload}
+              src={Pdf}
               width={50}
               height={50}
               alt="landing page main image"></Image>
@@ -96,10 +99,13 @@ export default function Home() {
         <div className=" flex justify-center">
           <p className=" mt-8 text-gray-900 dark:text-slate-300 font-serif font-bold text-3xl leading-tight">
             Loved by many <br />
-            <span className="text-sm"> and by many i mean me or now</span>
+            <span className="text-sm"> and by many i mean me for now</span>
           </p>
         </div>
         <div className="mt-12 flex justify-center gap-16"></div>
+
+
+
       </section>
     </>
   );
