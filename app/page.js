@@ -52,7 +52,7 @@ export default function Home() {
         <div></div>
       </div>
 
-      <section className=" bg-blue-950	">
+      <section className=" bg-blue-950 py-16	">
         <div className=" flex justify-center">
           <p className=" mx-auto mt-8 text-zinc-100 dark:text-slate-300 font-serif font-bold text-3xl leading-tight">
             How does it work
@@ -96,16 +96,16 @@ export default function Home() {
       </section>
 
       <section className=" ">
-        <div className=" flex justify-center">
+        {/* <div className=" flex justify-center">
           <p className=" mt-8 text-gray-900 dark:text-slate-300 font-serif font-bold text-3xl leading-tight">
             Loved by many <br />
             <span className="text-sm"> and by many i mean me for now</span>
           </p>
         </div>
-        <div className="mt-12 flex justify-center gap-16"></div>
+        <div className="mt-12 flex justify-center gap-16"></div> */}
 
-        <div class="min-w-screen min-h-screen bg-gray-50 flex items-center justify-center py-5">
-          <div class="w-full bg-white border-t border-b border-gray-200 px-5 py-16 md:py-24 text-gray-800">
+        <div class="min-w-screen min-h-screen  flex items-center justify-center ">
+          <div class="w-full bg-gray-300  border-t border-b border-gray-200 px-5 py-16 md:py-24 text-gray-800">
             <div class="w-full max-w-6xl mx-auto">
               <div class="text-center max-w-xl mx-auto">
                 <h1 class="text-6xl md:text-7xl font-bold mb-5 text-gray-600">
@@ -125,9 +125,9 @@ export default function Home() {
               </div>
               <div class="-mx-3 md:flex items-start">
                 <div class="px-3 md:w-1/3">
-                  <div class="w-full mx-auto rounded-lg bg-white border border-gray-200 p-5 text-gray-800 font-light mb-6">
+                  <div class="w-full mx-auto rounded-lg  border border-gray-200 p-5 text-gray-800 font-light mb-6">
                     <div class="w-full flex mb-4 items-center">
-                      <div class="overflow-hidden rounded-full w-10 h-10 bg-gray-50 border border-gray-200">
+                      <div class="overflow-hidden rounded-full w-10 h-10  border border-gray-200">
                         <img src="https://i.pravatar.cc/100?img=1" alt="" />
                       </div>
                       <div class="flex-grow pl-3">
@@ -152,7 +152,7 @@ export default function Home() {
                       </p>
                     </div>
                   </div>
-                  <div class="w-full mx-auto rounded-lg bg-white border border-gray-200 p-5 text-gray-800 font-light mb-6">
+                  <div class="w-full mx-auto rounded-lg  border border-gray-200 p-5 text-gray-800 font-light mb-6">
                     <div class="w-full flex mb-4 items-center">
                       <div class="overflow-hidden rounded-full w-10 h-10 bg-gray-50 border border-gray-200">
                         <img src="https://i.pravatar.cc/100?img=2" alt="" />
@@ -179,7 +179,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div class="px-3 md:w-1/3">
-                  <div class="w-full mx-auto rounded-lg bg-white border border-gray-200 p-5 text-gray-800 font-light mb-6">
+                  <div class="w-full mx-auto rounded-lg  border border-gray-200 p-5 text-gray-800 font-light mb-6">
                     <div class="w-full flex mb-4 items-center">
                       <div class="overflow-hidden rounded-full w-10 h-10 bg-gray-50 border border-gray-200">
                         <img src="https://i.pravatar.cc/100?img=3" alt="" />
@@ -204,7 +204,7 @@ export default function Home() {
                       </p>
                     </div>
                   </div>
-                  <div class="w-full mx-auto rounded-lg bg-white border border-gray-200 p-5 text-gray-800 font-light mb-6">
+                  <div class="w-full mx-auto rounded-lg border border-gray-200 p-5 text-gray-800 font-light mb-6">
                     <div class="w-full flex mb-4 items-center">
                       <div class="overflow-hidden rounded-full w-10 h-10 bg-gray-50 border border-gray-200">
                         <img src="https://i.pravatar.cc/100?img=4" alt="" />
@@ -233,7 +233,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div class="px-3 md:w-1/3">
-                  <div class="w-full mx-auto rounded-lg bg-white border border-gray-200 p-5 text-gray-800 font-light mb-6">
+                  <div class="w-full mx-auto rounded-lg  border border-gray-200 p-5 text-gray-800 font-light mb-6">
                     <div class="w-full flex mb-4 items-center">
                       <div class="overflow-hidden rounded-full w-10 h-10 bg-gray-50 border border-gray-200">
                         <img src="https://i.pravatar.cc/100?img=5" alt="" />
@@ -260,7 +260,7 @@ export default function Home() {
                       </p>
                     </div>
                   </div>
-                  <div class="w-full mx-auto rounded-lg bg-white border border-gray-200 p-5 text-gray-800 font-light mb-6">
+                  <div class="w-full mx-auto rounded-lg  border border-gray-200 p-5 text-gray-800 font-light mb-6">
                     <div class="w-full flex mb-4 items-center">
                       <div class="overflow-hidden rounded-full w-10 h-10 bg-gray-50 border border-gray-200">
                         <img src="https://i.pravatar.cc/100?img=6" alt="" />
