@@ -103,10 +103,8 @@ export default function Home() {
           </p>
         </div>
         <div className="mt-12 flex justify-center gap-16"></div>
-
-
-
       </section>
     </>
   );
 }
+yyy;
