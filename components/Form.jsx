@@ -76,7 +76,7 @@ const Forms = (props) => {
 
           <div className="flex justify-center mt-5">
             <button
-              className=" rounded-lg dark:bg-slate-950 bg-white dark:text-white text-black hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className=" rounded-lg bg-gray-900 dark:bg-slate-950 bg-white dark:text-white text-black hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
               disabled={props.isSubmitting}>
               {props.isSubmitting ? "Check your mail" : props.title}

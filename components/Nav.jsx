@@ -122,10 +122,9 @@ const Nav = ({ session }) => {
               </>
             ) : (
               <>
-                
                 <Link
                   href="/sigin"
-                  className=" text-black hover:bg-slate-800 hover:dark:bg-gray-700 dark:text-white  hover:text-white hover:font-bold dark:bg-gray-800 font-semibold rounded mr-3 px-4 py-2 ">
+                  className=" text-gray-800 hover:dark:bg-gray-700 dark:text-white  hover:text-black dark:bg-gray-800 font-semibold rounded mr-3 px-4 py-2 ">
                   Sign up
                 </Link>
                 <Link
