@@ -82,17 +82,31 @@ export default function chat() {
     standAloneQuestionTemplate
   );
 
-  const answerTemplate = `You're a helpful and enthusiastic suppport bot who can answer a given question about the context provided
-  and the conversation history.
-     Try to find the answer in the context. If the answer is not given in the context, check if the answer is in the conversation history.
-     If you really do not know the answer
-     say "I'm sorry, I can not find it in the PDF".
-     Do not try to make up an answer. Always speak as if you were chatting to a friend.
-     context: {context}
-     conversation history: {conv_history}
-     question: {question}
-     answer: 
-      `;
+  const answerTemplate = `
+As a support bot, your primary goal is to provide accurate and friendly assistance. When presented with a question, follow these steps:
+1. First, examine the provided context closely for the answer. The context for this inquiry is: {context}.
+2. If the context does not contain the answer, review the conversation history for relevant information. The conversation history is as follows: {conv_history}.
+3. If the answer is still elusive after checking both the context and conversation history, politely admit the limitation with a response: "I'm sorry, I cannot find it in the PDF."
+4. Remember to avoid conjecture or fabricating answers. Maintain a conversational tone, as if speaking to a friend.
+
+Here's your task:
+- Question: {question}
+- Your answer should be provided below.
+
+Answer:
+`;
+
+  // const answerTemplate = `You're a helpful and enthusiastic suppport bot who can answer a given question about the context provided,
+  // and the conversation history.
+  //    Try to find the answer in the context. If the answer is not given in the context check if the answer is in the conversation history.
+  //    If you really do not know the answer
+  //    say "I'm sorry, I can not find it in the PDF".
+  //    Do not try to make up an answer. Always speak as if you were chatting to a friend.
+  //    context: {context}
+  //    conversation history: {conv_history}
+  //    question: {question}
+  //    answer:
+  //     `;
 
   const answerPrompt = PromptTemplate.fromTemplate(answerTemplate);
 
@@ -108,18 +122,6 @@ export default function chat() {
   const answerChain = answerPrompt.pipe(llm).pipe(new StringOutputParser());
 
   // standalone question works pretty well
-  const chain = RunnableSequence.from([
-    {
-      standalone_question: standaloneQuestionchain,
-      original_input: new RunnablePassthrough(),
-    },
-    {
-      context: retrieverChain,
-      question: ({ original_input }) => original_input.question,
-      conv_history: ({ original_input }) => original_input.conv_history,
-    },
-    answerChain,
-  ]);
 
   useEffect(() => {
     const getAuth = async () => {
@@ -150,6 +152,19 @@ export default function chat() {
   }, [conversation]);
 
   const convHistory = [];
+  const chain = RunnableSequence.from([
+    {
+      standalone_question: standaloneQuestionchain,
+      original_input: new RunnablePassthrough(),
+    },
+    {
+      context: retrieverChain,
+      question: ({ original_input }) => original_input.question,
+      conv_history: ({ original_input }) => original_input.conv_history,
+    },
+    answerChain,
+    
+  ]);
 
   function formatConvHistory(messages) {
     return messages
@@ -331,7 +346,7 @@ export default function chat() {
 
   return (
     <div className="mx-12 grid gap-4 grid-cols-2">
-      <div className="rounded-lg border shadow5">
+      <div className="rounded-lg border shadow5 ">
         {pdf ? (
           <div className=" p-12 bg-gray h-[800px] overflow-y-auto  ">
             <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>

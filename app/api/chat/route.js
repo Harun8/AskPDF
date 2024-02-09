@@ -43,37 +43,80 @@ export default async function handler(req, res) {
       chunkOverlap: 50,
     });
 
-    const output = await splitter.createDocuments([pdfData.text]);
+    // const output = await splitter.createDocuments([pdfData.text]);
 
-    // console.log("output", output);
+    // Main async function to process PDF and insert documents
+    try {
+      const output = await splitter.createDocuments([pdfData.text]);
 
-    const documentsWithForeignKeys = output.map((document) => ({
-      ...document,
-      user_id: userId, // Assuming userId is defined elsewhere in your code
-      file_id: file_id, // Assuming file_id is defined elsewhere in your code
-    }));
-    console.log("each row", documentsWithForeignKeys);
+      // Generate embeddings and add foreign keys for each document
+      const documentsWithEmbeddingsAndKeys = await Promise.all(
+        output.map(async (document) => {
+          const embedding = await generateEmbedding(document.pageContent);
+          return {
+            ...document,
+            embedding, // Add the embedding to each document
+            user_id: userId, // Assuming userId is defined and obtained from your context
+            file_id: file_id, // Assuming file_id is defined and obtained from your context
+          };
+        })
+      );
 
+      console.log("each row with embeddings", documentsWithEmbeddingsAndKeys);
 
-    await SupabaseVectorStore.fromDocuments(
-      output,
-      new OpenAIEmbeddings({
-        openAIApiKey: process.env.NEXT_PUBLIC_API_KEY,
-      }),
-      {
-        client: supabase,
-        tableName: "documents",
+      // Insert documents into the Supabase table
+      const { data, error } = await supabase
+        .from("documents")
+        .insert(documentsWithEmbeddingsAndKeys);
+
+      if (error) throw error;
+
+      console.log("Insertion successful", data);
+    } catch (error) {
+      console.error("Error processing and inserting documents:", error);
+    }
+
+    async function generateEmbedding(content) {
+      try {
+        const response = await openai.embeddings.create({
+          model: "text-embedding-ada-002",
+          input: content,
+          encoding_format: "float",
+        });
+        // Ensure you extract the embedding correctly based on the API response structure
+        return response.data.embeddings[0].embedding; // Adjust based on actual response structure
+      } catch (error) {
+        console.error("Error generating embedding for content:", error);
+        return []; // Return an empty array or handle as appropriate
       }
-    )
-      .then((data) => {
-        console.log("Insertion successful", data);
-      })
-      .catch((error) => {
-        console.error("Error inserting documents:", error);
-      });
-    const responseObject = {
-      message: "PDF processed",
-    };
+    }
+
+    // const documentsWithForeignKeys = output.map((document) => ({
+    //   ...document,
+    //   user_id: userId, // Assuming userId is defined elsewhere in your code
+    //   file_id: file_id, // Assuming file_id is defined elsewhere in your code
+    // }));
+    // console.log("each row", documentsWithForeignKeys);
+
+    // await SupabaseVectorStore.fromDocuments(
+    //   documentsWithForeignKeys,
+    //   new OpenAIEmbeddings({
+    //     openAIApiKey: process.env.NEXT_PUBLIC_API_KEY,
+    //   }),
+    //   {
+    //     client: supabase,
+    //     tableName: "documents",
+    //   }
+    // )
+    //   .then((data) => {
+    //     console.log("Insertion successful", data);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error inserting documents:", error);
+    //   });
+    // const responseObject = {
+    //   message: "PDF processed",
+    // };
 
     const response = new Response(JSON.stringify(responseObject), {
       status: 200, // Set the status code to 200 (OK)

@@ -6,7 +6,7 @@ const ConversationDisplay = ({ conversation }) => {
         {/* Adjust the height as needed */}
         <div className=" ">
           <div
-            className={`flex-grow overflow-y-auto border-4 rounded-lg shadow-xl h-[500px] dark:bg-gray-900					`}>
+            className={`flex-grow overflow-y-auto border-4 rounded-lg shadow-xl h-[500px]  dark:bg-gray-900					`}>
             {conversation.map((msg, index) => {
               let textColor =
                 msg.type === "user"
