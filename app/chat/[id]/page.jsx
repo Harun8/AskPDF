@@ -184,14 +184,41 @@ const ChatPage = () => {
     .pipe(llm)
     .pipe(new StringOutputParser());
 
+  async function retriever(prevResult, { file_id }) {
+    try {
+      const { data, error } = await supabase
+        .from("documents")
+        .select("*") // Adjust to select specific columns as needed
+        .eq("file_id", file_id);
+
+      if (error) {
+        console.error("Error retrieving documents:", error);
+        throw error;
+      }
+
+      return data;
+    } catch (error) {
+      console.error("Error in retriever function:", error);
+      throw error;
+    }
+  }
+  const file_id = "d0c4c9e0-f471-4d0d-a3ad-af61c79d5f74"; // This should be dynamically set as per your requirement
+
   const retrieverChain = RunnableSequence.from([
-    (prevResult) => prevResult.standalone_question, // 1
-    retriver, // 2
-    combineDocuments, // 3
+    (prevResult) => prevResult.standalone_question,
+    (prevResult) => retriever(prevResult, { file_id }), // Pass file_id to the retriever
+    combineDocuments,
   ]);
+
+  // const retrieverChain = RunnableSequence.from([
+  //   (prevResult) => prevResult.standalone_question, // 1
+  //   retriver, // 2
+  //   combineDocuments, // 3
+  // ]);
   const answerChain = answerPrompt.pipe(llm).pipe(new StringOutputParser());
 
   const convHistory = [];
+
   const chain = RunnableSequence.from([
     {
       standalone_question: standaloneQuestionchain,
