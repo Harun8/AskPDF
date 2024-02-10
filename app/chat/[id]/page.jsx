@@ -66,17 +66,18 @@ const ChatPage = () => {
               userID: session.user.id,
             }),
           });
+          console.log("params.id", params.id);
 
-          let { data, error } = await supabase
-            .from("pdfs")
-            .select("chatId")
-            .eq("id", params.id);
+          // let { data, error } = await supabase
+          //   .from("pdfs")
+          //   .select("chatId")
+          //   .eq("id", params.id);
 
-          console.log("chatId", data);
-          setChat_id(data[0].chatId);
+          // console.log("chatId", data[0].chatId);
+          // setChat_id(data[0].chatId);
 
-          if (error)
-            throw new Error("could not get the chatID for this pdf file");
+          // if (error)
+          //   throw new Error("could not get the chatID for this pdf file");
 
           if (!response.ok) {
             throw new Error("API call failed");
@@ -88,7 +89,7 @@ const ChatPage = () => {
             console.log("params.id", params.id);
 
             console.log("response", data);
-            fetchPdfFilePath(params.id);
+            fetchPdfUrl(params.id);
           }
         } else {
           router.push("/");
@@ -104,19 +105,19 @@ const ChatPage = () => {
     getInfo();
   }, [params]);
 
-  async function fetchPdfFilePath(pdfId) {
-    const { data, error } = await supabase
-      .from("pdfs") // Replace with your table name
-      .select("file_id") // Adjust based on your schema
-      .eq("id", pdfId)
-      .single();
+  // async function fetchPdfFilePath(pdfId) {
+  //   const { data, error } = await supabase
+  //     .from("pdfs") // Replace with your table name
+  //     .select("file_id") // Adjust based on your schema
+  //     .eq("id", pdfId)
+  //     .single();
 
-    if (error) throw new Error(error.message);
+  //   if (error) throw new Error(error.message);
 
-    console.log("data", data);
+  //   console.log("data", data);
 
-    return fetchPdfUrl(data.file_id);
-  }
+  //   return fetchPdfUrl(data.file_id);
+  // }
 
   async function fetchPdfUrl(file_id) {
     console.log("file_id", file_id);
