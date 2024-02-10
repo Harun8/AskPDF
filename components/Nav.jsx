@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Session } from "@supabase/auth-helpers-nextjs";
 import ToggleBtn from "./ToggleBtn";
+import Settings from "@/public/settings.svg";
 const Nav = ({ session }) => {
   // const [session, setSession] = useState();
   const [loading, setLoading] = useState(false);
@@ -134,6 +135,13 @@ const Nav = ({ session }) => {
                 </Link>
               </>
             )}
+            <Image
+              className="text-white ml-3"
+              href="/"
+              src={Settings}
+              width={25}
+              height={25}
+              alt="settings"></Image>
             {/* <button
               type="button"
               className=" ml-4 relative rounded-full bg-slate-300 dark:bg-gray-800 p-1 text-black dark:text-white hover:dark:text-slate-500 hover:bg-slate-400  focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
