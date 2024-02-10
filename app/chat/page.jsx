@@ -21,16 +21,8 @@ import sendFileToOpenAi from "@/util/openai";
 import OpenAI from "openai";
 import Modal from "@/components/Modal";
 
-import { ChatOpenAI } from "langchain/chat_models/openai";
-import { PromptTemplate } from "langchain/prompts";
-import { SupabaseVectorStore } from "langchain/vectorstores/supabase";
-import { OpenAIEmbeddings } from "@langchain/openai";
-import { StringOutputParser } from "langchain/schema/output_parser";
-import { retriver } from "@/util/retriever";
-import {
-  RunnablePassthrough,
-  RunnableSequence,
-} from "langchain/schema/runnable";
+
+
 import combineDocuments from "./../../util/combineDocuments";
 
 const supabase = createClientComponentClient();
@@ -43,7 +35,7 @@ const openai = new OpenAI({
 const llm = new ChatOpenAI({
   openAIApiKey: process.env.NEXT_PUBLIC_API_KEY,
   streaming: true,
-  // modelName: "gpt-4-0125-preview",
+  modelName: "gpt-4-0125-preview",
   //  temperature: 0.5
 });
 
@@ -82,31 +74,31 @@ export default function chat() {
     standAloneQuestionTemplate
   );
 
-  const answerTemplate = `
-As a support bot, your primary goal is to provide accurate and friendly assistance. When presented with a question, follow these steps:
-1. First, examine the provided context closely for the answer. The context for this inquiry is: {context}.
-2. If the context does not contain the answer, review the conversation history for relevant information. The conversation history is as follows: {conv_history}.
-3. If the answer is still elusive after checking both the context and conversation history, politely admit the limitation with a response: "I'm sorry, I cannot find it in the PDF."
-4. Remember to avoid conjecture or fabricating answers. Maintain a conversational tone, as if speaking to a friend.
+  //   const answerTemplate = `
+  // As a support bot, your primary goal is to provide accurate and friendly assistance. When presented with a question, follow these steps:
+  // 1. First, examine the provided context closely for the answer. The context for this inquiry is: {context}.
+  // 2. If the context does not contain the answer, review the conversation history for relevant information. The conversation history is as follows: {conv_history}.
+  // 3. If the answer is still elusive after checking both the context and conversation history, politely admit the limitation with a response: "I'm sorry, I cannot find it in the PDF."
+  // 4. Remember to avoid conjecture or fabricating answers. Maintain a conversational tone, as if speaking to a friend.
 
-Here's your task:
-- Question: {question}
-- Your answer should be provided below.
+  // Here's your task:
+  // - Question: {question}
+  // - Your answer should be provided below.
 
-Answer:
-`;
+  // Answer:
+  // `;
 
-  // const answerTemplate = `You're a helpful and enthusiastic suppport bot who can answer a given question about the context provided,
-  // and the conversation history.
-  //    Try to find the answer in the context. If the answer is not given in the context check if the answer is in the conversation history.
-  //    If you really do not know the answer
-  //    say "I'm sorry, I can not find it in the PDF".
-  //    Do not try to make up an answer. Always speak as if you were chatting to a friend.
-  //    context: {context}
-  //    conversation history: {conv_history}
-  //    question: {question}
-  //    answer:
-  //     `;
+  const answerTemplate = `You're a helpful and enthusiastic suppport bot who can answer a given question about the context provided,
+  and the conversation history.
+     Try to find the answer in the context. If the answer is not given in the context check if the answer is in the conversation history.
+     If you really do not know the answer
+     say "I'm sorry, I can not find it in the PDF".
+     Do not try to make up an answer. Always speak as if you were chatting to a friend.
+     context: {context}
+     conversation history: {conv_history}
+     question: {question}
+     answer:
+      `;
 
   const answerPrompt = PromptTemplate.fromTemplate(answerTemplate);
 
@@ -163,7 +155,6 @@ Answer:
       conv_history: ({ original_input }) => original_input.conv_history,
     },
     answerChain,
-    
   ]);
 
   function formatConvHistory(messages) {
@@ -242,11 +233,6 @@ Answer:
     }
   };
 
-  const saveMessages = async () => {
-    console.log("In save message fn");
-    console.log("convo", conversation);
-  };
-
   const onFileSelect = async (event) => {
     console.log("Is the modal open? ", isOpen);
     event.stopPropagation();
@@ -311,9 +297,9 @@ Answer:
             try {
               const data = JSON.parse(textResponse); // Try parsing as JSON
               console.log("Parsed Data: ", data);
-              setCurrentPdfId(data.pdfIds[0]);
+              setCurrentPdfId(data.pdfIds);
               setChatId(data.chatId);
-              history.replaceState(data, "convo", `/chat/${data.pdfIds[0]}`);
+              history.replaceState(data, "convo", `/chat/${data.pdfIds}`);
 
               // router.replace(`/chat/${data.pdfIds[0]}`, undefined, { shallow: true });
             } catch (jsonError) {

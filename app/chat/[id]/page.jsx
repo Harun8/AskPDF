@@ -13,6 +13,17 @@ import { useEffect, useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import ConversationDisplay from "@/components/ConversationDisplay";
 import TextField from "@/components/TextField";
+import combineDocuments from "@/util/combineDocuments";
+import { ChatOpenAI } from "langchain/chat_models/openai";
+import { PromptTemplate } from "langchain/prompts";
+import { SupabaseVectorStore } from "langchain/vectorstores/supabase";
+import { OpenAIEmbeddings } from "@langchain/openai";
+import { StringOutputParser } from "langchain/schema/output_parser";
+import { retriver } from "@/util/retriever";
+import {
+  RunnablePassthrough,
+  RunnableSequence,
+} from "langchain/schema/runnable";
 
 import OpenAI from "openai";
 
@@ -39,8 +50,6 @@ const ChatPage = () => {
     setNumPages(numPages);
   }
 
-
-
   useEffect(() => {
     const getInfo = async () => {
       try {
@@ -63,7 +72,7 @@ const ChatPage = () => {
             .select("chatId")
             .eq("id", params.id);
 
-          console.log("chatId", data[0].chatId);
+          console.log("chatId", data);
           setChat_id(data[0].chatId);
 
           if (error)
@@ -139,151 +148,138 @@ const ChatPage = () => {
     }
   }
 
-  useEffect(() => {
-    console.log("answer", answer);
-    console.log("question", question);
-  }, [answer, question]);
+  const llm = new ChatOpenAI({
+    openAIApiKey: process.env.NEXT_PUBLIC_API_KEY,
+    streaming: true,
+    modelName: "gpt-4-0125-preview",
+    //  temperature: 0.5
+  });
+
+  const standAloneQuestionTemplate = `Given some conversation history (if any) and a question, convert it into a standalone question. 
+  conversation history: {conv_history}
+  
+  question: {question} 
+  standalone question:`;
+
+  const standaloneQuestionPrompt = PromptTemplate.fromTemplate(
+    standAloneQuestionTemplate
+  );
+
+  const answerTemplate = `You're a helpful and enthusiastic suppport bot who can answer a given question about the context provided,
+  and the conversation history.
+     Try to find the answer in the context. If the answer is not given in the context check if the answer is in the conversation history.
+     If you really do not know the answer
+     say "I'm sorry, I can not find it in the PDF".
+     Do not try to make up an answer. Always speak as if you were chatting to a friend.
+     context: {context}
+     conversation history: {conv_history}
+     question: {question}
+     answer:
+      `;
+
+  const answerPrompt = PromptTemplate.fromTemplate(answerTemplate);
+
+  const standaloneQuestionchain = standaloneQuestionPrompt
+    .pipe(llm)
+    .pipe(new StringOutputParser());
+
+  const retrieverChain = RunnableSequence.from([
+    (prevResult) => prevResult.standalone_question, // 1
+    retriver, // 2
+    combineDocuments, // 3
+  ]);
+  const answerChain = answerPrompt.pipe(llm).pipe(new StringOutputParser());
+
+  const convHistory = [];
+  const chain = RunnableSequence.from([
+    {
+      standalone_question: standaloneQuestionchain,
+      original_input: new RunnablePassthrough(),
+    },
+    {
+      context: retrieverChain,
+      question: ({ original_input }) => original_input.question,
+      conv_history: ({ original_input }) => original_input.conv_history,
+    },
+    answerChain,
+  ]);
+
+  function formatConvHistory(messages) {
+    return messages
+      .map((message, i) => {
+        if (i % 2 === 0) {
+          return `Human: ${message}`;
+        } else {
+          return `AI: ${message}`;
+        }
+      })
+      .join(`\n`);
+  }
 
   const sendMessage = async (messageText) => {
+    let answerIndex = [];
     let pdfTexts;
-    console.log("msgTExt", messageText);
+    // console.log("msgTExt", messageText);
     if (!messageText.trim()) return;
-
     const newMessage = { type: "user", text: messageText };
     setConversation([...conversation, newMessage]);
+    let updatedConversation;
+    let currentResponse = ""; // Initialize an empty string to accumulate the content
+    let chunkHolder = [];
 
     try {
-      let { data: pdfs, error } = await supabase
-        .from("pdfs")
-        .select("*")
-        .eq("id", params.id);
+      // console.log("check check");
+      const response = await chain.invoke({
+        question: messageText,
+        conv_history: formatConvHistory(convHistory),
+      });
+      for await (const chunk of response) {
+        const content = chunk;
+        // Accumulate the content.
+        currentResponse += content;
+        // console.log(currentResponse);
+        setConversation((prevConversation) => {
+          updatedConversation = [...prevConversation];
 
-      if (error) {
-        console.log("Error", error);
-        throw error;
+          // Check if the last entry is a response and update it, or create a new response entry
+          if (
+            updatedConversation.length > 0 &&
+            updatedConversation[updatedConversation.length - 1].type ===
+              "response"
+          ) {
+            // console.log("i got here 1", currentResponse);
+            updatedConversation[updatedConversation.length - 1].text =
+              currentResponse;
+          } else {
+            // console.log("i got here 2");
+
+            updatedConversation.push({
+              type: "response",
+              text: currentResponse,
+            });
+          }
+
+          // currentResponse = ""; // Clear currentResponse after updating the conversation.
+          return updatedConversation;
+        });
       }
+      convHistory.push(messageText);
+      convHistory.push(currentResponse);
+      console.log("conv", convHistory);
 
-      if (pdfs.length === 0) {
-        console.log("No PDF found with the given ID.");
-        return;
+      // console.log("Convo", updatedConversation);
+
+      if (!conversation.length > 0) {
+        answerIndex = conversation.length - 2;
+        console.log("I am saving this: ");
+      } else {
       }
-
-      pdfTexts = pdfs.map((pdf) => pdf.text);
-      console.log("PDF text type", typeof pdfTexts[0]);
-      console.log("Number of PDFs", pdfTexts.length);
     } catch (error) {
       console.log(error);
       return;
     }
-
-    let flattenedPdfTexts = pdfTexts.flat();
-
-    let messages = [
-      { role: "system", content: "You are a helpful assistant." },
-      ...flattenedPdfTexts.map((pdfText) => ({
-        role: "user",
-        content: pdfText,
-      })),
-    ];
-
-    console.log("messages ", messages);
-    // Add the user's query at the end
-    messages.push({ role: "user", content: messageText });
-
-    // Call the OpenAI API
-    let completion;
-    try {
-      let currentResponse = ""; // Initialize an empty string to accumulate the content
-
-      completion = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo-0301",
-        messages: messages,
-        stream: true,
-      });
-      let updatedConversation;
-      for await (const chunk of completion) {
-        if (chunk.choices[0].delta.content != null) {
-          const content = chunk.choices[0].delta.content;
-
-          // Accumulate the content.
-          currentResponse += content;
-          console.log(currentResponse);
-          setConversation((prevConversation) => {
-            updatedConversation = [...prevConversation];
-
-            // Check if the last entry is a response and update it, or create a new response entry
-            if (
-              updatedConversation.length > 0 &&
-              updatedConversation[updatedConversation.length - 1].type ===
-                "response"
-            ) {
-              updatedConversation[updatedConversation.length - 1].text +=
-                currentResponse;
-            } else {
-              updatedConversation.push({
-                type: "response",
-                text: currentResponse,
-              });
-            }
-
-            currentResponse = ""; // Clear currentResponse after updating the conversation.
-            return updatedConversation;
-          });
-        }
-      }
-
-      let questionIndex = updatedConversation.length - 2;
-      let answerÍndex = updatedConversation.length - 1;
-
-      if (!conversation.length > 0) {
-        setAnswer((prevAnswer) => [
-          ...prevAnswer,
-          updatedConversation[answerÍndex].text,
-        ]);
-        setQuestion((prevQuestion) => [
-          ...prevQuestion,
-          updatedConversation[questionIndex].text,
-        ]);
-
-        const { data, error } = await supabase.from("messages").insert([
-          // USING PARAMS ID DOES NOT SEEM SAFE
-          {
-            chatId: chat_id,
-            question: question,
-            answer: answer,
-            user_id: userId,
-          },
-        ]);
-
-        console.log("data", data);
-        if (error) throw new Error("Message not saved in the DB");
-      } else {
-        setAnswer((prevAnswer) => [
-          ...prevAnswer,
-          updatedConversation[answerÍndex].text,
-        ]);
-        setQuestion((prevQuestion) => [
-          ...prevQuestion,
-          updatedConversation[questionIndex].text,
-        ]);
-
-        const { data, error } = await supabase
-          .from("messages")
-          .update({
-            question: question,
-            answer: answer,
-          })
-          .eq("chatId", chat_id)
-          .select();
-
-        console.log("data", data);
-        if (error) throw new Error("Message not saved in the DB");
-      }
-    } catch (error) {
-      console.error("Error calling OpenAI API:", error);
-      return;
-    }
   };
+
   return (
     <div className="mx-12 grid gap-4 grid-cols-2">
       <div className="rounded-sm border shadow5">
