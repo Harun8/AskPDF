@@ -290,7 +290,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div class="flex items-end justify-end fixed bottom-0 right-0 mb-4 mr-4 z-10">
+        {/* <div class="flex items-end justify-end fixed bottom-0 right-0 mb-4 mr-4 z-10">
           <div>
             <a
               title="Buy me a beer"
@@ -303,7 +303,7 @@ export default function Home() {
               />
             </a>
           </div>
-        </div>
+        </div> */}
       </section>
     </>
   );

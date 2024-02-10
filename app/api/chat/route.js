@@ -44,36 +44,82 @@ export default async function handler(req, res) {
     });
 
     const output = await splitter.createDocuments([pdfData.text]);
-
-    const embedding = await openai.embeddings.create({
-      model: "text-embedding-ada-002",
-      input: output.pageContent,
-      encoding_format: "float",
-    });
-
-    console.log(embedding);
-
-    // console.log("output", output);
-    const documentsWithForeignKeys = output.map((document) => ({
-      ...document,
-      user_id: userId, // make sure userId is defined and obtained from your context
-      file_id: file_id, // make sure file_id is defined and obtained from your context
-    }));
-
-    console.log("each row", documentsWithForeignKeys);
-
-    // Step 2: Insert documents into the Supabase table
     try {
+      // Assuming `documents` is an array of objects where each object has a `pageContent` field.
+      const embeddingsPromises = output.map(async (document) => {
+        // Select the model you want to use for embeddings
+        const model = "text-embedding-ada-002";
+
+        const response = await openai.embeddings.create({
+          model: model,
+          input: document.pageContent,
+        });
+
+        // Assuming you want the embedding data, adjust according to actual response structure
+        console.log("response", response);
+        return response.data[0].embedding; // This should access the numeric embedding directly
+      });
+
+      const embeddings = await Promise.all(embeddingsPromises);
+      const numericEmbeddings = embeddings.map(
+        (embeddingObj) => embeddingObj.embedding
+      );
+
+      console.log("Embeddings:", numericEmbeddings);
+
+      const documentsWithForeignKeysAndEmbeddings = output.map(
+        (document, index) => ({
+          ...document,
+          embedding: embeddings[index], // Use the correctly formatted embedding
+          user_id: userId, // Assuming userId is available in your context
+          file_id: file_id, // Assuming fileId is available in your context
+        })
+      );
+
+      console.log(
+        "Documents with metadata and embeddings:",
+        documentsWithForeignKeysAndEmbeddings
+      );
+
+      // Step 2: Insert documents into the Supabase table
+
       const { data, error } = await supabase
         .from("documents")
-        .insert(documentsWithForeignKeys);
+        .insert(documentsWithForeignKeysAndEmbeddings);
 
       if (error) throw error;
 
       console.log("Insertion successful", data);
+
+      const responseObject = {
+        message: "PDF processed",
+      };
+
+      const response = new Response(JSON.stringify(responseObject), {
+        status: 200, // Set the status code to 200 (OK)
+        headers: {
+          "Content-Type": "application/json", // Set the Content-Type header to 'application/json'
+        },
+      });
+
+      //   return response;
     } catch (error) {
-      console.error("Error inserting documents:", error);
+      console.error("Error creating embeddings:", error);
+      const responseObject = {
+        message: "PDF failed",
+      };
+
+      const response = new Response(JSON.stringify(responseObject), {
+        status: 400, // Set the status code to 200 (OK)
+        headers: {
+          "Content-Type": "application/json", // Set the Content-Type header to 'application/json'
+        },
+      });
+
+      return response;
     }
+
+    // console.log("output", output);
 
     // const documentsWithForeignKeys = output.map((document) => ({
     //   ...document,
@@ -102,21 +148,21 @@ export default async function handler(req, res) {
     //   message: "PDF processed",
     // };
 
-    const response = new Response(JSON.stringify(responseObject), {
-      status: 200, // Set the status code to 200 (OK)
-      headers: {
-        "Content-Type": "application/json", // Set the Content-Type header to 'application/json'
-      },
-    });
+    //   const response = new Response(JSON.stringify(responseObject), {
+    //     status: 200, // Set the status code to 200 (OK)
+    //     headers: {
+    //       "Content-Type": "application/json", // Set the Content-Type header to 'application/json'
+    //     },
+    //   });
 
-    return response;
+    //   return response;
   } catch (error) {
     const responseObject = {
       message: "PDF failed",
     };
 
     const response = new Response(JSON.stringify(responseObject), {
-      status: 404, // Set the status code to 200 (OK)
+      status: 400, // Set the status code to 200 (OK)
       headers: {
         "Content-Type": "application/json", // Set the Content-Type header to 'application/json'
       },
@@ -124,6 +170,16 @@ export default async function handler(req, res) {
 
     return response;
   }
+
+  //   const response = new Response(JSON.stringify(responseObject), {
+  //     status: 404, // Set the status code to 200 (OK)
+  //     headers: {
+  //       "Content-Type": "application/json", // Set the Content-Type header to 'application/json'
+  //     },
+  //   });
+
+  //   return response;
+  // }
 }
 
 // // Error Handling in Chunking: Add error handling in the splitIntoChunks function to manage any unexpected scenarios.
