@@ -10,7 +10,7 @@ const TextField = ({ onSendMessage, isDisabled }) => {
   };
 
   return (
-    <div className="flex flex-col justify-end h-full ">
+    <div className="flex flex-col justify-end ">
       <textarea
         disabled={isDisabled}
         id="message"

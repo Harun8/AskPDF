@@ -12,6 +12,7 @@ import { useParams } from "next/navigation";
 import ConversationDisplay from "@/components/ConversationDisplay";
 import TextField from "@/components/TextField";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { redirect, useRouter } from "next/navigation";
 
 import OpenAI from "openai";
 
@@ -26,6 +27,7 @@ const Preview = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const [pdf, setPdf] = useState(null);
   const params = useParams();
+  const router = useRouter();
 
   const supabase = createClientComponentClient();
 
@@ -195,8 +197,8 @@ const Preview = () => {
         </div>
       </div>
 
-      <div className="flex flex-col justify-between h-full">
-        <div className="flex-grow overflow-y-auto">
+      <div className="">
+        <div className="">
           <ConversationDisplay conversation={conversation} />
         </div>
         <div className="mt-4">
