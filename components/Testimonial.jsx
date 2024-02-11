@@ -192,6 +192,9 @@ const Testimonial = () => {
             </blockquote>
           </div>
         </div>
+        <div className="flex justify-center text-sm italic font-light">
+          <p> and many more..</p>
+        </div>
       </section>
     </>
   );

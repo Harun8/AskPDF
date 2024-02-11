@@ -10,6 +10,7 @@ import Typewriter from "@/public/typewriter.svg";
 import Upload from "@/public/upload.svg";
 import Answer from "@/public/answer.svg";
 import Pdf from "@/public/pdf.svg";
+import SaveTime from "@/public/Save-time.svg";
 
 import Link from "next/link";
 import Testimonial from "@/components/Testimonial";
@@ -17,6 +18,9 @@ import Testimonial from "@/components/Testimonial";
 export default function Home() {
   return (
     <>
+      {/* <div className=" flex justify-center">
+        <h1 className="text-4xl font-bold text-blue-700"> AskPDF </h1>
+      </div> */}
       <div class=" mt-16 flex justify-center grid grid-rows-3 grid-flow-col gap-4">
         <div class="row-span-3 ...">
           <Image
@@ -38,22 +42,25 @@ export default function Home() {
         </div>
         <div class="col-span-2 ...">
           <p className=" dark:text-slate-300 font-serif font-bold text-6xl leading-tight">
-            <span className="ml-14"> the handiest </span> <br />
-            way to organize <br />
-            <span className="text-blue-600		"> reading</span>
+            <span className="">
+              engage <br />
+            </span>
+            <span className="">
+              with your <br />
+            </span>
+            <span className="text-blue-600"> PDFs</span>
           </p>
         </div>
         <div class="row-span-2 col-span-2 mx-auto">
           <Image
-            src={LPBI}
+            src={SaveTime}
             width={350}
             height={350}
             alt="landing page main image"></Image>
         </div>
         <div></div>
       </div>
-
-      <section className=" bg-blue-950 py-16	">
+      <section className=" mt-5 bg-blue-950 py-16	">
         <div className=" flex justify-center">
           <p className=" mx-auto mt-8 text-zinc-100 dark:text-slate-300 font-serif font-bold text-3xl leading-tight">
             How does it work
@@ -95,9 +102,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       <Testimonial></Testimonial>
-
       {/* <section className=" "> */}
       {/* <div className=" flex justify-center">
           <p className=" mt-8 text-gray-900 dark:text-slate-300 font-serif font-bold text-3xl leading-tight">
@@ -106,7 +111,6 @@ export default function Home() {
           </p>
         </div>
         <div className="mt-12 flex justify-center gap-16"></div> */}
-
       {/* <div class="flex items-end justify-end fixed bottom-0 right-0 mb-4 mr-4 z-10">
           <div>
             <a

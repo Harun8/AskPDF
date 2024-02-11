@@ -1,5 +1,11 @@
-const Settings = () => {
-  return <h1>settingsåage</h1>;
+import {Button} from "@/components/ui/button";
+export default function  Settings ()  {
+  return (
+    <>
+      <div className="flex justify-center">
+        <Button variant="homepage"> Cancel membership</Button>
+      </div>
+    </>
+  );
 };
 
-export default Settings;
