@@ -43,7 +43,7 @@ export default function Home() {
         <div class="col-span-2 ...">
           <p className=" dark:text-slate-300 font-serif font-bold text-6xl leading-tight">
             <span className="">
-              engage <br />
+              Engage <br />
             </span>
             <span className="">
               with your <br />

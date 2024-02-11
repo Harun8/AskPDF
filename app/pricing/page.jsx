@@ -77,7 +77,7 @@ export default async function Pricing() {
               </span>
 
               <span className="text-base font-medium dark:text-slate-100  text-slate-500">
-                /måneden
+                /month
               </span>
             </p>
             <a
@@ -199,7 +199,7 @@ export default async function Pricing() {
             </ul>
           </div>
         </div>
-        <div className=" bg-zinc-100 dark:bg-gray-900 	 border border-slate-900 rounded-lg shadow-sm divide-y divide-slate-200">
+        <div className=" bg-zinc-100 dark:bg-gray-900  	 border border-slate-900 rounded-lg shadow-sm divide-y divide-slate-200">
           <div className="p-6">
             <h2 className="text-xl leading-6 font-bold dark:text-slate-100 text-slate-900">
               {plans[1].name}
@@ -213,7 +213,7 @@ export default async function Pricing() {
               </span>
 
               <span className="text-base font-medium dark:text-slate-100  text-slate-500">
-                /måneden
+                /month
               </span>
             </p>
             <a
@@ -359,7 +359,7 @@ export default async function Pricing() {
               </span>
 
               <span className="text-base font-medium dark:text-slate-100  text-slate-500">
-                /måneden
+                /month
               </span>
             </p>
             <button
