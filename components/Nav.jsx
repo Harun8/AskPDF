@@ -137,7 +137,6 @@ const Nav = ({ session }) => {
             )}
             <Image
               className="text-white ml-3"
-              href="/"
               src={Settings}
               width={25}
               height={25}
