@@ -13,6 +13,8 @@ const Nav = ({ session }) => {
   const [loading, setLoading] = useState(false);
   const [toggleDropDown, setToggleDropDown] = useState(false);
   const router = useRouter();
+  console.log("router",router)
+
 
   const manageBilling = async () => {
     const response = await fetch("/api/settings");
@@ -20,6 +22,12 @@ const Nav = ({ session }) => {
 
     if (data) window.location.href = data.url;
   };
+
+  if (router.pathname === "/login") {
+    console.log("yeaa")
+    // Return null or any other placeholder if you are on /login page
+    return null;
+  }
 
   return (
     <nav className="">
