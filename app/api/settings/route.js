@@ -1,30 +1,27 @@
 import { SITE_URL } from "@/util/endpoints";
 import { stripe } from "@/util/stripe/stripe";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import SupabaseClient from "@supabase/auth-helpers-nextjs";
+const { createClient } = require("@supabase/supabase-js");
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
 
 export default async function handler(req, res) {
-  // Initialize server-side Supabase client
-  const supabaseServerClient = createServerSupabaseClient({ req, res });
-  // Retrieve the current user session from the server-side client
+  const user = await req.json(); // Assuming text data if not form data
 
-  //   const { user } = await supabase.auth.api.getUserByCookie(req);
-
-  const {
-    data: { user },
-  } = await supabaseServerClient.auth.getUser();
-
-  if (!user) {
-  }
-  console.log("data", user);
+  console.log("req.body", user);
 
   // Proceed with your logic now that you have the user
   const { data: profile, error } = await supabase
     .from("profile")
     .select("stripe_customer_id")
-    .eq("userid", user.id)
+    .eq("user_id", user.id)
     .single();
+
+  console.log("profile", profile);
 
   if (error) {
     return new Response(
@@ -55,4 +52,4 @@ export default async function handler(req, res) {
   });
 }
 
-export { handler as GET };
+export { handler as POST };

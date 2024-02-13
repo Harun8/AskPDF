@@ -12,21 +12,6 @@ const Nav = ({ session }) => {
   // const [session, setSession] = useState();
   const [loading, setLoading] = useState(false);
   const [toggleDropDown, setToggleDropDown] = useState(false);
-  const router = useRouter();
-  console.log("router", router);
-
-  const manageBilling = async () => {
-    const response = await fetch("/api/settings");
-    const data = response.json();
-
-    if (data) window.location.href = data.url;
-  };
-
-  if (router.pathname === "/login") {
-    console.log("yeaa");
-    // Return null or any other placeholder if you are on /login page
-    return null;
-  }
 
   return (
     <nav className="">
@@ -97,11 +82,11 @@ const Nav = ({ session }) => {
                       My chats
                     </Link>
 
-                    <button
-                      onClick={() => manageBilling()}
+                    <Link
+                      href="/settings"
                       className="  dark:bg-gray-800 dark:text-white  hover:text-slate-500	text-black rounded-md px-3 py-2 text-base font-medium">
                       Settings
-                    </button>
+                    </Link>
                   </>
                 ) : (
                   <>
