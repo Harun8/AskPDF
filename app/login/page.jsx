@@ -37,9 +37,12 @@ export default function LoginPage() {
   };
 
   return (
-    <div class="grid grid-cols-2 gap-1 ">
+    <> 
+       
+    <div class="grid grid-cols-2 gap-1  ">
       <div className="">
         <div className="flex justify-center">
+
           <Forms
             isSubmitting={isSubmitting}
             showPassword={false}
@@ -49,7 +52,7 @@ export default function LoginPage() {
             redirect="Don't have an account? Sign up?"></Forms>
         </div>
       </div>
-      <div className="flex justify-center items-center p-6">
+      <div className="flex justify-center items-center p-12">
         <div className="w-full">
           <Image
             className="rounded-3xl  object-cover"
@@ -60,5 +63,6 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }

@@ -5,6 +5,8 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
+import LoginImage from "@/public/text.jpg";
+import Image from "next/image";
 
 const Signin = () => {
   const router = useRouter();
@@ -30,13 +32,31 @@ const Signin = () => {
     }
   };
   return (
-    <div className="flex justify-center">
-      <Forms
-        onSubmit={signUpp}
-        title="Sign up"
-        link="login"
-        redirect="Already have an account? Log in"></Forms>
-    </div>
+    <>
+      <div class="grid grid-cols-2 gap-1  ">
+        <div className="">
+          <div className="flex justify-center">
+            <div className="flex justify-center">
+              <Forms
+                onSubmit={signUpp}
+                title="Sign up"
+                link="login"
+                redirect="Already have an account? Log in"></Forms>
+            </div>
+          </div>
+        </div>
+        <div className="flex justify-center items-center p-12">
+          <div className="w-full">
+            <Image
+              className="rounded-3xl  object-cover"
+              src={LoginImage}
+              alt="blue image"
+              layout="responsive"
+            />
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 
