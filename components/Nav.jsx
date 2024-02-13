@@ -13,8 +13,7 @@ const Nav = ({ session }) => {
   const [loading, setLoading] = useState(false);
   const [toggleDropDown, setToggleDropDown] = useState(false);
   const router = useRouter();
-  console.log("router",router)
-
+  console.log("router", router);
 
   const manageBilling = async () => {
     const response = await fetch("/api/settings");
@@ -24,7 +23,7 @@ const Nav = ({ session }) => {
   };
 
   if (router.pathname === "/login") {
-    console.log("yeaa")
+    console.log("yeaa");
     // Return null or any other placeholder if you are on /login page
     return null;
   }
@@ -145,7 +144,7 @@ const Nav = ({ session }) => {
             ) : (
               <>
                 <Link
-                  href="/sigin"
+                  href="/signin"
                   className=" text-gray-800 hover:dark:bg-gray-700 dark:text-white  hover:text-black dark:bg-gray-800 font-semibold rounded mr-3 px-4 py-2 ">
                   Sign up
                 </Link>
@@ -156,12 +155,12 @@ const Nav = ({ session }) => {
                 </Link>
               </>
             )}
-            <Image
+            {/* <Image
               className="text-white ml-3"
               src={Settings}
               width={25}
               height={25}
-              alt="settings"></Image>
+              alt="settings"></Image> */}
             {/* <button
               type="button"
               className=" ml-4 relative rounded-full bg-slate-300 dark:bg-gray-800 p-1 text-black dark:text-white hover:dark:text-slate-500 hover:bg-slate-400  focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
