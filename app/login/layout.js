@@ -1,5 +1,5 @@
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import Nav from "@/components/Nav";
 import { cookies } from "next/headers";
 import { Inter as FontSans } from "next/font/google";
@@ -25,9 +25,9 @@ export default async function RootLayout({ children }) {
   return (
     <html class="" lang="en">
       <body class="flex flex-col min-h-screen w-full bg-zinc-100	 dark:bg-gray-800">
-        <Nav session={session}></Nav>
+        {/* <Nav session={session}></Nav> */}
         <main class="flex-grow">{children}</main>
-        <Footer></Footer>
+        {/* <Footer></Footer> */}
       </body>
     </html>
   );
