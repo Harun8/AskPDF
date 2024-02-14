@@ -10,14 +10,6 @@ const openai = new OpenAI({
 
 const supabase = createClientComponentClient();
 
-const embeddings = new OpenAIEmbeddings({
-  openAIApiKey: process.env.NEXT_PUBLIC_API_KEY,
-});
-// const vectorStore = new SupabaseVectorStore(embeddings, {
-//   client: supabase,
-//   tableName: "documents", // defaults, but good practice
-//   queryName: "match_documents", // ^^
-// });
 const model = "text-embedding-ada-002";
 
 async function retriver(queryText, file_id) {
@@ -44,7 +36,7 @@ async function retriver(queryText, file_id) {
   // Now use the generated embedding as query_embedding in the RPC call
   const { data, error } = await supabase.rpc("match_documents", {
     query_embedding: queryEmbedding, // Use the generated embedding here
-    file_id: "01ed09d3-158c-4170-b6fd-5e0af3267563",
+    file_id: file_id,
     match_count: 10,
     filter: {},
   });
@@ -58,7 +50,5 @@ async function retriver(queryText, file_id) {
 
   return data || [];
 }
-
-// const retriver = vectorStore.asRetriever();
 
 export { retriver };
