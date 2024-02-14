@@ -114,9 +114,10 @@ export default function chat() {
     .pipe(llm)
     .pipe(new StringOutputParser());
 
+  const file_id = "b6eae5e8-9f97-4f2d-8221-825be1d7c165";
   const retrieverChain = RunnableSequence.from([
     (prevResult) => prevResult.standalone_question, // 1
-    retriver, // 2
+    (prevResult) => retriver(prevResult, file_id), // 2, now passing file_id
     combineDocuments, // 3
   ]);
   const answerChain = answerPrompt.pipe(llm).pipe(new StringOutputParser());

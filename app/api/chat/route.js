@@ -67,25 +67,23 @@ export default async function handler(req, res) {
 
       console.log("Embeddings:", numericEmbeddings);
 
-
-
       const { data: chatData, error: chatError } = await supabase
-            .from("chats")
-            .insert([{}]) // Replace with actual data if necessary
-            .select();
-      
-          if (chatError) {
-            console.error("Error inserting chat:", chatError);
-            return; // Exit if there's an error
-          }
-      
-          console.log("chatData", chatData);
-      
-          // Save the chat completion response
-      
-          // Database insertion for each chunk
-      
-          let chatId = chatData[0].id;
+        .from("chats")
+        .insert([{}]) // Replace with actual data if necessary
+        .select();
+
+      if (chatError) {
+        console.error("Error inserting chat:", chatError);
+        return; // Exit if there's an error
+      }
+
+      console.log("chatData", chatData);
+
+      // Save the chat completion response
+
+      // Database insertion for each chunk
+
+      let chatId = chatData[0].id;
 
       const documentsWithForeignKeysAndEmbeddings = output.map(
         (document, index) => ({
@@ -94,7 +92,7 @@ export default async function handler(req, res) {
           embedding: embeddings[index], // Use the correctly formatted embedding
           user_id: userId, // Assuming userId is available in your context
           file_id: file_id, // Assuming fileId is available in your context
-          chat_id: chatId
+          chat_id: chatId,
         })
       );
 
@@ -102,8 +100,6 @@ export default async function handler(req, res) {
         "Documents with metadata and embeddings:",
         documentsWithForeignKeysAndEmbeddings
       );
-
-      
 
       // Step 2: Insert documents into the Supabase table
 
@@ -119,7 +115,6 @@ export default async function handler(req, res) {
         message: "PDF processed",
         pdfIds: file_id,
         chatId: chatId,
-
       };
 
       const response = new Response(JSON.stringify(responseObject), {
@@ -129,7 +124,7 @@ export default async function handler(req, res) {
         },
       });
 
-        return response;
+      return response;
     } catch (error) {
       console.error("Error creating embeddings:", error);
       const responseObject = {
