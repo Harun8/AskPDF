@@ -16,17 +16,16 @@ export default async function Pricing() {
       interval: price.recurring.interval,
     });
   }
-  async function onCheckout() {
-    console.log("checkout FN called");
-    const priceId = "price_1OdUr0BzVPtG7eO2qrV6Zn89";
-    const response = await fetch(`/api/checkout/${priceId}`, {
+  console.log("plans", plans);
+  async function onCheckout(planId) {
+    const response = await fetch(`/api/checkout/${planId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json", // for example, setting Content-Type to application/json
         // ... you can add more headers here if needed
       },
       body: JSON.stringify({
-        priceId: priceId,
+        priceId: planId,
       }),
     });
 
@@ -216,11 +215,11 @@ export default async function Pricing() {
                 /month
               </span>
             </p>
-            <a
-              href="/sign-up"
+            <button
+              onClick={() => onCheckout(plans[1].id)}
               className="mt-8 block w-full dark:bg-slate-700 bg-slate-900 rounded-md py-2 text-sm font-semibold text-white text-center">
               Join as a Premium user
-            </a>
+            </button>
           </div>
           <div className="pt-6 pb-8 px-6">
             <h3 className="text-sm font-bold dark:text-slate-100  text-slate-900 tracking-wide uppercase">
@@ -363,7 +362,7 @@ export default async function Pricing() {
               </span>
             </p>
             <button
-              onClick={onCheckout}
+              onClick={() => onCheckout(plans[0].id)}
               className="mt-8 block w-full dark:bg-slate-700 bg-slate-900 rounded-md py-2 text-sm font-semibold text-white text-center">
               Join as a ultimate user
             </button>
