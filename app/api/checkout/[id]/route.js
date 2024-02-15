@@ -15,6 +15,8 @@ export default async function handler(req, res) {
       cancel_url: `${SITE_URL}/pricing`,
     });
 
+    console.log("Session", session);
+
     const responseObject = {
       id: session.id,
     };

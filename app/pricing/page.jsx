@@ -17,7 +17,7 @@ export default async function Pricing() {
     });
   }
   console.log("plans", plans);
-  async function onCheckout(planId) {
+  async function onCheckout(planId, plan) {
     const response = await fetch(`/api/checkout/${planId}`, {
       method: "POST",
       headers: {
@@ -26,6 +26,7 @@ export default async function Pricing() {
       },
       body: JSON.stringify({
         priceId: planId,
+        plan: plan,
       }),
     });
 
@@ -216,7 +217,7 @@ export default async function Pricing() {
               </span>
             </p>
             <button
-              onClick={() => onCheckout(plans[1].id)}
+              onClick={() => onCheckout(plans[1].id, plans[1].name)}
               className="mt-8 block w-full dark:bg-slate-700 bg-slate-900 rounded-md py-2 text-sm font-semibold text-white text-center">
               Join as a Premium user
             </button>
@@ -362,7 +363,7 @@ export default async function Pricing() {
               </span>
             </p>
             <button
-              onClick={() => onCheckout(plans[0].id)}
+              onClick={() => onCheckout(plans[0].id, plans[0].name)}
               className="mt-8 block w-full dark:bg-slate-700 bg-slate-900 rounded-md py-2 text-sm font-semibold text-white text-center">
               Join as a ultimate user
             </button>
