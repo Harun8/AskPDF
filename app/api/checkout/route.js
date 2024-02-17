@@ -61,6 +61,7 @@ export default async function handler(req, res) {
   }
 
   console.log("event", event);
+  console.log("plan", event.data.object.plan);
   // console.log("items", event.data.object.items);
 
   try {
@@ -104,10 +105,13 @@ export default async function handler(req, res) {
 export { handler as POST };
 
 export async function updateSubscription(event) {
+  console.log("UpdatedSub called");
   const subscription = event.data.object;
   const stripe_customer_id = subscription.customer;
   const subscription_status = subscription.status;
   const price = subscription.items.data[0].price.id;
+
+  // Case: 1, they buy a plan before logging in
   const { data: profile } = await supabase
     .from("profile")
     .select("*")
@@ -124,6 +128,7 @@ export async function updateSubscription(event) {
       .update(updatedSubscription)
       .eq("stripe_customer_id", stripe_customer_id);
   } else {
+    console.log("user is not a preivous customer");
     const customer = await stripe.customers.retrieve(stripe_customer_id);
     const name = customer.name;
     const email = customer.email;
@@ -131,6 +136,7 @@ export async function updateSubscription(event) {
     // console.log("name", name);
 
     // check if they've created a profile with no stripe_id
+    // Case 2: They've logged in first
 
     const updatedSubscription = {
       name,
@@ -143,14 +149,16 @@ export async function updateSubscription(event) {
       .update(updatedSubscription)
       .eq("email", email);
 
-    if (!error) return;
+    console.log("data", data);
+    // if (!error) return;
 
-    if (error) {
-      console.log(
-        "tried to update a user with no customer id in their profile"
-      );
+    if (data != null) {
+      // apparently null is not treated as an error and gave me a headache for days
+
+      return;
     }
-
+    console.log("tried to update a user with no customer id in their profile");
+    console.log("I am creating a new user");
     const newProfile = {
       name: name,
       email: email,
