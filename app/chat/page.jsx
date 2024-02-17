@@ -33,6 +33,7 @@ import {
 } from "langchain/schema/runnable";
 import combineDocuments from "./../../util/combineDocuments";
 import { fileSizeLimit } from "@/util/fileSizeLimit";
+import { uploadLimit } from "@/util/uploadLimit";
 
 const supabase = createClientComponentClient();
 
@@ -62,6 +63,8 @@ export default function chat() {
   const [duplicateFileError, setDuplicateFileError] = useState(false);
   const [plan, setPlan] = useState(null);
   const [fileOverLimit, setFileOverLimit] = useState(false);
+  const [uploadCount, setUploadCount] = useState(null);
+  const [isOverPDFCount, setIsOverPDFCount] = useState(false);
 
   const router = useRouter();
   function onDocumentLoadSuccess({ numPages }) {
@@ -153,7 +156,8 @@ export default function chat() {
 
           const data = await response.json();
           console.log("data", data);
-          setPlan(data[0].price);
+          setPlan(data.fileSize);
+          setUploadCount(data.upload);
         } else {
           router.push("/");
           console.log("THE USER AINT AUTHENTICATED REDIRRRREEECCCTT MFFF");
@@ -266,9 +270,17 @@ export default function chat() {
     event.stopPropagation();
     let filePath;
     let file_id;
-    let fsl = await fileSizeLimit(plan);
+    let fsl = await fileSizeLimit(plan); // fsl -> fileSizeLimit
+    let upl = await uploadLimit(plan); // upl -> uploadLimit
     console.log("fsl", fsl);
     console.log("file chosen, upload it to db", event);
+
+    if (uploadCount >= upl) {
+      isOverPDFCount(true);
+      console.log("YOU HAVE UPLOADED TOO MANY PDFSSS");
+      return;
+    }
+
     if (event.target.files[0].size > fsl) {
       setFileOverLimit(true);
       console.log("SHIT IS TOO BIGG FAMALAM");
@@ -388,11 +400,14 @@ export default function chat() {
             <Modal
               isDuplicate={duplicateFileError}
               isOverSize={fileOverLimit}
+              isOverPDFCount={isOverPDFCount}
               title={
                 duplicateFileError
                   ? "You've already uploaded this file"
                   : fileOverLimit
                   ? "File is over your limit, upgrade your plan if you wan't to upload a bigger file"
+                  : isOverPDFCount
+                  ? "You've uploaded the maxium PDF, upgrade your plan if you want to upload more PDF's"
                   : "Upload your PDF"
               }
               isOpen={isOpen}

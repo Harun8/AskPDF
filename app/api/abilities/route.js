@@ -17,7 +17,18 @@ export default async function handler(req, res) {
       .eq("user_id", user.user_id);
     console.log("data", data);
 
-    return new Response(JSON.stringify(data), {
+    const { data: pdfUpload, error: err } = await supabase.storage
+      .from("pdfs")
+      .list(user.user_id);
+
+    console.log("pdfuploads", pdfUpload.length);
+
+    const limits = {
+      fileSize: data[0].price,
+      upload: pdfUpload.length,
+    };
+
+    return new Response(JSON.stringify(limits), {
       status: 200, // Set the status code to 200 (OK)
       headers: {
         "Content-Type": "application/json", // Set the Content-Type header to 'application/json'
