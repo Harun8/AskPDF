@@ -8,6 +8,7 @@ const Modal = ({
   onFileSelect,
   title,
   isDuplicate,
+  isOverSize,
 }) => {
   return (
     <>
@@ -38,9 +39,9 @@ const Modal = ({
                   <Dialog.Title
                     as="h3"
                     className={`flex justify-center font-medium leading-6 text-gray-900 ${
-                      isDuplicate
-                        ? " text-red-500 text-xl"
-                        : "text-gray-900 text-lg "
+                      isDuplicate || isOverSize
+                        ? "text-red-500 text-xl"
+                        : "text-gray-900 text-lg"
                     }`}>
                     {title}
                   </Dialog.Title>

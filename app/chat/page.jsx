@@ -32,6 +32,7 @@ import {
   RunnableSequence,
 } from "langchain/schema/runnable";
 import combineDocuments from "./../../util/combineDocuments";
+import { fileSizeLimit } from "@/util/fileSizeLimit";
 
 const supabase = createClientComponentClient();
 
@@ -59,6 +60,8 @@ export default function chat() {
   const [isOpen, setIsOpen] = useState(false);
   const [isTextDisabled, setIsTextDisabled] = useState(true);
   const [duplicateFileError, setDuplicateFileError] = useState(false);
+  const [plan, setPlan] = useState(null);
+  const [fileOverLimit, setFileOverLimit] = useState(false);
 
   const router = useRouter();
   function onDocumentLoadSuccess({ numPages }) {
@@ -134,6 +137,23 @@ export default function chat() {
         if (session) {
           setUserId(session.user.id);
           setIsAuthenticated(true);
+          const response = await fetch("/api/abilities", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json", // Specify the content type as JSON
+            },
+            body: JSON.stringify({
+              user_id: session.user.id,
+            }),
+          });
+
+          if (!response.ok) {
+            console.log("Could not fetch abilities");
+          }
+
+          const data = await response.json();
+          console.log("data", data);
+          setPlan(data[0].price);
         } else {
           router.push("/");
           console.log("THE USER AINT AUTHENTICATED REDIRRRREEECCCTT MFFF");
@@ -246,9 +266,11 @@ export default function chat() {
     event.stopPropagation();
     let filePath;
     let file_id;
+    let fsl = await fileSizeLimit(plan);
+    console.log("fsl", fsl);
     console.log("file chosen, upload it to db", event);
-    const fileSizeLimit = 5 * 1024 * 1024; // 5MB
-    if (event.target.files[0].size > fileSizeLimit) {
+    if (event.target.files[0].size > fsl) {
+      setFileOverLimit(true);
       console.log("SHIT IS TOO BIGG FAMALAM");
       event.target.value = "";
     } else {
@@ -365,10 +387,13 @@ export default function chat() {
 
             <Modal
               isDuplicate={duplicateFileError}
+              isOverSize={fileOverLimit}
               title={
                 duplicateFileError
                   ? "You've already uploaded this file"
-                  : "Upload your image"
+                  : fileOverLimit
+                  ? "File is over your limit, upgrade your plan if you wan't to upload a bigger file"
+                  : "Upload your PDF"
               }
               isOpen={isOpen}
               closeModal={closeModal}
