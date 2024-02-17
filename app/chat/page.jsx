@@ -276,7 +276,7 @@ export default function chat() {
     console.log("file chosen, upload it to db", event);
 
     if (uploadCount >= upl) {
-      isOverPDFCount(true);
+      setIsOverPDFCount(true);
       console.log("YOU HAVE UPLOADED TOO MANY PDFSSS");
       return;
     }
