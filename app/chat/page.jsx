@@ -34,19 +34,13 @@ import {
 import combineDocuments from "./../../util/combineDocuments";
 import { fileSizeLimit } from "@/util/fileSizeLimit";
 import { uploadLimit } from "@/util/uploadLimit";
+import { modelChooser } from "@/util/openai/modelChooser";
 
 const supabase = createClientComponentClient();
 
 const openai = new OpenAI({
   apiKey: process.env.NEXT_PUBLIC_API_KEY, // api key
   dangerouslyAllowBrowser: true, // should be false
-});
-
-const llm = new ChatOpenAI({
-  openAIApiKey: process.env.NEXT_PUBLIC_API_KEY,
-  streaming: true,
-  modelName: "gpt-4-0125-preview",
-  //  temperature: 0.5
 });
 
 export default function chat() {
@@ -115,6 +109,13 @@ export default function chat() {
       `;
 
   const answerPrompt = PromptTemplate.fromTemplate(answerTemplate);
+
+  const llm = new ChatOpenAI({
+    openAIApiKey: process.env.NEXT_PUBLIC_API_KEY,
+    streaming: true,
+    modelName: modelChooser(plan),
+    //  temperature: 0.5
+  });
 
   const standaloneQuestionchain = standaloneQuestionPrompt
     .pipe(llm)
