@@ -13,6 +13,7 @@
     "@langchain/community": "^0.0.26",
     "@langchain/openai": "^0.0.14",
     "@radix-ui/react-slot": "^1.0.2",
+    "@radix-ui/react-toast": "^1.1.5",
     "@stripe/stripe-js": "^2.4.0",
     "@supabase/auth-helpers-nextjs": "^0.8.7",
     "@supabase/supabase-js": "^2.39.1",

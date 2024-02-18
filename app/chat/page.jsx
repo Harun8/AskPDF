@@ -20,6 +20,10 @@ import { redirect, useRouter } from "next/navigation";
 import sendFileToOpenAi from "@/util/openai";
 import OpenAI from "openai";
 import Modal from "@/components/Modal";
+import { Toaster } from "@/components/ui/sonner";
+import { Toast } from "@/components/ui/toast";
+// import { toast } from "@/components/ui/sonner";
+import { toast } from "sonner";
 
 import { ChatOpenAI } from "langchain/chat_models/openai";
 import { PromptTemplate } from "langchain/prompts";
@@ -279,10 +283,12 @@ export default function chat() {
     if (uploadCount >= upl) {
       setIsOverPDFCount(true);
       console.log("YOU HAVE UPLOADED TOO MANY PDFSSS");
+      showToast("You have reached your upload limit");
       return;
     }
 
     if (event.target.files[0].size > fsl) {
+      showToast("The PDF file is over your limit");
       setFileOverLimit(true);
       console.log("SHIT IS TOO BIGG FAMALAM");
       event.target.value = "";
@@ -371,6 +377,18 @@ export default function chat() {
 
   function openModal() {
     setIsOpen(true);
+  }
+
+  function showToast(desc) {
+    toast("Upload limit reached!", {
+      description: desc,
+      position: "top-right",
+
+      action: {
+        label: "Understood",
+        onClick: () => console.log("Undo"),
+      },
+    });
   }
 
   return (
