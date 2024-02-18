@@ -50,9 +50,14 @@ export default function Settings() {
   return (
     <>
       <div className="flex justify-center">
-        <Button variant="homepage" onClick={manageBilling}>
-          Cancel membership
-        </Button>
+        <div className="mt-20">
+          <p className="flex justify-center mb-12 text-lg font-medium">
+            Settings page
+          </p>
+          <Button variant="homepage" onClick={manageBilling}>
+            Manage membership
+          </Button>
+        </div>
       </div>
     </>
   );
