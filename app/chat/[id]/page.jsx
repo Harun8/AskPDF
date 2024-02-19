@@ -16,21 +16,10 @@ import TextField from "@/components/TextField";
 import combineDocuments from "@/util/combineDocuments";
 import { ChatOpenAI } from "langchain/chat_models/openai";
 import { PromptTemplate } from "langchain/prompts";
-import { SupabaseVectorStore } from "langchain/vectorstores/supabase";
-import { OpenAIEmbeddings } from "@langchain/openai";
 import { StringOutputParser } from "langchain/schema/output_parser";
 import { retriver } from "@/util/retriever";
-import {
-  RunnablePassthrough,
-  RunnableSequence,
-} from "langchain/schema/runnable";
 
 import OpenAI from "openai";
-
-const openai = new OpenAI({
-  apiKey: process.env.NEXT_PUBLIC_API_KEY, // api key
-  dangerouslyAllowBrowser: true, // should be false
-});
 
 const ChatPage = () => {
   const [conversation, setConversation] = useState([]);
@@ -94,20 +83,6 @@ const ChatPage = () => {
     getInfo();
   }, [params]);
 
-  // async function fetchPdfFilePath(pdfId) {
-  //   const { data, error } = await supabase
-  //     .from("pdfs") // Replace with your table name
-  //     .select("file_id") // Adjust based on your schema
-  //     .eq("id", pdfId)
-  //     .single();
-
-  //   if (error) throw new Error(error.message);
-
-  //   console.log("data", data);
-
-  //   return fetchPdfUrl(data.file_id);
-  // }
-
   async function fetchPdfUrl(file_id) {
     console.log("file_id", file_id);
 
@@ -138,76 +113,6 @@ const ChatPage = () => {
     }
   }
 
-  const llm = new ChatOpenAI({
-    openAIApiKey: process.env.NEXT_PUBLIC_API_KEY,
-    streaming: true,
-    modelName: "gpt-4-0125-preview",
-    //  temperature: 0.5
-  });
-
-  const standAloneQuestionTemplate = `Given some conversation history (if any) and a question, convert it into a standalone question. 
-  conversation history: {conv_history}
-  
-  question: {question} 
-  standalone question:`;
-
-  const standaloneQuestionPrompt = PromptTemplate.fromTemplate(
-    standAloneQuestionTemplate
-  );
-
-  const answerTemplate = `You're a helpful and enthusiastic suppport bot who can answer a given question about the context provided,
-  and the conversation history.
-     Try to find the answer in the context. If the answer is not given in the context check if the answer is in the conversation history.
-     If you really do not know the answer
-     say "I'm sorry, I can not find it in the PDF".
-     Do not try to make up an answer. Always speak as if you were chatting to a friend.
-     context: {context}
-     conversation history: {conv_history}
-     question: {question}
-     answer:
-      `;
-
-  const answerPrompt = PromptTemplate.fromTemplate(answerTemplate);
-
-  const standaloneQuestionchain = standaloneQuestionPrompt
-    .pipe(llm)
-    .pipe(new StringOutputParser());
-
-  const retrieverChain = RunnableSequence.from([
-    (prevResult) => prevResult.standalone_question, // 1
-    (prevResult) => retriver(prevResult, params.id), // 2, Correctly passing file_id
-    combineDocuments, // 3
-  ]);
-
-  const answerChain = answerPrompt.pipe(llm).pipe(new StringOutputParser());
-
-  const convHistory = [];
-
-  const chain = RunnableSequence.from([
-    {
-      standalone_question: standaloneQuestionchain,
-      original_input: new RunnablePassthrough(),
-    },
-    {
-      context: retrieverChain,
-      question: ({ original_input }) => original_input.question,
-      conv_history: ({ original_input }) => original_input.conv_history,
-    },
-    answerChain,
-  ]);
-
-  function formatConvHistory(messages) {
-    return messages
-      .map((message, i) => {
-        if (i % 2 === 0) {
-          return `Human: ${message}`;
-        } else {
-          return `AI: ${message}`;
-        }
-      })
-      .join(`\n`);
-  }
-
   const sendMessage = async (messageText) => {
     let answerIndex = [];
     let pdfTexts;
@@ -219,43 +124,44 @@ const ChatPage = () => {
     let currentResponse = ""; // Initialize an empty string to accumulate the content
     let chunkHolder = [];
 
+    convHistory.push(messageText);
+
     try {
       // console.log("check check");
       const response = await chain.invoke({
         question: messageText,
         conv_history: formatConvHistory(convHistory),
       });
-      for await (const chunk of response) {
-        const content = chunk;
-        // Accumulate the content.
-        currentResponse += content;
-        // console.log(currentResponse);
-        setConversation((prevConversation) => {
-          updatedConversation = [...prevConversation];
+      // for await (const chunk of response) {
+      //   const content = chunk;
+      //   // Accumulate the content.
+      //   currentResponse += content;
+      //   // console.log(currentResponse);
+      //   setConversation((prevConversation) => {
+      //     updatedConversation = [...prevConversation];
 
-          // Check if the last entry is a response and update it, or create a new response entry
-          if (
-            updatedConversation.length > 0 &&
-            updatedConversation[updatedConversation.length - 1].type ===
-              "response"
-          ) {
-            // console.log("i got here 1", currentResponse);
-            updatedConversation[updatedConversation.length - 1].text =
-              currentResponse;
-          } else {
-            // console.log("i got here 2");
+      //     // Check if the last entry is a response and update it, or create a new response entry
+      //     if (
+      //       updatedConversation.length > 0 &&
+      //       updatedConversation[updatedConversation.length - 1].type ===
+      //         "response"
+      //     ) {
+      //       // console.log("i got here 1", currentResponse);
+      //       updatedConversation[updatedConversation.length - 1].text =
+      //         currentResponse;
+      //     } else {
+      //       // console.log("i got here 2");
 
-            updatedConversation.push({
-              type: "response",
-              text: currentResponse,
-            });
-          }
+      //       updatedConversation.push({
+      //         type: "response",
+      //         text: currentResponse,
+      //       });
+      //     }
 
-          // currentResponse = ""; // Clear currentResponse after updating the conversation.
-          return updatedConversation;
-        });
-      }
-      convHistory.push(messageText);
+      //     // currentResponse = ""; // Clear currentResponse after updating the conversation.
+      //     return updatedConversation;
+      //   });
+      // }
       convHistory.push(currentResponse);
       console.log("conv", convHistory);
 
