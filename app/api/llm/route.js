@@ -11,6 +11,7 @@ import {
 import combineDocuments from "@/util/combineDocuments";
 import formatConvHistory from "@/util/formatConvHistory";
 const OpenAI = require("openai");
+const { createClient } = require("@supabase/supabase-js");
 
 const standAloneQuestionTemplate = `Given some conversation history (if any) and a question, convert it into a standalone question. 
 conversation history: {conv_history}
@@ -40,11 +41,11 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY, // api key
   dangerouslyAllowBrowser: true, // should be false
 });
-
 export default async function handler(req, res) {
   try {
     const data = await req.json(); // Assuming text data if not form data
     console.log(data);
+
     const llm = new ChatOpenAI({
       openAIApiKey: process.env.OPENAI_API_KEY,
       streaming: false,
@@ -103,9 +104,15 @@ export default async function handler(req, res) {
 
 export { handler as POST };
 
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
+
 async function retriver(queryText, file_id) {
   console.log("file_id", file_id);
 
+  const model = "text-embedding-ada-002";
   console.log("queryText", queryText);
   // Generate the embedding vector for the query text
   let queryEmbedding;

@@ -144,6 +144,7 @@ export default function chat() {
 
       const data = await response.json();
       console.log("data from llm endpoint is", data);
+
       // const response = await chain.invoke({
       //   question: messageText,
       //   conv_history: formatConvHistory(convHistory),
