@@ -1,10 +1,8 @@
 "use client";
-import { Dialog, Transition } from "@headlessui/react";
 
 import { Document, Page } from "react-pdf";
 // import pdf from ".../public/pdf";
 import { pdfjs } from "react-pdf";
-import pdf from "@/public/pdf.pdf";
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.js",
   import.meta.url
@@ -17,35 +15,15 @@ import TextField from "@/components/TextField";
 import ConversationDisplay from "@/components/ConversationDisplay";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { redirect, useRouter } from "next/navigation";
-import sendFileToOpenAi from "@/util/openai";
-import OpenAI from "openai";
+
 import Modal from "@/components/Modal";
-import { Toaster } from "@/components/ui/sonner";
-import { Toast } from "@/components/ui/toast";
-// import { toast } from "@/components/ui/sonner";
+
 import { toast } from "sonner";
 
-import { ChatOpenAI } from "langchain/chat_models/openai";
-import { PromptTemplate } from "langchain/prompts";
-import { SupabaseVectorStore } from "langchain/vectorstores/supabase";
-import { OpenAIEmbeddings } from "@langchain/openai";
-import { StringOutputParser } from "langchain/schema/output_parser";
-import { retriver } from "@/util/retriever";
-import {
-  RunnablePassthrough,
-  RunnableSequence,
-} from "langchain/schema/runnable";
-import combineDocuments from "./../../util/combineDocuments";
 import { fileSizeLimit } from "@/util/fileSizeLimit";
 import { uploadLimit } from "@/util/uploadLimit";
-import { modelChooser } from "@/util/openai/modelChooser";
 
 const supabase = createClientComponentClient();
-
-// const openai = new OpenAI({
-//   apiKey: process.env.NEXT_PUBLIC_API_KEY, // api key
-//   dangerouslyAllowBrowser: true, // should be false
-// });
 
 export default function chat() {
   const [conversation, setConversation] = useState([]);
@@ -63,8 +41,6 @@ export default function chat() {
   const [fileOverLimit, setFileOverLimit] = useState(false);
   const [uploadCount, setUploadCount] = useState(null);
   const [isOverPDFCount, setIsOverPDFCount] = useState(false);
-  const [llm, setllm] = useState();
-  const [chain, setChain] = useState(null); // Initializing chain as part of component state
 
   const router = useRouter();
   function onDocumentLoadSuccess({ numPages }) {
