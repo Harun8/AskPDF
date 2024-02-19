@@ -42,10 +42,10 @@ import { modelChooser } from "@/util/openai/modelChooser";
 
 const supabase = createClientComponentClient();
 
-const openai = new OpenAI({
-  apiKey: process.env.NEXT_PUBLIC_API_KEY, // api key
-  dangerouslyAllowBrowser: true, // should be false
-});
+// const openai = new OpenAI({
+//   apiKey: process.env.NEXT_PUBLIC_API_KEY, // api key
+//   dangerouslyAllowBrowser: true, // should be false
+// });
 
 export default function chat() {
   const [conversation, setConversation] = useState([]);
@@ -63,76 +63,13 @@ export default function chat() {
   const [fileOverLimit, setFileOverLimit] = useState(false);
   const [uploadCount, setUploadCount] = useState(null);
   const [isOverPDFCount, setIsOverPDFCount] = useState(false);
+  const [llm, setllm] = useState();
+  const [chain, setChain] = useState(null); // Initializing chain as part of component state
 
   const router = useRouter();
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
   }
-
-  // const tweetTemplate = `Generate a response for this product: {pdfFile}`;
-
-  // const tweetPrompt = PromptTemplate.fromTemplate(tweetTemplate);
-
-  // const tweetChain = tweetPrompt.pipe(llm);
-
-  // clean the user question
-  const standAloneQuestionTemplate = `Given some conversation history (if any) and a question, convert it into a standalone question. 
-    conversation history: {conv_history}
-    
-    question: {question} 
-    standalone question:`;
-
-  const standaloneQuestionPrompt = PromptTemplate.fromTemplate(
-    standAloneQuestionTemplate
-  );
-
-  //   const answerTemplate = `
-  // As a support bot, your primary goal is to provide accurate and friendly assistance. When presented with a question, follow these steps:
-  // 1. First, examine the provided context closely for the answer. The context for this inquiry is: {context}.
-  // 2. If the context does not contain the answer, review the conversation history for relevant information. The conversation history is as follows: {conv_history}.
-  // 3. If the answer is still elusive after checking both the context and conversation history, politely admit the limitation with a response: "I'm sorry, I cannot find it in the PDF."
-  // 4. Remember to avoid conjecture or fabricating answers. Maintain a conversational tone, as if speaking to a friend.
-
-  // Here's your task:
-  // - Question: {question}
-  // - Your answer should be provided below.
-
-  // Answer:
-  // `;
-
-  const answerTemplate = `You're a helpful and enthusiastic suppport bot who can answer a given question about the context provided,
-  and the conversation history.
-     Try to find the answer in the context. If the answer is not given in the context check if the answer is in the conversation history.
-     If you really do not know the answer
-     say "I'm sorry, I can not find it in the PDF".
-     Do not try to make up an answer. Always speak as if you were chatting to a friend.
-     context: {context}
-     conversation history: {conv_history}
-     question: {question}
-     answer:
-      `;
-
-  const answerPrompt = PromptTemplate.fromTemplate(answerTemplate);
-
-  const llm = new ChatOpenAI({
-    openAIApiKey: process.env.NEXT_PUBLIC_API_KEY,
-    streaming: true,
-    modelName: modelChooser(plan),
-    //  temperature: 0.5
-  });
-
-  const standaloneQuestionchain = standaloneQuestionPrompt
-    .pipe(llm)
-    .pipe(new StringOutputParser());
-
-  const retrieverChain = RunnableSequence.from([
-    (prevResult) => prevResult.standalone_question, // 1
-    (prevResult) => retriver(prevResult, currentPdfId), // 2, Correctly passing file_id
-    combineDocuments, // 3
-  ]);
-  const answerChain = answerPrompt.pipe(llm).pipe(new StringOutputParser());
-
-  // standalone question works pretty well
 
   useEffect(() => {
     const getAuth = async () => {
@@ -181,30 +118,6 @@ export default function chat() {
   }, [conversation]);
 
   const convHistory = [];
-  const chain = RunnableSequence.from([
-    {
-      standalone_question: standaloneQuestionchain,
-      original_input: new RunnablePassthrough(),
-    },
-    {
-      context: retrieverChain,
-      question: ({ original_input }) => original_input.question,
-      conv_history: ({ original_input }) => original_input.conv_history,
-    },
-    answerChain,
-  ]);
-
-  function formatConvHistory(messages) {
-    return messages
-      .map((message, i) => {
-        if (i % 2 === 0) {
-          return `Human: ${message}`;
-        } else {
-          return `AI: ${message}`;
-        }
-      })
-      .join(`\n`);
-  }
 
   const sendMessage = async (messageText) => {
     let answerIndex = [];
@@ -216,44 +129,55 @@ export default function chat() {
     let updatedConversation;
     let currentResponse = ""; // Initialize an empty string to accumulate the content
     let chunkHolder = [];
+    convHistory.push(messageText);
 
     try {
-      // console.log("check check");
-      const response = await chain.invoke({
-        question: messageText,
-        conv_history: formatConvHistory(convHistory),
+      const response = await fetch("/api/llm", {
+        method: "POST",
+        body: JSON.stringify({
+          plan: plan,
+          messageText: messageText,
+          conv_history: convHistory,
+          file_id: currentPdfId,
+        }),
       });
-      for await (const chunk of response) {
-        const content = chunk;
-        // Accumulate the content.
-        currentResponse += content;
-        // console.log(currentResponse);
-        setConversation((prevConversation) => {
-          updatedConversation = [...prevConversation];
 
-          // Check if the last entry is a response and update it, or create a new response entry
-          if (
-            updatedConversation.length > 0 &&
-            updatedConversation[updatedConversation.length - 1].type ===
-              "response"
-          ) {
-            // console.log("i got here 1", currentResponse);
-            updatedConversation[updatedConversation.length - 1].text =
-              currentResponse;
-          } else {
-            // console.log("i got here 2");
+      const data = await response.json();
+      console.log("data from llm endpoint is", data);
+      // const response = await chain.invoke({
+      //   question: messageText,
+      //   conv_history: formatConvHistory(convHistory),
+      // });
+      // for await (const chunk of response) {
+      //   const content = chunk;
+      //   // Accumulate the content.
+      //   currentResponse += content;
+      //   // console.log(currentResponse);
+      //   setConversation((prevConversation) => {
+      //     updatedConversation = [...prevConversation];
 
-            updatedConversation.push({
-              type: "response",
-              text: currentResponse,
-            });
-          }
+      //     // Check if the last entry is a response and update it, or create a new response entry
+      //     if (
+      //       updatedConversation.length > 0 &&
+      //       updatedConversation[updatedConversation.length - 1].type ===
+      //         "response"
+      //     ) {
+      //       // console.log("i got here 1", currentResponse);
+      //       updatedConversation[updatedConversation.length - 1].text =
+      //         currentResponse;
+      //     } else {
+      //       // console.log("i got here 2");
 
-          // currentResponse = ""; // Clear currentResponse after updating the conversation.
-          return updatedConversation;
-        });
-      }
-      convHistory.push(messageText);
+      //       updatedConversation.push({
+      //         type: "response",
+      //         text: currentResponse,
+      //       });
+      //     }
+
+      //     // currentResponse = ""; // Clear currentResponse after updating the conversation.
+      //     return updatedConversation;
+      //   });
+      // }
       convHistory.push(currentResponse);
       console.log("conv", convHistory);
 

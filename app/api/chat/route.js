@@ -1,23 +1,19 @@
 import fs from "fs";
 import pdf from "pdf-parse";
 import { promisify } from "util";
-const readFileAsync = promisify(fs.readFile);
 const { createClient } = require("@supabase/supabase-js");
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter"; // defaults to 1000 chars
-import { SupabaseVectorStore } from "@langchain/community/vectorstores/supabase";
-import { OpenAIEmbeddings } from "@langchain/openai";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
-import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 
 const OpenAI = require("openai");
 require("dotenv").config();
 
 const openai = new OpenAI({
-  apiKey: process.env.NEXT_PUBLIC_API_KEY, // api key
+  apiKey: process.env.OPENAI_API_KEY, // api key
   dangerouslyAllowBrowser: true, // should be false
 });
 
