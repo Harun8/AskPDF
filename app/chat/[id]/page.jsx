@@ -1,8 +1,6 @@
 "use client";
 import { Document, Page } from "react-pdf";
-// import pdf from ".../public/pdf";
 import { pdfjs } from "react-pdf";
-import pdf from "@/public/pdf.pdf";
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.js",
   import.meta.url
@@ -13,13 +11,6 @@ import { useEffect, useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import ConversationDisplay from "@/components/ConversationDisplay";
 import TextField from "@/components/TextField";
-import combineDocuments from "@/util/combineDocuments";
-import { ChatOpenAI } from "langchain/chat_models/openai";
-import { PromptTemplate } from "langchain/prompts";
-import { StringOutputParser } from "langchain/schema/output_parser";
-import { retriver } from "@/util/retriever";
-
-import OpenAI from "openai";
 
 const ChatPage = () => {
   const [conversation, setConversation] = useState([]);
