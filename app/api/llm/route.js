@@ -1,8 +1,6 @@
 import { ChatOpenAI } from "langchain/chat_models/openai";
 import { modelChooser } from "@/util/openai/modelChooser";
 import { PromptTemplate } from "langchain/prompts";
-import { SupabaseVectorStore } from "langchain/vectorstores/supabase";
-import { OpenAIEmbeddings } from "@langchain/openai";
 import { StringOutputParser } from "langchain/schema/output_parser";
 import {
   RunnablePassthrough,
