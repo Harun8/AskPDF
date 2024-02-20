@@ -1,4 +1,5 @@
-const ConversationDisplay = ({ conversation }) => {
+import LoadingPDF from "./loadingPDF";
+const ConversationDisplay = ({ conversation, showThinkingAnimation }) => {
   return (
     <div className="   ">
       <div className="flex flex-col h-[500px]">
@@ -16,6 +17,9 @@ const ConversationDisplay = ({ conversation }) => {
                 <div
                   key={index}
                   className={` mt-4 mb-4 pl-4  py-4 ml-2 mr-2 flex justify-start rounded-lg ${textColor}`}>
+                  {msg.type === "response" && showThinkingAnimation ? (
+                    <LoadingPDF></LoadingPDF>
+                  ) : null}{" "}
                   {msg.text}
                 </div>
               );

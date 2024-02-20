@@ -41,7 +41,7 @@ export default function chat() {
   const [fileOverLimit, setFileOverLimit] = useState(false);
   const [uploadCount, setUploadCount] = useState(null);
   const [isOverPDFCount, setIsOverPDFCount] = useState(false);
-
+  const [showThinkingAnimation, setShowThinkingAnimation] = useState(false);
   const router = useRouter();
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
@@ -102,6 +102,7 @@ export default function chat() {
     convHistory.push(messageText);
 
     try {
+      setShowThinkingAnimation(true);
       const response = await fetch("/api/llm", {
         method: "POST",
         body: JSON.stringify({
@@ -115,6 +116,8 @@ export default function chat() {
       const data = await response.json();
 
       if (data) {
+        setShowThinkingAnimation(false);
+
         const chatbotResponse = {
           type: "response",
           text: data,
@@ -310,7 +313,10 @@ export default function chat() {
 
       <div className="flex flex-col justify-between h-full">
         <div className="flex-grow overflow-y-auto">
-          <ConversationDisplay conversation={conversation} />
+          <ConversationDisplay
+            showThinkingAnimation={showThinkingAnimation}
+            conversation={conversation}
+          />
         </div>
 
         <div className="mt-4">
