@@ -46,7 +46,7 @@ export default async function handler(req, res) {
 
     const llm = new ChatOpenAI({
       openAIApiKey: process.env.OPENAI_API_KEY,
-      streaming: false,
+      // streaming: false,
       modelName: modelChooser(data.plan),
       //  temperature: 0.5
     });

@@ -22,6 +22,9 @@ const ChatPage = () => {
   const [userId, setUserId] = useState(null);
   const [answer, setAnswer] = useState([]);
   const [question, setQuestion] = useState([]);
+  const [plan, setPlan] = useState(null);
+  const [uploadCount, setUploadCount] = useState(null);
+
   let currentPdfId;
   const params = useParams();
   const supabase = createClientComponentClient();
@@ -29,6 +32,47 @@ const ChatPage = () => {
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
   }
+
+  useEffect(() => {
+    const getAuth = async () => {
+      try {
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
+        // console.log("session", session);
+
+        if (session) {
+          setIsAuthenticated(true);
+          const response = await fetch("/api/abilities", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json", // Specify the content type as JSON
+            },
+            body: JSON.stringify({
+              user_id: session.user.id,
+            }),
+          });
+
+          if (!response.ok) {
+            console.log("Could not fetch abilities");
+          }
+
+          const data = await response.json();
+          console.log("data", data);
+          setPlan(data.fileSize);
+          setUploadCount(data.upload);
+        } else {
+          router.push("/");
+          console.log("THE USER AINT AUTHENTICATED REDIRRRREEECCCTT MFFF");
+        }
+      } catch (error) {
+        console.error("Error checking authentication", error);
+        // Handle error as appropriate
+      }
+    };
+
+    getAuth();
+  }, []);
 
   useEffect(() => {
     const getInfo = async () => {
@@ -103,66 +147,42 @@ const ChatPage = () => {
       setPdf(download);
     }
   }
+  const convHistory = [];
 
   const sendMessage = async (messageText) => {
-    let answerIndex = [];
-    let pdfTexts;
-    // console.log("msgTExt", messageText);
     if (!messageText.trim()) return;
     const newMessage = { type: "user", text: messageText };
     setConversation([...conversation, newMessage]);
-    let updatedConversation;
     let currentResponse = ""; // Initialize an empty string to accumulate the content
-    let chunkHolder = [];
 
     convHistory.push(messageText);
 
     try {
-      // console.log("check check");
-      const response = await chain.invoke({
-        question: messageText,
-        conv_history: formatConvHistory(convHistory),
+      const response = await fetch("/api/llm", {
+        method: "POST",
+        body: JSON.stringify({
+          plan: plan,
+          messageText: messageText,
+          conv_history: convHistory,
+          file_id: params.id,
+        }),
       });
-      // for await (const chunk of response) {
-      //   const content = chunk;
-      //   // Accumulate the content.
-      //   currentResponse += content;
-      //   // console.log(currentResponse);
-      //   setConversation((prevConversation) => {
-      //     updatedConversation = [...prevConversation];
 
-      //     // Check if the last entry is a response and update it, or create a new response entry
-      //     if (
-      //       updatedConversation.length > 0 &&
-      //       updatedConversation[updatedConversation.length - 1].type ===
-      //         "response"
-      //     ) {
-      //       // console.log("i got here 1", currentResponse);
-      //       updatedConversation[updatedConversation.length - 1].text =
-      //         currentResponse;
-      //     } else {
-      //       // console.log("i got here 2");
+      const data = await response.json();
+      console.log("data", data);
+      convHistory.push(data);
+      // Assuming data contains the chatbot response text
+      if (data) {
+        const chatbotResponse = {
+          type: "response",
+          text: data,
+        };
+        // Adding chatbot response to the conversation
+        setConversation((conversation) => [...conversation, chatbotResponse]);
+      }
 
-      //       updatedConversation.push({
-      //         type: "response",
-      //         text: currentResponse,
-      //       });
-      //     }
-
-      //     // currentResponse = ""; // Clear currentResponse after updating the conversation.
-      //     return updatedConversation;
-      //   });
-      // }
       convHistory.push(currentResponse);
       console.log("conv", convHistory);
-
-      // console.log("Convo", updatedConversation);
-
-      if (!conversation.length > 0) {
-        answerIndex = conversation.length - 2;
-        console.log("I am saving this: ");
-      } else {
-      }
     } catch (error) {
       console.log(error);
       return;
