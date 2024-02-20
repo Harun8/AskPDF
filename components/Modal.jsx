@@ -39,11 +39,7 @@ const Modal = ({
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
-                    className={`flex justify-center font-medium leading-6 text-gray-900 ${
-                      isDuplicate || isOverSize || isOverPDFCount
-                        ? "text-red-500 text-xl"
-                        : "text-gray-900 text-lg"
-                    }`}>
+                    className={`flex justify-center font-medium leading-6 text-gray-900`}>
                     {title}
                   </Dialog.Title>
                   <div className=" flex justify-center mt-2">

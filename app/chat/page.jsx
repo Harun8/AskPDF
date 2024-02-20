@@ -141,16 +141,28 @@ export default function chat() {
     console.log("fsl", fsl);
     console.log("file chosen, upload it to db", event);
 
+    // check if both cases are true first
+    if (uploadCount >= upl && event.target.files[0].size > fsl) {
+      showToast(
+        "File and upload limit reached!",
+        "You have reached your upload limit, and file size limit"
+      );
+      closeModal();
+      return;
+    }
+
     if (uploadCount >= upl) {
-      setIsOverPDFCount(true);
-      console.log("YOU HAVE UPLOADED TOO MANY PDFSSS");
-      showToast("You have reached your upload limit");
+      // setIsOverPDFCount(true);
+      console.log("Upload limit reached!", "YOU HAVE UPLOADED TOO MANY PDFSSS");
+      showToast("Upload limit reached", "You have reached your upload limit");
+      closeModal();
       return;
     }
 
     if (event.target.files[0].size > fsl) {
-      showToast("The PDF file is over your limit");
-      setFileOverLimit(true);
+      showToast("File size limit reached!", "The PDF file is over your limit");
+      closeModal();
+      // setFileOverLimit(true);
       console.log("SHIT IS TOO BIGG FAMALAM");
       event.target.value = "";
     } else {
@@ -240,8 +252,8 @@ export default function chat() {
     setIsOpen(true);
   }
 
-  function showToast(desc) {
-    toast("Upload limit reached!", {
+  function showToast(title, desc) {
+    toast(title, {
       description: desc,
       position: "top-right",
 
@@ -278,18 +290,7 @@ export default function chat() {
             <div className="text">{/* <span>Click to upload PDF</span> */}</div>
 
             <Modal
-              isDuplicate={duplicateFileError}
-              isOverSize={fileOverLimit}
-              isOverPDFCount={isOverPDFCount}
-              title={
-                duplicateFileError
-                  ? "You've already uploaded this file"
-                  : fileOverLimit
-                  ? "File is over your limit, upgrade your plan if you wan't to upload a bigger file"
-                  : isOverPDFCount
-                  ? "You've uploaded the maxium PDF, upgrade your plan if you want to upload more PDF's"
-                  : "Upload your PDF"
-              }
+              title={"Upload your PDF"}
               isOpen={isOpen}
               closeModal={closeModal}
               openModal={openModal}
