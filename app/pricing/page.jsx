@@ -2,21 +2,28 @@
 import { SITE_URL } from "@/util/endpoints";
 import { stripe } from "@/util/stripe/stripe";
 import { loadStripe } from "@stripe/stripe-js";
+import { useEffect } from "react";
 
 export default async function Pricing() {
-  const { data: prices } = await stripe.prices.list();
-  const plans = [];
+  useEffect(() => {
+    async function getPrices() {
+      try {
+        const response = await fetch(`/api/stripe`, {
+          body: JSON.stringify({
+            plan: plan,
+            messageText: messageText,
+            conv_history: convHistory,
+            file_id: currentPdfId,
+          }),
+        });
 
-  for (const price of prices) {
-    const product = await stripe.products.retrieve(price.product);
-    plans.push({
-      name: product.name,
-      id: price.id,
-      price: price.unit_amount / 100,
-      interval: price.recurring.interval,
-    });
-  }
-  console.log("plans", plans);
+        const data = await response.json();
+        console.log("prices", data);
+      } catch (error) {}
+    }
+    getPrices();
+  }, []);
+
   async function onCheckout(planId, plan) {
     const response = await fetch(`/api/checkout/${planId}`, {
       method: "POST",
