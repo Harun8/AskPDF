@@ -1,35 +1,68 @@
 "use client";
 const { createClient } = require("@supabase/supabase-js");
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-const MyChats = async () => {
+const supabase = createClientComponentClient();
+
+const MyChats = () => {
+  const [pdfs, setPdfs] = useState([]);
+  const [userId, setUserId] = useState(null);
   const router = useRouter();
 
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  );
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
+        console.log("session", session);
+        setUserId(session.user.id);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getUser();
+  }, []);
 
-  const { data } = await supabase.from("pdfs").select();
-
-  console.log("pdf_title", data.pdf_title);
+  useEffect(() => {
+    const getFiles = async () => {
+      try {
+        const { data, error } = await supabase.storage
+          .from("pdfs")
+          .list(userId);
+        console.log("pdfs", data);
+        setPdfs(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getFiles();
+  }, [userId]);
 
   const getPdfId = (id) => {
     console.log("id", id);
-    router.push(`/chat/${id}`);
+    // router.push(`/chat/${id}`);
   };
 
   return (
     <>
-      <h2></h2>
       <div className="flex justify-center text-black dark:text-white">
-        {data.map((data) => {
-          return (
-            <p onClick={() => getPdfId(data.id)} key={Math.random()}>
-              {data.pdf_title}
-            </p>
-          );
-        })}
+        <div className="flex justify-center">
+          <div className="mt-20">
+            {pdfs.map((pdf) => {
+              return (
+                <a
+                  className="flex justify-start mb-12 text-lg font-medium  bg-zinc-300 rounded p-6"
+                  onClick={() => getPdfId(pdf.id)}
+                  key={Math.random()}>
+                  {pdf.name}
+                </a>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </>
   );
