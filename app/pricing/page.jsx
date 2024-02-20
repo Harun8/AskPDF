@@ -1,25 +1,23 @@
 "use client";
-import { SITE_URL } from "@/util/endpoints";
-import { stripe } from "@/util/stripe/stripe";
-import { loadStripe } from "@stripe/stripe-js";
-import { useEffect } from "react";
 
-export default async function Pricing() {
+import { loadStripe } from "@stripe/stripe-js";
+import { useEffect, useState } from "react";
+
+export default function Pricing() {
+  const [plans, setPlans] = useState([]);
   useEffect(() => {
     async function getPrices() {
       try {
         const response = await fetch(`/api/stripe`, {
-          body: JSON.stringify({
-            plan: plan,
-            messageText: messageText,
-            conv_history: convHistory,
-            file_id: currentPdfId,
-          }),
+          method: "GET",
         });
 
         const data = await response.json();
         console.log("prices", data);
-      } catch (error) {}
+        setPlans(data);
+      } catch (error) {
+        console.error(error);
+      }
     }
     getPrices();
   }, []);
@@ -209,14 +207,14 @@ export default async function Pricing() {
         <div className=" bg-zinc-100 dark:bg-gray-900  	 border border-slate-900 rounded-lg shadow-sm divide-y divide-slate-200">
           <div className="p-6">
             <h2 className="text-xl leading-6 font-bold dark:text-slate-100 text-slate-900">
-              {plans[1].name}
+              {plans.length > 0 ? plans[1].name : "Premium"}
             </h2>
             <p className="mt-2 text-base dark:text-slate-100  text-slate-700 leading-tight">
               For new makers who want to fine-tune and test an idea.
             </p>
             <p className="mt-8">
               <span className="text-4xl font-bold dark:text-slate-100  text-slate-900 tracking-tighter">
-                {plans[1].price} kr
+                {plans.length > 0 ? plans[1].price : 70} kr
               </span>
 
               <span className="text-base font-medium dark:text-slate-100  text-slate-500">
@@ -360,14 +358,14 @@ export default async function Pricing() {
         <div className=" bg-zinc-100 dark:bg-gray-900 	 border border-slate-900 rounded-lg shadow-sm divide-y divide-slate-200">
           <div className="p-6">
             <h2 className="text-xl leading-6 font-bold dark:text-slate-100 text-slate-900">
-              {plans[0].name}
+              {plans.length > 0 ? plans[0].name : "Ultimate"}
             </h2>
             <p className="mt-2 text-base dark:text-slate-100  text-slate-700 leading-tight">
               For new makers who want to fine-tune and test an idea.
             </p>
             <p className="mt-8">
               <span className="text-4xl font-bold dark:text-slate-100  text-slate-900 tracking-tighter">
-                {plans[0].price} kr
+                {plans.length > 0 ? plans[0].price : 140} kr
               </span>
 
               <span className="text-base font-medium dark:text-slate-100  text-slate-500">
