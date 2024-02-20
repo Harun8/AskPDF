@@ -41,7 +41,7 @@ export default function Pricing() {
 
     const data = await response.json();
     const stripe = await loadStripe(
-      process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+      process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY // fine that it is in the client
     );
     await stripe.redirectToCheckout({ sessionId: data.id });
   }
