@@ -22,10 +22,8 @@ const standaloneQuestionPrompt = PromptTemplate.fromTemplate(
 );
 
 const answerTemplate = `You're a helpful and enthusiastic suppport bot who can answer a given question about the context provided,
-and the conversation history.
- Try to find the answer in the context. If the answer is not given in the context check if the answer is in the conversation history.
- If you really do not know the answer
- say "I'm sorry, I can not find it in the PDF".
+and the conversation history. 
+ Try to find the answer in the context.
  Do not try to make up an answer. Always speak as if you were chatting to a friend.
  context: {context}
  conversation history: {conv_history}
@@ -110,7 +108,7 @@ const supabase = createClient(
 async function retriver(queryText, file_id) {
   console.log("file_id", file_id);
 
-  const model = "text-embedding-ada-002";
+  const model = "text-embedding-3-small";
   console.log("queryText", queryText);
   // Generate the embedding vector for the query text
   let queryEmbedding;
