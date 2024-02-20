@@ -17,13 +17,15 @@ const ConversationDisplay = ({ conversation, showThinkingAnimation }) => {
                 <div
                   key={index}
                   className={` mt-4 mb-4 pl-4  py-4 ml-2 mr-2 flex justify-start rounded-lg ${textColor}`}>
-                  {msg.type === "response" && showThinkingAnimation ? (
-                    <LoadingPDF></LoadingPDF>
-                  ) : null}{" "}
                   {msg.text}
                 </div>
               );
             })}
+            {showThinkingAnimation && (
+              <div className="mt-4 mb-4 pl-4 py-4 ml-2 mr-2 flex justify-start rounded-lg bg-zinc-200 dark:bg-gray-800">
+                <LoadingPDF />
+              </div>
+            )}
           </div>
         </div>
       </div>

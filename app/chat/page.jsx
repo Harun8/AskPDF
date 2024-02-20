@@ -73,7 +73,7 @@ export default function chat() {
           }
 
           const data = await response.json();
-          console.log("data", data);
+          console.log("data with plan", data);
           setPlan(data.fileSize);
           setUploadCount(data.upload);
         } else {

@@ -24,6 +24,7 @@ const ChatPage = () => {
   const [question, setQuestion] = useState([]);
   const [plan, setPlan] = useState(null);
   const [uploadCount, setUploadCount] = useState(null);
+  const [showThinkingAnimation, setShowThinkingAnimation] = useState(false);
 
   let currentPdfId;
   const params = useParams();
@@ -42,7 +43,6 @@ const ChatPage = () => {
         // console.log("session", session);
 
         if (session) {
-          setIsAuthenticated(true);
           const response = await fetch("/api/abilities", {
             method: "POST",
             headers: {
@@ -58,7 +58,7 @@ const ChatPage = () => {
           }
 
           const data = await response.json();
-          console.log("data", data);
+          console.log("data with plan", data);
           setPlan(data.fileSize);
           setUploadCount(data.upload);
         } else {
@@ -158,6 +158,8 @@ const ChatPage = () => {
     convHistory.push(messageText);
 
     try {
+      setShowThinkingAnimation(true);
+
       const response = await fetch("/api/llm", {
         method: "POST",
         body: JSON.stringify({
@@ -173,6 +175,8 @@ const ChatPage = () => {
       convHistory.push(data);
       // Assuming data contains the chatbot response text
       if (data) {
+        setShowThinkingAnimation(false);
+
         const chatbotResponse = {
           type: "response",
           text: data,
@@ -216,7 +220,10 @@ const ChatPage = () => {
 
       <div className="flex flex-col justify-between h-full">
         <div className="flex-grow overflow-y-auto">
-          <ConversationDisplay conversation={conversation} />
+          <ConversationDisplay
+            showThinkingAnimation={showThinkingAnimation}
+            conversation={conversation}
+          />
         </div>
         <div className="mt-4">
           <TextField onSendMessage={sendMessage}></TextField>
