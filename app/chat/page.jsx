@@ -96,15 +96,9 @@ export default function chat() {
   const convHistory = [];
 
   const sendMessage = async (messageText) => {
-    let answerIndex = [];
-    let pdfTexts;
-    // console.log("msgTExt", messageText);
     if (!messageText.trim()) return;
     const newMessage = { type: "user", text: messageText };
     setConversation([...conversation, newMessage]);
-    let updatedConversation;
-    let currentResponse = ""; // Initialize an empty string to accumulate the content
-    let chunkHolder = [];
     convHistory.push(messageText);
 
     try {
@@ -119,52 +113,14 @@ export default function chat() {
       });
 
       const data = await response.json();
-      console.log("data from llm endpoint is", data);
-      convHistory.push(messageText);
 
-      // const response = await chain.invoke({
-      //   question: messageText,
-      //   conv_history: formatConvHistory(convHistory),
-      // });
-      // for await (const chunk of response) {
-      //   const content = chunk;
-      //   // Accumulate the content.
-      //   currentResponse += content;
-      //   // console.log(currentResponse);
-      //   setConversation((prevConversation) => {
-      //     updatedConversation = [...prevConversation];
-
-      //     // Check if the last entry is a response and update it, or create a new response entry
-      //     if (
-      //       updatedConversation.length > 0 &&
-      //       updatedConversation[updatedConversation.length - 1].type ===
-      //         "response"
-      //     ) {
-      //       // console.log("i got here 1", currentResponse);
-      //       updatedConversation[updatedConversation.length - 1].text =
-      //         currentResponse;
-      //     } else {
-      //       // console.log("i got here 2");
-
-      //       updatedConversation.push({
-      //         type: "response",
-      //         text: currentResponse,
-      //       });
-      //     }
-
-      //     // currentResponse = ""; // Clear currentResponse after updating the conversation.
-      //     return updatedConversation;
-      //   });
-      // }
-      convHistory.push(currentResponse);
-      console.log("conv", convHistory);
-
-      // console.log("Convo", updatedConversation);
-
-      if (!conversation.length > 0) {
-        answerIndex = conversation.length - 2;
-        console.log("I am saving this: ");
-      } else {
+      if (data) {
+        const chatbotResponse = {
+          type: "response",
+          text: data,
+        };
+        // Adding chatbot response to the conversation
+        setConversation((conversation) => [...conversation, chatbotResponse]);
       }
     } catch (error) {
       console.log(error);
