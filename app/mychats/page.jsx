@@ -48,13 +48,14 @@ const MyChats = () => {
 
   return (
     <>
+      <p className="flex justify-center font-medium font-4xl">My chats </p>
       <div className="flex justify-center text-black dark:text-white">
         <div className="flex justify-center">
           <div className="mt-20">
             {pdfs.map((pdf) => {
               return (
                 <a
-                  className="flex justify-start mb-12 text-lg font-medium  bg-zinc-300 rounded p-6"
+                  className=" cursor-pointer hover:bg-zinc-400 flex justify-start mb-12 text-lg font-medium  bg-zinc-300 rounded p-6"
                   onClick={() => getPdfId(pdf.id)}
                   key={Math.random()}>
                   {pdf.name}
