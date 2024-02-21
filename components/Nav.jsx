@@ -8,11 +8,30 @@ import { useEffect, useState } from "react";
 import { Session } from "@supabase/auth-helpers-nextjs";
 import ToggleBtn from "./ToggleBtn";
 import Settings from "@/public/settings.svg";
-const Nav = ({ session }) => {
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+
+const Nav = () => {
   // const [session, setSession] = useState();
   const [loading, setLoading] = useState(false);
   const [toggleDropDown, setToggleDropDown] = useState(false);
+  const [session, setSession] = useState(null);
 
+  const supabase = createClientComponentClient();
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
+        console.log("session", session);
+        setSession(session);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getUser();
+  }, []);
   return (
     <nav className="">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
