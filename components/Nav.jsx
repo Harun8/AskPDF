@@ -15,6 +15,7 @@ const Nav = () => {
   const [loading, setLoading] = useState(false);
   const [toggleDropDown, setToggleDropDown] = useState(false);
   const [session, setSession] = useState(null);
+  const router = useRouter();
 
   const supabase = createClientComponentClient();
 
