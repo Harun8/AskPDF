@@ -10,7 +10,7 @@ import Typewriter from "@/public/typewriter.svg";
 import Upload from "@/public/upload.svg";
 import Answer from "@/public/answer.svg";
 import Pdf from "@/public/pdf.svg";
-import SaveTime from "@/public/Save-time.svg";
+import Coffee from "@/public/coffee.svg";
 
 import Link from "next/link";
 import Testimonial from "@/components/Testimonial";
@@ -18,22 +18,25 @@ import Testimonial from "@/components/Testimonial";
 export default function Home() {
   return (
     <>
-      <div className="grid grid-cols-2 items-center mx-10 h-dvh ">
-        <div className="align-middle">
+      <div className="grid grid-cols-2 mt-28 mx-10 h-dvh ">
+        <div className="">
           <p className=" dark:text-slate-300 font-serif font-bold text-6xl leading-tight">
             <span className="">
               Learn quicker <br /> with,
             </span>
             <span className="text-blue-600"> AskPDF</span>
           </p>
-          <p className="font-base font-light text-xl mt-1 leading-relaxed	 ">
-            Just upload, ask, and instantly get the answers you need. <br />
+          <p className="font-base font-light text-xl mt-6 leading-relaxed	 ">
+            Optimize your PDF experience with{" "}
+            <span className="text-blue-600"> AskPDF</span>: the smart solution
+            that transforms your documents into responsive knowledge bases. Just
+            upload, ask, and instantly get the answers you need. <br />
             Streamline your study or work sessions with{" "}
             <span className="text-blue-600"> AskPDF</span> where PDF's come to
             talk!
           </p>
 
-          <div className="mt-10">
+          <div className="mt-16">
             <Button size="xlg" variant="homepage">
               Try AskPDF for free
             </Button>
@@ -143,20 +146,20 @@ export default function Home() {
           </p>
         </div>
         <div className="mt-12 flex justify-center gap-16"></div> */}
-      {/* <div class="flex items-end justify-end fixed bottom-0 right-0 mb-4 mr-4 z-10">
-          <div>
-            <a
-              title="Buy me a beer"
-              href="https://www.buymeacoffee.com/scottwindon"
-              target="_blank"
-              class="block w-16 h-16 rounded-full transition-all shadow hover:shadow-lg transform hover:scale-110 hover:rotate-12">
-              <img
-                class="object-cover object-center w-full h-full rounded-full"
-                src="https://i.pinimg.com/originals/60/fd/e8/60fde811b6be57094e0abc69d9c2622a.jpg"
-              />
-            </a>
-          </div>
-        </div> */}
+      <div class="flex items-end justify-end fixed bottom-0 right-0 mb-4 mr-4 z-10">
+        <div>
+          <a
+            title="Buy me a beer"
+            href="https://www.buymeacoffee.com/scottwindon"
+            target="_blank"
+            class="block w-16 bg-zinc-300 h-16 rounded-full transition-all shadow hover:shadow-lg transform hover:scale-110 hover:rotate-12">
+            <Image
+              class="object-cover object-center w-full h-full rounded-full"
+              src={Coffee}
+            />
+          </a>
+        </div>
+      </div>
       {/* </section> */}
     </>
   );
