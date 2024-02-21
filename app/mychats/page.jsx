@@ -43,7 +43,7 @@ const MyChats = () => {
 
   const getPdfId = (id) => {
     console.log("id", id);
-    // router.push(`/chat/${id}`);
+    router.push(`/chat/${id}`);
   };
 
   return (
