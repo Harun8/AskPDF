@@ -18,9 +18,41 @@ import Testimonial from "@/components/Testimonial";
 export default function Home() {
   return (
     <>
-      {/* <div className=" flex justify-center">
-        <h1 className="text-4xl font-bold text-blue-700"> AskPDF </h1>
-      </div> */}
+      <div className="grid grid-cols-2 items-center mx-10 h-dvh ">
+        <div className="align-middle">
+          <p className=" dark:text-slate-300 font-serif font-bold text-6xl leading-tight">
+            <span className="">
+              Learn quicker <br /> with,
+            </span>
+            <span className="text-blue-600"> AskPDF</span>
+          </p>
+          <p className="font-base font-light text-xl mt-1 leading-relaxed	 ">
+            Just upload, ask, and instantly get the answers you need. <br />
+            Streamline your study or work sessions with{" "}
+            <span className="text-blue-600"> AskPDF</span> where PDF's come to
+            talk!
+          </p>
+
+          <div className="mt-10">
+            <Button size="xlg" variant="homepage">
+              Try AskPDF for free
+            </Button>
+            <Link
+              className=" hover:text-gray-700 ml-6 my-auto font-semibold text-lg"
+              href="/preview">
+              Try the demo
+            </Link>
+          </div>
+        </div>
+        <div className="">
+          <Image
+            src={Typewriter}
+            width={650}
+            height={650}
+            alt="landing page main image"></Image>
+        </div>
+      </div>
+      {/* 
       <div class=" mt-16 flex justify-center grid grid-rows-3 grid-flow-col gap-4">
         <div class="row-span-3 ...">
           <Image
@@ -59,7 +91,7 @@ export default function Home() {
             alt="landing page main image"></Image>
         </div>
         <div></div>
-      </div>
+      </div> */}
       <section className=" mt-5 bg-blue-950 py-16	">
         <div className=" flex justify-center">
           <p className=" mx-auto mt-8 text-zinc-100 dark:text-slate-300 font-serif font-bold text-3xl leading-tight">

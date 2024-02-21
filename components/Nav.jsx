@@ -32,10 +32,10 @@ const Nav = () => {
       }
     };
     getUser();
-  }, []);
+  }, [session]);
   return (
-    <nav className="">
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <nav className=" ">
+      <div className="mx-auto max-w-8xl px-2 sm:px-6 lg:px-8 bg-zinc-200 ">
         <div className="relative flex h-16 items-center justify-center">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
             <button
@@ -140,7 +140,7 @@ const Nav = () => {
                     const { error } = await supabase.auth.signOut();
                     setLoading(false);
                     router.refresh();
-                    // if (!error) setSession(null);
+                    if (!error) setSession(null);
                   }}
                   disabled={loading}>
                   {loading ? "Loading" : "Logout"}
