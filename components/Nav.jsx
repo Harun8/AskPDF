@@ -84,7 +84,7 @@ const Nav = () => {
                 </div>
                 <Link
                   href="/"
-                  className="  dark:bg-gray-800 dark:text-white hover:text-slate-500	text-black rounded-md px-3 py-2 text-base font-medium"
+                  className=" text-xl  dark:bg-gray-800 dark:text-white hover:text-slate-500	text-black rounded-md px-3 py-2 text-base font-medium"
                   aria-current="page">
                   Home page
                 </Link>
@@ -93,18 +93,18 @@ const Nav = () => {
                   <>
                     <Link
                       href="/chat"
-                      className="  dark:bg-gray-800 dark:text-white  hover:text-slate-500	text-black rounded-md px-3 py-2 text-base font-medium">
+                      className=" text-xl dark:bg-gray-800 dark:text-white  hover:text-slate-500	text-black rounded-md px-3 py-2 text-base font-medium">
                       New chat
                     </Link>
                     <Link
                       href="/mychats"
-                      className="  dark:bg-gray-800 dark:text-white  hover:text-slate-500	text-black rounded-md px-3 py-2 text-base font-medium">
+                      className=" text-xl dark:bg-gray-800 dark:text-white  hover:text-slate-500	text-black rounded-md px-3 py-2 text-base font-medium">
                       My chats
                     </Link>
 
                     <Link
                       href="/settings"
-                      className="  dark:bg-gray-800 dark:text-white  hover:text-slate-500	text-black rounded-md px-3 py-2 text-base font-medium">
+                      className=" text-xl  dark:bg-gray-800 dark:text-white  hover:text-slate-500	text-black rounded-md px-3 py-2 text-base font-medium">
                       Settings
                     </Link>
                   </>
@@ -112,13 +112,13 @@ const Nav = () => {
                   <>
                     <Link
                       href="/pricing"
-                      className="  dark:bg-gray-800 dark:text-white  hover:text-slate-500	text-black rounded-md px-3 py-2 text-base font-medium">
+                      className=" text-xl  dark:bg-gray-800 dark:text-white  hover:text-slate-500	text-black rounded-md px-3 py-2 text-base font-medium">
                       Pricing
                     </Link>
 
                     <Link
                       href="/preview"
-                      className="  dark:bg-gray-800 dark:text-white  hover:text-slate-500	text-black rounded-md px-3 py-2 text-base font-medium">
+                      className=" text-xl dark:bg-gray-800 dark:text-white  hover:text-slate-500	text-black rounded-md px-3 py-2 text-base font-medium">
                       Preview
                     </Link>
                   </>
@@ -133,7 +133,7 @@ const Nav = () => {
                   Welcome, {session.user.email}
                 </p> */}
                 <button
-                  className="bg-slate-900 font-semibold rounded px-4 py-2 text-white"
+                  className=" text-xl bg-slate-900 font-semibold rounded px-4 py-2 text-white"
                   onClick={async (e) => {
                     e.preventDefault();
                     setLoading(true);
@@ -150,12 +150,12 @@ const Nav = () => {
               <>
                 <Link
                   href="/signin"
-                  className=" text-gray-800 hover:dark:bg-gray-700 dark:text-white  hover:text-black dark:bg-gray-800 font-semibold rounded mr-3 px-4 py-2 ">
+                  className=" text-xl text-gray-800 hover:dark:bg-gray-700 dark:text-white  hover:text-black dark:bg-gray-800 font-semibold rounded mr-3 px-4 py-2 ">
                   Sign up
                 </Link>
                 <Link
                   href="/login"
-                  className=" bg-black text-white hover:bg-slate-800 hover:dark:bg-gray-700 dark:text-white  hover:text-white hover:font-bold dark:bg-gray-800 font-semibold  mr-3 px-4 py-2 ">
+                  className=" text-xl bg-black text-white hover:bg-slate-800 hover:dark:bg-gray-700 dark:text-white  hover:text-white hover:font-bold dark:bg-gray-800 font-semibold  mr-3 px-4 py-2 ">
                   Get started
                 </Link>
               </>

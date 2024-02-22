@@ -156,7 +156,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <Testimonial></Testimonial>
+      {/* <Testimonial></Testimonial> */}
       {/* <section className=" "> */}
       {/* <div className=" flex justify-center">
           <p className=" mt-8 text-gray-900 dark:text-slate-300 font-serif font-bold text-3xl leading-tight">
