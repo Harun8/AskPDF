@@ -37,14 +37,14 @@ export default function Home() {
             talk!
           </p>
 
-          <div className="mt-16 flex items-center">
+          <div className="mt-16 flex items-start">
             <Button size="xlg" variant="homepage">
               Try AskPDF for free
             </Button>
             <Link
-              className="hover:text-green-500  hover:font-bold ml-6 my-auto font-semibold text-lg "
+              className="  hover:text-red-500  hover:font-bold ml-6 my-auto font-semibold text-lg "
               href="/preview">
-              <div className="flex items-center">
+              <div className=" flex items-center">
                 Try the demo
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +73,6 @@ export default function Home() {
             alt="landing page main image"></Image>
         </div>
       </div>
-      <div>yo</div>
       {/* 
       <div class=" mt-16 flex justify-center grid grid-rows-3 grid-flow-col gap-4">
         <div class="row-span-3 ...">

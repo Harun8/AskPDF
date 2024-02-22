@@ -33,7 +33,7 @@ const Signin = () => {
   };
   return (
     <>
-      <div class="grid grid-cols-2 gap-1  ">
+      <div class="grid grid-cols-2 gap-1 h-dvh ">
         <div className="">
           <div className="flex justify-center">
             <div className="flex justify-center">
@@ -45,15 +45,8 @@ const Signin = () => {
             </div>
           </div>
         </div>
-        <div className="flex justify-center items-center p-12">
-          <div className="w-full">
-            <Image
-              className="rounded-3xl  object-cover"
-              src={LoginImage}
-              alt="blue image"
-              layout="responsive"
-            />
-          </div>
+        <div className="flex justify-center items-center p-12 bg-indigo-800	">
+          <div className="flex justify-center text-white">hello there :)</div>
         </div>
       </div>
     </>

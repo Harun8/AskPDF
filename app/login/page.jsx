@@ -37,32 +37,31 @@ export default function LoginPage() {
   };
 
   return (
-    <> 
-       
-    <div class="grid grid-cols-2 gap-1  ">
-      <div className="">
-        <div className="flex justify-center">
-
-          <Forms
-            isSubmitting={isSubmitting}
-            showPassword={false}
-            onSubmit={login}
-            link="signin"
-            title="Login"
-            redirect="Don't have an account? Sign up?"></Forms>
+    <>
+      <div class="grid grid-cols-2 gap-1 h-dvh ">
+        <div className="">
+          <div className="flex justify-center">
+            <Forms
+              isSubmitting={isSubmitting}
+              showPassword={false}
+              onSubmit={login}
+              link="signin"
+              title="Login"
+              redirect="Don't have an account? Sign up?"></Forms>
+          </div>
+        </div>
+        <div className="flex justify-center items-center p-12 bg-blue-200 ">
+          <div className="flex justify-center">welcome back :) </div>
+          {/* <div className="w-full">
+            <Image
+              className="rounded-3xl  object-cover"
+              src={LoginImage}
+              alt="blue image"
+              layout="responsive"
+            />
+          </div> */}
         </div>
       </div>
-      <div className="flex justify-center items-center p-12">
-        <div className="w-full">
-          <Image
-            className="rounded-3xl  object-cover"
-            src={LoginImage}
-            alt="blue image"
-            layout="responsive"
-          />
-        </div>
-      </div>
-    </div>
     </>
   );
 }
