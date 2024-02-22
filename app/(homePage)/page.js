@@ -11,6 +11,7 @@ import Upload from "@/public/upload.svg";
 import Answer from "@/public/answer.svg";
 import Pdf from "@/public/pdf.svg";
 import Coffee from "@/public/coffee.svg";
+import SaveTime from "@/public/Save-time.svg";
 
 import Link from "next/link";
 import Testimonial from "@/components/Testimonial";
@@ -18,15 +19,15 @@ import Testimonial from "@/components/Testimonial";
 export default function Home() {
   return (
     <>
-      <div className="grid grid-cols-2 mt-28 mx-10 h-dvh ">
+      <div className="grid grid-cols-2 mt-36 mx-10 h-dvh ">
         <div className="">
-          <p className=" dark:text-slate-300 font-serif font-bold text-6xl leading-tight">
+          <p className=" dark:text-slate-300 font-serif font-bold text-7xl leading-tight">
             <span className="">
               Learn quicker <br /> with,
             </span>
             <span className="text-blue-600"> AskPDF</span>
           </p>
-          <p className="font-base font-light text-xl mt-6 leading-relaxed	 ">
+          <p className="font-base font-medium text-2xl mt-6 leading-relaxed	 ">
             Optimize your PDF experience with{" "}
             <span className="text-blue-600"> AskPDF</span>: the smart solution
             that transforms your documents into responsive knowledge bases. Just
@@ -36,25 +37,43 @@ export default function Home() {
             talk!
           </p>
 
-          <div className="mt-16">
+          <div className="mt-16 flex items-center">
             <Button size="xlg" variant="homepage">
               Try AskPDF for free
             </Button>
             <Link
-              className=" hover:text-gray-700 ml-6 my-auto font-semibold text-lg"
+              className="hover:text-green-500  hover:font-bold ml-6 my-auto font-semibold text-lg "
               href="/preview">
-              Try the demo
+              <div className="flex items-center">
+                Try the demo
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 448 512"
+                  className="ml-2 ">
+                  <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
+                </svg>
+              </div>
             </Link>
+          </div>
+          <div className="flex justify-end">
+            <Image
+              src={SaveTime}
+              width={350}
+              height={350}
+              alt="landing page main image"></Image>
           </div>
         </div>
         <div className="">
           <Image
             src={Typewriter}
-            width={650}
-            height={650}
+            width={800}
+            height={800}
             alt="landing page main image"></Image>
         </div>
       </div>
+      <div>yo</div>
       {/* 
       <div class=" mt-16 flex justify-center grid grid-rows-3 grid-flow-col gap-4">
         <div class="row-span-3 ...">
