@@ -258,7 +258,9 @@ const Nav = () => {
             </svg>
           </li>
           <li>
-            <a class="text-sm text-gray-400 hover:text-gray-500" href="#">
+            <a
+              class="text-sm text-gray-400 hover:text-gray-500 font-bold"
+              href="#">
               Preview
             </a>
           </li>
@@ -279,7 +281,7 @@ const Nav = () => {
           </li>
           <li class="relative flex items-center">
             <a
-              class=" text-sm text-red-400 hover:text-red-600 hover:font-bold"
+              class=" text-sm text-red-400 hover:text-red-600 font-bold "
               href="#">
               Pricing
             </a>
@@ -305,7 +307,9 @@ const Nav = () => {
             </svg>
           </li>
           <li>
-            <a class="text-sm text-gray-400 hover:text-gray-500" href="#">
+            <a
+              class="text-sm text-gray-400 hover:text-gray-500 font-bold"
+              href="#">
               Contact
             </a>
           </li>
