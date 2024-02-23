@@ -53,18 +53,25 @@ export default function Pricing() {
           Choose one of our incredible options
         </h2>
       </div>
-      {/* <div className="mt-6 relative self-center  rounded-lg p-0.5 flex">
-        <button
-          type="button"
-          className="relative w-1/2 rounded-md py-2 text-sm font-medium whitespace-nowrap focus:outline-none sm:w-auto sm:px-8 bg-slate-50 border-slate-50 text-slate-900 shadow-sm">
-          Monthly billing
-        </button>
-        <button
-          type="button"
-          className="dark:text-white ml-0.5 relative w-1/2 border rounded-md py-2 text-sm font-medium whitespace-nowrap focus:outline-none sm:w-auto sm:px-8 border-transparent text-slate-900">
-          Yearly billing
-        </button>
-      </div> */}
+      <div className="mt-6 relative self-center flex">
+        <div className="bg-zinc-200 rounded-lg p-0.5  ">
+          <button
+            type="button"
+            className="relative w-1/2 rounded-md py-2 text-sm font-medium whitespace-nowrap focus:outline-none sm:w-auto sm:px-8 bg-slate-50 border-slate-50 text-slate-900 shadow-sm">
+            Monthly billing
+          </button>
+          <button
+            type="button"
+            className="dark:text-white ml-0.5 relative w-1/2 border rounded-md py-2 text-sm font-medium whitespace-nowrap focus:outline-none sm:w-auto sm:px-8 border-transparent text-slate-900">
+            Yearly billing
+          </button>
+        </div>
+        <div className="flex items-center">
+          <span className=" bg-green-200 font-bold rounded-full text-xs px-6  py-2 ml-3">
+            save 28%
+          </span>
+        </div>
+      </div>
 
       <div className="mt-12 space-y-3 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-6 md:max-w-5xl md:mx-auto xl:grid-cols-3">
         <div className=" bg-zinc-100 dark:bg-gray-900 	 border border-slate-900 rounded-lg shadow-sm divide-y divide-slate-200">
