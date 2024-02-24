@@ -100,7 +100,6 @@ const Preview = () => {
     if (!messageText.trim()) return;
     const newMessage = { type: "user", text: messageText };
     setConversation([...conversation, newMessage]);
-    let currentResponse = ""; // Initialize an empty string to accumulate the content
 
     convHistory.push(messageText);
 

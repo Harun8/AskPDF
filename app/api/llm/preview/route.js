@@ -177,7 +177,7 @@ export default async function handler(req, res) {
     const llm = new ChatOpenAI({
       openAIApiKey: process.env.OPENAI_API_KEY,
       // streaming: false,
-      modelName: modelChooser(null),
+      modelName: "gpt-4-0125-preview",
       //  temperature: 0.5
     });
 

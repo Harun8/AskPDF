@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 export default function Pricing() {
   const [plans, setPlans] = useState([]);
+  // const [mont]
   useEffect(() => {
     async function getPrices() {
       try {
@@ -211,17 +212,21 @@ export default function Pricing() {
             </ul>
           </div>
         </div>
-        <div className=" bg-zinc-100 dark:bg-gray-900  	 border border-slate-900 rounded-lg shadow-sm divide-y divide-slate-200">
+        <div className=" bg-sky-100 dark:bg-gray-900 shadow-xl  shadow-blue-500		 border border-slate-900 rounded-lg shadow-sm divide-y divide-slate-200">
           <div className="p-6">
             <h2 className="text-xl leading-6 font-bold dark:text-slate-100 text-slate-900">
-              {plans.length > 0 ? plans[1].name : "Premium"}
+              {plans.length > 0 ? plans[3].name : "Premium"}
+              <span className="ml-4 text-xm text-blue-600">
+                {" "}
+                (Most popular){" "}
+              </span>
             </h2>
             <p className="mt-2 text-base dark:text-slate-100  text-slate-700 leading-tight">
               For new makers who want to fine-tune and test an idea.
             </p>
             <p className="mt-8">
               <span className="text-4xl font-bold dark:text-slate-100  text-slate-900 tracking-tighter">
-                {plans.length > 0 ? plans[1].price : 70} kr
+                {plans.length > 0 ? plans[3].price : 70} kr
               </span>
 
               <span className="text-base font-medium dark:text-slate-100  text-slate-500">
@@ -230,7 +235,7 @@ export default function Pricing() {
             </p>
             <button
               onClick={() => onCheckout(plans[1].id, plans[1].name)}
-              className="mt-8 block w-full dark:bg-slate-700 bg-slate-900 rounded-md py-2 text-sm font-semibold text-white text-center">
+              className="  mt-8 block w-full dark:bg-slate-700 bg-slate-900 rounded-md py-2 text-sm font-semibold text-white text-center">
               Join as a Premium user
             </button>
           </div>
@@ -365,14 +370,14 @@ export default function Pricing() {
         <div className=" bg-zinc-100 dark:bg-gray-900 	 border border-slate-900 rounded-lg shadow-sm divide-y divide-slate-200">
           <div className="p-6">
             <h2 className="text-xl leading-6 font-bold dark:text-slate-100 text-slate-900">
-              {plans.length > 0 ? plans[0].name : "Ultimate"}
+              {plans.length > 0 ? plans[2].name : "Ultimate"}
             </h2>
             <p className="mt-2 text-base dark:text-slate-100  text-slate-700 leading-tight">
               For new makers who want to fine-tune and test an idea.
             </p>
             <p className="mt-8">
               <span className="text-4xl font-bold dark:text-slate-100  text-slate-900 tracking-tighter">
-                {plans.length > 0 ? plans[0].price : 140} kr
+                {plans.length > 0 ? plans[2].price : 140} kr
               </span>
 
               <span className="text-base font-medium dark:text-slate-100  text-slate-500">

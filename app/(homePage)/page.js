@@ -38,9 +38,20 @@ export default function Home() {
           </p>
 
           <div className="mt-16 flex items-start">
-            <Button size="xlg" variant="homepage">
+            <Link
+              className=" inline-flex items-center justify-center whitespace-nowrap rounded-md
+               text-sm font-medium ring-offset-white transition-colors
+                focus-visible:outline-none focus-visible:ring-2 
+                focus-visible:ring-slate-950 focus-visible:ring-offset-2 
+                disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-slate-950
+                 dark:focus-visible:ring-slate-300 bg-blue-700 text-white 
+                 	 hover:bg-blue-900  h-11 rounded-none p-7"
+              href="pricing">
               Try AskPDF for free
-            </Button>
+            </Link>
+            {/* <Button size="xlg" variant="homepage">
+              Try AskPDF for free
+            </Button> */}
             <Link
               className="  hover:text-red-500  hover:font-bold ml-6 my-auto font-semibold text-lg "
               href="/preview">
