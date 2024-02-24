@@ -51,7 +51,10 @@ export default function LoginPage() {
           </div>
         </div>
         <div className="flex justify-center items-center p-12 bg-blue-200 ">
-          <div className="flex justify-center">welcome back :) </div>
+          <div className="flex justify-center">
+            {" "}
+            {isSubmitting ? "check your email :)" : "welcome back :)"}{" "}
+          </div>
           {/* <div className="w-full">
             <Image
               className="rounded-3xl  object-cover"

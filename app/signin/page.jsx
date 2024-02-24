@@ -9,10 +9,12 @@ import LoginImage from "@/public/text.jpg";
 import Image from "next/image";
 
 const Signin = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
   const supabase = createClientComponentClient();
 
   const signUpp = async (values) => {
+    setIsSubmitting(true);
     console.log("signup been called", values.email, values.password);
 
     let { error } = await supabase.auth.signInWithOtp({
@@ -23,10 +25,12 @@ const Signin = () => {
 
       // },
     });
-
     if (error) {
+      setIsSubmitting(false);
       console.log("error", error);
     } else {
+      setIsSubmitting(false);
+
       console.log("Sucess! Please check your email");
       router.refresh();
     }
@@ -38,6 +42,7 @@ const Signin = () => {
           <div className="flex justify-center">
             <div className="flex justify-center">
               <Forms
+                isSubmitting={isSubmitting}
                 onSubmit={signUpp}
                 title="Sign up"
                 link="login"
@@ -46,7 +51,9 @@ const Signin = () => {
           </div>
         </div>
         <div className="flex justify-center items-center p-12 bg-indigo-800	">
-          <div className="flex justify-center text-white">hello there :)</div>
+          <div className="flex justify-center text-white">
+            {isSubmitting ? "check your email :)" : "hello there :)"}
+          </div>
         </div>
       </div>
     </>
