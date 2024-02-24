@@ -16,10 +16,10 @@ import { redirect, useRouter } from "next/navigation";
 
 import OpenAI from "openai";
 
-const openai = new OpenAI({
-  apiKey: process.env.NEXT_PUBLIC_API_KEY, // api key
-  dangerouslyAllowBrowser: true, // should be false
-});
+// const openai = new OpenAI({
+//   apiKey: process.env.NEXT_PUBLIC_API_KEY, // api key
+//   dangerouslyAllowBrowser: true, // should be false
+// });
 
 const Preview = () => {
   const [conversation, setConversation] = useState([]);
@@ -28,6 +28,7 @@ const Preview = () => {
   const [pdf, setPdf] = useState(null);
   const params = useParams();
   const router = useRouter();
+  const [showThinkingAnimation, setShowThinkingAnimation] = useState(false);
 
   const supabase = createClientComponentClient();
 
@@ -60,117 +61,80 @@ const Preview = () => {
   const loadPDF = async () => {
     const { data, error } = await supabase.storage
       .from("previewPDF")
-      .download(`preview/Praktik hos LINAK.pdf`);
+      .download(`preview/Cuckoo.pdf`);
 
     if (error) throw new Error(error.message);
 
     console.log("download data ", data);
     setPdf(data);
   };
-  const sendMessage = async (messageText) => {
-    let answer = [];
-    let pdfTexts;
-    console.log("msgTExt", messageText);
-    if (!messageText.trim()) return;
 
+  const uploadPdf = async () => {
+    try {
+      console.log("Is the modal open? ", isOpen);
+
+      const formData = new FormData();
+      // a web API that allows you to easily construct a set of key/value pairs representing form fields and their values
+      formData.append("file", pdf);
+      formData.append("file_title", "praktik");
+      // formData.append("file_id", file_id);
+      // formData.append("userId", userId);
+
+      const response = await fetch("/api/llm/preview", {
+        method: "POST",
+        body: formData,
+      });
+
+      console.log("Content-Type: ", response.headers.get("Content-Type"));
+
+      if (response.ok) {
+        console.log("request worked");
+      }
+    } catch (error) {
+      console.error;
+    }
+  };
+  const convHistory = [];
+
+  const sendMessage = async (messageText) => {
+    if (!messageText.trim()) return;
     const newMessage = { type: "user", text: messageText };
     setConversation([...conversation, newMessage]);
+    let currentResponse = ""; // Initialize an empty string to accumulate the content
+
+    convHistory.push(messageText);
 
     try {
-      let { data: pdfs, error } = await supabase
-        .from("preview_pdf")
-        .select("*")
-        .eq("id", 1);
+      setShowThinkingAnimation(true);
 
-      if (error) {
-        console.log("Error", error);
-        throw error;
+      const response = await fetch("/api/llm/preview", {
+        method: "POST",
+        body: JSON.stringify({
+          plan: null,
+          messageText: messageText,
+          conv_history: convHistory,
+          // file_id: params.id,
+        }),
+      });
+
+      const data = await response.json();
+      console.log("data", data);
+      convHistory.push(data);
+      // Assuming data contains the chatbot response text
+      if (data) {
+        setShowThinkingAnimation(false);
+
+        const chatbotResponse = {
+          type: "response",
+          text: data,
+        };
+        // Adding chatbot response to the conversation
+        setConversation((conversation) => [...conversation, chatbotResponse]);
       }
-
-      if (pdfs.length === 0) {
-        console.log("No PDF found with the given ID.");
-        return;
-      }
-
-      pdfTexts = pdfs.map((pdf) => pdf.text);
-      // console.log("PDF text type", typeof pdfTexts[0]);
-      // console.log("Number of PDFs", pdfTexts.length);
     } catch (error) {
       console.log(error);
       return;
     }
-
-    let flattenedPdfTexts = pdfTexts.flat();
-
-    let messages = [
-      { role: "system", content: "You are a helpful assistant." },
-      ...flattenedPdfTexts.map((pdfText) => ({
-        role: "user",
-        content: pdfText,
-      })),
-      { role: "user", content: messageText },
-    ];
-
-    // console.log("messages ", messages);
-    // Add the user's query at the end
-    messages.push({ role: "user", content: messageText });
-
-    // Call the OpenAI API
-    let completion;
-    try {
-      let currentResponse = ""; // Initialize an empty string to accumulate the content
-
-      completion = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo-0301",
-        messages: messages,
-        stream: true,
-      });
-      let updatedConversation;
-      for await (const chunk of completion) {
-        // console.log("chunk", chunk);
-        if (chunk.choices[0].delta.content != null) {
-          const content = chunk.choices[0].delta.content;
-
-          // Accumulate the content.
-          currentResponse += content;
-          console.log(currentResponse);
-          setConversation((prevConversation) => {
-            updatedConversation = [...prevConversation];
-
-            // Check if the last entry is a response and update it, or create a new response entry
-            if (
-              updatedConversation.length > 0 &&
-              updatedConversation[updatedConversation.length - 1].type ===
-                "response"
-            ) {
-              updatedConversation[updatedConversation.length - 1].text +=
-                currentResponse;
-            } else {
-              updatedConversation.push({
-                type: "response",
-                text: currentResponse,
-              });
-            }
-
-            currentResponse = ""; // Clear currentResponse after updating the conversation.
-            return updatedConversation;
-          });
-        }
-      }
-      console.log("Convo", updatedConversation);
-      // console.log("Convo2", conversation);
-    } catch (error) {
-      console.error("Error calling OpenAI API:", error);
-      return;
-    }
-
-    // Once the streaming is done, you may want to append any remaining text to the conversation.
-    // if (currentResponse.length > 0) {
-    //   setConversation((prevConversation) => [
-    //     ...prevConversation,
-    //     { type: "response", text: currentResponse },
-    //   ]);
-    // }
   };
   return (
     <div className="mx-12 grid grid-cols-2">
@@ -199,7 +163,10 @@ const Preview = () => {
 
       <div className="">
         <div className="">
-          <ConversationDisplay conversation={conversation} />
+          <ConversationDisplay
+            showThinkingAnimation={showThinkingAnimation}
+            conversation={conversation}
+          />
         </div>
         <div className="mt-4">
           <TextField onSendMessage={sendMessage}></TextField>

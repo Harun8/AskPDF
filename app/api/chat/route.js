@@ -44,7 +44,7 @@ export default async function handler(req, res) {
       // Assuming `documents` is an array of objects where each object has a `pageContent` field.
       const embeddingsPromises = output.map(async (document) => {
         // Select the model you want to use for embeddings
-        const model = "text-embedding-ada-002";
+        const model = "text-embedding-3-small";
 
         const response = await openai.embeddings.create({
           model: model,
