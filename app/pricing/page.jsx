@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 
 export default function Pricing() {
   const [plans, setPlans] = useState([]);
+  const [monthly, setMonthly] = useState(true);
+  const [yearly, setYearly] = useState(false);
+
   // const [mont]
   useEffect(() => {
     async function getPrices() {
@@ -47,6 +50,15 @@ export default function Pricing() {
     await stripe.redirectToCheckout({ sessionId: data.id });
   }
 
+  const monthlyPricing = async () => {
+    setMonthly(true);
+    setYearly(false);
+  };
+  const yearlyPricing = async () => {
+    setYearly(true);
+    setMonthly(false);
+  };
+
   return (
     <div className="sm:flex sm:flex-col sm:align-center p-10">
       <div className="relative self-center  rounded-lg p-0.5 flex">
@@ -57,13 +69,22 @@ export default function Pricing() {
       <div className="mt-6 relative self-center flex">
         <div className="bg-zinc-200 rounded-lg p-0.5  ">
           <button
+            onClick={monthlyPricing}
             type="button"
-            className="relative w-1/2 rounded-md py-2 text-sm font-medium whitespace-nowrap focus:outline-none sm:w-auto sm:px-8 bg-slate-50 border-slate-50 text-slate-900 shadow-sm">
+            className={`${`relative w-1/2 rounded-md py-2 text-sm font-medium whitespace-nowrap 
+            focus:outline-none sm:w-auto sm:px-8 ${
+              monthly ? "bg-slate-50 " : ""
+            } border-slate-50 text-slate-900 shadow-sm`}`}>
             Monthly billing
           </button>
           <button
+            onClick={yearlyPricing}
             type="button"
-            className="dark:text-white ml-0.5 relative w-1/2 border rounded-md py-2 text-sm font-medium whitespace-nowrap focus:outline-none sm:w-auto sm:px-8 border-transparent text-slate-900">
+            className={`${`relative w-1/2 rounded-md py-2 text-sm font-medium whitespace-nowrap 
+            focus:outline-none sm:w-auto sm:px-8 ${
+              yearly ? "bg-slate-50 " : ""
+            } border-slate-50 text-slate-900 shadow-sm`}`}>
+            {" "}
             Yearly billing
           </button>
         </div>
@@ -226,7 +247,8 @@ export default function Pricing() {
             </p>
             <p className="mt-8">
               <span className="text-4xl font-bold dark:text-slate-100  text-slate-900 tracking-tighter">
-                {plans.length > 0 ? plans[3].price : 70} kr
+                {plans.length > 0 && monthly ? plans[3].price : plans[1].price}{" "}
+                kr
               </span>
 
               <span className="text-base font-medium dark:text-slate-100  text-slate-500">
@@ -377,7 +399,8 @@ export default function Pricing() {
             </p>
             <p className="mt-8">
               <span className="text-4xl font-bold dark:text-slate-100  text-slate-900 tracking-tighter">
-                {plans.length > 0 ? plans[2].price : 140} kr
+                {plans.length > 0 && monthly ? plans[2].price : plans[0].price}{" "}
+                kr
               </span>
 
               <span className="text-base font-medium dark:text-slate-100  text-slate-500">
