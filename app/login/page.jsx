@@ -38,7 +38,7 @@ export default function LoginPage() {
 
   return (
     <>
-      <div class="grid grid-cols-2 gap-1 h-dvh ">
+      <div class=" flex justify-center md:grid md:grid-cols-2 md:gap-1 h-dvh ">
         <div className="">
           <div className="flex justify-center">
             <Forms
@@ -50,7 +50,7 @@ export default function LoginPage() {
               redirect="Don't have an account? Sign up?"></Forms>
           </div>
         </div>
-        <div className="flex justify-center items-center p-12 bg-blue-200 ">
+        <div className="hidden md:flex md:justify-center md:items-center md:p-12 md:bg-blue-200 ">
           <div className="flex justify-center">
             {" "}
             {isSubmitting ? "check your email :)" : "welcome back :)"}{" "}

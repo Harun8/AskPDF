@@ -37,7 +37,7 @@ const Signin = () => {
   };
   return (
     <>
-      <div class="grid grid-cols-2 gap-1 h-dvh ">
+      <div class="flex justify-center md:grid md:grid-cols-2 md:gap-1 h-dvh">
         <div className="">
           <div className="flex justify-center">
             <div className="flex justify-center">
@@ -50,7 +50,7 @@ const Signin = () => {
             </div>
           </div>
         </div>
-        <div className="flex justify-center items-center p-12 bg-indigo-800	">
+        <div className="hidden md:flex md:justify-center md:items-center md:p-12 md:bg-indigo-800	">
           <div className="flex justify-center text-white">
             {isSubmitting ? "check your email :)" : "hello there :)"}
           </div>
