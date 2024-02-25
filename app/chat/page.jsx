@@ -265,7 +265,7 @@ export default function chat() {
   }
 
   return (
-    <div className="mx-12 grid gap-4 grid-cols-2">
+    <div className="mx-12 mx-12 flex flex-col lg:grid lg:grid-cols-2">
       <div className="rounded-lg border shadow5 ">
         {pdf ? (
           <div className=" p-12 bg-gray h-[800px] overflow-y-auto  ">

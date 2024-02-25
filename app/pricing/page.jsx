@@ -81,7 +81,7 @@ export default function Pricing() {
               <button
                 onClick={monthlyPricing}
                 type="button"
-                className={`${`relative w-1/2 rounded-md py-2 text-sm font-medium whitespace-nowrap 
+                className={`${`relative w-1/2 rounded-md py-2 text-xs md:text-sm  font-medium whitespace-nowrap 
             focus:outline-none sm:w-auto sm:px-8 ${
               monthly ? "bg-slate-50 " : ""
             } border-slate-50 text-slate-900 shadow-sm`}`}>
@@ -90,7 +90,7 @@ export default function Pricing() {
               <button
                 onClick={yearlyPricing}
                 type="button"
-                className={`${`relative w-1/2 rounded-md py-2 text-sm font-medium whitespace-nowrap 
+                className={`${`relative w-1/2 rounded-md py-2 text-xs md:text-sm  font-medium whitespace-nowrap 
             focus:outline-none sm:w-auto sm:px-8 ${
               yearly ? "bg-slate-50 " : ""
             } border-slate-50 text-slate-900 shadow-sm`}`}>
