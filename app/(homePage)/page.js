@@ -19,15 +19,15 @@ import Testimonial from "@/components/Testimonial";
 export default function Home() {
   return (
     <>
-      <div className="grid grid-cols-2 mt-36 mx-10 h-dvh ">
+      <div className="flex flex-col md:grid grid-cols-2 mt-36 mx-10 h-dvh ">
         <div className="">
-          <p className=" dark:text-slate-300 font-serif font-bold text-7xl leading-tight">
+          <p className=" dark:text-slate-300 font-serif font-bold  text-3xl md:text-7xl leading-tight">
             <span className="">
               Learn quicker <br /> with,
             </span>
             <span className="text-blue-600"> AskPDF</span>
           </p>
-          <p className="font-base font-medium text-2xl mt-6 leading-relaxed	 ">
+          <p className="font-base font-medium text-medium md:text-xl mt-6 leading-relaxed	 ">
             Optimize your PDF experience with{" "}
             <span className="text-blue-600"> AskPDF</span>: the smart solution
             that transforms your documents into responsive knowledge bases. Just
@@ -68,15 +68,16 @@ export default function Home() {
               </div>
             </Link>
           </div>
-          <div className="flex justify-end">
+          <div class=" flex justify-end">
             <Image
+              className=" w-1/3 h-1/3 md:w-1/3 md:h-1/3 "
               src={SaveTime}
               width={350}
               height={350}
               alt="landing page main image"></Image>
           </div>
         </div>
-        <div className="">
+        <div className=" hidden md:flex justify-center ">
           <Image
             src={Typewriter}
             width={800}
@@ -116,7 +117,7 @@ export default function Home() {
           </div>
           <div>
             <Image
-              className="mx-auto"
+              className=" mx-auto"
               src={Pdf}
               width={50}
               height={50}
