@@ -70,13 +70,13 @@ export default function Pricing() {
       {loading ? (
         <Loading></Loading>
       ) : (
-        <div className="sm:flex sm:flex-col sm:align-center p-10">
-          <div className="relative self-center  rounded-lg p-0.5 flex">
-            <h2 className="text-4xl leading-6 font-bold dark:text-slate-100 text-slate-900">
+        <div className="md:flex md:flex-col md:align-center p-10">
+          <div className="  relative self-center  rounded-lg p-0.5 flex sm:justify-center">
+            <h2 className="lg:text-4xl md:text-4xl text-xl leading-6 font-bold dark:text-slate-100 text-slate-900">
               Choose one of our incredible options
             </h2>
           </div>
-          <div className="mt-6 relative self-center flex">
+          <div className="mt-6 relative self-center flex justify-center">
             <div className="bg-zinc-200 rounded-lg p-0.5  ">
               <button
                 onClick={monthlyPricing}
@@ -94,7 +94,6 @@ export default function Pricing() {
             focus:outline-none sm:w-auto sm:px-8 ${
               yearly ? "bg-slate-50 " : ""
             } border-slate-50 text-slate-900 shadow-sm`}`}>
-                {" "}
                 Yearly billing
               </button>
             </div>
@@ -105,7 +104,7 @@ export default function Pricing() {
             </div>
           </div>
 
-          <div className="mt-12 space-y-3 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-6 md:max-w-5xl md:mx-auto xl:grid-cols-3">
+          <div className="mt-12 space-y-3 md:mt-16 md:space-y-0 md:grid md:grid-cols-3 md:gap-6 md:max-w-5xl md:mx-auto xl:grid-cols-3">
             <div className=" bg-zinc-100 dark:bg-gray-900 	 border border-slate-900 rounded-lg shadow-sm divide-y divide-slate-200">
               <div className="p-6">
                 <h2 className="text-xl leading-6 font-bold dark:text-slate-100 text-slate-900">
@@ -259,7 +258,7 @@ export default function Pricing() {
                   <span className="text-4xl font-bold dark:text-slate-100  text-slate-900 tracking-tighter">
                     {plans.length > 0 && monthly
                       ? plans[3].price
-                      : plans[1].price}{" "}
+                      : plans[1].price}
                     kr
                   </span>
 
@@ -268,7 +267,11 @@ export default function Pricing() {
                   </span>
                 </p>
                 <button
-                  onClick={() => onCheckout(plans[1].id, plans[1].name)}
+                  onClick={
+                    monthly
+                      ? () => onCheckout(plans[3].id, plans[3].name)
+                      : () => onCheckout(plans[1].id, plans[1].name)
+                  }
                   className="  mt-8 block w-full dark:bg-slate-700 bg-slate-900 rounded-md py-2 text-sm font-semibold text-white text-center">
                   Join as a Premium user
                 </button>
@@ -422,7 +425,11 @@ export default function Pricing() {
                   </span>
                 </p>
                 <button
-                  onClick={() => onCheckout(plans[0].id, plans[0].name)}
+                  onClick={
+                    monthly
+                      ? () => onCheckout(plans[2].id, plans[2].name)
+                      : () => onCheckout(plans[0].id, plans[0].name)
+                  }
                   className="mt-8 block w-full dark:bg-slate-700 bg-slate-900 rounded-md py-2 text-sm font-semibold text-white text-center">
                   Join as a ultimate user
                 </button>
