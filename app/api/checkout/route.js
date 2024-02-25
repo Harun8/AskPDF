@@ -8,11 +8,10 @@ export const config = {
     bodyParser: false,
   },
 };
-const service_role_key =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqdGxyaGpmYWJ0YXZ0Y2R0dnVmIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcwMzI1ODA3NCwiZXhwIjoyMDE4ODM0MDc0fQ.l7D2kxoNeR03gvcMdl4TqqUgcC80lZ-2ISYgcia9TDw";
+
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
-  service_role_key,
+  process.env.SERVICE_KEY_ROLE,
   {
     auth: {
       autoRefreshToken: false,

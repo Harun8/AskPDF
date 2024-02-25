@@ -11,29 +11,29 @@ import Settings from "@/public/settings.svg";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Button } from "./ui/button";
 
-const Nav = () => {
+const Nav = ({ session }) => {
   // const [session, setSession] = useState();
   const [loading, setLoading] = useState(false);
   const [toggleDropDown, setToggleDropDown] = useState(false);
-  const [session, setSession] = useState(null);
+  // const [session, setSession] = useState(null);
   const router = useRouter();
 
   const supabase = createClientComponentClient();
 
-  useEffect(() => {
-    const getUser = async () => {
-      try {
-        const {
-          data: { session },
-        } = await supabase.auth.getSession();
-        console.log("session", session);
-        setSession(session);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getUser();
-  }, [session]);
+  // useEffect(() => {
+  //   const getUser = async () => {
+  //     try {
+  //       const {
+  //         data: { session },
+  //       } = await supabase.auth.getSession();
+  //       console.log("session", session);
+  //       setSession(session);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
+  //   getUser();
+  // }, []); // Removed session from dependencies
 
   const handleToggle = (event) => {
     event.stopPropagation();
@@ -217,7 +217,7 @@ const Nav = () => {
                 const { error } = await supabase.auth.signOut();
                 setLoading(false);
                 router.refresh();
-                if (!error) setSession(null);
+                // if (!error) setSession(null);
               }}
               disabled={loading}>
               {loading ? "Loading" : "Logout"}
