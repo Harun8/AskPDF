@@ -84,46 +84,7 @@ export default function Home() {
             alt="landing page main image"></Image>
         </div>
       </div>
-      {/* 
-      <div class=" mt-16 flex justify-center grid grid-rows-3 grid-flow-col gap-4">
-        <div class="row-span-3 ...">
-          <Image
-            src={Typewriter}
-            width={650}
-            height={650}
-            alt="landing page main image"></Image>
 
-          <div className="flex justify-start mt-6 ">
-            <Button size="xlg" variant="homepage">
-              Try AskPDF for free
-            </Button>
-            <Link
-              className=" hover:text-gray-700 ml-6 my-auto font-semibold text-lg"
-              href="/preview">
-              Try the demo
-            </Link>
-          </div>
-        </div>
-        <div class="col-span-2 ...">
-          <p className=" dark:text-slate-300 font-serif font-bold text-6xl leading-tight">
-            <span className="">
-              Engage <br />
-            </span>
-            <span className="">
-              with your <br />
-            </span>
-            <span className="text-blue-600"> PDFs</span>
-          </p>
-        </div>
-        <div class="row-span-2 col-span-2 mx-auto">
-          <Image
-            src={SaveTime}
-            width={350}
-            height={350}
-            alt="landing page main image"></Image>
-        </div>
-        <div></div>
-      </div> */}
       <section className=" mt-5 bg-blue-950 py-16	">
         <div className=" flex justify-center">
           <p className=" mx-auto mt-8 text-zinc-100 dark:text-slate-300 font-serif font-bold text-3xl leading-tight">
@@ -167,14 +128,7 @@ export default function Home() {
         </div>
       </section>
       {/* <Testimonial></Testimonial> */}
-      {/* <section className=" "> */}
-      {/* <div className=" flex justify-center">
-          <p className=" mt-8 text-gray-900 dark:text-slate-300 font-serif font-bold text-3xl leading-tight">
-            Loved by many <br />
-            <span className="text-sm"> and by many i mean me for now</span>
-          </p>
-        </div>
-        <div className="mt-12 flex justify-center gap-16"></div> */}
+
       <div class="flex items-end justify-end fixed bottom-0 right-0 mb-4 mr-4 z-10">
         <div>
           <a
@@ -189,7 +143,6 @@ export default function Home() {
           </a>
         </div>
       </div>
-      {/* </section> */}
     </>
   );
 }

@@ -14,7 +14,6 @@ require("dotenv").config();
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY, // api key
-  dangerouslyAllowBrowser: true, // should be false
 });
 
 // change to post instead of handler??

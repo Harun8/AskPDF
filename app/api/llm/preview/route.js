@@ -167,7 +167,6 @@ const answerPrompt = PromptTemplate.fromTemplate(answerTemplate);
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY, // api key
-  dangerouslyAllowBrowser: true, // should be false
 });
 export default async function handler(req, res) {
   try {
