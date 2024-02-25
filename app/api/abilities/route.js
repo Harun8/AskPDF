@@ -24,7 +24,7 @@ export default async function handler(req, res) {
     console.log("pdfuploads", pdfUpload.length);
 
     const limits = {
-      fileSize: data[0].price,
+      fileSize: data.length > 0 ? data[0].price : null,
       upload: pdfUpload.length,
     };
 

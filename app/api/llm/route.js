@@ -1,11 +1,19 @@
 import { ChatOpenAI } from "langchain/chat_models/openai";
 import { modelChooser } from "@/util/openai/modelChooser";
-import { PromptTemplate } from "langchain/prompts";
-import { StringOutputParser } from "langchain/schema/output_parser";
+// import { PromptTemplate } from "langchain/core/prompts";
+import { PromptTemplate } from "@langchain/core/prompts";
+// import { StringOutputParser } from "langchain/schema/output_parser";
+// import { StringOutputParser } from "langchain/core/output_parser";
+import { StringOutputParser } from "@langchain/core/output_parsers";
+// import {
+//   RunnablePassthrough,
+//   RunnableSequence,
+// } from "langchain/core/runnables";
+
 import {
   RunnablePassthrough,
   RunnableSequence,
-} from "langchain/schema/runnable";
+} from "@langchain/core/runnables";
 import combineDocuments from "@/util/combineDocuments";
 import formatConvHistory from "@/util/formatConvHistory";
 const OpenAI = require("openai");
