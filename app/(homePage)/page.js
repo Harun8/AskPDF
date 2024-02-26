@@ -70,15 +70,16 @@ export default function Home() {
           </div>
           <div class=" flex justify-end">
             <Image
-              className=" w-1/3 h-1/3 md:w-1/3 md:h-1/3 "
+              className=" md:w-1/3 md:h-1/3  "
               src={SaveTime}
               width={350}
               height={350}
               alt="landing page main image"></Image>
           </div>
         </div>
-        <div className=" hidden md:flex justify-center ">
+        <div className="  ">
           <Image
+            className="hidden md:flex md:justify-center"
             src={Typewriter}
             width={800}
             height={800}
