@@ -3,11 +3,11 @@ import { headers } from "next/headers";
 import getRawBody from "raw-body";
 const { createClient } = require("@supabase/supabase-js");
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+// export const config = {
+//   api: {
+//     bodyParser: false,
+//   },
+// };
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
