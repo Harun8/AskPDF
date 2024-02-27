@@ -1,5 +1,5 @@
 import { SITE_URL } from "@/util/endpoints";
-import { stripe } from "@/util/stripe/stripe";
+import Stripe from "stripe";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import SupabaseClient from "@supabase/auth-helpers-nextjs";
 const { createClient } = require("@supabase/supabase-js");

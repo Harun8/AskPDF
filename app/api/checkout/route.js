@@ -1,6 +1,6 @@
-import { stripe } from "@/util/stripe/stripe";
 import { headers } from "next/headers";
 import getRawBody from "raw-body";
+import Stripe from "stripe";
 const { createClient } = require("@supabase/supabase-js");
 
 // export const config = {
