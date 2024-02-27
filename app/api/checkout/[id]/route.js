@@ -35,7 +35,7 @@ export default async function handler(req, res) {
     console.error("Error:", error.message);
 
     const responseObject = {
-      message: "req, faileed",
+      message: error.message,
     };
     const response = new Response(JSON.stringify(responseObject), {
       status: 404, // Set the status code to 200 (OK)
