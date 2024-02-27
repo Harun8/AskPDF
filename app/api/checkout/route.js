@@ -22,6 +22,9 @@ const supabase = createClient(
 
 // Access auth admin api
 const adminAuthClient = supabase.auth.admin;
+export const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY, {
+  apiVersion: "2023-10-16",
+});
 
 export default async function handler(req, res) {
   const headersList = headers();
@@ -34,7 +37,7 @@ export default async function handler(req, res) {
   try {
     // const rawbody = await getRawBody(req);
     const rawbody = await req.text();
-    event = Stripe.webhooks.constructEvent(rawbody, signature, signingSecret);
+    event = stripe.webhooks.constructEvent(rawbody, signature, signingSecret);
     // const session = event.data.object;
     // // Note that you'll need to add an async prefix to this route handler
     // const { line_items } = await stripe.checkout.sessions.retrieve(session.id, {

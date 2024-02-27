@@ -1,6 +1,9 @@
 import { SITE_URL } from "@/util/endpoints";
 import Stripe from "stripe";
 
+export const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY, {
+  apiVersion: "2023-10-16",
+});
 export default async function handler(req, res) {
   console.log("post req, called", req.body);
   const body = await req.json();
