@@ -1,5 +1,5 @@
 import { SITE_URL } from "@/util/endpoints";
-import { stripe } from "@/util/stripe/stripe";
+import Stripe from "stripe";
 
 export default async function handler(req, res) {
   console.log("post req, called", req.body);
