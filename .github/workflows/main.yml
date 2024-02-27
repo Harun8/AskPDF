@@ -1,0 +1,35 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+      - '*'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build and Deploy
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ github.ref == 'refs/heads/main' && secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ github.ref == 'refs/heads/main' && secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          OPENAI_API_KEY: ${{ github.ref == 'refs/heads/main' && secrets.OPENAI_API_KEY }}
+          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ github.ref == 'refs/heads/main' && secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
+          STRIPE_SECRET_KEY: ${{ github.ref == 'refs/heads/main' && secrets.STRIPE_SECRET_KEY }}
+          STRIPE_SIGNING_SECRET: ${{ github.ref == 'refs/heads/main' && secrets.STRIPE_SIGNING_SECRET }}
+          SERVICE_KEY_ROLE: ${{ github.ref == 'refs/heads/main' && secrets.SERVICE_KEY_ROLE }}
+
+        run: |
+          npm run build
+          npm run deploy
