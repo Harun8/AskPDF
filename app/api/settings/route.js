@@ -38,9 +38,9 @@ export default async function handler(req, res) {
   console.log("data from profile table", profile);
 
   // Your existing Stripe session creation logic...
-  const session = await stripe.billingPortal.sessions.create({
+  const session = await Stripe.billingPortal.sessions.create({
     customer: profile.stripe_customer_id,
-    return_url: "http://localhost:3000",
+    return_url: `${SITE_URL}`,
   });
 
   console.log("session", session);
