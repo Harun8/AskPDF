@@ -34,7 +34,7 @@ export default async function handler(req, res) {
   try {
     // const rawbody = await getRawBody(req);
     const rawbody = await req.text();
-    event = stripe.webhooks.constructEvent(rawbody, signature, signingSecret);
+    event = Stripe.webhooks.constructEvent(rawbody, signature, signingSecret);
     // const session = event.data.object;
     // // Note that you'll need to add an async prefix to this route handler
     // const { line_items } = await stripe.checkout.sessions.retrieve(session.id, {
