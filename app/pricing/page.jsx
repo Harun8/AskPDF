@@ -257,8 +257,8 @@ export default function Pricing() {
                 <p className="mt-8">
                   <span className="text-4xl font-bold dark:text-slate-100  text-slate-900 tracking-tighter">
                     {plans.length > 0 && monthly
-                      ? plans[3].price
-                      : plans[1].price}
+                      ? plans[5].price
+                      : plans[0].price / 12}
                     kr
                   </span>
 
@@ -415,8 +415,8 @@ export default function Pricing() {
                 <p className="mt-8">
                   <span className="text-4xl font-bold dark:text-slate-100  text-slate-900 tracking-tighter">
                     {plans.length > 0 && monthly
-                      ? plans[2].price
-                      : plans[0].price}{" "}
+                      ? plans[4].price
+                      : plans[2].price / 12}{" "}
                     kr
                   </span>
 
