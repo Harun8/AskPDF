@@ -269,8 +269,8 @@ export default function Pricing() {
                 <button
                   onClick={
                     monthly
-                      ? () => onCheckout(plans[3].id, plans[3].name)
-                      : () => onCheckout(plans[1].id, plans[1].name)
+                      ? () => onCheckout(plans[5].id, plans[5].name)
+                      : () => onCheckout(plans[0].id, plans[0].name)
                   }
                   className="  mt-8 block w-full dark:bg-slate-700 bg-slate-900 rounded-md py-2 text-sm font-semibold text-white text-center">
                   Join as a Premium user
@@ -427,8 +427,8 @@ export default function Pricing() {
                 <button
                   onClick={
                     monthly
-                      ? () => onCheckout(plans[2].id, plans[2].name)
-                      : () => onCheckout(plans[0].id, plans[0].name)
+                      ? () => onCheckout(plans[4].id, plans[4].name)
+                      : () => onCheckout(plans[2].id, plans[2].name)
                   }
                   className="mt-8 block w-full dark:bg-slate-700 bg-slate-900 rounded-md py-2 text-sm font-semibold text-white text-center">
                   Join as a ultimate user
