@@ -19,11 +19,6 @@ export const fontSans = FontSans({
   variable: "--font-sans",
 });
 
-// export const metadata = {
-//   title: "AskPDF | Chat to your PDFs",
-//   description: "Learn quicker",
-// };
-
 export default function RootLayout({ children }) {
   const [session, setSession] = useState(null);
 

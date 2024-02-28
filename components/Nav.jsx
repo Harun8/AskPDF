@@ -35,6 +35,7 @@ const Nav = ({ session }) => {
   //   };
   //   getUser();
   // }, []); // Removed session from dependencies
+  console.log("session", session);
 
   const handleToggle = (event) => {
     event.stopPropagation();
