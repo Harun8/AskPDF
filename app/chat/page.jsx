@@ -42,6 +42,7 @@ export default function chat() {
   const [uploadCount, setUploadCount] = useState(null);
   const [isOverPDFCount, setIsOverPDFCount] = useState(false);
   const [showThinkingAnimation, setShowThinkingAnimation] = useState(false);
+
   const router = useRouter();
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
