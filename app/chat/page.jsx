@@ -35,12 +35,9 @@ export default function chat() {
   const [chatId, setChatId] = useState("");
   const [userId, setUserId] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [isTextDisabled, setIsTextDisabled] = useState(true);
-  const [duplicateFileError, setDuplicateFileError] = useState(false);
   const [plan, setPlan] = useState(null);
   const [fileOverLimit, setFileOverLimit] = useState(false);
   const [uploadCount, setUploadCount] = useState(null);
-  const [isOverPDFCount, setIsOverPDFCount] = useState(false);
   const [showThinkingAnimation, setShowThinkingAnimation] = useState(false);
 
   const router = useRouter();
