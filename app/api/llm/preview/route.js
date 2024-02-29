@@ -166,7 +166,7 @@ and the conversation history.
 const answerPrompt = PromptTemplate.fromTemplate(answerTemplate);
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY, // api key
+  apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY, // api key
 });
 export default async function handler(req, res) {
   try {
@@ -174,7 +174,7 @@ export default async function handler(req, res) {
     console.log(data);
 
     const llm = new ChatOpenAI({
-      openAIApiKey: process.env.OPENAI_API_KEY,
+      openAIApiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
       // streaming: false,
       modelName: "gpt-4-0125-preview",
       //  temperature: 0.5
