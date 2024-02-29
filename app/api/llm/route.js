@@ -1,4 +1,5 @@
-import { ChatOpenAI } from "langchain/chat_models/openai";
+// import { ChatOpenAI } from "langchain/chat_models/openai";
+import { ChatOpenAI } from "@langchain/openai";
 import { modelChooser } from "@/util/openai/modelChooser";
 // import { PromptTemplate } from "langchain/core/prompts";
 import { PromptTemplate } from "@langchain/core/prompts";
@@ -9,7 +10,8 @@ import { StringOutputParser } from "@langchain/core/output_parsers";
 //   RunnablePassthrough,
 //   RunnableSequence,
 // } from "langchain/core/runnables";
-
+import { headers } from "next/headers";
+import { PassThrough } from "stream";
 import {
   RunnablePassthrough,
   RunnableSequence,
@@ -45,14 +47,22 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY, // api key
 });
 export default async function handler(req, res) {
+  // new Response(JSON.stringify(), {
+  //   status: 200, // Set the status code to 200 (OK)
+  //   headers: {
+  //     "Content-Type": "text/plain",
+  //     "Transfer-Encoding": "chunked",
+  //   },
+  // });
+
   try {
     const data = await req.json(); // Assuming text data if not form data
     console.log(data);
 
     const llm = new ChatOpenAI({
       openAIApiKey: process.env.OPENAI_API_KEY,
-      // streaming: false,
       modelName: modelChooser(data.plan),
+      streaming: true,
       //  temperature: 0.5
     });
 
@@ -83,12 +93,22 @@ export default async function handler(req, res) {
       answerChain,
     ]);
 
-    const response = await chain.invoke({
+    const response = await chain.stream({
       question: data.messageText,
       conv_history: await formatConvHistory(data.conv_history),
     });
-    console.log("chain is", response);
-    return new Response(JSON.stringify(response), {
+
+    const myStream = new PassThrough();
+
+    for await (const chunk of response) {
+      // console.log(`${chunk}|`);
+      myStream.write(chunk);
+      // myStream.pipe(res);
+    }
+    myStream.end();
+    console.log("mystream", myStream);
+
+    return new Response(JSON.stringify(), {
       status: 200, // Set the status code to 200 (OK)
       headers: {
         "Content-Type": "application/json", // Set the Content-Type header to 'application/json'
