@@ -1,4 +1,5 @@
 "use client";
+import { Menu } from "@headlessui/react";
 
 import Image from "next/image";
 import { supabase } from "@/lib/supabase";
@@ -11,6 +12,7 @@ import Settings from "@/public/settings.svg";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Button } from "./ui/button";
 import AskPDF from "@/public/askpdf2.png";
+import { DropDown } from "./smNav";
 
 const Nav = ({ session }) => {
   // const [session, setSession] = useState();
@@ -35,33 +37,25 @@ const Nav = ({ session }) => {
   //   };
   //   getUser();
   // }, []); // Removed session from dependencies
-  console.log("session", session);
+  // console.log("session", session);
 
   const handleToggle = (event) => {
-    event.stopPropagation();
-    setToggleDropDown(!toggleDropDown);
+    // event.stopPropagation();
+    setToggleDropDown((prev) => !prev);
+    console.log("toggleDropDown:", !toggleDropDown); // Add this line to check the state change
   };
 
   return (
     <>
       <nav class="relative px-4 py-4 flex justify-between items-center bg-white">
-        <Link class="text-3xl font-bold leading-none" href="#">
+        <Link class="text-3xl font-bold leading-none" href="/">
           <Image src={AskPDF} width={50} height={50} alt="AskPDF logo"></Image>
         </Link>
-        <div class="lg:hidden">
-          <button
-            onClick={() => setToggleDropDown((prev) => !prev)}
-            class="navbar-burger flex items-center text-blue-600 p-3">
-            <svg
-              class="block h-4 w-4 fill-current"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg">
-              <title>Mobile menu</title>
-              <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
-            </svg>
-          </button>
+
+        <div className=" md:hidden">
+          <DropDown></DropDown>
         </div>
-        <ul class="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
+        <ul class="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 md:flex md:mx-auto md:flex md:items-center md:w-auto md:space-x-6">
           <li>
             <Link class=" text-blue-600 font-bold hover:text-black " href="/">
               Home
@@ -253,60 +247,6 @@ const Nav = ({ session }) => {
               </svg>
             </button>
           </div>
-          {toggleDropDown && (
-            <>
-              <div className="">
-                <ul>
-                  <li class="mb-1">
-                    <Link
-                      class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
-                      href="#">
-                      Home
-                    </Link>
-                  </li>
-
-                  <li class="mb-1">
-                    <Link
-                      class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
-                      href="#">
-                      Preview
-                    </Link>
-                  </li>
-                  <li class="mb-1">
-                    <Link
-                      class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
-                      href="#">
-                      Pricing
-                    </Link>
-                  </li>
-                  <li class="mb-1">
-                    <Link
-                      class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
-                      href="#">
-                      Contact
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-              <div class="mt-auto">
-                <div class="pt-6">
-                  <Link
-                    class="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl"
-                    href="#">
-                    Sign in
-                  </Link>
-                  <Link
-                    class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-600 hover:bg-blue-700  rounded-xl"
-                    href="#">
-                    Sign Up
-                  </Link>
-                </div>
-                <p class="my-4 text-xs text-center text-gray-400">
-                  <span>Copyright © 2021</span>
-                </p>
-              </div>
-            </>
-          )}
         </nav>
       </div>
     </>
@@ -496,3 +436,43 @@ export default Nav;
 //     </div>
 //   )}
 // </nav>
+
+document.addEventListener("DOMContentLoaded", function () {
+  // open
+  const burger = document.querySelectorAll(".navbar-burger");
+  const menu = document.querySelectorAll(".navbar-menu");
+
+  if (burger.length && menu.length) {
+    for (var i = 0; i < burger.length; i++) {
+      burger[i].addEventListener("click", function () {
+        for (var j = 0; j < menu.length; j++) {
+          menu[j].classList.toggle("hidden");
+        }
+      });
+    }
+  }
+
+  // close
+  const close = document.querySelectorAll(".navbar-close");
+  const backdrop = document.querySelectorAll(".navbar-backdrop");
+
+  if (close.length) {
+    for (var i = 0; i < close.length; i++) {
+      close[i].addEventListener("click", function () {
+        for (var j = 0; j < menu.length; j++) {
+          menu[j].classList.toggle("hidden");
+        }
+      });
+    }
+  }
+
+  if (backdrop.length) {
+    for (var i = 0; i < backdrop.length; i++) {
+      backdrop[i].addEventListener("click", function () {
+        for (var j = 0; j < menu.length; j++) {
+          menu[j].classList.toggle("hidden");
+        }
+      });
+    }
+  }
+});
