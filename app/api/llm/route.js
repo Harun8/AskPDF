@@ -44,7 +44,7 @@ and the conversation history.
 const answerPrompt = PromptTemplate.fromTemplate(answerTemplate);
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY, // api key
+  apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY, // api key
 });
 export default async function handler(req, res) {
   // new Response(JSON.stringify(), {

@@ -1,3 +1,16 @@
+const { createClient } = require("@supabase/supabase-js");
+
+const OpenAI = require("openai");
+
+const openai = new OpenAI({
+  apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY, // api key
+  dangerouslyAllowBrowser: "true",
+});
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
 export default async function retriverPDF(queryText) {
   console.log("file_id");
 
