@@ -245,7 +245,7 @@ export default function Pricing() {
             <div className=" hover:bg-sky-100 dark:bg-gray-900 shadow-xl  shadow-blue-500		 border border-slate-900 rounded-lg shadow-sm divide-y divide-slate-200">
               <div className="p-6">
                 <h2 className="text-xl leading-6 font-bold dark:text-slate-100 text-slate-900">
-                  {plans.length > 0 ? plans[3].name : "Premium"}
+                  {plans.length > 0 ? plans[2].name : "Premium"}
                   <span className="ml-4 text-xm text-blue-600">
                     {" "}
                     (Most popular){" "}
@@ -257,8 +257,8 @@ export default function Pricing() {
                 <p className="mt-8">
                   <span className="text-4xl font-bold dark:text-slate-100  text-slate-900 tracking-tighter">
                     {plans.length > 0 && monthly
-                      ? plans[5].price
-                      : plans[0].price / 12}
+                      ? plans[3].price
+                      : plans[2].price / 12}
                     kr
                   </span>
 
@@ -269,8 +269,8 @@ export default function Pricing() {
                 <button
                   onClick={
                     monthly
-                      ? () => onCheckout(plans[5].id, plans[5].name)
-                      : () => onCheckout(plans[0].id, plans[0].name)
+                      ? () => onCheckout(plans[3].id, plans[3].name)
+                      : () => onCheckout(plans[2].id, plans[2].name)
                   }
                   className="  mt-8 block w-full dark:bg-slate-700 bg-slate-900 rounded-md py-2 text-sm font-semibold text-white text-center">
                   Join as a Premium user
@@ -415,8 +415,8 @@ export default function Pricing() {
                 <p className="mt-8">
                   <span className="text-4xl font-bold dark:text-slate-100  text-slate-900 tracking-tighter">
                     {plans.length > 0 && monthly
-                      ? plans[4].price
-                      : plans[2].price / 12}{" "}
+                      ? plans[1].price
+                      : plans[0].price / 12}{" "}
                     kr
                   </span>
 
@@ -427,8 +427,8 @@ export default function Pricing() {
                 <button
                   onClick={
                     monthly
-                      ? () => onCheckout(plans[4].id, plans[4].name)
-                      : () => onCheckout(plans[2].id, plans[2].name)
+                      ? () => onCheckout(plans[1].id, plans[1].name)
+                      : () => onCheckout(plans[0].id, plans[0].name)
                   }
                   className="mt-8 block w-full dark:bg-slate-700 bg-slate-900 rounded-md py-2 text-sm font-semibold text-white text-center">
                   Join as a ultimate user
