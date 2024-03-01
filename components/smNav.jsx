@@ -8,7 +8,7 @@ export function DropDown() {
     <div className="">
       <Menu as="div" className="relative inline-block text-left">
         <div>
-          <Menu.Button className="inline-flex w-full justify-center rounded-md bg-sky-500/70 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75">
+          <Menu.Button className="inline-flex w-full justify-center rounded-md bg-sky-500/70 px-4 py-2 text-sm font-medium text-white hover:bg-sky-800/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75">
             Menu
           </Menu.Button>
         </div>
