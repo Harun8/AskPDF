@@ -207,7 +207,7 @@ const ChatPage = () => {
     convHistory.push(messageText);
     try {
       setShowThinkingAnimation(true);
-      const response = await fetch("/api/llm/preview", {
+      const response = await fetch("/api/llm", {
         method: "POST",
         body: JSON.stringify({
           plan: plan,

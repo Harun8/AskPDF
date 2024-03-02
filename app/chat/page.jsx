@@ -149,7 +149,7 @@ export default function chat() {
 
     try {
       setShowThinkingAnimation(true);
-      const response = await fetch("/api/llm/preview", {
+      const response = await fetch("/api/llm", {
         method: "POST",
         body: JSON.stringify({
           plan: plan,
@@ -212,6 +212,7 @@ export default function chat() {
         setDuplicateFileError(true);
         // Handle error
         console.log("error", error.message);
+        closeModal();
         return;
       } else {
         setDuplicateFileError(false);
@@ -323,21 +324,17 @@ export default function chat() {
         ) : (
           <div className="flex justify-center mt-48">
             <button onClick={openModal}> Click me</button>
-            <div className="text">{/* <span>Click to upload PDF</span> */}</div>
+          </div>
+        )}
 
+        {isOpen && (
+          <div className="flex justify-center mt-48">
             <Modal
               title={"Upload your PDF"}
               isOpen={isOpen}
               closeModal={closeModal}
               openModal={openModal}
               onFileSelect={onFileSelect}></Modal>
-
-            {/* <input
-                size="100"
-                onChange={(event) => onFileSelect(event)}
-                type="file"
-                id="file"
-                accept="application/pdf"></input> */}
           </div>
         )}
 
