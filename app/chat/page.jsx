@@ -57,6 +57,7 @@ export default function chat() {
   const [fileId, setFileId] = useState(null);
   const [isTextDisabled, setIsTextDisabled] = useState(true);
   const [currentResponse, setCurrentResponse] = useState("");
+  const [processingPDF, setProcessingPDF] = useState(false);
   const channelA = client.channel("room-1");
 
   const router = useRouter();
@@ -228,6 +229,7 @@ export default function chat() {
       }
 
       try {
+        setProcessingPDF(true);
         console.log("Is the modal open? ", isOpen);
 
         const formData = new FormData();
@@ -248,6 +250,8 @@ export default function chat() {
           console.log("Is the modal open? ", isOpen);
 
           try {
+            setProcessingPDF(false);
+            closeModal();
             setIsTextDisabled(false);
             const textResponse = await response.text(); // Read response as text
             console.log("Response Text: ", textResponse);
@@ -266,15 +270,21 @@ export default function chat() {
               // Handle case where text is not JSON
             }
           } catch (error) {
+            setProcessingPDF(false);
+
             console.error("Error reading text response: ", error);
           }
         } else {
+          setProcessingPDF(false);
+
           console.log("Response not OK: ", response.status);
         }
 
         // const result = await response.json();
         // console.log(result); // handle the response
       } catch (error) {
+        setProcessingPDF(false);
+
         console.log("error in chat page", error);
       }
     }
@@ -330,6 +340,7 @@ export default function chat() {
         {isOpen && (
           <div className="flex justify-center mt-48">
             <Modal
+              processingPDF={processingPDF}
               title={"Upload your PDF"}
               isOpen={isOpen}
               closeModal={closeModal}

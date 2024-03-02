@@ -10,6 +10,7 @@ const Modal = ({
   isDuplicate,
   isOverSize,
   isOverPDFCount,
+  processingPDF,
 }) => {
   return (
     <>
@@ -40,7 +41,9 @@ const Modal = ({
                   <Dialog.Title
                     as="h3"
                     className={`flex justify-center font-medium leading-6 text-gray-900`}>
-                    {title}
+                    {!processingPDF
+                      ? title
+                      : "Processing your pdf, please wait ..."}
                   </Dialog.Title>
                   <div className=" flex justify-center mt-2">
                     <p className="text-sm text-gray-500">
