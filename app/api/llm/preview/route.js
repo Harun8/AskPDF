@@ -168,6 +168,21 @@ const answerPrompt = PromptTemplate.fromTemplate(answerTemplate);
 const openai = new OpenAI({
   apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY, // api key
 });
+
+const client = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  {
+    realtime: {
+      params: {
+        eventsPerSecond: 100,
+      },
+    },
+  }
+);
+
+const channelB = client.channel("room-1");
+
 export default async function handler(req, res) {
   try {
     const data = await req.json(); // Assuming text data if not form data
@@ -175,7 +190,7 @@ export default async function handler(req, res) {
 
     const llm = new ChatOpenAI({
       openAIApiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
-      // streaming: false,
+      streaming: true,
       modelName: "gpt-4-0125-preview",
       //  temperature: 0.5
     });
@@ -207,11 +222,27 @@ export default async function handler(req, res) {
       answerChain,
     ]);
 
-    const response = await chain.invoke({
+    const response = await chain.stream({
       question: data.messageText,
       conv_history: await formatConvHistory(data.conv_history),
     });
+    // channelB.subscribe((status) => {
+    //   if (status === "SUBSCRIBED") {
+    //     console.log("Successfully subscribed to the channel");
+    //   }
+    // });
+    for await (const chunk of response) {
+      console.log("chunk", chunk);
+      channelB.send({
+        type: "broadcast",
+        event: "test",
+        payload: { message: chunk },
+      });
+    }
+    client.removeChannel(channelB);
+
     console.log("chain is", response);
+
     return new Response(JSON.stringify(response), {
       status: 200, // Set the status code to 200 (OK)
       headers: {

@@ -29,27 +29,38 @@ const OpenAI = require("openai");
 const { createClient } = require("@supabase/supabase-js");
 import retriver from "@/util/retriever";
 import retriverPDF from "@/util/retrieverPDF";
-const standAloneQuestionTemplate = `Given some conversation history (if any) and a question, convert it into a standalone question. 
-conversation history: {conv_history}
+// const standAloneQuestionTemplate = `Given some conversation history (if any) and a question, convert it into a standalone question.
+// conversation history: {conv_history}
 
-question: {question} 
-standalone question:`;
+// question: {question}
+// standalone question:`;
 
-const standaloneQuestionPrompt = PromptTemplate.fromTemplate(
-  standAloneQuestionTemplate
+// const standaloneQuestionPrompt = PromptTemplate.fromTemplate(
+//   standAloneQuestionTemplate
+// );
+const client = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  {
+    realtime: {
+      params: {
+        eventsPerSecond: 100,
+      },
+    },
+  }
 );
+// const answerTemplate = `You're a helpful and enthusiastic suppport bot who can answer a given question about the context provided,
+// and the conversation history.
+//  Try to find the answer in the context.
+//  Do not try to make up an answer. Always speak as if you were chatting to a friend.
+//  context: {context}
+//  conversation history: {conv_history}
+//  question: {question}
+//  answer:
+//   `;
 
-const answerTemplate = `You're a helpful and enthusiastic suppport bot who can answer a given question about the context provided,
-and the conversation history. 
- Try to find the answer in the context.
- Do not try to make up an answer. Always speak as if you were chatting to a friend.
- context: {context}
- conversation history: {conv_history}
- question: {question}
- answer:
-  `;
+// const answerPrompt = PromptTemplate.fromTemplate(answerTemplate);
 
-const answerPrompt = PromptTemplate.fromTemplate(answerTemplate);
 const Preview = () => {
   const [conversation, setConversation] = useState([]);
   const [numPages, setNumPages] = useState();
@@ -58,6 +69,7 @@ const Preview = () => {
   const params = useParams();
   const router = useRouter();
   const [showThinkingAnimation, setShowThinkingAnimation] = useState(false);
+  const [currentResponse, setCurrentResponse] = useState("");
 
   const supabase = createClientComponentClient();
 
@@ -124,67 +136,54 @@ const Preview = () => {
     }
   };
   const convHistory = [];
-  const llm = new ChatOpenAI({
-    openAIApiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
-    modelName: modelChooser(null),
-    streaming: true,
-    //  temperature: 0.5
-  });
+  // const llm = new ChatOpenAI({
+  //   openAIApiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
+  //   modelName: modelChooser(null),
+  //   streaming: true,
+  //   //  temperature: 0.5
+  // });
 
-  // console.log("min LLM ER:", llm);
+  // // console.log("min LLM ER:", llm);
 
-  const standaloneQuestionchain = standaloneQuestionPrompt
-    .pipe(llm)
-    .pipe(new StringOutputParser());
+  // const standaloneQuestionchain = standaloneQuestionPrompt
+  //   .pipe(llm)
+  //   .pipe(new StringOutputParser());
 
-  const retrieverChain = RunnableSequence.from([
-    (prevResult) => prevResult.standalone_question,
-    (prevResult) => retriverPDF(prevResult),
-    combineDocuments,
-  ]);
+  // const retrieverChain = RunnableSequence.from([
+  //   (prevResult) => prevResult.standalone_question,
+  //   (prevResult) => retriverPDF(prevResult),
+  //   combineDocuments,
+  // ]);
 
-  const answerChain = answerPrompt.pipe(llm).pipe(new StringOutputParser());
+  // const answerChain = answerPrompt.pipe(llm).pipe(new StringOutputParser());
 
-  const chain = RunnableSequence.from([
-    {
-      standalone_question: standaloneQuestionchain,
-      original_input: new RunnablePassthrough(),
-    },
-    {
-      context: retrieverChain,
-      question: ({ original_input }) => original_input.question,
-      conv_history: ({ original_input }) => original_input.conv_history,
-    },
-    answerChain,
-  ]);
+  // const chain = RunnableSequence.from([
+  //   {
+  //     standalone_question: standaloneQuestionchain,
+  //     original_input: new RunnablePassthrough(),
+  //   },
+  //   {
+  //     context: retrieverChain,
+  //     question: ({ original_input }) => original_input.question,
+  //     conv_history: ({ original_input }) => original_input.conv_history,
+  //   },
+  //   answerChain,
+  // ]);
 
-  const sendMessage = async (messageText) => {
-    if (!messageText.trim()) return;
-    setConversation((conversation) => [
-      ...conversation,
-      { type: "user", text: messageText },
-      { type: "response", text: "", streaming: true }, // Placeholder for streaming response
-    ]);
+  const channelA = client.channel("room-1");
 
-    convHistory.push(messageText);
+  useEffect(() => {
+    console.log("useffect called");
+    // Correctly initialize currentResponse within the scope it will be used
 
-    try {
-      setShowThinkingAnimation(true);
-
-      const response = await chain.stream({
-        question: messageText,
-        conv_history: await formatConvHistory(convHistory),
-      });
-
-      if (response) {
-        setShowThinkingAnimation(false);
-      }
-      let currentResponse = ""; // Initialize an empty string to accumulate the content
-      for await (const chunk of response) {
-        console.log(`${chunk}|`);
-        currentResponse += chunk;
-
-        // Update the last message in the conversation with the new currentResponse
+    console.log("current response", currentResponse);
+    channelA
+      .on("broadcast", { event: "test" }, (payload) => {
+        console.log("payload", payload);
+        if (payload.payload) {
+          setShowThinkingAnimation(false);
+        }
+        setCurrentResponse((prev) => (prev += payload.payload.message));
         setConversation((conversation) => {
           // Clone the current conversation
           const newConversation = [...conversation];
@@ -196,7 +195,67 @@ const Preview = () => {
           };
           return newConversation;
         });
-      }
+      })
+      .subscribe();
+
+    return () => {
+      // console.log("Attempting to unsubscribe", channelA);
+      // channelA.unsubscribe();
+      // console.log("Unsubscribed", channelA);
+      // currentResponse = "";
+    };
+  }, [conversation]); // Empty dependency array to run once on mount
+
+  const sendMessage = async (messageText) => {
+    setCurrentResponse("");
+    client.removeChannel(channelA);
+    if (!messageText.trim()) return;
+    setConversation((conversation) => [
+      ...conversation,
+      { type: "user", text: messageText },
+      { type: "response", text: "", streaming: true }, // Placeholder for streaming response
+    ]);
+
+    convHistory.push(messageText);
+
+    try {
+      setShowThinkingAnimation(true);
+      const response = await fetch("/api/llm/preview", {
+        method: "POST",
+        body: JSON.stringify({
+          // plan: plan,
+          messageText: messageText,
+          conv_history: convHistory,
+          // file_id: currentPdfId,
+        }),
+      });
+
+      // const response = await chain.stream({
+      //   question: messageText,
+      //   conv_history: await formatConvHistory(convHistory),
+      // });
+
+      // if (response) {
+      //   setShowThinkingAnimation(false);
+      // }
+      // let currentResponse = ""; // Initialize an empty string to accumulate the content
+      // for await (const chunk of response) {
+      //   console.log(`${chunk}|`);
+      //   currentResponse += chunk;
+
+      //   // Update the last message in the conversation with the new currentResponse
+      //   setConversation((conversation) => {
+      //     // Clone the current conversation
+      //     const newConversation = [...conversation];
+      //     // Update the last message's text with the accumulated currentResponse
+      //     newConversation[newConversation.length - 1] = {
+      //       ...newConversation[newConversation.length - 1],
+      //       type: "response",
+      //       text: currentResponse,
+      //     };
+      //     return newConversation;
+      //   });
+      // }
     } catch (error) {
       console.log(error);
       return;
