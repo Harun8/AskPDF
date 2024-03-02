@@ -166,17 +166,15 @@ and the conversation history.
 const answerPrompt = PromptTemplate.fromTemplate(answerTemplate);
 
 const openai = new OpenAI({
-  apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY, // api key
+  apiKey: process.env.OPENAI_API_KEY, // api key
 });
 
 const client = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
   {
-    realtime: {
-      params: {
-        eventsPerSecond: 100,
-      },
+    config: {
+      broadcast: { ack: true },
     },
   }
 );
@@ -226,16 +224,12 @@ export default async function handler(req, res) {
       question: data.messageText,
       conv_history: await formatConvHistory(data.conv_history),
     });
-    // channelB.subscribe((status) => {
-    //   if (status === "SUBSCRIBED") {
-    //     console.log("Successfully subscribed to the channel");
-    //   }
-    // });
+
     for await (const chunk of response) {
       console.log("chunk", chunk);
-      channelB.send({
+      await channelB.send({
         type: "broadcast",
-        event: "test",
+        event: "acknowledge",
         payload: { message: chunk },
       });
     }

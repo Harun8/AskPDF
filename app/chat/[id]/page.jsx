@@ -11,42 +11,20 @@ import { useEffect, useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import ConversationDisplay from "@/components/ConversationDisplay";
 import TextField from "@/components/TextField";
-import Streamer from "@/util/openai/streamer";
-import { ChatOpenAI } from "@langchain/openai";
-import { modelChooser } from "@/util/openai/modelChooser";
-import { PromptTemplate } from "@langchain/core/prompts";
-import { StringOutputParser } from "@langchain/core/output_parsers";
-import {
-  RunnablePassthrough,
-  RunnableSequence,
-} from "@langchain/core/runnables";
-import combineDocuments from "@/util/combineDocuments";
-import formatConvHistory from "@/util/formatConvHistory";
-const OpenAI = require("openai");
+
 const { createClient } = require("@supabase/supabase-js");
-import retriver from "@/util/retriever";
-const standAloneQuestionTemplate = `Given some conversation history (if any) and a question, convert it into a standalone question. 
-conversation history: {conv_history}
 
-question: {question} 
-standalone question:`;
-
-const standaloneQuestionPrompt = PromptTemplate.fromTemplate(
-  standAloneQuestionTemplate
+const client = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  {
+    realtime: {
+      params: {
+        eventsPerSecond: 100,
+      },
+    },
+  }
 );
-
-const answerTemplate = `You're a helpful and enthusiastic suppport bot who can answer a given question about the context provided,
-and the conversation history. 
- Try to find the answer in the context.
- Do not try to make up an answer. Always speak as if you were chatting to a friend.
- context: {context}
- conversation history: {conv_history}
- question: {question}
- answer:
-  `;
-
-const answerPrompt = PromptTemplate.fromTemplate(answerTemplate);
-
 const ChatPage = () => {
   const [conversation, setConversation] = useState([]);
   const [numPages, setNumPages] = useState();
@@ -59,6 +37,7 @@ const ChatPage = () => {
   const [plan, setPlan] = useState(null);
   const [uploadCount, setUploadCount] = useState(null);
   const [showThinkingAnimation, setShowThinkingAnimation] = useState(false);
+  const [currentResponse, setCurrentResponse] = useState("");
 
   let currentPdfId;
   const params = useParams();
@@ -183,41 +162,40 @@ const ChatPage = () => {
   }
 
   const convHistory = [];
-  const llm = new ChatOpenAI({
-    openAIApiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
-    modelName: modelChooser(plan),
-    streaming: true,
-    //  temperature: 0.5
-  });
+  const channelA = client.channel("room-1");
 
-  // console.log("min LLM ER:", llm);
+  useEffect(() => {
+    console.log("useffect called");
+    // Correctly initialize currentResponse within the scope it will be used
 
-  const standaloneQuestionchain = standaloneQuestionPrompt
-    .pipe(llm)
-    .pipe(new StringOutputParser());
+    console.log("current response", currentResponse);
+    channelA
+      .on("broadcast", { event: "acknowledge" }, (payload) => {
+        console.log("payload", payload);
+        if (payload.payload) {
+          setShowThinkingAnimation(false);
+        }
+        setCurrentResponse((prev) => (prev += payload.payload.message));
+        setConversation((conversation) => {
+          // Clone the current conversation
+          const newConversation = [...conversation];
+          // Update the last message's text with the accumulated currentResponse
+          newConversation[newConversation.length - 1] = {
+            ...newConversation[newConversation.length - 1],
+            type: "response",
+            text: currentResponse,
+          };
+          return newConversation;
+        });
+      })
+      .subscribe();
 
-  const retrieverChain = RunnableSequence.from([
-    (prevResult) => prevResult.standalone_question,
-    (prevResult) => retriver(prevResult, params.id),
-    combineDocuments,
-  ]);
-
-  const answerChain = answerPrompt.pipe(llm).pipe(new StringOutputParser());
-
-  const chain = RunnableSequence.from([
-    {
-      standalone_question: standaloneQuestionchain,
-      original_input: new RunnablePassthrough(),
-    },
-    {
-      context: retrieverChain,
-      question: ({ original_input }) => original_input.question,
-      conv_history: ({ original_input }) => original_input.conv_history,
-    },
-    answerChain,
-  ]);
+    return () => {};
+  }, [conversation]); // Empty dependency array to run once on mount
 
   const sendMessage = async (messageText) => {
+    setCurrentResponse("");
+    client.removeChannel(channelA);
     if (!messageText.trim()) return;
     // Add a new user message and a placeholder for the chatbot response
     setConversation((conversation) => [
@@ -226,62 +204,18 @@ const ChatPage = () => {
       { type: "response", text: "", streaming: true }, // Placeholder for streaming response
     ]);
 
-    let currentResponse = ""; // Initialize an empty string to accumulate the content
-
     convHistory.push(messageText);
-
     try {
       setShowThinkingAnimation(true);
-
-      const response = await chain.stream({
-        question: messageText,
-        conv_history: await formatConvHistory(convHistory),
+      const response = await fetch("/api/llm/preview", {
+        method: "POST",
+        body: JSON.stringify({
+          plan: plan,
+          messageText: messageText,
+          conv_history: convHistory,
+          file_id: params.id,
+        }),
       });
-
-      if (response) {
-        setShowThinkingAnimation(false);
-      }
-      let currentResponse = ""; // Initialize an empty string to accumulate the content
-
-      // console.log("response", response);
-
-      for await (const chunk of response) {
-        console.log(`${chunk}|`);
-        currentResponse += chunk;
-
-        setConversation((conversation) => {
-          const newConversation = [...conversation];
-          // Find the index of the response placeholder
-          const responseIndex = newConversation.findIndex(
-            (msg) => msg.type === "response" && msg.streaming
-          );
-          if (responseIndex !== -1) {
-            newConversation[responseIndex] = {
-              type: "response",
-              text: currentResponse,
-              streaming: true,
-            };
-          }
-          return newConversation;
-        });
-      }
-      // After the streaming loop completes
-      setConversation((conversation) => {
-        const newConversation = [...conversation];
-        const responseIndex = newConversation.findIndex(
-          (msg) => msg.type === "response" && msg.streaming
-        );
-        if (responseIndex !== -1) {
-          newConversation[responseIndex] = {
-            ...newConversation[responseIndex],
-            streaming: false, // Indicate streaming is complete
-          };
-        }
-        return newConversation;
-      });
-
-      convHistory.push(currentResponse);
-      console.log("conv", convHistory);
     } catch (error) {
       console.log(error);
       return;

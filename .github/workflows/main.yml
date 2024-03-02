@@ -24,7 +24,7 @@ jobs:
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ github.ref == 'refs/heads/main' && secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ github.ref == 'refs/heads/main' && secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
-          NEXT_PUBLIC_OPENAI_API_KEY: ${{ github.ref == 'refs/heads/main' && secrets.OPENAI_API_KEY }}
+          OPENAI_API_KEY: ${{ github.ref == 'refs/heads/main' && secrets.OPENAI_API_KEY }}
           NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ github.ref == 'refs/heads/main' && secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
           STRIPE_SECRET_KEY: ${{ github.ref == 'refs/heads/main' && secrets.STRIPE_SECRET_KEY }}
           STRIPE_SIGNING_SECRET: ${{ github.ref == 'refs/heads/main' && secrets.STRIPE_SIGNING_SECRET }}

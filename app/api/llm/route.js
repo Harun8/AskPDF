@@ -42,9 +42,20 @@ and the conversation history.
   `;
 
 const answerPrompt = PromptTemplate.fromTemplate(answerTemplate);
+const client = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  {
+    config: {
+      broadcast: { ack: true },
+    },
+  }
+);
+
+const channelB = client.channel("room-1");
 
 const openai = new OpenAI({
-  apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY, // api key
+  apiKey: process.env.OPENAI_API_KEY, // api key
 });
 export default async function handler(req, res) {
   // new Response(JSON.stringify(), {
@@ -98,15 +109,17 @@ export default async function handler(req, res) {
       conv_history: await formatConvHistory(data.conv_history),
     });
 
-    const myStream = new PassThrough();
-
     for await (const chunk of response) {
-      // console.log(`${chunk}|`);
-      myStream.write(chunk);
-      // myStream.pipe(res);
+      console.log("chunk", chunk);
+      await channelB.send({
+        type: "broadcast",
+        event: "acknowledge",
+        payload: { message: chunk },
+      });
     }
-    myStream.end();
-    console.log("mystream", myStream);
+    client.removeChannel(channelB);
+
+    console.log("chain is", response);
 
     return new Response(JSON.stringify(), {
       status: 200, // Set the status code to 200 (OK)

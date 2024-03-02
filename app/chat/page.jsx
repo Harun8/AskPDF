@@ -24,40 +24,20 @@ import { fileSizeLimit } from "@/util/fileSizeLimit";
 import { uploadLimit } from "@/util/uploadLimit";
 
 const supabase = createClientComponentClient();
-import { ChatOpenAI } from "@langchain/openai";
-import { modelChooser } from "@/util/openai/modelChooser";
-import { PromptTemplate } from "@langchain/core/prompts";
-import { StringOutputParser } from "@langchain/core/output_parsers";
-import {
-  RunnablePassthrough,
-  RunnableSequence,
-} from "@langchain/core/runnables";
-import combineDocuments from "@/util/combineDocuments";
-import formatConvHistory from "@/util/formatConvHistory";
-const OpenAI = require("openai");
+
 const { createClient } = require("@supabase/supabase-js");
-import retriver from "@/util/retriever";
-const standAloneQuestionTemplate = `Given some conversation history (if any) and a question, convert it into a standalone question. 
-conversation history: {conv_history}
 
-question: {question} 
-standalone question:`;
-
-const standaloneQuestionPrompt = PromptTemplate.fromTemplate(
-  standAloneQuestionTemplate
+const client = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  {
+    realtime: {
+      params: {
+        eventsPerSecond: 100,
+      },
+    },
+  }
 );
-
-const answerTemplate = `You're a helpful and enthusiastic suppport bot who can answer a given question about the context provided,
-and the conversation history. 
- Try to find the answer in the context.
- Do not try to make up an answer. Always speak as if you were chatting to a friend.
- context: {context}
- conversation history: {conv_history}
- question: {question}
- answer:
-  `;
-
-const answerPrompt = PromptTemplate.fromTemplate(answerTemplate);
 
 export default function chat() {
   const [conversation, setConversation] = useState([]);
@@ -76,6 +56,8 @@ export default function chat() {
   const [duplicateFileError, setDuplicateFileError] = useState(false);
   const [fileId, setFileId] = useState(null);
   const [isTextDisabled, setIsTextDisabled] = useState(true);
+  const [currentResponse, setCurrentResponse] = useState("");
+  const channelA = client.channel("room-1");
 
   const router = useRouter();
   function onDocumentLoadSuccess({ numPages }) {
@@ -124,71 +106,19 @@ export default function chat() {
     getAuth();
   }, []);
 
-  useEffect(() => {
-    console.log("convo", conversation);
-  }, [conversation]);
-
   const convHistory = [];
-  const llm = new ChatOpenAI({
-    openAIApiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
-    modelName: modelChooser(plan),
-    streaming: true,
-    //  temperature: 0.5
-  });
+  useEffect(() => {
+    console.log("useffect called");
+    // Correctly initialize currentResponse within the scope it will be used
 
-  // console.log("min LLM ER:", llm);
-
-  const standaloneQuestionchain = standaloneQuestionPrompt
-    .pipe(llm)
-    .pipe(new StringOutputParser());
-
-  const retrieverChain = RunnableSequence.from([
-    (prevResult) => prevResult.standalone_question,
-    (prevResult) => retriver(prevResult, fileId),
-    combineDocuments,
-  ]);
-
-  const answerChain = answerPrompt.pipe(llm).pipe(new StringOutputParser());
-
-  const chain = RunnableSequence.from([
-    {
-      standalone_question: standaloneQuestionchain,
-      original_input: new RunnablePassthrough(),
-    },
-    {
-      context: retrieverChain,
-      question: ({ original_input }) => original_input.question,
-      conv_history: ({ original_input }) => original_input.conv_history,
-    },
-    answerChain,
-  ]);
-
-  const sendMessage = async (messageText) => {
-    if (!messageText.trim()) return;
-    const newMessage = { type: "user", text: messageText };
-    setConversation([...conversation, newMessage]);
-    convHistory.push(messageText);
-
-    try {
-      setShowThinkingAnimation(true);
-
-      const response = await chain.stream({
-        question: messageText,
-        conv_history: await formatConvHistory(convHistory),
-      });
-
-      if (response) {
-        setShowThinkingAnimation(false);
-      }
-      let currentResponse = ""; // Initialize an empty string to accumulate the content
-
-      // console.log("response", response);
-
-      for await (const chunk of response) {
-        console.log(`${chunk}|`);
-        currentResponse += chunk;
-
-        // Update the last message in the conversation with the new currentResponse
+    console.log("current response", currentResponse);
+    channelA
+      .on("broadcast", { event: "acknowledge" }, (payload) => {
+        console.log("payload", payload);
+        if (payload.payload) {
+          setShowThinkingAnimation(false);
+        }
+        setCurrentResponse((prev) => (prev += payload.payload.message));
         setConversation((conversation) => {
           // Clone the current conversation
           const newConversation = [...conversation];
@@ -200,10 +130,34 @@ export default function chat() {
           };
           return newConversation;
         });
-      }
+      })
+      .subscribe();
 
-      convHistory.push(currentResponse);
-      console.log("conv", convHistory);
+    return () => {};
+  }, [conversation]); // Empty dependency array to run once on mount
+
+  const sendMessage = async (messageText) => {
+    setCurrentResponse("");
+    client.removeChannel(channelA);
+    if (!messageText.trim()) return;
+    setConversation((conversation) => [
+      ...conversation,
+      { type: "user", text: messageText },
+      { type: "response", text: "", streaming: true }, // Placeholder for streaming response
+    ]);
+    convHistory.push(messageText);
+
+    try {
+      setShowThinkingAnimation(true);
+      const response = await fetch("/api/llm/preview", {
+        method: "POST",
+        body: JSON.stringify({
+          plan: plan,
+          messageText: messageText,
+          conv_history: convHistory,
+          file_id: currentPdfId,
+        }),
+      });
     } catch (error) {
       console.log(error);
       return;
@@ -253,6 +207,8 @@ export default function chat() {
         .from("pdfs")
         .upload(filePath, event.target.files[0]);
       if (error) {
+        showToast("Duplicate file", "You have already uploaded this file");
+
         setDuplicateFileError(true);
         // Handle error
         console.log("error", error.message);
