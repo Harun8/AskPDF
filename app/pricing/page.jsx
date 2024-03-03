@@ -111,8 +111,8 @@ export default function Pricing() {
                   Starter
                 </h2>
                 <p className="mt-2 text-base dark:text-slate-100  text-slate-700 leading-tight">
-                  For new makers who want to fine-tune and test an idea. Will
-                  always be free
+                  An always free option designed for casual users to start
+                  interacting with a PDF.
                 </p>
                 <p className="mt-8">
                   <span className="text-4xl font-bold dark:text-slate-100  text-slate-900 tracking-tighter">
@@ -252,7 +252,8 @@ export default function Pricing() {
                   </span>
                 </h2>
                 <p className="mt-2 text-base dark:text-slate-100  text-slate-700 leading-tight">
-                  For new makers who want to fine-tune and test an idea.
+                  For users who want's to extract the most out of their PDF's
+                  and maximize their PDF interactions.
                 </p>
                 <p className="mt-8">
                   <span className="text-4xl font-bold dark:text-slate-100  text-slate-900 tracking-tighter">
@@ -410,7 +411,8 @@ export default function Pricing() {
                   {plans.length > 0 ? plans[2].name : "Ultimate"}
                 </h2>
                 <p className="mt-2 text-base dark:text-slate-100  text-slate-700 leading-tight">
-                  For new makers who want to fine-tune and test an idea.
+                  Get extensive PDF uploads and more features for professionals
+                  requiring advanced PDF communication capabilities.
                 </p>
                 <p className="mt-8">
                   <span className="text-4xl font-bold dark:text-slate-100  text-slate-900 tracking-tighter">
