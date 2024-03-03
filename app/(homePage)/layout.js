@@ -8,7 +8,7 @@ import React, { useEffect, useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Analytics } from "@vercel/analytics/react";
 import { supabase } from "@/lib/supabase";
-
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import Footer from "@/components/footer";
 
@@ -45,6 +45,7 @@ export default function RootLayout({ children }) {
         <main class="flex-grow">
           {children}
           <Analytics></Analytics>
+          <SpeedInsights></SpeedInsights>
         </main>
         <Footer></Footer>
       </body>
