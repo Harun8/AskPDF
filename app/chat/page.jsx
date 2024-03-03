@@ -332,21 +332,21 @@ export default function chat() {
             </Document>
           </div>
         ) : (
-          <div className="flex justify-center mt-48">
-            <button onClick={openModal}> Click me</button>
-          </div>
-        )}
+          <>
+            <div className="flex justify-center mt-48">
+              <button onClick={openModal}> Click me</button>
+            </div>
 
-        {isOpen && (
-          <div className="flex justify-center mt-48">
-            <Modal
-              processingPDF={processingPDF}
-              title={"Upload your PDF"}
-              isOpen={isOpen}
-              closeModal={closeModal}
-              openModal={openModal}
-              onFileSelect={onFileSelect}></Modal>
-          </div>
+            <div className="flex justify-center mt-48">
+              <Modal
+                processingPDF={processingPDF}
+                title={"Upload your PDF"}
+                isOpen={isOpen}
+                closeModal={closeModal}
+                openModal={openModal}
+                onFileSelect={onFileSelect}></Modal>
+            </div>
+          </>
         )}
 
         {pdf && (
@@ -359,6 +359,7 @@ export default function chat() {
       <div className="flex flex-col justify-between h-full">
         <div className="flex-grow overflow-y-auto">
           <ConversationDisplay
+            processingPDF={processingPDF}
             showThinkingAnimation={showThinkingAnimation}
             conversation={conversation}
           />
@@ -366,7 +367,7 @@ export default function chat() {
 
         <div className="mt-4">
           <TextField
-            // isDisabled={isTextDisabled}
+            isDisabled={processingPDF}
             onSendMessage={sendMessage}></TextField>
         </div>
       </div>

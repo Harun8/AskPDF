@@ -7,7 +7,7 @@ const Footer = () => {
           {" "}
           BETA
         </span>{" "}
-        Version: {version}
+        Version: {version}.beta
         {/* <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
           © 2023{" "}
           <a href="https://AskPDF.com/" class="hover:underline mr-5">

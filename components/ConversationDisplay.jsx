@@ -1,5 +1,10 @@
 import LoadingPDF from "./loadingPDF";
-const ConversationDisplay = ({ conversation, showThinkingAnimation }) => {
+import ProcessingPDF from "./processingPDF";
+const ConversationDisplay = ({
+  conversation,
+  showThinkingAnimation,
+  processingPDF,
+}) => {
   return (
     <div className="   ">
       <div className="flex flex-col h-[500px]">
@@ -7,7 +12,15 @@ const ConversationDisplay = ({ conversation, showThinkingAnimation }) => {
         {/* Adjust the height as needed */}
         <div className=" ">
           <div
-            className={` overflow-y-auto border-4 rounded-lg shadow-xl h-[500px]  dark:bg-gray-900					`}>
+            className={` overflow-y-auto border-4 rounded-lg shadow-xl h-[500px]  dark:bg-gray-900 ${
+              processingPDF ? " flex justify-center items-center	" : " "
+            }	`}>
+            {processingPDF && (
+              <>
+                <ProcessingPDF></ProcessingPDF>
+              </>
+            )}
+
             {conversation.map((msg, index) => {
               let textColor =
                 msg.type === "user"
