@@ -1,4 +1,4 @@
-.loader {
+.load {
     --background: linear-gradient(135deg, #23C4F8, #275EFE);
     --shadow: rgba(39, 94, 254, 0.28);
     --text: #6C7486;
@@ -10,7 +10,7 @@
     position: relative;
   }
   
-  .loader:before, .loader:after {
+  .load:before, .load:after {
     --r: -6deg;
     content: "";
     position: absolute;
@@ -21,16 +21,16 @@
     transform: rotate(var(--r));
   }
   
-  .loader:before {
+  .load:before {
     left: 4px;
   }
   
-  .loader:after {
+  .load:after {
     --r: 6deg;
     right: 4px;
   }
   
-  .loader div {
+  .load div {
     width: 100%;
     height: 100%;
     border-radius: 13px;
@@ -41,14 +41,14 @@
     background-image: var(--background);
   }
   
-  .loader div ul {
+  .load div ul {
     margin: 0;
     padding: 0;
     list-style: none;
     position: relative;
   }
   
-  .loader div ul li {
+  .load div ul li {
     --r: 180deg;
     --o: 0;
     --c: var(--page);
@@ -63,46 +63,46 @@
     animation: var(--duration) ease infinite;
   }
   
-  .loader div ul li:nth-child(2) {
+  .load div ul li:nth-child(2) {
     --c: var(--page-fold);
     -webkit-animation-name: page-2;
     animation-name: page-2;
   }
   
-  .loader div ul li:nth-child(3) {
+  .load div ul li:nth-child(3) {
     --c: var(--page-fold);
     -webkit-animation-name: page-3;
     animation-name: page-3;
   }
   
-  .loader div ul li:nth-child(4) {
+  .load div ul li:nth-child(4) {
     --c: var(--page-fold);
     -webkit-animation-name: page-4;
     animation-name: page-4;
   }
   
-  .loader div ul li:nth-child(5) {
+  .load div ul li:nth-child(5) {
     --c: var(--page-fold);
     -webkit-animation-name: page-5;
     animation-name: page-5;
   }
   
-  .loader div ul li svg {
+  .load div ul li svg {
     width: 90px;
     height: 120px;
     display: block;
   }
   
-  .loader div ul li:first-child {
+  .load div ul li:first-child {
     --r: 0deg;
     --o: 1;
   }
   
-  .loader div ul li:last-child {
+  .load div ul li:last-child {
     --o: 1;
   }
   
-  .loader span {
+  .load span {
     display: block;
     left: 0;
     right: 0;

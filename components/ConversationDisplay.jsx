@@ -30,7 +30,10 @@ const ConversationDisplay = ({
                 <div
                   key={index}
                   className={` mt-4 mb-4 pl-4  py-4 ml-2 mr-2 flex justify-start rounded-lg ${textColor}`}>
-                  {msg.text}
+                  {msg.text}{" "}
+                  {/* {showThinkingAnimation && msg.type === "response" ? (
+                    <LoadingPDF></LoadingPDF>
+                  ) : null} */}
                 </div>
               );
             })}

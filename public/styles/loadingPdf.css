@@ -1,10 +1,10 @@
 .loader {
     display: flex;
     align-items: center;
-    /* justify-content: center; */
+      justify-content: center;
   }
   .book-wrapper {
-    width: 15px;
+    width: 35px;
     height: fit-content;
     display: flex;
     align-items: center;

@@ -3,7 +3,7 @@ import "@/public/styles/processingPDF.css";
 const ProcessingPDF = () => {
   return (
     <>
-      <div class="loader">
+      <div class="load">
         <div>
           {/* <span>Processing your pdf, please wait ...</span> */}
           <ul>
