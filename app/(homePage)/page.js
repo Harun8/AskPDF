@@ -93,7 +93,7 @@ export default function Home() {
             How does it work
           </p>
         </div>
-        <div className=" mt-12 pb-8 flex justify-center gap-16">
+        <div class="mt-12 pb-8 flex flex-col md:flex-row md:justify-center gap-16">
           <div>
             <Image
               className="mx-auto"
