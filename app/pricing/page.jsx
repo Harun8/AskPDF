@@ -76,7 +76,7 @@ export default function Pricing() {
               Choose one of our incredible options
             </h2>
           </div>
-          <div className="mt-6 relative self-center flex justify-center">
+          <div className="mt-6 relative self-center flex flex-col md:flex-row md:justify-center">
             <div className="bg-zinc-200 rounded-lg p-0.5  ">
               <button
                 onClick={monthlyPricing}
@@ -97,7 +97,7 @@ export default function Pricing() {
                 Yearly billing
               </button>
             </div>
-            <div className="flex items-center">
+            <div className="grid justify-items-end md:flex  md:items-center">
               <span className=" bg-green-200 font-bold rounded-full text-xs px-6  py-2 ml-3">
                 save 28%
               </span>
