@@ -44,8 +44,8 @@ export default function RootLayout({ children }) {
         <Nav session={session}></Nav>
         <main class="flex-grow">
           {children}
-          {/* <Analytics></Analytics>
-          <SpeedInsights></SpeedInsights> */}
+          <Analytics></Analytics>
+          <SpeedInsights></SpeedInsights>
         </main>
         <Footer></Footer>
       </body>
