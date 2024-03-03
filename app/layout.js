@@ -41,13 +41,13 @@ export default function RootLayout({ children }) {
   return (
     <html class="" lang="en">
       <body class="flex flex-col min-h-screen w-full bg-zinc-100	 dark:bg-gray-800">
-        <Nav session={session}></Nav>
+        {/* <Nav session={session}></Nav> */}
         <main class="flex-grow">
           {children}
           <Analytics></Analytics>
           <SpeedInsights></SpeedInsights>
         </main>
-        <Footer></Footer>
+        {/* <Footer></Footer> */}
       </body>
     </html>
   );
