@@ -1,5 +1,6 @@
 import LoadingPDF from "./loadingPDF";
 import ProcessingPDF from "./processingPDF";
+
 const ConversationDisplay = ({
   conversation,
   showThinkingAnimation,
@@ -29,11 +30,8 @@ const ConversationDisplay = ({
               return (
                 <div
                   key={index}
-                  className={` mt-4 mb-4 pl-4  py-4 ml-2 mr-2 flex justify-start rounded-lg ${textColor}`}>
+                  className={` whitespace-pre-line mt-4 mb-4 pl-4  py-4 ml-2 mr-2 flex justify-start rounded-lg ${textColor}`}>
                   {msg.text}{" "}
-                  {/* {showThinkingAnimation && msg.type === "response" ? (
-                    <LoadingPDF></LoadingPDF>
-                  ) : null} */}
                 </div>
               );
             })}

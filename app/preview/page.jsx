@@ -13,6 +13,10 @@ import ConversationDisplay from "@/components/ConversationDisplay";
 import TextField from "@/components/TextField";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { redirect, useRouter } from "next/navigation";
+import { createRoot } from "react-dom/client";
+import Markdown from "react-markdown";
+// import { Marked } from "marked";
+import { marked } from "marked";
 
 const supabase = createClientComponentClient();
 
@@ -107,7 +111,6 @@ const Preview = () => {
   const convHistory = [];
 
   const channelA = client.channel("room-1");
-
   useEffect(() => {
     console.log("useffect called");
     // Correctly initialize currentResponse within the scope it will be used
@@ -120,15 +123,28 @@ const Preview = () => {
           setShowThinkingAnimation(false);
         }
         setCurrentResponse((prev) => (prev += payload.payload.message));
+
         setConversation((conversation) => {
-          // Clone the current conversation
           const newConversation = [...conversation];
-          // Update the last message's text with the accumulated currentResponse
-          newConversation[newConversation.length - 1] = {
-            ...newConversation[newConversation.length - 1],
-            type: "response",
-            text: currentResponse,
-          };
+          const lastIndex = newConversation.length - 1;
+
+          // Ensure the last message is of type 'response' before updating
+          if (
+            newConversation[lastIndex] &&
+            newConversation[lastIndex].type === "response"
+          ) {
+            newConversation[lastIndex] = {
+              ...newConversation[lastIndex],
+              text: newConversation[lastIndex].text + payload.payload.message,
+            };
+          } else {
+            // If the last message is not a 'response', append a new response message
+            newConversation.push({
+              type: "response",
+              text: payload.payload.message,
+            });
+          }
+
           return newConversation;
         });
       })
@@ -144,7 +160,7 @@ const Preview = () => {
     setConversation((conversation) => [
       ...conversation,
       { type: "user", text: messageText },
-      { type: "response", text: "", streaming: true }, // Placeholder for streaming response
+      // { type: "response", text: "", streaming: true }, // Placeholder for streaming response
     ]);
 
     convHistory.push(messageText);
