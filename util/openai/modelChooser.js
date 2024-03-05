@@ -6,14 +6,14 @@ function modelChooser(plan) {
     // free plan
     modelChooser = "gpt-3.5-turbo-0125"; // 1 pdf upload
   } else if (
-    plan === "price_1OdUr0BzVPtG7eO2qrV6Zn89" ||
-    plan === "price_1OmhlyBzVPtG7eO2r61Xi5QQ"
+    plan === "price_1OpYyoBzVPtG7eO2xJAtCiFa" ||
+    plan === "price_1OpYlBBzVPtG7eO2D4il1zcz"
   ) {
     // premium
     modelChooser = "gpt-4-0125-preview"; // 50 pdf uploads
   } else if (
-    plan === "price_1OdYTmBzVPtG7eO2uLsTNHqI" ||
-    plan === "price_1OmhlyBzVPtG7eO2r61Xi5QQ"
+    plan === "price_1OpYzEBzVPtG7eO2xS53tGQ0" ||
+    plan === "price_1OpYzuBzVPtG7eO2oCFa8Sc7"
   ) {
     // ultimate plan
     modelChooser = "gpt-4-0125-preview"; // 100 pdf uploads

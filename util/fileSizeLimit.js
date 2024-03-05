@@ -6,14 +6,14 @@ function fileSizeLimit(plan) {
     // free plan
     fileSizeLimit = 5 * 1024 * 1024; // 5MB
   } else if (
-    plan === "price_1OdUr0BzVPtG7eO2qrV6Zn89" ||
-    plan === "price_1OmhlyBzVPtG7eO2r61Xi5QQ"
+    plan === "price_1OpYyoBzVPtG7eO2xJAtCiFa" ||
+    plan === "price_1OpYlBBzVPtG7eO2D4il1zcz"
   ) {
     // premium
     fileSizeLimit = 10 * 1024 * 1024; // 10MB
   } else if (
-    plan === "price_1OdYTmBzVPtG7eO2uLsTNHqI" ||
-    plan === "price_1OmhoaBzVPtG7eO2M02FJFtE"
+    plan === "price_1OpYzEBzVPtG7eO2xS53tGQ0" ||
+    plan === "price_1OpYzuBzVPtG7eO2oCFa8Sc7"
   ) {
     // ultimate plan
     fileSizeLimit = 50 * 1024 * 2024; // 50 MB
