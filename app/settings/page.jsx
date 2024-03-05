@@ -19,7 +19,9 @@ export default function Settings() {
       } = await supabase.auth.getSession();
       console.log("session", session);
 
-      if (!session) console.log("No session");
+      if (!session) {
+        router.push("/");
+      }
 
       console.log("session", session.user.id);
       setUserId(session.user.id);

@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import ConversationDisplay from "@/components/ConversationDisplay";
 import TextField from "@/components/TextField";
+import { useRouter } from "next/navigation";
 
 const { createClient } = require("@supabase/supabase-js");
 
@@ -39,6 +40,7 @@ const ChatPage = () => {
   const [showThinkingAnimation, setShowThinkingAnimation] = useState(false);
   const [currentResponse, setCurrentResponse] = useState("");
 
+  const router = useRouter();
   let currentPdfId;
   const params = useParams();
   const supabase = createClientComponentClient();
