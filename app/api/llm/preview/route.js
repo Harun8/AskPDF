@@ -179,12 +179,11 @@ const client = createClient(
   }
 );
 
-const channelB = client.channel("room-1");
-
 export default async function handler(req, res) {
   try {
     const data = await req.json(); // Assuming text data if not form data
     console.log(data);
+    const channelB = client.channel(`session-${data.sessionId}`);
 
     const llm = new ChatOpenAI({
       openAIApiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,

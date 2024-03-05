@@ -39,12 +39,18 @@ const Preview = () => {
   const router = useRouter();
   const [showThinkingAnimation, setShowThinkingAnimation] = useState(false);
   const [currentResponse, setCurrentResponse] = useState("");
-
+  const [sessionId, setSessionId] = useState();
   const supabase = createClientComponentClient();
 
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
   }
+
+  useEffect(() => {
+    const sessionId = crypto.randomUUID();
+    console.log("sessionId", sessionId);
+    setSessionId(sessionId);
+  }, []);
 
   useEffect(() => {
     const getInfo = async () => {
@@ -106,7 +112,7 @@ const Preview = () => {
   };
   const convHistory = [];
 
-  const channelA = client.channel("room-1");
+  const channelA = client.channel(`session-${sessionId}`);
   useEffect(() => {
     console.log("useffect called");
     // Correctly initialize currentResponse within the scope it will be used
@@ -166,7 +172,7 @@ const Preview = () => {
       const response = await fetch("/api/llm/preview", {
         method: "POST",
         body: JSON.stringify({
-          // plan: plan,
+          sessionId: sessionId,
           messageText: messageText,
           conv_history: convHistory,
           // file_id: currentPdfId,
