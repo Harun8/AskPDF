@@ -208,9 +208,8 @@ const Preview = () => {
             showThinkingAnimation={showThinkingAnimation}
             conversation={conversation}
           />
-          <div className="mt-4">
-            <TextField onSendMessage={sendMessage}></TextField>
-          </div>
+          <TextField onSendMessage={sendMessage}></TextField>
+          <div className=""></div>
         </div>
       </div>
     </div>

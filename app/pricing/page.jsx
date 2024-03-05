@@ -260,13 +260,17 @@ export default function Pricing() {
                     {plans.length > 0 && monthly
                       ? plans[3].price
                       : plans[2].price / 12}
-                    kr
+                    kr{" "}
                   </span>
 
                   <span className="text-base font-medium dark:text-slate-100  text-slate-500">
                     /month
                   </span>
                 </p>
+                <span className=" flex justify-end text-xs text-muted">
+                  {" "}
+                  {!monthly ? "billed annually" : ""}
+                </span>
                 <button
                   onClick={
                     monthly
@@ -422,6 +426,10 @@ export default function Pricing() {
                     /month
                   </span>
                 </p>
+                <span className=" flex justify-end text-xs text-muted">
+                  {" "}
+                  {!monthly ? "billed annually" : ""}
+                </span>
                 <button
                   onClick={
                     monthly
