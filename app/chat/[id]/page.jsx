@@ -267,10 +267,9 @@ const ChatPage = () => {
             showThinkingAnimation={showThinkingAnimation}
             conversation={conversation}
           />
-        </div>
-        <div className="mt-4">
           <TextField onSendMessage={sendMessage}></TextField>
         </div>
+        <div className="mt-4"></div>
       </div>
     </div>
   );

@@ -8,12 +8,12 @@ const ConversationDisplay = ({
 }) => {
   return (
     <div className="   ">
-      <div className="flex flex-col h-[500px]">
+      <div className="flex flex-col h-[600px]">
         {/* ^^// CHANGE THE HEIGHT TO MATCH USERS VIEWPORT */}{" "}
         {/* Adjust the height as needed */}
         <div className=" ">
           <div
-            className={` overflow-y-auto border-4 rounded-lg shadow-xl h-[500px]  dark:bg-gray-900 ${
+            className={` overflow-y-auto border-4 rounded-lg shadow-xl h-[600px]  dark:bg-gray-900 ${
               processingPDF ? " flex justify-center items-center	" : " "
             }	`}>
             {processingPDF && (

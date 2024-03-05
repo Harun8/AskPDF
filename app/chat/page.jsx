@@ -376,14 +376,13 @@ export default function chat() {
             showThinkingAnimation={showThinkingAnimation}
             conversation={conversation}
           />
-        </div>
-
-        <div className="mt-4">
           <TextField
             isDisabled={processingPDF}
             onSendMessage={sendMessage}></TextField>
         </div>
       </div>
+
+      <div className="mt-4"></div>
     </div>
   );
 }
