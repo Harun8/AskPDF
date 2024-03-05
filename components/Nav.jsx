@@ -39,10 +39,9 @@ const Nav = ({ session }) => {
   // }, []); // Removed session from dependencies
   // console.log("session", session);
 
-  const handleToggle = (event) => {
-    // event.stopPropagation();
-    setToggleDropDown((prev) => !prev);
-    console.log("toggleDropDown:", !toggleDropDown); // Add this line to check the state change
+  const logOut = async () => {
+    const { error } = await supabase.auth.signOut();
+    window.location.href = "/";
   };
 
   return (
@@ -53,7 +52,7 @@ const Nav = ({ session }) => {
         </Link>
 
         <div className=" md:hidden">
-          <DropDown session={session}></DropDown>
+          <DropDown logOut={logOut} session={session}></DropDown>
         </div>
         <ul class="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 md:flex md:mx-auto md:flex md:items-center md:w-auto md:space-x-6">
           <li>

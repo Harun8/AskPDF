@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Fragment, useEffect, useRef, useState } from "react";
 // import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
-export function DropDown({ session }) {
+export function DropDown({ session, logOut }) {
   return (
     <div className="">
       <Menu as="div" className="z-50 relative inline-block text-left">
@@ -95,8 +95,8 @@ export function DropDown({ session }) {
               <div className="px-1 py-1">
                 <Menu.Item>
                   {({ active }) => (
-                    <Link
-                      href="/"
+                    <button
+                      onClick={() => logOut()}
                       className={`${
                         active ? "bg-violet-500 text-white" : "text-gray-900"
                       } group flex w-full items-center rounded-md px-2 py-2 text-sm`}>
@@ -111,8 +111,8 @@ export function DropDown({ session }) {
                           aria-hidden="true"
                         />
                       )}
-                      Release logs (coming soon)
-                    </Link>
+                      Log out
+                    </button>
                   )}
                 </Menu.Item>
               </div>

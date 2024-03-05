@@ -13,10 +13,6 @@ import ConversationDisplay from "@/components/ConversationDisplay";
 import TextField from "@/components/TextField";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { redirect, useRouter } from "next/navigation";
-import { createRoot } from "react-dom/client";
-import Markdown from "react-markdown";
-// import { Marked } from "marked";
-import { marked } from "marked";
 
 const supabase = createClientComponentClient();
 

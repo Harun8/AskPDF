@@ -236,8 +236,8 @@ const ChatPage = () => {
   };
 
   return (
-    <div className="mx-12 grid gap-4 grid-cols-2">
-      <div className="rounded-sm border shadow5">
+    <div className="mx-12 flex flex-col lg:grid lg:grid-cols-2">
+      <div className="rounded-lg border shadow5">
         <div className=" p-4 bg-gray h-[800px] overflow-y-auto  ">
           {pdf ? (
             <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>
@@ -260,8 +260,8 @@ const ChatPage = () => {
         </div>
       </div>
 
-      <div className="flex flex-col justify-between h-full">
-        <div className="flex-grow overflow-y-auto">
+      <div className="">
+        <div className="">
           <ConversationDisplay
             processingPDF={false}
             showThinkingAnimation={showThinkingAnimation}
