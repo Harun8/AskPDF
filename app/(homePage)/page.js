@@ -1,3 +1,4 @@
+"use client";
 import {
   ResizableHandle,
   ResizablePanel,
@@ -12,11 +13,24 @@ import Answer from "@/public/answer.svg";
 import Pdf from "@/public/pdf.svg";
 import Coffee from "@/public/coffee.svg";
 import SaveTime from "@/public/Save-time.svg";
+import { supabase } from "@/lib/supabase";
+import React, { useEffect, useState } from "react";
 
 import Link from "next/link";
 import Testimonial from "@/components/Testimonial";
 
 export default function Home() {
+  const [session, setSession] = useState(null);
+
+  useEffect(() => {
+    // Fetch session on component mount
+    setSession(supabase.auth.getSession());
+
+    // Set up a session state listener for real-time updates
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+  }, []);
   return (
     <>
       <div className="flex flex-col md:grid grid-cols-2 mt-36 mx-10 h-dvh ">
@@ -54,9 +68,10 @@ export default function Home() {
             </Button> */}
             <Link
               className="  hover:text-red-500  hover:font-bold ml-6 my-auto font-semibold text-lg "
-              href="/preview">
+              href={session ? "/chat" : "/preview"}>
               <div className=" flex items-center">
-                Try the demo
+                {session ? "Start chatting now" : "Try the demo"}
+                {/* Try the demo */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
