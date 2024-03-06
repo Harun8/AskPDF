@@ -8,6 +8,9 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
+export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: "2023-10-16",
+});
 
 export default async function handler(req, res) {
   const user = await req.json(); // Assuming text data if not form data
@@ -38,7 +41,7 @@ export default async function handler(req, res) {
   console.log("data from profile table", profile);
 
   // Your existing Stripe session creation logic...
-  const session = await Stripe.billingPortal.sessions.create({
+  const session = await stripe.billingPortal.sessions.create({
     customer: profile.stripe_customer_id,
     return_url: `${SITE_URL}`,
   });
