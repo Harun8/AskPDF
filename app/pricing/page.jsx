@@ -123,7 +123,7 @@ export default function Pricing() {
                   </span>
                 </p>
                 <a
-                  href="/sign-up"
+                  href="/signin"
                   className="mt-8 block w-full dark:bg-slate-700 bg-slate-900 rounded-md py-2 text-sm font-semibold text-white text-center">
                   Sign up to get started
                 </a>
