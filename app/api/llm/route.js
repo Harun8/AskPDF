@@ -57,6 +57,9 @@ const channelB = client.channel("room-1");
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY, // api key
 });
+
+export const runtime = "edge";
+
 export default async function handler(req, res) {
   // new Response(JSON.stringify(), {
   //   status: 200, // Set the status code to 200 (OK)
