@@ -114,7 +114,6 @@ const Preview = () => {
 
   const channelA = client.channel(`session-${sessionId}`);
   useEffect(() => {
-    console.log("useffect called");
     // Correctly initialize currentResponse within the scope it will be used
 
     console.log("current response", currentResponse);
