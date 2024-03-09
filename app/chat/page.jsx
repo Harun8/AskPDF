@@ -58,7 +58,6 @@ export default function chat() {
   const [isTextDisabled, setIsTextDisabled] = useState(true);
   const [currentResponse, setCurrentResponse] = useState("");
   const [processingPDF, setProcessingPDF] = useState(false);
-  const channelA = client.channel("room-1");
 
   const router = useRouter();
   function onDocumentLoadSuccess({ numPages }) {
@@ -108,6 +107,7 @@ export default function chat() {
   }, []);
 
   const convHistory = [];
+  const channelA = client.channel(`session-${userId}`);
   useEffect(() => {
     console.log("useffect called");
     // Correctly initialize currentResponse within the scope it will be used
@@ -166,6 +166,7 @@ export default function chat() {
       const response = await fetch("/api/llm", {
         method: "POST",
         body: JSON.stringify({
+          sessionId: userId,
           plan: plan,
           messageText: messageText,
           conv_history: convHistory,

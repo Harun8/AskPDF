@@ -164,7 +164,7 @@ const ChatPage = () => {
   }
 
   const convHistory = [];
-  const channelA = client.channel("room-1");
+  const channelA = client.channel(`session-${userId}`);
 
   useEffect(() => {
     console.log("useffect called");
@@ -225,6 +225,8 @@ const ChatPage = () => {
       const response = await fetch("/api/llm", {
         method: "POST",
         body: JSON.stringify({
+          sessionId: userId,
+
           plan: plan,
           messageText: messageText,
           conv_history: convHistory,

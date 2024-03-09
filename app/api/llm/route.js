@@ -52,14 +52,12 @@ const client = createClient(
   }
 );
 
-const channelB = client.channel("room-1");
-
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY, // api key
 });
 
 export const runtime = "edge";
-
+let channelB;
 export default async function handler(req, res) {
   // new Response(JSON.stringify(), {
   //   status: 200, // Set the status code to 200 (OK)
@@ -72,7 +70,39 @@ export default async function handler(req, res) {
   try {
     const data = await req.json(); // Assuming text data if not form data
     console.log(data);
+    channelB = client.channel(`session-${data.sessionId}`);
 
+    processData(data);
+
+    return new Response(
+      JSON.stringify({ msg: "PDF RECEVIED IT IS BEING PROCCESSED" }),
+      {
+        status: 200, // Set the status code to 200 (OK)
+        headers: {
+          "Content-Type": "application/json", // Set the Content-Type header to 'application/json'
+        },
+      }
+    );
+  } catch (error) {
+    console.error(error);
+    return new Response(JSON.stringify(error), {
+      status: 404, // Set the status code to 200 (OK)
+      headers: {
+        "Content-Type": "application/json", // Set the Content-Type header to 'application/json'
+      },
+    });
+  }
+}
+
+export { handler as POST };
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
+
+async function processData(data) {
+  try {
     const llm = new ChatOpenAI({
       openAIApiKey: process.env.OPENAI_API_KEY,
       modelName: modelChooser(data.plan),
@@ -121,32 +151,10 @@ export default async function handler(req, res) {
       });
     }
     client.removeChannel(channelB);
-
-    console.log("chain is", response);
-
-    return new Response(JSON.stringify(), {
-      status: 200, // Set the status code to 200 (OK)
-      headers: {
-        "Content-Type": "application/json", // Set the Content-Type header to 'application/json'
-      },
-    });
   } catch (error) {
-    console.error(error);
-    return new Response(JSON.stringify(error), {
-      status: 404, // Set the status code to 200 (OK)
-      headers: {
-        "Content-Type": "application/json", // Set the Content-Type header to 'application/json'
-      },
-    });
+    console.error(error.message);
   }
 }
-
-export { handler as POST };
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-);
 
 async function retriver(queryText, file_id) {
   console.log("file_id", file_id);
