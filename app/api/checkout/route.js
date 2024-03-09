@@ -38,14 +38,6 @@ export default async function handler(req, res) {
     // const rawbody = await getRawBody(req);
     const rawbody = await req.text();
     event = stripe.webhooks.constructEvent(rawbody, signature, signingSecret);
-    // const session = event.data.object;
-    // // Note that you'll need to add an async prefix to this route handler
-    // const { line_items } = await stripe.checkout.sessions.retrieve(session.id, {
-    //   expand: ["line_items"],
-    // });
-
-    // pID = line_items;
-    // console.log("pID", line_items);
   } catch (error) {
     console.log("error in webhooks", error);
 
@@ -61,10 +53,6 @@ export default async function handler(req, res) {
 
     return response;
   }
-
-  console.log("event", event);
-  console.log("plan", event.data.object.plan);
-  // console.log("items", event.data.object.items);
 
   try {
     switch (event.type) {
