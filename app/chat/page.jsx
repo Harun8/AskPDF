@@ -221,7 +221,7 @@ export default function chat() {
         .from("pdfs")
         .upload(filePath, event.target.files[0]);
       if (error) {
-        showToast("Duplicate file", "You have already uploaded this file");
+        showToast("Error", error.message);
 
         setDuplicateFileError(true);
         // Handle error
