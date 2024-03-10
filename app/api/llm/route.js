@@ -10,7 +10,6 @@ import { StringOutputParser } from "@langchain/core/output_parsers";
 //   RunnablePassthrough,
 //   RunnableSequence,
 // } from "langchain/core/runnables";
-import { headers } from "next/headers";
 import { PassThrough } from "stream";
 import {
   RunnablePassthrough,
