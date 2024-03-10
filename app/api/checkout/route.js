@@ -62,6 +62,9 @@ export default async function handler(req, res) {
       case "customer.subscription.deleted":
         await deleteSubscription(event);
         break;
+      case "customer.subscription.created":
+        await updateSubscription(event);
+        break;
     }
 
     const responseObject = {

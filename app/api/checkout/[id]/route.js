@@ -20,11 +20,11 @@ export default async function handler(req, res) {
     };
 
     // Conditionally add subscription_data if the priceId is the specific one
-    // if (body.priceId === "price_1OsOE6BzVPtG7eO2xWwYSw72") {
-    //   sessionConfig.subscription_data = {
-    //     trial_period_days: 7,
-    //   };
-    // }
+    if (body.priceId === "price_1OpYlBBzVPtG7eO2D4il1zcz") {
+      sessionConfig.subscription_data = {
+        trial_period_days: 7,
+      };
+    }
 
     const session = await stripe.checkout.sessions.create(sessionConfig);
 
