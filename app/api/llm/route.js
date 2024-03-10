@@ -10,7 +10,7 @@ import { StringOutputParser } from "@langchain/core/output_parsers";
 //   RunnablePassthrough,
 //   RunnableSequence,
 // } from "langchain/core/runnables";
-import { headers } from "next/headers";
+import { cookies } from "next/headers";
 import { PassThrough } from "stream";
 import {
   RunnablePassthrough,
@@ -60,8 +60,8 @@ const openai = new OpenAI({
 export const runtime = "edge";
 let channelB;
 export default async function handler(req, res) {
-  const headersList = headers();
-  console.log("headers", headersList);
+  const cookieStore = cookies();
+  console.log("headers", cookieStore);
   try {
     const data = await req.json(); // Assuming text data if not form data
     console.log(data);
