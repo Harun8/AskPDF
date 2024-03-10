@@ -63,7 +63,7 @@ export default async function handler(req, res) {
     const data = await req.json(); // Assuming text data if not form data
     console.log(data);
 
-    processData(data);
+    await processData(data);
 
     return new Response(
       JSON.stringify({ msg: "PDF RECEVIED IT IS BEING PROCCESSED" }),
