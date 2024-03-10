@@ -62,37 +62,6 @@ export default async function handler(req, res) {
     const data = await req.json(); // Assuming text data if not form data
     console.log(data);
 
-    await processData(data);
-
-    return new Response(
-      JSON.stringify({ msg: "PDF RECEVIED IT IS BEING PROCCESSED" }),
-      {
-        status: 200, // Set the status code to 200 (OK)
-        headers: {
-          "Content-Type": "application/json", // Set the Content-Type header to 'application/json'
-        },
-      }
-    );
-  } catch (error) {
-    console.error(error);
-    return new Response(JSON.stringify(error), {
-      status: 404, // Set the status code to 200 (OK)
-      headers: {
-        "Content-Type": "application/json", // Set the Content-Type header to 'application/json'
-      },
-    });
-  }
-}
-
-export { handler as POST };
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-);
-
-async function processData(data) {
-  try {
     channelB = client.channel(`session-${data.sessionId}`);
 
     const llm = new ChatOpenAI({
@@ -141,17 +110,95 @@ async function processData(data) {
       });
     }
     client.removeChannel(channelB);
-  } catch (error) {
-    console.error(error.message);
-    channelB.send({
-      type: "broadcast",
-      event: "acknowledge",
-      payload: { message: error },
-    });
 
-    client.removeChannel(channelB);
+    return new Response(
+      JSON.stringify({ msg: "PDF RECEVIED IT IS BEING PROCCESSED" }),
+      {
+        status: 200, // Set the status code to 200 (OK)
+        headers: {
+          "Content-Type": "application/json", // Set the Content-Type header to 'application/json'
+        },
+      }
+    );
+  } catch (error) {
+    console.error(error);
+    return new Response(JSON.stringify(error), {
+      status: 404, // Set the status code to 200 (OK)
+      headers: {
+        "Content-Type": "application/json", // Set the Content-Type header to 'application/json'
+      },
+    });
   }
 }
+
+export { handler as POST };
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
+
+// async function processData(data) {
+//   try {
+//     channelB = client.channel(`session-${data.sessionId}`);
+
+//     const llm = new ChatOpenAI({
+//       openAIApiKey: process.env.OPENAI_API_KEY,
+//       modelName: modelChooser(data.plan),
+//       streaming: true,
+//       //  temperature: 0.5
+//     });
+
+//     const standaloneQuestionchain = standaloneQuestionPrompt
+//       .pipe(llm)
+//       .pipe(new StringOutputParser());
+
+//     const retrieverChain = RunnableSequence.from([
+//       (prevResult) => prevResult.standalone_question,
+//       (prevResult) => retriver(prevResult, data.file_id),
+//       combineDocuments,
+//     ]);
+
+//     const answerChain = answerPrompt.pipe(llm).pipe(new StringOutputParser());
+
+//     const chain = RunnableSequence.from([
+//       {
+//         standalone_question: standaloneQuestionchain,
+//         original_input: new RunnablePassthrough(),
+//       },
+//       {
+//         context: retrieverChain,
+//         question: ({ original_input }) => original_input.question,
+//         conv_history: ({ original_input }) => original_input.conv_history,
+//       },
+//       answerChain,
+//     ]);
+
+//     const response = await chain.stream({
+//       question: data.messageText,
+//       conv_history: await formatConvHistory(data.conv_history),
+//     });
+
+//     for await (const chunk of response) {
+//       console.log("chunk", chunk);
+//       await channelB.send({
+//         type: "broadcast",
+//         event: "acknowledge",
+//         payload: { message: chunk },
+//       });
+//     }
+//     client.removeChannel(channelB);
+//   } catch (error) {
+//     console.error(error.message);
+//     channelB.send({
+//       type: "broadcast",
+//       event: "acknowledge",
+//       payload: { message: error },
+//     });
+
+//     client.removeChannel(channelB);
+//   }
+// }
 
 async function retriver(queryText, file_id) {
   const model = "text-embedding-3-small";
