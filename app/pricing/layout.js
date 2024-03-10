@@ -1,3 +1,4 @@
+"use client";
 import { Inter } from "next/font/google";
 import "../globals.css";
 import Nav from "@/components/Nav";
@@ -13,24 +14,19 @@ export const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 });
-export const dynamic = "force-dynamic";
 
 export default async function RootLayout({ children }) {
-  // const cookieStore = cookies();
+  const [session, setSession] = useState(null);
 
-  // const supabase = createServerComponentClient({ cookies: () => cookieStore });
-  // const {
-  //   data: { session },
-  // } = await supabase.auth.getSession();
+  useEffect(() => {
+    // Fetch session on component mount
+    setSession(supabase.auth.getSession());
 
-  const {
-    data: { session },
-  } = await supabaseServer().auth.getSession();
-  if (!session) {
-    return false;
-  } else {
-    return true;
-  }
+    // Set up a session state listener for real-time updates
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+  }, []);
 
   return (
     <html class="" lang="en">
