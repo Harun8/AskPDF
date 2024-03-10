@@ -1,12 +1,12 @@
-"use server";
 import { Inter } from "next/font/google";
 import "../globals.css";
 import Nav from "@/components/Nav";
 import { cookies } from "next/headers";
 import { Inter as FontSans } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
+import supabaseServer from "@/lib/supabaseServer";
 
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+// import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import Footer from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -17,12 +17,21 @@ export const fontSans = FontSans({
 });
 
 export default async function RootLayout({ children }) {
-  const cookieStore = cookies();
+  // const cookieStore = cookies();
 
-  const supabase = createServerComponentClient({ cookies: () => cookieStore });
+  // const supabase = createServerComponentClient({ cookies: () => cookieStore });
+  // const {
+  //   data: { session },
+  // } = await supabase.auth.getSession();
+
   const {
     data: { session },
-  } = await supabase.auth.getSession();
+  } = await supabaseServer().auth.getSession();
+  if (!session) {
+    return false;
+  } else {
+    return true;
+  }
 
   return (
     <html class="" lang="en">
