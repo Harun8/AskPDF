@@ -164,7 +164,7 @@ const ChatPage = () => {
   }
 
   const convHistory = [];
-  let channelA = client.channel(`session-${userId}`);
+  const channelA = client.channel(`session-${userId}`);
   console.log("userId", userId);
 
   useEffect(() => {
@@ -172,7 +172,6 @@ const ChatPage = () => {
     // Correctly initialize currentResponse within the scope it will be used
 
     console.log("current response", currentResponse);
-    console.log("channelA", channelA);
     channelA
       .on("broadcast", { event: "acknowledge" }, (payload) => {
         console.log("payload", payload);

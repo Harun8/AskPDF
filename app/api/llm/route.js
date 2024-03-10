@@ -56,7 +56,7 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY, // api key
 });
 
-export const runtime = "edge";
+// export const runtime = "edge";
 let channelB;
 export default async function handler(req, res) {
   try {
