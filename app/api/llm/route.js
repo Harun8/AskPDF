@@ -59,14 +59,6 @@ const openai = new OpenAI({
 export const runtime = "edge";
 let channelB;
 export default async function handler(req, res) {
-  // new Response(JSON.stringify(), {
-  //   status: 200, // Set the status code to 200 (OK)
-  //   headers: {
-  //     "Content-Type": "text/plain",
-  //     "Transfer-Encoding": "chunked",
-  //   },
-  // });
-
   try {
     const data = await req.json(); // Assuming text data if not form data
     console.log(data);
@@ -110,8 +102,6 @@ async function processData(data) {
       //  temperature: 0.5
     });
 
-    console.log("min LLM ER:", llm);
-
     const standaloneQuestionchain = standaloneQuestionPrompt
       .pipe(llm)
       .pipe(new StringOutputParser());
@@ -143,7 +133,6 @@ async function processData(data) {
     });
 
     for await (const chunk of response) {
-      console.log("chunk", chunk);
       await channelB.send({
         type: "broadcast",
         event: "acknowledge",
@@ -164,10 +153,7 @@ async function processData(data) {
 }
 
 async function retriver(queryText, file_id) {
-  console.log("file_id", file_id);
-
   const model = "text-embedding-3-small";
-  console.log("queryText", queryText);
   // Generate the embedding vector for the query text
   let queryEmbedding;
   try {
@@ -179,7 +165,6 @@ async function retriver(queryText, file_id) {
       console.error("Error generating embeddings:", embeddingResult.error);
       return [];
     }
-    console.log("embeddingResult", embeddingResult);
     queryEmbedding = embeddingResult.data[0].embedding; // Adjust this line based on the actual structure of the response
   } catch (error) {
     console.error("Error during embedding generation:", error);
@@ -192,8 +177,6 @@ async function retriver(queryText, file_id) {
     match_count: 10,
     filter: {},
   });
-
-  console.log("data", data);
 
   if (error) {
     console.error("Error searching for documents:", error);

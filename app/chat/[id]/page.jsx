@@ -164,7 +164,7 @@ const ChatPage = () => {
   }
 
   const convHistory = [];
-  const channelA = client.channel(`session-${userId}`);
+  let channelA = client.channel(`session-${userId}`);
   console.log("userId", userId);
 
   useEffect(() => {
