@@ -49,6 +49,7 @@ const ChatPage = () => {
     setNumPages(numPages);
   }
 
+  let channelA;
   useEffect(() => {
     const getAuth = async () => {
       try {
@@ -58,6 +59,8 @@ const ChatPage = () => {
         // console.log("session", session);
 
         if (session) {
+          channelA = client.channel(`session-${session.user.id}`);
+
           const response = await fetch("/api/abilities", {
             method: "POST",
             headers: {
@@ -164,7 +167,6 @@ const ChatPage = () => {
   }
 
   const convHistory = [];
-  const channelA = client.channel(`session-${userId}`);
 
   useEffect(() => {
     console.log("useffect called");
