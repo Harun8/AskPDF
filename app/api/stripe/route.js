@@ -3,6 +3,8 @@ export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2023-10-16",
 });
 
+export const dynamic = "force-dynamic";
+
 export default async function handler(req, res) {
   //   const data = await req.json(); // Assuming text data if not form data
 
