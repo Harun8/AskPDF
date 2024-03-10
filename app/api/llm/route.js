@@ -60,6 +60,7 @@ let channelB;
 export default async function handler(req, res) {
   try {
     const data = await req.json(); // Assuming text data if not form data
+    //
     console.log(data);
 
     channelB = client.channel(`session-${data.sessionId}`);
