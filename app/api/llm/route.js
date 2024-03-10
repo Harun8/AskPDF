@@ -134,6 +134,7 @@ async function processData(data) {
     });
 
     for await (const chunk of response) {
+      console.log("chunk", chunk);
       await channelB.send({
         type: "broadcast",
         event: "acknowledge",

@@ -107,7 +107,7 @@ export default function chat() {
   }, []);
 
   const convHistory = [];
-  const channelA = client.channel(`session-${userId}`);
+  const channelA = client.channel(`session-${userId}`).unsubscribe();
   useEffect(() => {
     console.log("useffect called");
     // Correctly initialize currentResponse within the scope it will be used
@@ -163,6 +163,8 @@ export default function chat() {
 
     try {
       setShowThinkingAnimation(true);
+      const controller = new AbortController();
+      const signal = controller.signal;
       const response = await fetch("/api/llm", {
         method: "POST",
         body: JSON.stringify({
@@ -172,6 +174,7 @@ export default function chat() {
           conv_history: convHistory,
           file_id: currentPdfId,
         }),
+        signal: signal,
       });
     } catch (error) {
       console.log(error);
