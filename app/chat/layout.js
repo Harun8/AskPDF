@@ -15,6 +15,7 @@ export const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 });
+export const dynamic = "force-dynamic";
 
 export default async function RootLayout({ children }) {
   // const cookieStore = cookies();
