@@ -3,7 +3,6 @@ import "../globals.css";
 import Nav from "@/components/Nav";
 import { cookies } from "next/headers";
 import { Inter as FontSans } from "next/font/google";
-import supabaseServer from "@/lib/supabaseServer";
 
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import Footer from "@/components/footer";
@@ -14,24 +13,14 @@ export const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 });
-export const dynamic = "force-dynamic";
 
 export default async function RootLayout({ children }) {
-  // const cookieStore = cookies();
+  const cookieStore = cookies();
 
-  // const supabase = createServerComponentClient({ cookies: () => cookieStore });
-  // const {
-  //   data: { session },
-  // } = await supabase.auth.getSession();
-
+  const supabase = createServerComponentClient({ cookies: () => cookieStore });
   const {
     data: { session },
-  } = await supabaseServer().auth.getSession();
-  if (!session) {
-    return false;
-  } else {
-    return true;
-  }
+  } = await supabase.auth.getSession();
 
   return (
     <html class="" lang="en">
