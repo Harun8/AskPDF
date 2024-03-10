@@ -153,6 +153,13 @@ async function processData(data) {
     client.removeChannel(channelB);
   } catch (error) {
     console.error(error.message);
+    channelB.send({
+      type: "broadcast",
+      event: "acknowledge",
+      payload: { message: error },
+    });
+
+    client.removeChannel(channelB);
   }
 }
 
