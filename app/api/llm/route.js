@@ -94,7 +94,7 @@ const supabase = createClient(
 
 async function processData(data) {
   try {
-    channelB = client.channel(`session-${data.sessionId}`);
+    channelB = client.channel(`session-1`);
 
     const llm = new ChatOpenAI({
       openAIApiKey: process.env.OPENAI_API_KEY,
