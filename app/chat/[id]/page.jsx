@@ -172,6 +172,7 @@ const ChatPage = () => {
     // Correctly initialize currentResponse within the scope it will be used
 
     console.log("current response", currentResponse);
+    console.log("channelA", channelA);
     channelA
       .on("broadcast", { event: "acknowledge" }, (payload) => {
         console.log("payload", payload);
