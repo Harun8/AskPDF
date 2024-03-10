@@ -62,7 +62,6 @@ export default async function handler(req, res) {
   try {
     const data = await req.json(); // Assuming text data if not form data
     console.log(data);
-    channelB = client.channel(`session-${data.sessionId}`);
 
     processData(data);
 
@@ -95,6 +94,8 @@ const supabase = createClient(
 
 async function processData(data) {
   try {
+    channelB = client.channel(`session-${data.sessionId}`);
+
     const llm = new ChatOpenAI({
       openAIApiKey: process.env.OPENAI_API_KEY,
       modelName: modelChooser(data.plan),
