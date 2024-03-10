@@ -10,7 +10,7 @@ import { StringOutputParser } from "@langchain/core/output_parsers";
 //   RunnablePassthrough,
 //   RunnableSequence,
 // } from "langchain/core/runnables";
-// import { cookies } from "next/headers";
+import { headers } from "next/headers";
 import { PassThrough } from "stream";
 import {
   RunnablePassthrough,
@@ -18,7 +18,6 @@ import {
 } from "@langchain/core/runnables";
 import combineDocuments from "@/util/combineDocuments";
 import formatConvHistory from "@/util/formatConvHistory";
-
 const OpenAI = require("openai");
 const { createClient } = require("@supabase/supabase-js");
 
@@ -60,18 +59,6 @@ const openai = new OpenAI({
 export const runtime = "edge";
 let channelB;
 export default async function handler(req, res) {
-  // const cookieStore = cookies();
-  // console.log("headers", cookieStore);
-
-  // if (Object.keys(cookieStore).length === 0) {
-  //   return new Response(JSON.stringify({ msg: "user is not authenticated" }), {
-  //     status: 404, // Set the status code to 200 (OK)
-  //     headers: {
-  //       "Content-Type": "application/json", // Set the Content-Type header to 'application/json'
-  //     },
-  //   });
-  // }
-
   try {
     const data = await req.json(); // Assuming text data if not form data
     console.log(data);
