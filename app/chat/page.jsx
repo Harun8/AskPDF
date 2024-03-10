@@ -107,7 +107,7 @@ export default function chat() {
   }, []);
 
   const convHistory = [];
-  const channelA = client.channel(`session-${userId}`).unsubscribe();
+  const channelA = client.channel(`session-${userId}`);
   useEffect(() => {
     console.log("useffect called");
     // Correctly initialize currentResponse within the scope it will be used

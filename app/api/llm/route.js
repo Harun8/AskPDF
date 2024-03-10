@@ -18,6 +18,7 @@ import {
 } from "@langchain/core/runnables";
 import combineDocuments from "@/util/combineDocuments";
 import formatConvHistory from "@/util/formatConvHistory";
+
 const OpenAI = require("openai");
 const { createClient } = require("@supabase/supabase-js");
 
@@ -59,6 +60,8 @@ const openai = new OpenAI({
 export const runtime = "edge";
 let channelB;
 export default async function handler(req, res) {
+  const headersList = headers();
+  console.log("headers", headersList);
   try {
     const data = await req.json(); // Assuming text data if not form data
     console.log(data);
