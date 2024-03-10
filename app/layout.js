@@ -1,6 +1,6 @@
 "use client";
 import { Inter } from "next/font/google";
-import "../globals.css";
+import "./globals.css";
 import Nav from "@/components/Nav";
 // import { cookies } from "next/headers";
 import { Inter as FontSans } from "next/font/google";
