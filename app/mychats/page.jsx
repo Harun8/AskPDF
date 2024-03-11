@@ -17,6 +17,11 @@ const MyChats = () => {
         const {
           data: { session },
         } = await supabase.auth.getSession();
+
+        if (!session) {
+          router.push("/");
+          return;
+        }
         console.log("session", session);
         setUserId(session.user.id);
 

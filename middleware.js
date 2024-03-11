@@ -14,13 +14,16 @@ export async function middleware(req) {
     data: { user },
   } = await supabase.auth.getUser();
 
+  console.log("user", user);
+
   if (!user) {
-    return NextResponse.redirect(new URL("/login", req.url));
+    // return NextResponse.redirect(new URL("/login", req.url));
+    return NextResponse.json({ message: "Auth required!" }, { status: 401 });
   }
 
   return res;
 }
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js).)*"],
+  matcher: ["/api/llm", "/api/chat", "/api/settings"],
 };
