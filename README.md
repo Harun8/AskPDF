@@ -37,4 +37,6 @@ Version 2: Current one
 - Route 504 timeout from vercel
 - lscache vs localstorage
 - Streaming responses
-- Authentication and authorization 
+- Authentication and authorization
+- Flow diagram of the chat part
+- sequence diagram
