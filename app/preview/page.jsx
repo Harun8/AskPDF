@@ -14,6 +14,7 @@ import TextField from "@/components/TextField";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { redirect, useRouter } from "next/navigation";
 import { toast } from "sonner";
+import lscache from "lscache";
 
 const supabase = createClientComponentClient();
 
@@ -158,14 +159,18 @@ const Preview = () => {
 
   const sendMessage = async (messageText) => {
     setCounter((prev) => prev + 1);
-    const index = Number(localStorage.getItem("questions"));
-    localStorage.setItem("questions", index + 1);
+    // const index = Number(localStorage.getItem("questions"));
+    // localStorage.setItem("questions", index + 1);
+
+    const index = lscache.get("questions");
+    console.log("index", typeof index);
+    lscache.set("questions", index + 1, 1440);
     console.log("counter", counter);
-    if (counter == 10 || localStorage.getItem("questions") > 10) {
+    if (counter == 10 || lscache.get("questions") > 10) {
       console.log("SHOW TOAST LIMIT REACHED");
       showToast(
         "Free daily questions limit reached",
-        "Go ahead and signup to ask more questions!"
+        "Your limit will be reset in 24 hours :)"
       );
       return;
     }
