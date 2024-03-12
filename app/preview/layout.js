@@ -3,6 +3,7 @@ import "../globals.css";
 import Nav from "@/components/Nav";
 import { cookies } from "next/headers";
 import { Inter as FontSans } from "next/font/google";
+import { Toaster } from "@/components/ui/sonner";
 
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import Footer from "@/components/footer";
@@ -28,6 +29,7 @@ export default async function RootLayout({ children }) {
         <Nav session={session}></Nav>
         <main class="flex-grow">{children}</main>
         <Footer></Footer>
+        <Toaster />
       </body>
     </html>
   );

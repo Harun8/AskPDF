@@ -13,6 +13,7 @@ import ConversationDisplay from "@/components/ConversationDisplay";
 import TextField from "@/components/TextField";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { redirect, useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const supabase = createClientComponentClient();
 
@@ -40,6 +41,7 @@ const Preview = () => {
   const [showThinkingAnimation, setShowThinkingAnimation] = useState(false);
   const [currentResponse, setCurrentResponse] = useState("");
   const [sessionId, setSessionId] = useState();
+  const [counter, setCounter] = useState(0);
   const supabase = createClientComponentClient();
 
   function onDocumentLoadSuccess({ numPages }) {
@@ -47,6 +49,8 @@ const Preview = () => {
   }
 
   useEffect(() => {
+    // localStorage.setItem("questions", 0);
+
     const sessionId = crypto.randomUUID();
     console.log("sessionId", sessionId);
     setSessionId(sessionId);
@@ -116,10 +120,8 @@ const Preview = () => {
   useEffect(() => {
     // Correctly initialize currentResponse within the scope it will be used
 
-    console.log("current response", currentResponse);
     channelA
       .on("broadcast", { event: "acknowledge" }, (payload) => {
-        console.log("payload", payload);
         if (payload.payload) {
           setShowThinkingAnimation(false);
         }
@@ -155,6 +157,18 @@ const Preview = () => {
   }, [conversation]); // Empty dependency array to run once on mount
 
   const sendMessage = async (messageText) => {
+    setCounter((prev) => prev + 1);
+    const index = Number(localStorage.getItem("questions"));
+    localStorage.setItem("questions", index + 1);
+    console.log("counter", counter);
+    if (counter == 10 || localStorage.getItem("questions") > 10) {
+      console.log("SHOW TOAST LIMIT REACHED");
+      showToast(
+        "Free daily questions limit reached",
+        "Go ahead and signup to ask more questions!"
+      );
+      return;
+    }
     setCurrentResponse("");
     client.removeChannel(channelA);
     if (!messageText.trim()) return;
@@ -182,6 +196,18 @@ const Preview = () => {
       return;
     }
   };
+
+  function showToast(title, desc) {
+    toast(title, {
+      description: desc,
+      position: "top-right",
+
+      action: {
+        label: "Understood",
+        onClick: () => console.log("Undo"),
+      },
+    });
+  }
   return (
     <div className="mx-12 flex flex-col lg:grid lg:grid-cols-2">
       <div className="rounded-lg border shadow5">
