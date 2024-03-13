@@ -119,6 +119,9 @@ const Preview = () => {
 
   const channelA = client.channel(`session-${sessionId}`);
   useEffect(() => {
+    channelA.unsubscribe();
+  }, []);
+  useEffect(() => {
     // Correctly initialize currentResponse within the scope it will be used
 
     channelA
@@ -166,14 +169,14 @@ const Preview = () => {
     console.log("index", typeof index);
     lscache.set("questions", index + 1, 1440);
     console.log("counter", counter);
-    if (counter == 10 || lscache.get("questions") > 10) {
-      console.log("SHOW TOAST LIMIT REACHED");
-      showToast(
-        "Free daily questions limit reached",
-        "Your limit will be reset in 24 hours :)"
-      );
-      return;
-    }
+    // if (counter == 5 || lscache.get("questions") > 5) {
+    //   console.log("SHOW TOAST LIMIT REACHED");
+    //   showToast(
+    //     "Free daily questions limit reached",
+    //     "Login to start asking more questions! :)"
+    //   );
+    //   return;
+    // }
     setCurrentResponse("");
     client.removeChannel(channelA);
     if (!messageText.trim()) return;

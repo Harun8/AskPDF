@@ -14,8 +14,6 @@ export async function middleware(req) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  console.log("user", user);
-
   if (!user) {
     // return NextResponse.redirect(new URL("/login", req.url));
     return NextResponse.json({ message: "Auth required!" }, { status: 401 });
