@@ -1,5 +1,7 @@
 https://www.allabtai.com/wp-content/uploads/2022/12/big-file-summerize-gpt3.jpg
 
+# NOTE: Right now this readme is only being utilized as notes for myself, which will be changed soon explaining everything about this project
+
 ## Note to self
 
 Anything older/weaker than the "gpt-3.5-turbo-0125", seems to be useless, on first test
@@ -29,5 +31,12 @@ Version 2: Current one
 - Realtime broadcast
 - SendGrid/twillio
 - Vector database with 1500 + dimensions could go up to 3000+
-- Sripe integration
+- Sripe integration (webhooks)
 - Fix ER diagram
+- Supabase realtime broadcast
+- Route 504 timeout from vercel
+- lscache vs localstorage
+- Streaming responses
+- Authentication and authorization
+- Flow diagram of the chat part
+- sequence diagram
