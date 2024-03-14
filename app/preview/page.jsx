@@ -118,9 +118,8 @@ const Preview = () => {
   const convHistory = [];
 
   const channelA = client.channel(`session-${sessionId}`);
-  useEffect(() => {
-    channelA.unsubscribe();
-  }, []);
+  // This function does not need to be async since you're not awaiting it here
+
   useEffect(() => {
     // Correctly initialize currentResponse within the scope it will be used
 
