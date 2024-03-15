@@ -3,8 +3,7 @@ import "../globals.css";
 import Nav from "@/components/Nav";
 import { cookies } from "next/headers";
 import { Inter as FontSans } from "next/font/google";
-import supabaseServer from "@/lib/supabaseServer";
-
+b;
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import Footer from "@/components/footer";
 
