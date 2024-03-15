@@ -56,8 +56,12 @@ So that is what I did. Jumping into working with LLM's and a bunch of new techno
 
 ## Upcoming feature I will be working on for the next release
 
-- [ ] https://github.com/Harun8/AskPdf/issues/4
-- [ ] #18
+- [ ] Darkmode https://github.com/Harun8/AskPdf/issues/4
+- [ ] Refactoring
+
+## 
+
+### If you made it so far, then thank you for taking your time and reading this. Feel free to add me on linkedin xxx
 
 https://www.allabtai.com/wp-content/uploads/2022/12/big-file-summerize-gpt3.jpg
 
