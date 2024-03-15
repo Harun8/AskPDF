@@ -3,12 +3,30 @@
 import { loadStripe } from "@stripe/stripe-js";
 import { useEffect, useState } from "react";
 import Loading from "./loading";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 export default function Pricing() {
   const [plans, setPlans] = useState([]);
   const [monthly, setMonthly] = useState(true);
   const [yearly, setYearly] = useState(false);
   const [loading, setLoading] = useState(true); // Loading state added here
+  const supabase = createClientComponentClient();
+
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    const getUser = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      console.log("session", session);
+
+      console.log("session", session.user.id);
+      setUserId(session.user.id);
+    };
+
+    getUser();
+  }, []);
 
   // const [mont]
   useEffect(() => {
@@ -33,26 +51,51 @@ export default function Pricing() {
   }, []);
 
   async function onCheckout(planId, plan) {
-    const response = await fetch(`/api/checkout/${planId}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json", // for example, setting Content-Type to application/json
-        // ... you can add more headers here if needed
-      },
-      body: JSON.stringify({
-        priceId: planId,
-        plan: plan,
-      }),
-    });
+    // if user is logged in and has a session
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+    const { data: profile } = await supabase
+      .from("profile")
+      .select("stripe_customer_id")
+      .eq("user_id", userId)
+      .single();
+
+    console.log("data", profile);
+    if (profile) {
+      console.log("user have a customer IDDDD");
+
+      const response = await fetch("/api/settings", {
+        method: "POST",
+        body: JSON.stringify({
+          id: userId,
+        }),
+      });
+      const data = await response.json();
+
+      console.log("data", data);
+      if (data) window.location.href = data.url;
+    } else {
+      const response = await fetch(`/api/checkout/${planId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", // for example, setting Content-Type to application/json
+          // ... you can add more headers here if needed
+        },
+        body: JSON.stringify({
+          priceId: planId,
+          plan: plan,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      const stripe = await loadStripe(
+        process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY // fine that it is in the client
+      );
+      await stripe.red;
+      await stripe.redirectToCheckout({ sessionId: data.id });
     }
-    const data = await response.json();
-    const stripe = await loadStripe(
-      process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY // fine that it is in the client
-    );
-    await stripe.redirectToCheckout({ sessionId: data.id });
   }
 
   const monthlyPricing = async () => {
