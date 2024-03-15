@@ -50,7 +50,6 @@
 //         });
 
 //         // Assuming you want the embedding data, adjust according to actual response structure
-//         console.log("response", response);
 //         return response.data[0].embedding; // This should access the numeric embedding directly
 //       });
 
@@ -58,8 +57,6 @@
 //       const numericEmbeddings = embeddings.map(
 //         (embeddingObj) => embeddingObj.embedding
 //       );
-
-//       console.log("Embeddings:", numericEmbeddings);
 
 //       const documentsWithForeignKeysAndEmbeddings = output.map(
 //         (document, index) => ({
@@ -69,10 +66,7 @@
 //         })
 //       );
 
-//       console.log(
-//         "Documents with metadata and embeddings:",
-//         documentsWithForeignKeysAndEmbeddings
-//       );
+//
 
 //       // Step 2: Insert documents into the Supabase table
 
@@ -81,8 +75,6 @@
 //         .insert(documentsWithForeignKeysAndEmbeddings);
 
 //       if (error) throw error;
-
-//       console.log("Insertion successful", data);
 
 //       const responseObject = {
 //         message: "PDF processed",
@@ -183,7 +175,6 @@ export const runtime = "edge";
 export default async function handler(req, res) {
   try {
     const data = await req.json(); // Assuming text data if not form data
-    console.log(data);
 
     const channelB = client.channel(`session-${data.sessionId}`);
 
@@ -193,8 +184,6 @@ export default async function handler(req, res) {
       modelName: "gpt-4-0125-preview",
       //  temperature: 0.5
     });
-
-    console.log("min LLM ER:", llm);
 
     const standaloneQuestionchain = standaloneQuestionPrompt
       .pipe(llm)
@@ -227,7 +216,6 @@ export default async function handler(req, res) {
     });
 
     for await (const chunk of response) {
-      console.log("chunk", chunk);
       await channelB.send({
         type: "broadcast",
         event: "acknowledge",
@@ -235,8 +223,6 @@ export default async function handler(req, res) {
       });
     }
     client.removeChannel(channelB);
-
-    console.log("chain is", response);
 
     return new Response(JSON.stringify(response), {
       status: 200, // Set the status code to 200 (OK)
@@ -263,10 +249,7 @@ const supabase = createClient(
 );
 
 async function retriver(queryText) {
-  console.log("file_id");
-
   const model = "text-embedding-3-small";
-  console.log("queryText", queryText);
   // Generate the embedding vector for the query text
   let queryEmbedding;
   try {
@@ -278,7 +261,6 @@ async function retriver(queryText) {
       console.error("Error generating embeddings:", embeddingResult.error);
       return [];
     }
-    console.log("embeddingResult", embeddingResult);
     queryEmbedding = embeddingResult.data[0].embedding; // Adjust this line based on the actual structure of the response
   } catch (error) {
     console.error("Error during embedding generation:", error);
@@ -291,8 +273,6 @@ async function retriver(queryText) {
     match_count: 10,
     filter: {},
   });
-
-  console.log("data", data);
 
   if (error) {
     console.error("Error searching for documents:", error);

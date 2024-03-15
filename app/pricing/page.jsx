@@ -19,9 +19,7 @@ export default function Pricing() {
       const {
         data: { session },
       } = await supabase.auth.getSession();
-      console.log("session", session);
 
-      console.log("session", session.user.id);
       setUserId(session.user.id);
     };
 
@@ -39,7 +37,6 @@ export default function Pricing() {
         });
 
         const data = await response.json();
-        console.log("prices", data);
         setPlans(data);
       } catch (error) {
         console.error(error);
@@ -59,10 +56,7 @@ export default function Pricing() {
       .eq("user_id", userId)
       .single();
 
-    console.log("data", profile);
     if (profile) {
-      console.log("user have a customer IDDDD");
-
       const response = await fetch("/api/settings", {
         method: "POST",
         body: JSON.stringify({
@@ -71,7 +65,6 @@ export default function Pricing() {
       });
       const data = await response.json();
 
-      console.log("data", data);
       if (data) window.location.href = data.url;
     } else {
       const response = await fetch(`/api/checkout/${planId}`, {

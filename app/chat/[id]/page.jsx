@@ -55,7 +55,6 @@ const ChatPage = () => {
         const {
           data: { session },
         } = await supabase.auth.getSession();
-        // console.log("session", session);
 
         if (session) {
           const response = await fetch("/api/abilities", {
@@ -69,16 +68,14 @@ const ChatPage = () => {
           });
 
           if (!response.ok) {
-            console.log("Could not fetch abilities");
+            console.error("response to abilities endpoint failed");
           }
 
           const data = await response.json();
-          console.log("data with plan", data);
           setPlan(data.fileSize);
           setUploadCount(data.upload);
         } else {
           router.push("/");
-          console.log("THE USER AINT AUTHENTICATED REDIRRRREEECCCTT MFFF");
         }
       } catch (error) {
         console.error("Error checking authentication", error);
@@ -95,7 +92,6 @@ const ChatPage = () => {
         const {
           data: { session },
         } = await supabase.auth.getSession();
-        console.log("session", session);
 
         if (session) {
           setUserId(session.user.id);
@@ -105,7 +101,6 @@ const ChatPage = () => {
               userID: session.user.id,
             }),
           });
-          console.log("params.id", params.id);
 
           if (!response.ok) {
             throw new Error("API call failed");
@@ -114,14 +109,10 @@ const ChatPage = () => {
             const data = await response.json();
             currentPdfId = params.id;
 
-            console.log("params.id", params.id);
-
-            console.log("response", data);
             fetchPdfUrl(params.id);
           }
         } else {
           router.push("/");
-          console.log("THE USER AINT AUTHENTICATED REDIRRRREEECCCTT MFFF");
         }
       } catch (error) {
         console.error("Error checking authentication", error);
@@ -134,8 +125,6 @@ const ChatPage = () => {
   }, [params]);
 
   async function fetchPdfUrl(file_id) {
-    console.log("file_id", file_id);
-
     const { data, error } = await supabase
       .schema("storage")
       .from("objects")
@@ -144,18 +133,10 @@ const ChatPage = () => {
 
     if (error) throw new Error(error.message);
 
-    console.log("publicURL", data);
-
     if (data) {
-      console.log(
-        "Path to file, ",
-        data[0].path_tokens[0] + data[0].path_tokens[1]
-      );
       const { data: download, error } = await supabase.storage
         .from("pdfs")
         .download(`${data[0].path_tokens[0]}/${data[0].path_tokens[1]}`);
-
-      console.log("download data ", download);
 
       if (error) throw new Error(error.message);
 
@@ -165,16 +146,12 @@ const ChatPage = () => {
 
   const convHistory = [];
   const channelA = client.channel(`session-${userId}`);
-  console.log("userId", userId);
 
   useEffect(() => {
-    console.log("useffect called");
     // Correctly initialize currentResponse within the scope it will be used
 
-    console.log("current response", currentResponse);
     channelA
       .on("broadcast", { event: "acknowledge" }, (payload) => {
-        console.log("payload", payload);
         if (payload.payload) {
           setShowThinkingAnimation(false);
         }
@@ -235,7 +212,7 @@ const ChatPage = () => {
         }),
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
       return;
     }
   };

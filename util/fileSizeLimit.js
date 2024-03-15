@@ -1,5 +1,4 @@
 function fileSizeLimit(plan) {
-  console.log("plan", plan);
   let fileSizeLimit;
   // change to a switch case when u see this
   if (plan == null) {

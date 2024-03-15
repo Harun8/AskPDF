@@ -27,12 +27,11 @@ export default function LoginPage() {
     });
 
     if (error) {
-      console.log("error", error);
+      console.error("error", error);
       setIsSubmitting(false);
     } else {
       // force reload upon switching site path
       // window.location.href = "/"; // router.push() does not work
-      // console.log("Sucess! You're signed in!!!");
     }
   };
 

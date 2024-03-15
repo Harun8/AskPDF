@@ -53,7 +53,6 @@ const Preview = () => {
     // localStorage.setItem("questions", 0);
 
     const sessionId = crypto.randomUUID();
-    console.log("sessionId", sessionId);
     setSessionId(sessionId);
   }, []);
 
@@ -63,12 +62,9 @@ const Preview = () => {
         const {
           data: { session },
         } = await supabase.auth.getSession();
-        console.log("session", session);
 
         if (session) {
           router.push("/");
-          console.log("THE USER ISSSS AUTHENTICATED REDIRRRREEECCCTT MFFF");
-          console.log("THE DONT NEED TO SEE THE PREVIEW PAGE");
         } else {
           loadPDF();
         }
@@ -86,14 +82,11 @@ const Preview = () => {
 
     if (error) throw new Error(error.message);
 
-    console.log("download data ", data);
     setPdf(data);
   };
 
   const uploadPdf = async () => {
     try {
-      console.log("Is the modal open? ", isOpen);
-
       const formData = new FormData();
       // a web API that allows you to easily construct a set of key/value pairs representing form fields and their values
       formData.append("file", pdf);
@@ -105,14 +98,8 @@ const Preview = () => {
         method: "POST",
         body: formData,
       });
-
-      console.log("Content-Type: ", response.headers.get("Content-Type"));
-
-      if (response.ok) {
-        console.log("request worked");
-      }
     } catch (error) {
-      console.error;
+      console.error(error);
     }
   };
   const convHistory = [];
@@ -165,17 +152,14 @@ const Preview = () => {
     // localStorage.setItem("questions", index + 1);
 
     const index = lscache.get("questions");
-    console.log("index", typeof index);
     lscache.set("questions", index + 1, 1440);
-    console.log("counter", counter);
-    // if (counter == 5 || lscache.get("questions") > 5) {
-    //   console.log("SHOW TOAST LIMIT REACHED");
-    //   showToast(
-    //     "Free daily questions limit reached",
-    //     "Login to start asking more questions! :)"
-    //   );
-    //   return;
-    // }
+    if (counter == 10 || lscache.get("questions") > 10) {
+      showToast(
+        "Free daily questions limit reached",
+        "Login to start asking more questions! :)"
+      );
+      return;
+    }
     setCurrentResponse("");
     client.removeChannel(channelA);
     if (!messageText.trim()) return;

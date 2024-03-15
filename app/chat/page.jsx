@@ -70,7 +70,6 @@ export default function chat() {
         const {
           data: { session },
         } = await supabase.auth.getSession();
-        // console.log("session", session);
 
         if (session) {
           setUserId(session.user.id);
@@ -86,16 +85,14 @@ export default function chat() {
           });
 
           if (!response.ok) {
-            console.log("Could not fetch abilities");
+            console.error("Could not fetch abilities");
           }
 
           const data = await response.json();
-          console.log("data with plan", data);
           setPlan(data.fileSize);
           setUploadCount(data.upload);
         } else {
           router.push("/");
-          console.log("THE USER AINT AUTHENTICATED REDIRRRREEECCCTT MFFF");
         }
       } catch (error) {
         console.error("Error checking authentication", error);
@@ -109,13 +106,10 @@ export default function chat() {
   const convHistory = [];
   const channelA = client.channel(`session-${userId}`);
   useEffect(() => {
-    console.log("useffect called");
     // Correctly initialize currentResponse within the scope it will be used
 
-    console.log("current response", currentResponse);
     channelA
       .on("broadcast", { event: "acknowledge" }, (payload) => {
-        console.log("payload", payload);
         if (payload.payload) {
           setShowThinkingAnimation(false);
         }
@@ -175,20 +169,17 @@ export default function chat() {
         }),
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
       return;
     }
   };
 
   const onFileSelect = async (event) => {
-    console.log("Is the modal open? ", isOpen);
     event.stopPropagation();
     let filePath;
     let file_id;
     let fsl = await fileSizeLimit(plan); // fsl -> fileSizeLimit
     let upl = await uploadLimit(plan); // upl -> uploadLimit
-    console.log("fsl", fsl);
-    console.log("file chosen, upload it to db", event);
 
     // check if both cases are true first
     if (uploadCount >= upl && event.target.files[0].size > fsl) {
@@ -202,7 +193,6 @@ export default function chat() {
 
     if (uploadCount >= upl) {
       // setIsOverPDFCount(true);
-      console.log("Upload limit reached!", "YOU HAVE UPLOADED TOO MANY PDFSSS");
       showToast("Upload limit reached", "You have reached your upload limit");
       closeModal();
       return;
@@ -212,13 +202,9 @@ export default function chat() {
       showToast("File size limit reached!", "The PDF file is over your limit");
       closeModal();
       // setFileOverLimit(true);
-      console.log("SHIT IS TOO BIGG FAMALAM");
       event.target.value = "";
     } else {
-      console.log("Is the modal open? ", isOpen);
-
       filePath = `${userId}/${event.target.files[0].name}`;
-      console.log("userid", userId);
       const { data, error } = await supabase.storage
         .from("pdfs")
         .upload(filePath, event.target.files[0]);
@@ -227,17 +213,14 @@ export default function chat() {
 
         setDuplicateFileError(true);
         // Handle error
-        console.log("error", error.message);
+        console.error(error.message);
         closeModal();
         return;
       } else {
         setDuplicateFileError(false);
 
         setPdf(event.target.files[0]); // call method
-        console.log("Is the modal open? ", isOpen);
 
-        console.log("File upload success", data);
-        console.log("data.id", data.id);
         file_id = data.id;
         setFileId(data.id);
         // Handle success
@@ -245,7 +228,6 @@ export default function chat() {
 
       try {
         setProcessingPDF(true);
-        console.log("Is the modal open? ", isOpen);
 
         const formData = new FormData();
         // a web API that allows you to easily construct a set of key/value pairs representing form fields and their values
@@ -259,22 +241,16 @@ export default function chat() {
           body: formData,
         });
 
-        console.log("Content-Type: ", response.headers.get("Content-Type"));
-
         if (response.ok) {
-          console.log("Is the modal open? ", isOpen);
-
           try {
             setProcessingPDF(false);
             closeModal();
             setIsTextDisabled(false);
             const textResponse = await response.text(); // Read response as text
-            console.log("Response Text: ", textResponse);
 
             // If you still need to parse JSON from the text
             try {
               const data = JSON.parse(textResponse); // Try parsing as JSON
-              console.log("Parsed Data: ", data);
               setCurrentPdfId(data.pdfIds);
               setChatId(data.chatId);
               history.replaceState(data, "convo", `/chat/${data.pdfIds}`);
@@ -292,15 +268,14 @@ export default function chat() {
         } else {
           setProcessingPDF(false);
 
-          console.log("Response not OK: ", response.status);
+          console.error("Response not OK: ", response.status);
         }
 
         // const result = await response.json();
-        // console.log(result); // handle the response
       } catch (error) {
         setProcessingPDF(false);
 
-        console.log("error in chat page", error);
+        console.error("error in chat page", error);
       }
     }
   };

@@ -10,20 +10,16 @@ export default function Settings() {
 
   const [userId, setUserId] = useState(null);
 
-  console.log("router", router);
-
   useEffect(() => {
     const getUser = async () => {
       const {
         data: { session },
       } = await supabase.auth.getSession();
-      console.log("session", session);
 
       if (!session) {
         router.push("/");
       }
 
-      console.log("session", session.user.id);
       setUserId(session.user.id);
     };
 
@@ -39,12 +35,10 @@ export default function Settings() {
     });
     const data = await response.json();
 
-    console.log("data", data);
     if (data) window.location.href = data.url;
   };
 
   if (router.pathname === "/login") {
-    console.log("yeaa");
     // Return null or any other placeholder if you are on /login page
     return null;
   }

@@ -3,8 +3,6 @@ export default async function handler(req, res) {
   // Perform operations with `id` here...
   const textData = await req.json(); // Assuming text data if not form data
 
-  console.log("req", textData);
-
   const responseObject = {
     message: "YO MAIIIN",
   };

@@ -15,16 +15,12 @@ export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 export default async function handler(req, res) {
   const user = await req.json(); // Assuming text data if not form data
 
-  console.log("req.body", user);
-
   // Proceed with your logic now that you have the user
   const { data: profile, error } = await supabase
     .from("profile")
     .select("stripe_customer_id")
     .eq("user_id", user.id)
     .single();
-
-  console.log("profile", profile);
 
   if (error) {
     return new Response(
@@ -38,15 +34,12 @@ export default async function handler(req, res) {
     );
   }
 
-  console.log("data from profile table", profile);
-
   // Your existing Stripe session creation logic...
   const session = await stripe.billingPortal.sessions.create({
     customer: profile.stripe_customer_id,
     return_url: `${SITE_URL}`,
   });
 
-  console.log("session", session);
   return new Response(JSON.stringify({ url: session.url }), {
     status: 200, // Set the status code to 200 (OK)
     headers: {

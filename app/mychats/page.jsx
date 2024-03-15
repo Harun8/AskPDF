@@ -22,13 +22,11 @@ const MyChats = () => {
           router.push("/");
           return;
         }
-        console.log("session", session);
         setUserId(session.user.id);
 
         const { data, error } = await supabase.storage
           .from("pdfs")
           .list(session.user.id);
-        console.log("pdfs", data);
         setPdfs(data);
       } catch (error) {
         console.error(error);
@@ -37,24 +35,7 @@ const MyChats = () => {
     getUser();
   }, []);
 
-  // useEffect(() => {
-  //   const getFiles = async () => {
-  //     console.log("userid", userId);
-  //     try {
-  //       const { data, error } = await supabase.storage
-  //         .from("pdfs")
-  //         .list(userId);
-  //       console.log("pdfs", data);
-  //       setPdfs(data);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-  //   getFiles();
-  // }, [userId]);
-
   const getPdfId = (id) => {
-    console.log("id", id);
     router.push(`/chat/${id}`);
   };
 

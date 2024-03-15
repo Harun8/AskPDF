@@ -15,7 +15,6 @@ const Signin = () => {
 
   const signUpp = async (values) => {
     setIsSubmitting(true);
-    console.log("signup been called", values.email, values.password);
 
     let { error } = await supabase.auth.signInWithOtp({
       email: values.email,
@@ -27,11 +26,10 @@ const Signin = () => {
     });
     if (error) {
       setIsSubmitting(false);
-      console.log("error", error);
+      console.error("error", error);
     } else {
       setIsSubmitting(false);
 
-      console.log("Sucess! Please check your email");
       router.refresh();
     }
   };

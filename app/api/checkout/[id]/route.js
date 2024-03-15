@@ -5,9 +5,7 @@ export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2023-10-16",
 });
 export default async function handler(req, res) {
-  console.log("post req, called", req.body);
   const body = await req.json();
-  console.log("body", body.priceId);
 
   try {
     // Initialize the session creation object with properties that are always needed
@@ -27,8 +25,6 @@ export default async function handler(req, res) {
     }
 
     const session = await stripe.checkout.sessions.create(sessionConfig);
-
-    console.log("Session", session);
 
     const responseObject = {
       id: session.id,

@@ -9,19 +9,15 @@ import { userAgent } from "next/server";
 export default async function handler(req, res) {
   const user = await req.json(); // Assuming text data if not form data
 
-  console.log("user", user.user_id);
   try {
     const { data, error } = await supabase
       .from("profile")
       .select("price")
       .eq("user_id", user.user_id);
-    console.log("data", data);
 
     const { data: pdfUpload, error: err } = await supabase.storage
       .from("pdfs")
       .list(user.user_id);
-
-    console.log("pdfuploads", pdfUpload.length);
 
     const limits = {
       fileSize: data.length > 0 ? data[0].price : null,

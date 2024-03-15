@@ -1,5 +1,4 @@
 function modelChooser(plan) {
-  console.log("plan", plan);
   let modelChooser;
   // change to a switch case when u see this
   if (plan == null) {
@@ -19,7 +18,6 @@ function modelChooser(plan) {
     modelChooser = "gpt-4-0125-preview"; // 100 pdf uploads
   }
 
-  console.log("model IS", modelChooser);
   return modelChooser;
 }
 

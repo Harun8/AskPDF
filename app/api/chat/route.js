@@ -51,7 +51,6 @@ export default async function handler(req, res) {
         });
 
         // Assuming you want the embedding data, adjust according to actual response structure
-        console.log("response", response);
         return response.data[0].embedding; // This should access the numeric embedding directly
       });
 
@@ -59,8 +58,6 @@ export default async function handler(req, res) {
       const numericEmbeddings = embeddings.map(
         (embeddingObj) => embeddingObj.embedding
       );
-
-      console.log("Embeddings:", numericEmbeddings);
 
       const { data: chatData, error: chatError } = await supabase
         .from("chats")
@@ -71,8 +68,6 @@ export default async function handler(req, res) {
         console.error("Error inserting chat:", chatError);
         return; // Exit if there's an error
       }
-
-      console.log("chatData", chatData);
 
       // Save the chat completion response
 
@@ -91,11 +86,6 @@ export default async function handler(req, res) {
         })
       );
 
-      console.log(
-        "Documents with metadata and embeddings:",
-        documentsWithForeignKeysAndEmbeddings
-      );
-
       // Step 2: Insert documents into the Supabase table
 
       const { data, error } = await supabase
@@ -103,8 +93,6 @@ export default async function handler(req, res) {
         .insert(documentsWithForeignKeysAndEmbeddings);
 
       if (error) throw error;
-
-      console.log("Insertion successful", data);
 
       const responseObject = {
         message: "PDF processed",

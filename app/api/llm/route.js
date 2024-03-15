@@ -61,7 +61,6 @@ export default async function handler(req, res) {
   try {
     const data = await req.json(); // Assuming text data if not form data
     //
-    console.log(data);
 
     channelB = client.channel(`session-${data.sessionId}`);
 
@@ -103,7 +102,6 @@ export default async function handler(req, res) {
     });
 
     for await (const chunk of response) {
-      console.log("chunk", chunk);
       await channelB.send({
         type: "broadcast",
         event: "acknowledge",
@@ -181,7 +179,6 @@ const supabase = createClient(
 //     });
 
 //     for await (const chunk of response) {
-//       console.log("chunk", chunk);
 //       await channelB.send({
 //         type: "broadcast",
 //         event: "acknowledge",

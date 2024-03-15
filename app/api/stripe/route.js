@@ -8,7 +8,6 @@ export const dynamic = "force-dynamic";
 export default async function handler(req, res) {
   //   const data = await req.json(); // Assuming text data if not form data
 
-  console.log("body", req);
   try {
     const { data: prices } = await stripe.prices.list();
     const plans = [];
@@ -22,7 +21,6 @@ export default async function handler(req, res) {
         interval: price.recurring.interval,
       });
     }
-    console.log("plans", plans);
 
     return new Response(JSON.stringify(plans), {
       status: 200, // Set the status code to 200 (OK)
