@@ -52,6 +52,13 @@ So that is what I did. Jumping into working with LLM's and a bunch of new techno
 
 ## Entity relationship diagram
 
+# What is next? 
+
+## Upcoming feature I will be working on for the next release
+
+- [ ] https://github.com/Harun8/AskPdf/issues/4
+- [ ] #18
+
 https://www.allabtai.com/wp-content/uploads/2022/12/big-file-summerize-gpt3.jpg
 
 # NOTE: Right now this readme is only being utilized as notes for myself, which will be changed soon explaining everything about this project
