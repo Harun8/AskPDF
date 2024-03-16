@@ -19,7 +19,7 @@ For an introduction AskPDF is a website where a user can upload and chat with th
 
 ### Why did I make AskPDF? 
 
-The reason for me making AskPDF was primarly to delve a bit further in to the NextJS framework. My first project in Nextjs was a simple wordle spinoff game called [numb3r](https://numb3r.vercel.app). And based of that small implementation of the game I enjoyed the framework, so I knew i wanted to make a bigger project. And as we know 2022-2024 utilizing/incorperating llm's (large language models) into real-world applications seems to be a hot commodity. 
+The reason for me making AskPDF was primarly to delve a bit further in to the NextJS framework. My first project in Nextjs was a simple wordle spinoff game called [numb3r](https://numb3r.vercel.app). And based of that small implementation of the game I enjoyed the framework, so I knew i wanted to make a bigger project. And as we know for the past few years utilizing/incorperating llm's (large language models) into real-world applications seems to be a hot commodity. 
 
 So that is what I did. Jumping into working with LLM's and a bunch of new technologies that I haven't used before. So for the next section I will dive into the different technologies/tools i've used and what i've learned throughout making this application
 
@@ -31,19 +31,30 @@ So that is what I did. Jumping into working with LLM's and a bunch of new techno
 
 ## Nextjs
 
+## Openai API
+
+One thing that was really straightforward was using the openai API
+
 ## Langchain
 
 ## Supabase
 
+As a backend as a service i stumbled across supabase which was regarded as a firebase alternative. And after doing some research and reading their documentation, I figured that using supabse could be a smart option so that is what i did. 
+
+My reasoning for choosing supabase what primarly on the fact that their documentation and tutorials was easy to understand and it seemed like they've got a relative big community, so there was
+
   ### Supabase vector DB
 
 ### Supabase realtime broadcast
+
+### Supabase enviorments
 
 ## Sendgrid email service
 
 ## Stripe
 
 ## lscache vs localstorage
+
 
 
 # Diagrams
@@ -57,11 +68,13 @@ So that is what I did. Jumping into working with LLM's and a bunch of new techno
 ## Upcoming feature I will be working on for the next release
 
 - [ ] Darkmode https://github.com/Harun8/AskPdf/issues/4
-- [ ] Refactoring
+- [ ] Heavy Refactoring
+- [ ] Reduce response times on some api's
+- [ ] Add OCR recognition for PDFs
 
 ## 
 
-### If you made it so far, then thank you for taking your time and reading this. Feel free to add me on linkedin xxx
+### If you made it so far, then thank you for taking your time and reading this. Feel free to start this repo if you've liked it
 
 https://www.allabtai.com/wp-content/uploads/2022/12/big-file-summerize-gpt3.jpg
 
