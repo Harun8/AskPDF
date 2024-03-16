@@ -37,7 +37,7 @@ One thing that was really straightforward was using the openai API. However the 
 
 One of them being that my implementation of code
 
-```
+```  js
 
 async function processChunks(chunks, file_id) {
   for (const chunk of chunks) {
