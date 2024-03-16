@@ -42,15 +42,17 @@ const Footer = () => {
           </div>
           <div class="px-5 py-2">
             <Link
-              href="#"
+              href="/faq"
               class="text-base leading-6 text-gray-500 hover:text-gray-900">
               FAQ
             </Link>
           </div>
         </nav>
         <div class="flex justify-center mt-8 space-x-6">
-          <Link href="#" class="text-gray-400 hover:text-blue-500">
-            <span class="sr-only">Facebook</span>
+          <Link
+            href="https://www.linkedin.com/in/harun-abdi-25aa73164/"
+            class="text-gray-400 hover:text-blue-500">
+            <span class="sr-only">Linkedin</span>
             <svg
               class="w-6 h-6"
               aria-hidden="true"
