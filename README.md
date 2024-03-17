@@ -33,7 +33,37 @@ So that is what I did. Jumping into working with LLM's and a bunch of new techno
 
 ## Openai API
 
-One thing that was really straightforward was using the openai API
+One thing that was really straightforward was using the openai API. However the first intuitive thought was to use the chat completion API. So that is what i did for a good chunk of this project until I ran into some bottlenecks. 
+
+One of them being that my implementation of code
+
+```  js
+
+async function processChunks(chunks, file_id) {
+  for (const chunk of chunks) {
+    const response = await chatCompletion(chunk);
+    responses.push(response);
+    pdfText.push(chunk);
+  }
+...
+}
+
+
+async function chatCompletion(chunk, text) {
+  const completion = await openai.chat.completions.create({
+    messages: [
+      { role: "system", content: "You are a helpful assistant." },
+      { role: "user", content: chunk },
+    ],
+    model: "gpt-3.5-turbo-0301",
+  });
+
+
+  return completion.choices[0].message.content;
+}
+
+```
+
 
 ## Langchain
 
@@ -54,6 +84,8 @@ My reasoning for choosing supabase what primarly on the fact that their document
 ## Stripe
 
 ## lscache vs localstorage
+
+# Testing
 
 
 
