@@ -35,7 +35,9 @@ So that is what I did. Jumping into working with LLM's and a bunch of new techno
 
 One thing that was really straightforward was using the openai API. However the first intuitive thought was to use the chat completion API. So that is what i did for a good chunk of this project until I ran into some bottlenecks. 
 
-One of them being that my implementation of code
+One of them being that my implementation of code. There was two huge downsides into my first implementation
+
+1. First one being that the
 
 ```  js
 
@@ -87,7 +89,7 @@ My reasoning for choosing supabase what primarly on the fact that their document
 
 # Testing
 
-
+## End-To-End testing with Cypress
 
 # Diagrams
 
@@ -104,9 +106,9 @@ My reasoning for choosing supabase what primarly on the fact that their document
 - [ ] Reduce response times on some api's
 - [ ] Add OCR recognition for PDFs
 
-## 
+## Final remarks
 
-### If you made it so far, then thank you for taking your time and reading this. Feel free to start this repo if you've liked it
+### If you made it so far, then thank you for taking your time and reading this. Feel free to star this repo if you've liked it
 
 https://www.allabtai.com/wp-content/uploads/2022/12/big-file-summerize-gpt3.jpg
 
