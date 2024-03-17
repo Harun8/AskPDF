@@ -280,7 +280,7 @@ export default function Pricing() {
                 </ul>
               </div>
             </div>
-            <div className=" hover:bg-sky-100 dark:bg-gray-900 shadow-xl  shadow-blue-500		 border border-slate-900 rounded-lg shadow-sm divide-y divide-slate-200">
+            <div className=" bg-sky-100 hover:bg-sky-200 dark:bg-gray-900 shadow-xl  shadow-blue-500		 border border-slate-900 rounded-lg shadow-sm divide-y divide-slate-200">
               <div className="p-6">
                 <h2 className="text-xl leading-6 font-bold dark:text-slate-100 text-slate-900">
                   {plans.length > 0 ? plans[2].name : "Premium"}
