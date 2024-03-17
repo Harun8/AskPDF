@@ -188,12 +188,12 @@ const Nav = ({ session }) => {
         {!session ? (
           <>
             <Link
-              class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
+              class="hidden md:inline-block md:ml-auto md:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
               href="/login">
               Login
             </Link>
             <Link
-              class="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
+              class="hidden md:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
               href="/signin">
               Sign up
             </Link>
@@ -201,7 +201,7 @@ const Nav = ({ session }) => {
         ) : (
           <>
             <button
-              class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-blue-400 hover:bg-blue-900 text-sm text-white font-bold  rounded-xl transition duration-200"
+              class="hidden md:inline-block md:ml-auto md:mr-3 py-2 px-6 bg-blue-400 hover:bg-blue-900 text-sm text-white font-bold  rounded-xl transition duration-200"
               onClick={async (e) => {
                 e.preventDefault();
                 setLoading(true);

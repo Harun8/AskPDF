@@ -6,9 +6,9 @@ import Nav from "@/components/Nav";
 import { Inter as FontSans } from "next/font/google";
 import React, { useEffect, useState } from "react";
 // import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-// import { Analytics } from "@vercel/analytics/react";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { supabase } from "@/lib/supabase";
-// import { SpeedInsights } from "@vercel/speed-insights/next";
 // import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import Footer from "@/components/footer";
 // import { createServerComponentClient } from "@/lib/supabaseServer";
@@ -46,8 +46,8 @@ export default function RootLayout({ children }) {
         <Nav session={session}></Nav>
         <main className="flex-grow">
           {children}
-          {/* <Analytics></Analytics>
-          <SpeedInsights></SpeedInsights> */}
+          <Analytics></Analytics>
+          <SpeedInsights></SpeedInsights>
         </main>
         <Footer></Footer>
       </body>

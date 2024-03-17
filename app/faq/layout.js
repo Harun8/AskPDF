@@ -3,7 +3,8 @@ import "../globals.css";
 import Nav from "@/components/Nav";
 import { cookies } from "next/headers";
 import { Inter as FontSans } from "next/font/google";
-
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import Footer from "@/components/footer";
 
@@ -26,7 +27,11 @@ export default async function RootLayout({ children }) {
     <html class="" lang="en">
       <body class="flex flex-col min-h-screen w-full bg-zinc-100	 dark:bg-gray-800">
         <Nav session={session}></Nav>
-        <main class="flex-grow">{children}</main>
+        <main class="flex-grow">
+          {children}
+          {/* <Analytics></Analytics>
+          <SpeedInsights></SpeedInsights> */}
+        </main>
         <Footer></Footer>
       </body>
     </html>
