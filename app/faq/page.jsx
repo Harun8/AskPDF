@@ -43,7 +43,7 @@ const Accordion = () => {
               text="You've most likely hit your limit"
             />
             <AccordionItem
-              header="Can I get a trial period"
+              header="Can I get a trial period?"
               text="Yes indeed, for the premium subscription we have a 7-day trial period"
             />
             {/* <AccordionItem
