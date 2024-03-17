@@ -27,7 +27,7 @@ export default async function RootLayout({ children }) {
       <body class="flex flex-col min-h-screen w-full bg-zinc-100	 dark:bg-gray-800">
         <Nav session={session}></Nav>
         <main class="flex-grow">{children}</main>
-        {/* <Footer></Footer> */}
+        <Footer></Footer>
       </body>
     </html>
   );

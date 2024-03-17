@@ -54,7 +54,7 @@ const Accordion = () => {
         </div>
       </div>
 
-      <div className="absolute bottom-0 right-0 z-[-1]">
+      <div className="absolute bottom-0 right-0 z-[-1] ">
         <svg
           width="1440"
           height="886"
