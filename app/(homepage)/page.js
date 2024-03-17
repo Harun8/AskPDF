@@ -83,7 +83,7 @@ export default function Home() {
               </div>
             </Link>
           </div>
-          <div class=" flex justify-end">
+          <div className=" flex justify-end">
             <Image
               className=" md:w-1/3 md:h-1/3  "
               src={SaveTime}
@@ -108,7 +108,7 @@ export default function Home() {
             How does it work
           </p>
         </div>
-        <div class="mt-12 pb-8 flex flex-col md:flex-row md:justify-center gap-16">
+        <div className="mt-12 pb-8 flex flex-col md:flex-row md:justify-center gap-16">
           <div>
             <Image
               className="mx-auto"
@@ -146,15 +146,15 @@ export default function Home() {
       </section>
       {/* <Testimonial></Testimonial> */}
       {/* 
-      <div class="flex items-end justify-end fixed bottom-0 right-0 mb-4 mr-4 z-10">
+      <div className="flex items-end justify-end fixed bottom-0 right-0 mb-4 mr-4 z-10">
         <div>
           <a
             title="Buy me a beer"
             href="https://www.buymeacoffee.com/scottwindon"
             target="_blank"
-            class="block w-16 bg-zinc-300 h-16 rounded-full transition-all shadow hover:shadow-lg transform hover:scale-110 hover:rotate-12">
+            className="block w-16 bg-zinc-300 h-16 rounded-full transition-all shadow hover:shadow-lg transform hover:scale-110 hover:rotate-12">
             <Image
-              class="object-cover object-center w-full h-full rounded-full"
+              className="object-cover object-center w-full h-full rounded-full"
               src={Coffee}
             />
           </a>

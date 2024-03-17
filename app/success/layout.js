@@ -23,10 +23,10 @@ export default async function RootLayout({ children }) {
   } = await supabase.auth.getSession();
 
   return (
-    <html class="" lang="en">
-      <body class="flex flex-col min-h-screen w-full bg-zinc-100	 dark:bg-gray-800">
+    <html className="" lang="en">
+      <body className="flex flex-col min-h-screen w-full bg-zinc-100	 dark:bg-gray-800">
         {/* <Nav session={session}></Nav> */}
-        <main class="flex-grow">{children}</main>
+        <main className="flex-grow">{children}</main>
         {/* <Footer></Footer> */}
       </body>
     </html>

@@ -12,7 +12,7 @@ const Success = () => {
     // </div>
 
     <div className="flex justify-center mt-12">
-      <div class="grid grid-rows-3 grid-flow-col gap-10">
+      <div className="grid grid-rows-3 grid-flow-col gap-10">
         <Image
           className="mx-auto"
           src={Welcome}
@@ -35,17 +35,6 @@ const Success = () => {
             </Link>
           </div>
         </div>
-
-        {/* <div class="row-span-10 ...">
-          <Link className="dark:text-white border rounded" href="/signin ">
-            {" "}
-            You can now access to your specific AskPDF plan, get started now, by
-            creating your account!
-          </Link>
-        </div>
-        <div class="col-span-2 ...">
-          <p>Send </p>
-        </div> */}
       </div>
     </div>
   );
