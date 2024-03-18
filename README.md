@@ -69,6 +69,7 @@ async function chatCompletion(chunk, text) {
 
 ## Langchain
 
+- Few-shot prompting
 ## Supabase
 
 As a backend as a service i stumbled across supabase which was regarded as a firebase alternative. And after doing some research and reading their documentation, I figured that using supabse could be a smart option so that is what i did. 
