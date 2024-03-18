@@ -1,6 +1,6 @@
 "use client";
 import { Inter } from "next/font/google";
-import "../globals.css";
+import "./globals.css";
 import Nav from "@/components/Nav";
 // import { cookies } from "next/headers";
 import { Inter as FontSans } from "next/font/google";
@@ -11,6 +11,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { supabase } from "@/lib/supabase";
 // import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import Footer from "@/components/footer";
+import { usePathname } from "next/navigation";
 // import { createServerComponentClient } from "@/lib/supabaseServer";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,9 +21,14 @@ export const fontSans = FontSans({
   variable: "--font-sans",
 });
 
+const hideLayout = ["/login", "/signin", "/success"];
+
 export default function RootLayout({ children }) {
   const [session, setSession] = useState(null);
-
+  const pathname = usePathname();
+  console.log("pathname", pathname);
+  const hideNavFooter = hideLayout.includes(pathname);
+  console.log("hideNavFooter", hideNavFooter);
   useEffect(() => {
     // Fetch session on component mount
     setSession(supabase.auth.getSession());
@@ -43,13 +49,14 @@ export default function RootLayout({ children }) {
   return (
     <html className="" lang="en">
       <body className="flex flex-col min-h-screen w-full bg-zinc-100	 dark:bg-gray-800">
-        <Nav session={session}></Nav>
         <main className="flex-grow">
+          {!hideNavFooter && <Nav session={session}></Nav>}
           {children}
           <Analytics></Analytics>
           <SpeedInsights></SpeedInsights>
+
+          {!hideNavFooter && <Footer></Footer>}
         </main>
-        <Footer></Footer>
       </body>
     </html>
   );
