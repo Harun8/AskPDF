@@ -108,7 +108,7 @@ const ChatPage = () => {
           if (response.ok) {
             const data = await response.json();
             currentPdfId = params.id;
-
+            console.log("pId", params.id);
             fetchPdfUrl(params.id);
           }
         } else {

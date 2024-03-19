@@ -47,7 +47,7 @@ const MyChats = () => {
       <div className="flex justify-center text-black dark:text-white">
         <div className="flex justify-center">
           <div className="mt-20">
-            {pdfs.slice(1).map((pdf) => {
+            {pdfs.map((pdf) => {
               return (
                 <a
                   className=" cursor-pointer hover:bg-zinc-400 flex justify-start mb-12 text-lg font-medium  bg-zinc-300 rounded p-6"
