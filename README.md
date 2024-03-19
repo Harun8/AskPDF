@@ -151,6 +151,8 @@ Version 2: Current one
 - Route 504 timeout from vercel
 - lscache vs localstorage
 
+Using UUID's bad for database performance? https://planetscale.com/blog/the-problem-with-using-a-uuid-primary-key-in-mysql
+
 
 - Streaming responses
 - Authentication and authorization
