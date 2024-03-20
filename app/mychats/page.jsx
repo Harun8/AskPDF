@@ -28,8 +28,6 @@ const MyChats = () => {
           .from("pdfs")
           .list(session.user.id);
         setPdfs(data);
-
-        console.log(data);
       } catch (error) {
         console.error(error);
       }
