@@ -21,12 +21,22 @@ export const fontSans = FontSans({
   variable: "--font-sans",
 });
 
-const hideLayout = ["/login", "/signin", "/success"];
+const hideNav = ["/login", "/signin", "/success"];
+const hideFooter = [
+  "/login",
+  "/signin",
+  "/success",
+  "/mychats",
+  "/chat",
+  "/preview",
+];
 
 export default function RootLayout({ children }) {
   const [session, setSession] = useState(null);
   const pathname = usePathname();
-  const hideNavFooter = hideLayout.includes(pathname);
+  const isNavVisible = hideNav.includes(pathname);
+  const isFooterVisible = hideFooter.includes(pathname);
+
   useEffect(() => {
     // Fetch session on component mount
     setSession(supabase.auth.getSession());
@@ -48,12 +58,12 @@ export default function RootLayout({ children }) {
     <html className="" lang="en">
       <body className="flex flex-col min-h-screen w-full bg-zinc-100	 dark:bg-gray-800">
         <main className="flex-grow">
-          {!hideNavFooter && <Nav session={session}></Nav>}
+          {!isNavVisible && <Nav session={session}></Nav>}
           {children}
           <Analytics></Analytics>
           {/* <SpeedInsights></SpeedInsights> */}
 
-          {!hideNavFooter && <Footer></Footer>}
+          {!isFooterVisible && <Footer></Footer>}
         </main>
       </body>
     </html>
