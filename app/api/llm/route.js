@@ -55,8 +55,8 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY, // api key
 });
 
-export const runtime = "edge";
-export const config = { maxDuration: 300 };
+export const maxDuration = 300;
+export const dynamic = "force-dynamic";
 
 let channelB;
 export default async function handler(req, res) {
