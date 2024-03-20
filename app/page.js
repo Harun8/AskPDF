@@ -18,6 +18,7 @@ import React, { useEffect, useState } from "react";
 
 import Link from "next/link";
 import Testimonial from "@/components/Testimonial";
+import Head from "next/head";
 
 export default function Home() {
   const [session, setSession] = useState(null);
@@ -33,6 +34,9 @@ export default function Home() {
   }, []);
   return (
     <>
+      <Head>
+        <title>AskPDFs</title>
+      </Head>
       <div className="flex flex-col md:grid grid-cols-2 mt-36 mx-10 h-dvh ">
         <div className="">
           <p className=" dark:text-slate-300 font-serif font-bold  text-3xl md:text-7xl leading-tight">

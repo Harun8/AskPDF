@@ -12,6 +12,7 @@ const TextField = ({ onSendMessage, isDisabled }) => {
   return (
     <div className="flex flex-col justify-end ">
       <textarea
+        maxLength={150}
         disabled={isDisabled}
         id="message"
         rows="4"
