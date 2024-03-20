@@ -147,6 +147,8 @@ export default function chat() {
   const sendMessage = async (messageText) => {
     setCurrentResponse("");
     client.removeChannel(channelA);
+
+    // empty string is false in js
     if (!messageText.trim()) return;
     setConversation((conversation) => [
       ...conversation,
