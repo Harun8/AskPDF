@@ -26,9 +26,7 @@ const hideLayout = ["/login", "/signin", "/success"];
 export default function RootLayout({ children }) {
   const [session, setSession] = useState(null);
   const pathname = usePathname();
-  console.log("pathname", pathname);
   const hideNavFooter = hideLayout.includes(pathname);
-  console.log("hideNavFooter", hideNavFooter);
   useEffect(() => {
     // Fetch session on component mount
     setSession(supabase.auth.getSession());
@@ -53,7 +51,7 @@ export default function RootLayout({ children }) {
           {!hideNavFooter && <Nav session={session}></Nav>}
           {children}
           <Analytics></Analytics>
-          <SpeedInsights></SpeedInsights>
+          {/* <SpeedInsights></SpeedInsights> */}
 
           {!hideNavFooter && <Footer></Footer>}
         </main>
