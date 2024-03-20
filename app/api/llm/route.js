@@ -56,7 +56,7 @@ const openai = new OpenAI({
 });
 
 export const runtime = "edge";
-export const maxDuration = 300;
+export const config = { maxDuration: 300 };
 
 let channelB;
 export default async function handler(req, res) {
