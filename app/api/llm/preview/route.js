@@ -171,6 +171,7 @@ const client = createClient(
   }
 );
 export const runtime = "edge";
+export const maxDuration = 300;
 
 export default async function handler(req, res) {
   try {
