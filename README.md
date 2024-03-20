@@ -13,7 +13,7 @@ Technologies used
   lscache vs localstorage
 -->
 
-## What is AskPDF
+## What is AskPDF {Still in draft mode)
 
 For an introduction AskPDF is a website where a user can upload and chat with their PDF's.
 
@@ -35,9 +35,7 @@ So that is what I did. Jumping into working with LLM's and a bunch of new techno
 
 One thing that was really straightforward was using the openai API. However the first intuitive thought was to use the chat completion API. So that is what i did for a good chunk of this project until I ran into some bottlenecks. 
 
-One of them being that my implementation of code. There was two huge downsides into my first implementation
-
-1. First one being that the
+One of them being that my implementation of code. There were sopme downsides into my first implementation:
 
 ```  js
 
@@ -66,8 +64,18 @@ async function chatCompletion(chunk, text) {
 
 ```
 
+One of them being that i used the chat completion api for both processing my documents and answeing questions. For small sized documents wit only a few pages this seemed to work fine, but once you increase the input then not only would the performace take a huge hit but each question would be really expensive to compute since i was appending the whole document in to the chat completions API and calling it over a loop based on the chunks of the PDF. So if it was a big PDF then i would have a lot of chunks and a lot of calls to the API.
+
+__So how did I do?__
+
+Well I new i had to change direction in some sense, since this didn't seem to be an long term solution so I went to the OpenAI API documentation, read through their different API's and stumbled across their embedding API. Which was a way to measure the relatedness of text strings in a dimensional space, which could have either 1536 dimensions or 3072. So I read more about it and realised this was a quite better solution. And this is where I came across __LangChain__
 
 ## Langchain
+
+And langchain is open source framework that makes it easier to set up applications that are build on LLM.
+
+So I used langchain with my OpenAI API, and processed each uploaded PDF as embeddings and stored them in a vector database.
+
 
 - Few-shot prompting
 ## Supabase
