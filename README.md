@@ -68,7 +68,7 @@ One of them being that i used the chat completion api for both processing my doc
 
 __So how did I do?__
 
-Well I new i had to change direction in some sense, since this didn't seem to be an long term solution so I went to the OpenAI API documentation, read through their different API's and stumbled across their embedding API. Which was a way to measure the relatedness of text strings in a dimensional space, which could have either 1536 dimensions or 3072. So I read more about it and realised this was a quite better solution. And this is where I came across __LangChain__
+Well I new i had to change direction in some sense, since this didn't seem to be an long term solution so I went to the OpenAI API documentation, read through their different API's and stumbled across their embedding API. Which was a way to measure the relatedness of text strings in a dimensional space, which could have either 1536 dimensions or 3072. So I read more about it and realised this was a quite better solution. And this is where I came across __LangChain__.
 
 ## Langchain
 
