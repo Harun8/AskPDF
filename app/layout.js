@@ -29,6 +29,7 @@ const hideFooter = [
   "/mychats",
   "/chat",
   "/preview",
+  "/settings",
 ];
 
 export default function RootLayout({ children }) {
