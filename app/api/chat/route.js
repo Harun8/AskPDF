@@ -58,10 +58,10 @@ export default async function handler(req, res) {
       const numericEmbeddings = embeddings.map(
         (embeddingObj) => embeddingObj.embedding
       );
-
+      console.log("userid", userId);
       const { data: chatData, error: chatError } = await supabase
         .from("chats")
-        .insert([{}]) // Replace with actual data if necessary
+        .insert([{ user_id: userId }]) // Replace with actual data if necessary
         .select();
 
       if (chatError) {

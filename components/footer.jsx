@@ -1,6 +1,8 @@
-import { version } from "@/package.json";
+import packageInfo from "@/package.json";
 import Link from "next/link";
 const Footer = () => {
+  let version = packageInfo.version;
+
   return (
     <section class="bg-zinc-100">
       <div class="max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
