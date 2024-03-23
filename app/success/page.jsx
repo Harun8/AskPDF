@@ -1,9 +1,17 @@
+"use client";
+import React from "react";
+
 import Image from "next/image";
 import Link from "next/link";
 import Welcome from "@/public/Welcome.svg";
 import { Button } from "@/components/ui/button";
+import { useWindowSize } from "react-use";
+import Confetti from "react-confetti";
 
 const Success = () => {
+  const { width, height } = useWindowSize();
+  console.log(width, height);
+
   return (
     // <div className=" flex flex-nowrap justify-center bg-white">
 
@@ -12,6 +20,7 @@ const Success = () => {
     // </div>
 
     <div className="flex justify-center mt-12">
+      <Confetti width={width} height={height} />
       <div className="grid grid-rows-3 grid-flow-col gap-10">
         <Image
           className="mx-auto"
