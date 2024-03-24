@@ -71,7 +71,7 @@ export default function Home() {
               Try AskPDF for free
             </Button> */}
             <Link
-              className="  hover:text-red-500  hover:font-bold ml-6 my-auto font-semibold text-lg "
+              className="  hover:text-red-500 dark:text-slate-300 dark:hover:text-red-500 hover:font-bold ml-6 my-auto font-semibold text-lg "
               href={session ? "/chat" : "/preview"}>
               <div className=" flex items-center">
                 {session ? "Start chatting now" : "Try the demo"}
@@ -89,7 +89,7 @@ export default function Home() {
           </div>
           <div className=" flex justify-end">
             <Image
-              className=" md:w-1/3 md:h-1/3  "
+              className=" md:w-1/3 md:h-1/3"
               src={SaveTime}
               width={350}
               height={350}
@@ -106,9 +106,9 @@ export default function Home() {
         </div>
       </div>
 
-      <section className=" mt-5 bg-blue-950 py-16	">
+      <section className=" mt-5 bg-blue-950 dark:bg-blue-950  py-16	">
         <div className=" flex justify-center">
-          <p className=" mx-auto mt-8 text-zinc-100 dark:text-slate-300 font-serif font-bold text-3xl leading-tight">
+          <p className="mx-auto mt-8 text-zinc-100 dark:text-slate-300 font-serif font-bold text-3xl leading-tight">
             How does it work
           </p>
         </div>

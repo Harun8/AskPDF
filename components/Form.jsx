@@ -23,7 +23,7 @@ const Forms = (props) => {
         validationSchema={SignupSchema}
         onSubmit={(values) => props.onSubmit(values)}>
         {({ errors, touched }) => (
-          <Form className=" dark:bg-gray-900  rounded w-96 px-8 pt-6 pb-8 mb-4 align-middle mt-60 ">
+          <Form className=" dark:bg-gray-800  rounded w-96 px-8 pt-6 pb-8 mb-4 align-middle mt-60 ">
             {/*    
               <h1 className="dark:text-white  flex justify-center text-3xl font-bold 		">
             Welcome back 

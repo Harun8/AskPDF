@@ -34,7 +34,7 @@ const Success = () => {
           width={400}
           height={400}></Image>
         <div>
-          <Link className="dark:text-white border rounded" href="/signin ">
+          <Link className="dark:text-white   rounded " href="/signin ">
             {" "}
             You can now access to your AskPDF plan, get started now, by creating
             your account!

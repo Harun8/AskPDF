@@ -12,6 +12,7 @@ import { supabase } from "@/lib/supabase";
 // import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import Footer from "@/components/footer";
 import { usePathname } from "next/navigation";
+import Provider from "@/components/provider";
 // import { createServerComponentClient } from "@/lib/supabaseServer";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -48,24 +49,19 @@ export default function RootLayout({ children }) {
     });
   }, []);
 
-  // const cookieStore = cookies();
-
-  // const supabase = createServerComponentClient({ cookies: () => cookieStore });
-  // const {
-  //   data: { session },
-  // } = await supabase.auth.getSession();
-
   return (
     <html className="" lang="en">
       <body className="flex flex-col min-h-screen w-full bg-zinc-100	 dark:bg-gray-800">
-        <main className="flex-grow">
-          {!isNavVisible && <Nav session={session}></Nav>}
-          {children}
-          <Analytics></Analytics>
-          {/* <SpeedInsights></SpeedInsights> */}
+        <Provider>
+          <main className="flex-grow">
+            {!isNavVisible && <Nav session={session}></Nav>}
+            {children}
+            <Analytics></Analytics>
+            {/* <SpeedInsights></SpeedInsights> */}
 
-          {!isFooterVisible && <Footer></Footer>}
-        </main>
+            {!isFooterVisible && <Footer></Footer>}
+          </main>
+        </Provider>
       </body>
     </html>
   );

@@ -48,7 +48,7 @@ const MyChats = () => {
             {pdfs.map((pdf) => {
               return (
                 <a
-                  className=" cursor-pointer hover:bg-zinc-400 flex justify-start mb-12 text-lg font-medium  bg-zinc-300 rounded p-6"
+                  className=" cursor-pointer hover:bg-zinc-400 flex justify-start mb-12 text-lg font-medium  bg-zinc-300 dark:bg-zinc-600 rounded p-6"
                   onClick={() => getPdfId(pdf.id)}
                   key={Math.random()}>
                   {pdf.name}

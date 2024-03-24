@@ -49,7 +49,7 @@ export default function LoginPage() {
               redirect="Don't have an account? Sign up?"></Forms>
           </div>
         </div>
-        <div className="hidden md:flex md:justify-center md:items-center md:p-12 md:bg-blue-200 ">
+        <div className="hidden md:flex md:justify-center md:items-center md:p-12 md:bg-blue-200 md:dark:bg-blue-900 ">
           <div className="flex justify-center">
             {" "}
             {isSubmitting ? "check your email :)" : "welcome back :)"}{" "}

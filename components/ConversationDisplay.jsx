@@ -13,7 +13,7 @@ const ConversationDisplay = ({
         {/* Adjust the height as needed */}
         <div className=" ">
           <div
-            className={` overflow-y-auto border-4 rounded-lg shadow-xl h-[600px]  dark:bg-gray-900 ${
+            className={` overflow-y-auto border-4 dark:border-gray-950 rounded-lg shadow-xl h-[600px]  dark:bg-gray-900 ${
               processingPDF ? " flex justify-center items-center	" : " "
             }	`}>
             {processingPDF && (
@@ -25,7 +25,7 @@ const ConversationDisplay = ({
             {conversation.map((msg, index) => {
               let textColor =
                 msg.type === "user"
-                  ? "text-zinc-800	 bg-zinc-200 dark:bg-gray-800 "
+                  ? "text-zinc-800 dark:text-slate-400	 bg-zinc-200 dark:bg-gray-800 "
                   : "text-blue-500 font-semibold	 bg-zinc-200 dark:bg-gray-800 ";
               return (
                 <div
