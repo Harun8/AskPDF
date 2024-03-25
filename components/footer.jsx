@@ -4,7 +4,7 @@ const Footer = () => {
   let version = packageInfo.version;
 
   return (
-    <section class="bg-gray-800">
+    <section class="bg-zinc-100 dark:bg-gray-800">
       <div class="max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
         <nav class="flex flex-wrap justify-center -mx-5 -my-2">
           {/* <div class="px-5 py-2">
