@@ -82,7 +82,7 @@ So I used langchain with my OpenAI API, and processed each uploaded PDF as embed
 
 As a backend as a service i stumbled across supabase which was regarded as a firebase alternative. And after doing some research and reading their documentation, I figured that using supabse could be a smart option so that is what i did. 
 
-My reasoning for choosing supabase what primarly on the fact that their documentation and tutorials was easy to understand and it seemed like they've got a relative big community, so there was
+My reasoning for choosing supabase whas primarly on the fact that their documentation and tutorials was easy to understand and it seemed like they've got a relative big community. 
 
   ### Supabase vector DB
 
