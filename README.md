@@ -24,7 +24,7 @@ The reason for me making AskPDF was primarly to delve a bit further in to the Ne
 So that is what I did. Jumping into working with LLM's and a bunch of new technologies that I haven't used before. So for the next section I will dive into the different technologies/tools i've used and what i've learned throughout making this application
 
 > [!TIP]
-> I have learnt not to use a bunch of new technologies at the same time. The importance of familiarity when working with tools is a massive guide to not run into as many bottlenecks as i maybe did ahaha
+> I have learnt not to use a bunch of new technologies at the same time. The importance of familiarity when working with tools is a massive guide to not run into as many bottlenecks as i maybe did 
 
 
 # Technologies
@@ -82,7 +82,7 @@ So I used langchain with my OpenAI API, and processed each uploaded PDF as embed
 
 As a backend as a service i stumbled across supabase which was regarded as a firebase alternative. And after doing some research and reading their documentation, I figured that using supabse could be a smart option so that is what i did. 
 
-My reasoning for choosing supabase what primarly on the fact that their documentation and tutorials was easy to understand and it seemed like they've got a relative big community, so there was
+My reasoning for choosing supabase whas primarly on the fact that their documentation and tutorials was easy to understand and it seemed like they've got a relative big community. 
 
   ### Supabase vector DB
 
