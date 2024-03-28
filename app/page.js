@@ -17,8 +17,6 @@ import { supabase } from "@/lib/supabase";
 import React, { useEffect, useState } from "react";
 
 import Link from "next/link";
-import Testimonial from "@/components/Testimonial";
-import Head from "next/head";
 
 export default function Home() {
   const [session, setSession] = useState(null);
@@ -34,9 +32,6 @@ export default function Home() {
   }, []);
   return (
     <>
-      <Head>
-        <title>AskPDFs</title>
-      </Head>
       <div className="flex flex-col md:grid grid-cols-2 mt-36 mx-10 h-dvh ">
         <div className="">
           <p className=" dark:text-slate-300 font-serif font-bold  text-3xl md:text-7xl leading-tight">
@@ -67,15 +62,12 @@ export default function Home() {
               href="pricing">
               Try AskPDF for free
             </Link>
-            {/* <Button size="xlg" variant="homepage">
-              Try AskPDF for free
-            </Button> */}
+
             <Link
               className="  hover:text-red-500 dark:text-slate-300 dark:hover:text-red-500 hover:font-bold ml-6 my-auto font-semibold text-lg "
               href={session ? "/chat" : "/preview"}>
               <div className=" flex items-center">
                 {session ? "Start chatting now" : "Try the demo"}
-                {/* Try the demo */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -106,7 +98,7 @@ export default function Home() {
         </div>
       </div>
 
-      <section className=" mt-5 bg-blue-950 dark:bg-blue-950  py-16	">
+      {/* <section className=" mt-5 bg-blue-950 dark:bg-blue-950  py-16	">
         <div className=" flex justify-center">
           <p className="mx-auto mt-8 text-zinc-100 dark:text-slate-300 font-serif font-bold text-3xl leading-tight">
             How does it work
@@ -147,8 +139,7 @@ export default function Home() {
             </p>
           </div>
         </div>
-      </section>
-      {/* <Testimonial></Testimonial> */}
+      </section> */}
       {/* 
       <div className="flex items-end justify-end fixed bottom-0 right-0 mb-4 mr-4 z-10">
         <div>
