@@ -72,7 +72,7 @@ Well I new i had to change direction in some sense, since this didn't seem to be
 
 ## Langchain
 
-And langchain is open source framework that makes it easier to set up applications that are build on LLM.
+And langchain is open source framework that makes it easier to set up applications that are built on LLM.
 
 So I used langchain with my OpenAI API, and processed each uploaded PDF as embeddings and stored them in a vector database.
 
