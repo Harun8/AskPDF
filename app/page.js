@@ -7,7 +7,9 @@ import {
 import Image from "next/image";
 import LPBI from "@/public/landingPage.svg";
 import { Button } from "@/components/ui/button";
-import Typewriter from "@/public/typewriter.svg";
+import TypingLight from "@/public/TypingLight.svg";
+import TypingDark from "@/public/TypingDark.svg";
+
 import Upload from "@/public/upload.svg";
 import Answer from "@/public/answer.svg";
 import Pdf from "@/public/pdf.svg";
@@ -18,7 +20,7 @@ import React, { useEffect, useState } from "react";
 
 import Link from "next/link";
 
-export default function Home() {
+export default function Home(props) {
   const [session, setSession] = useState(null);
 
   useEffect(() => {
@@ -32,7 +34,7 @@ export default function Home() {
   }, []);
   return (
     <>
-      <div className="flex flex-col md:grid grid-cols-2 mt-36 mx-10 h-dvh ">
+      <div className="flex flex-col md:grid grid-cols-2  mt-28 mx-10 h-dvh ">
         <div className="">
           <p className=" dark:text-slate-300 font-serif font-bold  text-3xl md:text-7xl leading-tight">
             <span className="">
@@ -64,18 +66,10 @@ export default function Home() {
             </Link>
 
             <Link
-              className="  hover:text-red-500 dark:text-slate-300 dark:hover:text-red-500 hover:font-bold ml-6 my-auto font-semibold text-lg "
+              className="   hover:text-red-500 dark:text-slate-300 dark:hover:text-red-500 hover:font-bold ml-6 my-auto font-semibold text-lg "
               href={session ? "/chat" : "/preview"}>
               <div className=" flex items-center">
                 {session ? "Start chatting now" : "Try the demo"}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 448 512"
-                  className="ml-2 ">
-                  <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
-                </svg>
               </div>
             </Link>
           </div>
@@ -91,7 +85,7 @@ export default function Home() {
         <div className="  ">
           <Image
             className="hidden md:flex md:justify-center"
-            src={Typewriter}
+            src={TypingLight}
             width={800}
             height={800}
             alt="landing page main image"></Image>
