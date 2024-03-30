@@ -191,7 +191,7 @@ const Nav = ({ session }) => {
         {!session ? (
           <>
             <Link
-              className="hidden md:inline-block md:ml-auto md:mr-3 py-2 px-6 bg-gray-200 dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm text-gray-900 dark:text-gray-200 font-bold  rounded-xl transition duration-200"
+              className="hidden md:inline-block md:ml-auto md:mr-3 py-2 px-6 bg-gray-300 dark:bg-gray-900 hover:bg-gray-200 dark:hover:bg-gray-700 text-sm text-gray-900 dark:text-gray-200 font-bold  rounded-xl transition duration-200"
               href="/login">
               Login
             </Link>
