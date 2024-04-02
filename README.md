@@ -35,7 +35,7 @@ So that is what I did. Jumping into working with LLM's and a bunch of new techno
 
 One thing that was really straightforward was using the openai API. However the first intuitive thought was to use the chat completion API. So that is what i did for a good chunk of this project until I ran into some bottlenecks. 
 
-One of them being that my implementation of code. There were sopme downsides into my first implementation:
+One of them being that my implementation of code. There were some downsides into my first implementation:
 
 ```  js
 
