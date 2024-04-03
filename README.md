@@ -102,7 +102,7 @@ My reasoning for choosing supabase whas primarly on the fact that their document
 
 # Diagrams
 
-## Flow diagram showcasing how the interaction between the pdf and chat works behind the scenes
+## Flow diagram showcasing how the interaction between the pdf and chat works behind the scenes.
 
 ## Entity relationship diagram
 
