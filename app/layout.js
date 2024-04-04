@@ -50,18 +50,18 @@ export default function RootLayout({ children }) {
   }, []);
 
   return (
-    <html className="dark" lang="en">
+    <html className="" lang="en">
       <body className="flex flex-col min-h-screen w-full bg-zinc-100	 dark:bg-gray-800">
-        <Provider>
-          <main className="flex-grow">
-            {!isNavVisible && <Nav session={session}></Nav>}
-            {children}
-            <Analytics></Analytics>
-            {/* <SpeedInsights></SpeedInsights> */}
+        {/* <Provider> */}
+        <main className="flex-grow">
+          {!isNavVisible && <Nav session={session}></Nav>}
+          {children}
+          <Analytics></Analytics>
+          {/* <SpeedInsights></SpeedInsights> */}
 
-            {!isFooterVisible && <Footer></Footer>}
-          </main>
-        </Provider>
+          {!isFooterVisible && <Footer></Footer>}
+        </main>
+        {/* </Provider> */}
       </body>
     </html>
   );

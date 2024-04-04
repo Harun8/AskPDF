@@ -4,9 +4,9 @@ const Footer = () => {
   let version = packageInfo.version;
 
   return (
-    <footer class="bg-zinc-100  m-4 dark:bg-gray-800">
-      <div class="w-full mx-auto max-w-screen-xl  md:flex md:items-center md:justify-between">
-        <p className="mt-8 text-base leading-6 text-center font-bold text-red-600">
+    <footer className="bg-zinc-100  sticky top-[100vh] m-4 dark:bg-gray-800 ">
+      <div className=" mx-auto max-w-screen-xl   md:flex md:items-center md:justify-between">
+        <p className=" text-base leading-6 sm:text-center font-bold text-red-600">
           © 2024 AskPDF {version}.beta
         </p>
         <div className="flex flex-wrap items-center gap-4">
@@ -41,7 +41,7 @@ const Footer = () => {
           </Link>
         </div>
 
-        <div class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+        <div className="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
           <div className="px-5 py-2">
             <Link
               href="/preview"
@@ -63,6 +63,14 @@ const Footer = () => {
               className="text-base leading-6 text-gray-500 hover:text-gray-900">
               FAQ
             </Link>
+          </div>
+
+          <div className="px-5 py-2">
+            {/* <Link
+              href="/faq"
+              className="text-base leading-6 text-gray-500 hover:text-gray-900">
+              Report a bug
+            </Link> */}
           </div>
         </div>
       </div>
