@@ -37,7 +37,7 @@ export default function Home(props) {
       <div className="flex flex-col md:grid grid-cols-2  mt-28 mx-10  ">
         <div className="">
           <p className=" dark:text-slate-300 font-serif font-bold  text-3xl md:text-7xl leading-tight">
-            <span className="">
+            <span data-testid="cypress-title" className="">
               Learn quicker <br /> with,
             </span>
             <span className="text-blue-600"> AskPDF</span>

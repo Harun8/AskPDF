@@ -142,7 +142,9 @@ export default function Pricing() {
           </div>
 
           <div className="mt-12 space-y-3 md:mt-16 md:space-y-0 md:grid md:grid-cols-3 md:gap-6 md:max-w-5xl md:mx-auto xl:grid-cols-3">
-            <div className=" bg-zinc-100 dark:bg-gray-900 	 border border-slate-900 rounded-lg shadow-sm divide-y divide-slate-200">
+            <div
+              data-testid="cypress-FreePlan"
+              className=" bg-zinc-100 dark:bg-gray-900 	 border border-slate-900 rounded-lg shadow-sm divide-y divide-slate-200">
               <div className="p-6">
                 <h2 className="text-xl leading-6 font-bold dark:text-slate-100 text-slate-900">
                   Starter
@@ -161,6 +163,7 @@ export default function Pricing() {
                   </span>
                 </p>
                 <a
+                  data-testid="cypress-freeTierBtn"
                   href="/signin"
                   className="mt-8 block w-full dark:bg-slate-700 bg-slate-900 rounded-md py-2 text-sm font-semibold text-white text-center">
                   Sign up to get started

@@ -18,11 +18,9 @@ export default function Loading() {
             <div className="p-6">
               <Skeleton className=" bg-zinc-300 text-xl h-4 w-[250px]"></Skeleton>
 
-              <p className="mt-8">
-                <Skeleton className=" bg-zinc-300 h-16 w-[250px]"></Skeleton>
+              <Skeleton className=" bg-zinc-300 h-16 w-[250px]"></Skeleton>
 
-                <Skeleton className=" mt-6 bg-zinc-300 h-2 w-[150px]"></Skeleton>
-              </p>
+              <Skeleton className=" mt-6 bg-zinc-300 h-2 w-[150px]"></Skeleton>
               <Skeleton className="mt-4 bg-zinc-300 h-8 w-[250px]"></Skeleton>
             </div>
             <div className="pt-6 pb-8 px-6">
@@ -54,11 +52,9 @@ export default function Loading() {
             <div className="p-6">
               <Skeleton className=" bg-zinc-300 text-xl h-4 w-[250px]"></Skeleton>
 
-              <p className="mt-8">
-                <Skeleton className=" bg-zinc-300 h-16 w-[250px]"></Skeleton>
+              <Skeleton className=" bg-zinc-300 h-16 w-[250px]"></Skeleton>
 
-                <Skeleton className=" mt-6 bg-zinc-300 h-2 w-[150px]"></Skeleton>
-              </p>
+              <Skeleton className=" mt-6 bg-zinc-300 h-2 w-[150px]"></Skeleton>
               <Skeleton className="mt-4 bg-zinc-300 h-8 w-[250px]"></Skeleton>
             </div>
             <div className="pt-6 pb-8 px-6">
@@ -90,11 +86,9 @@ export default function Loading() {
             <div className="p-6">
               <Skeleton className=" bg-zinc-300 text-xl h-4 w-[250px]"></Skeleton>
 
-              <p className="mt-8">
-                <Skeleton className=" bg-zinc-300 h-16 w-[250px]"></Skeleton>
+              <Skeleton className=" bg-zinc-300 h-16 w-[250px]"></Skeleton>
 
-                <Skeleton className=" mt-6 bg-zinc-300 h-2 w-[150px]"></Skeleton>
-              </p>
+              <Skeleton className=" mt-6 bg-zinc-300 h-2 w-[150px]"></Skeleton>
               <Skeleton className="mt-4 bg-zinc-300 h-8 w-[250px]"></Skeleton>
             </div>
             <div className="pt-6 pb-8 px-6">
