@@ -2,6 +2,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
+import { Toaster } from "@/components/ui/sonner";
 // import { cookies } from "next/headers";
 import { Inter as FontSans } from "next/font/google";
 import React, { useEffect, useState } from "react";
@@ -13,6 +14,7 @@ import { supabase } from "@/lib/supabase";
 import Footer from "@/components/footer";
 import { usePathname } from "next/navigation";
 import Provider from "@/components/provider";
+import { Toast, ToastProvider } from "@/components/ui/toast";
 // import { createServerComponentClient } from "@/lib/supabaseServer";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -39,6 +41,15 @@ export default function RootLayout({ children }) {
   const isNavVisible = hideNav.includes(pathname);
   const isFooterVisible = hideFooter.includes(pathname);
 
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${"theme"}=`);
+    const themeIs = parts.pop().split(";").shift();
+
+    console.log("parts", themeIs);
+  }, []);
   useEffect(() => {
     // Fetch session on component mount
     setSession(supabase.auth.getSession());
@@ -52,16 +63,16 @@ export default function RootLayout({ children }) {
   return (
     <html className="" lang="en">
       <body className="flex flex-col min-h-screen w-full bg-zinc-100	 dark:bg-gray-800">
-        {/* <Provider> */}
-        <main className="flex-grow">
-          {!isNavVisible && <Nav session={session}></Nav>}
-          {children}
-          <Analytics></Analytics>
-          {/* <SpeedInsights></SpeedInsights> */}
-
-          {!isFooterVisible && <Footer></Footer>}
-        </main>
-        {/* </Provider> */}
+        <Provider>
+          <main className="flex-grow">
+            {!isNavVisible && <Nav session={session}></Nav>}
+            {children}
+            <Analytics></Analytics>
+            {/* <SpeedInsights></SpeedInsights> */}
+            {!isFooterVisible && <Footer></Footer>}
+          </main>
+        </Provider>
+        <Toaster></Toaster>
       </body>
     </html>
   );

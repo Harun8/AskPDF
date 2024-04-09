@@ -3,7 +3,7 @@
 import { ThemeProvider } from "next-themes";
 import { useState, useEffect } from "react";
 
-const Provider = ({ children }) => {
+const Provider = ({ children }, props) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -15,7 +15,10 @@ const Provider = ({ children }) => {
   }
 
   return (
-    <ThemeProvider enableSystem={true} attribute="class">
+    <ThemeProvider
+      forcedTheme={props.themeIs}
+      enableSystem={true}
+      attribute="class">
       {children}
     </ThemeProvider>
   );

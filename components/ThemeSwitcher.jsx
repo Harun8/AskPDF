@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 
 import { useTheme } from "next-themes";
 
@@ -8,16 +9,14 @@ const ThemeSwitcher = () => {
   const renderThemeChanger = () => {
     let currentTheme = theme === "system" ? systemTheme : theme;
 
-    // (function () {
-    //   currentTheme === "light";
-    // })();
-
     if (currentTheme === "dark") {
       return (
         <button
           className="w-6 h-6 text-yellow-500 "
           role="button"
-          onClick={() => setTheme("light")}>
+          onClick={() => {
+            setTheme("light"), (document.cookie = `theme=light`);
+          }}>
           <svg
             fill="#ADD5EA"
             width={25}
@@ -33,7 +32,9 @@ const ThemeSwitcher = () => {
         <button
           className="w-6 h-6 text-gray-900 "
           role="button"
-          onClick={() => setTheme("dark")}>
+          onClick={() => {
+            setTheme("dark"), (document.cookie = `theme=dark`);
+          }}>
           <svg
             width={25}
             height={25}
