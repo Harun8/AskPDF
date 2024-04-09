@@ -15,10 +15,7 @@ const Provider = ({ children }, props) => {
   }
 
   return (
-    <ThemeProvider
-      forcedTheme={props.themeIs}
-      enableSystem={true}
-      attribute="class">
+    <ThemeProvider defaultTheme="light" enableSystem={true} attribute="class">
       {children}
     </ThemeProvider>
   );
