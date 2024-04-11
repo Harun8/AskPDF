@@ -15,7 +15,7 @@ Technologies used
 
 ## What is AskPDF {Still in draft mode)
 
-For an introduction AskPDF is a website where a user can upload and chat with their PDF's.
+For an introduction AskPDF is a website where a user can upload and chat with their PDF's
 
 ### Why did I make AskPDF? 
 
