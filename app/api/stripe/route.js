@@ -11,11 +11,12 @@ export default async function handler(req, res) {
   try {
     const { data: prices } = await stripe.prices.list();
     const plans = [];
+    console.log("prices", prices);
 
     for (const price of prices) {
-      const product = await stripe.products.retrieve(price.product);
+      // const product = await stripe.products.retrieve(price.product);
       plans.push({
-        name: product.name,
+        // name: product.name,
         id: price.id,
         price: price.unit_amount / 100,
         interval: price.recurring.interval,

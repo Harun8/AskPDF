@@ -285,7 +285,7 @@ export default function Pricing() {
             <div className=" bg-sky-100 hover:bg-sky-200 dark:bg-gray-900 shadow-xl  shadow-blue-500		 border border-slate-900 rounded-lg shadow-sm divide-y divide-slate-200">
               <div className="p-6">
                 <h2 className="text-xl leading-6 font-bold dark:text-slate-100 text-slate-900">
-                  {plans.length > 0 ? plans[2].name : "Premium"}
+                  Premium
                   <span className="ml-4 text-xm text-blue-600">
                     {" "}
                     (Most popular){" "}
@@ -448,7 +448,7 @@ export default function Pricing() {
             <div className=" bg-zinc-100 dark:bg-gray-900 	 border border-slate-900 rounded-lg shadow-sm divide-y divide-slate-200">
               <div className="p-6">
                 <h2 className="text-xl leading-6 font-bold dark:text-slate-100 text-slate-900">
-                  {plans.length > 0 ? plans[1].name : "Ultimate"}
+                  Ultimate
                 </h2>
                 <p className="mt-2 text-base dark:text-slate-100  text-slate-700 leading-tight">
                   Advanced PDF features for professional communication needs,

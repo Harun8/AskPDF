@@ -34,7 +34,7 @@ export default function Home(props) {
   }, []);
   return (
     <>
-      <div className="flex flex-col md:grid grid-cols-2  mt-28 mx-10  ">
+      <div className="flex flex-col md:grid grid-cols-2 mt-18 md:mt-28 mx-10  ">
         <div className="">
           <p className=" dark:text-slate-300 font-serif font-bold  text-3xl md:text-7xl leading-tight">
             <span data-testid="cypress-title" className="">
