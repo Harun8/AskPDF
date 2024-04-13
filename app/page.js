@@ -1,19 +1,8 @@
 "use client";
-import {
-  ResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup,
-} from "@/components/ui/resizable";
-import Image from "next/image";
-import LPBI from "@/public/landingPage.svg";
-import { Button } from "@/components/ui/button";
-import TypingLight from "@/public/TypingLight.svg";
-import TypingDark from "@/public/TypingDark.svg";
 
-import Upload from "@/public/upload.svg";
-import Answer from "@/public/answer.svg";
-import Pdf from "@/public/pdf.svg";
-import Coffee from "@/public/coffee.svg";
+import Image from "next/image";
+import TypingLight from "@/public/TypingLight.svg";
+
 import SaveTime from "@/public/Save-time.svg";
 import { supabase } from "@/lib/supabase";
 import React, { useEffect, useState } from "react";
@@ -24,10 +13,8 @@ export default function Home(props) {
   const [session, setSession] = useState(null);
 
   useEffect(() => {
-    // Fetch session on component mount
     setSession(supabase.auth.getSession());
 
-    // Set up a session state listener for real-time updates
     supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
