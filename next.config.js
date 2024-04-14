@@ -4,10 +4,10 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ["pdf-parse"],
   },
-  i18n: {
-    defaultLocale: "en",
-    locales: ["en", "da"],
-  },
+  // i18n: {
+  //   defaultLocale: "en",
+  //   locales: ["en", "da"],
+  // },
   webpack: (config) => {
     config.resolve.alias.canvas = false;
     config.module.rules.push({
