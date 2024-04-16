@@ -10,7 +10,7 @@ Technologies used
   Realtime broadcast for streaming
   Sendgrid email service
   Stripe integration + webhooks
-  lscache vs localstorage
+  lscache vs localstorage.
 -->
 
 ## What is AskPDF {Still in draft mode)
