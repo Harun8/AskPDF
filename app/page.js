@@ -53,6 +53,7 @@ export default function Home(props) {
             </Link>
 
             <Link
+              prefetch={true}
               className="   hover:text-red-500 dark:text-slate-300 dark:hover:text-red-500 hover:font-bold ml-6 my-auto font-semibold text-lg "
               href={session ? "/chat" : "/preview"}>
               <div className=" flex items-center">

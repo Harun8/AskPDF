@@ -1,6 +1,6 @@
 {
   "name": "askpdf",
-  "version": "1.37.5",
+  "version": "1.38.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -12,6 +12,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
+    "@formatjs/intl-localematcher": "^0.5.4",
     "@headlessui/react": "^1.7.18",
     "@langchain/community": "^0.0.26",
     "@langchain/core": "^0.1.33",

@@ -16,6 +16,7 @@ import { usePathname } from "next/navigation";
 import Provider from "@/components/provider";
 import { Toast, ToastProvider } from "@/components/ui/toast";
 // import { createServerComponentClient } from "@/lib/supabaseServer";
+import { appWithTranslation } from "next-i18next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,8 +35,7 @@ const hideFooter = [
   "/preview",
   "/settings",
 ];
-
-export default function RootLayout({ children }) {
+function RootLayout({ children }) {
   const [session, setSession] = useState(null);
   const pathname = usePathname();
   const isNavVisible = hideNav.includes(pathname);
@@ -77,3 +77,4 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+export default appWithTranslation(RootLayout);
