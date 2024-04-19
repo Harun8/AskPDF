@@ -21,6 +21,7 @@ export default function Home(props) {
   }, []);
   return (
     <>
+      <title>AskPDFs</title>
       <div className="flex flex-col md:grid grid-cols-2 mt-18 md:mt-28 mx-10  ">
         <div className="md:ml-12">
           <p className=" dark:text-slate-300 font-serif font-bold  text-3xl md:text-7xl leading-tight">

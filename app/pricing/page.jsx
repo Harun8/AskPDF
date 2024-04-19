@@ -104,6 +104,8 @@ export default function Pricing() {
 
   return (
     <>
+      <title>Pricing | AskPDFs</title>
+
       {loading ? (
         <Loading></Loading>
       ) : (

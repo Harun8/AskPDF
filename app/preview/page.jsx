@@ -200,41 +200,45 @@ const Preview = () => {
     });
   }
   return (
-    <div className="mx-12 flex flex-col lg:grid lg:grid-cols-2">
-      <div className="rounded-lg border shadow5">
-        <div className=" p-6 bg-gray h-[800px] overflow-y-auto  ">
-          {pdf ? (
-            <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>
-              {Array.apply(null, Array(numPages))
-                .map((x, i) => i + 1)
-                .map((page) => {
-                  return (
-                    <Page
-                      className=""
-                      pageNumber={page}
-                      renderTextLayer={false}
-                      renderAnnotationLayer={false}
-                    />
-                  );
-                })}
-            </Document>
-          ) : (
-            <h1>no file</h1>
-          )}
-        </div>
-      </div>
+    <>
+      <title>Preview | AskPDFs</title>
 
-      <div className="">
+      <div className="mx-12 flex flex-col lg:grid lg:grid-cols-2">
+        <div className="rounded-lg border dark:border-slate-900	 shadow5 scrollbar scrollbar-thumb-blue-600 scrollbar-thumb-rounded">
+          <div className=" p-6 bg-gray h-[800px] overflow-y-auto  ">
+            {pdf ? (
+              <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>
+                {Array.apply(null, Array(numPages))
+                  .map((x, i) => i + 1)
+                  .map((page) => {
+                    return (
+                      <Page
+                        className=""
+                        pageNumber={page}
+                        renderTextLayer={false}
+                        renderAnnotationLayer={false}
+                      />
+                    );
+                  })}
+              </Document>
+            ) : (
+              <h1>no file</h1>
+            )}
+          </div>
+        </div>
+
         <div className="">
-          <ConversationDisplay
-            showThinkingAnimation={showThinkingAnimation}
-            conversation={conversation}
-          />
-          <TextField onSendMessage={sendMessage}></TextField>
-          <div className=""></div>
+          <div className="">
+            <ConversationDisplay
+              showThinkingAnimation={showThinkingAnimation}
+              conversation={conversation}
+            />
+            <TextField onSendMessage={sendMessage}></TextField>
+            <div className=""></div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

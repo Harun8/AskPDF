@@ -45,6 +45,8 @@ export default function Settings() {
 
   return (
     <>
+      <title>Settings | AskPDFs</title>
+
       <div className="flex justify-center">
         <div className="mt-20">
           <p className="flex justify-center mb-12 text-lg font-medium">

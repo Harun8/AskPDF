@@ -308,64 +308,68 @@ export default function chat() {
   }
 
   return (
-    <div className="mx-12 mx-12 flex flex-col lg:grid lg:grid-cols-2">
-      <div className="rounded-lg border shadow5 ">
-        {pdf ? (
-          <div className=" p-12 bg-gray h-[800px] overflow-y-auto  ">
-            <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>
-              {Array.apply(null, Array(numPages))
-                .map((x, i) => i + 1)
-                .map((page) => {
-                  return (
-                    <Page
-                      className="mb-12"
-                      pageNumber={page}
-                      renderTextLayer={false}
-                      renderAnnotationLayer={false}
-                    />
-                  );
-                })}
-            </Document>
-          </div>
-        ) : (
-          <>
-            <div className="flex justify-center mt-48">
-              <button onClick={openModal}> Click me</button>
+    <>
+      <title>AskPDFs</title>
+
+      <div className="mx-12 mx-12 flex flex-col lg:grid lg:grid-cols-2">
+        <div className="rounded-lg border shadow5 ">
+          {pdf ? (
+            <div className=" p-12 bg-gray h-[800px] overflow-y-auto  ">
+              <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>
+                {Array.apply(null, Array(numPages))
+                  .map((x, i) => i + 1)
+                  .map((page) => {
+                    return (
+                      <Page
+                        className="mb-12"
+                        pageNumber={page}
+                        renderTextLayer={false}
+                        renderAnnotationLayer={false}
+                      />
+                    );
+                  })}
+              </Document>
             </div>
+          ) : (
+            <>
+              <div className="flex justify-center mt-48">
+                <button onClick={openModal}> Click me</button>
+              </div>
 
-            <div className="flex justify-center mt-48">
-              <Modal
-                processingPDF={processingPDF}
-                title={"Upload your PDF"}
-                isOpen={isOpen}
-                closeModal={closeModal}
-                openModal={openModal}
-                onFileSelect={onFileSelect}></Modal>
-            </div>
-          </>
-        )}
+              <div className="flex justify-center mt-48">
+                <Modal
+                  processingPDF={processingPDF}
+                  title={"Upload your PDF"}
+                  isOpen={isOpen}
+                  closeModal={closeModal}
+                  openModal={openModal}
+                  onFileSelect={onFileSelect}></Modal>
+              </div>
+            </>
+          )}
 
-        {pdf && (
-          <p>
-            Page {pageNumber} of {numPages}
-          </p>
-        )}
-      </div>
-
-      <div className="flex flex-col justify-between h-full">
-        <div className="flex-grow overflow-y-auto">
-          <ConversationDisplay
-            processingPDF={processingPDF}
-            showThinkingAnimation={showThinkingAnimation}
-            conversation={conversation}
-          />
-          <TextField
-            isDisabled={processingPDF}
-            onSendMessage={sendMessage}></TextField>
+          {pdf && (
+            <p>
+              Page {pageNumber} of {numPages}
+            </p>
+          )}
         </div>
-      </div>
 
-      <div className="mt-4"></div>
-    </div>
+        <div className="flex flex-col justify-between h-full">
+          <div className="flex-grow overflow-y-auto">
+            <ConversationDisplay
+              processingPDF={processingPDF}
+              showThinkingAnimation={showThinkingAnimation}
+              conversation={conversation}
+            />
+            <TextField
+              isDisabled={processingPDF}
+              onSendMessage={sendMessage}></TextField>
+          </div>
+        </div>
+
+        <div className="mt-4"></div>
+      </div>
+    </>
   );
 }

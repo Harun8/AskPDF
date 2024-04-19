@@ -35,6 +35,8 @@ const Signin = () => {
   };
   return (
     <>
+      <title>Sign up | AskPDFs</title>
+
       <div class="flex justify-center md:grid md:grid-cols-2 md:gap-1 h-dvh">
         <div className="">
           <div className="flex justify-center">

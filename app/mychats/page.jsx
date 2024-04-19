@@ -41,6 +41,8 @@ const MyChats = () => {
 
   return (
     <>
+      <title>My chats | AskPDFs</title>
+
       <p className="flex justify-center font-medium font-4xl">My chats </p>
       <div className="flex justify-center text-black dark:text-white">
         <div className="flex justify-center">
