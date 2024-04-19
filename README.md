@@ -10,12 +10,12 @@ Technologies used
   Realtime broadcast for streaming
   Sendgrid email service
   Stripe integration + webhooks
-  lscache vs localstorage
+  lscache vs localstorage.
 -->
 
 ## What is AskPDF {Still in draft mode)
 
-For an introduction AskPDF is a website where a user can upload and chat with their PDF's
+For an introduction AskPDF is a website where a user can upload and chat with their PDF's.
 
 ### Why did I make AskPDF? 
 
