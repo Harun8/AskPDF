@@ -13,7 +13,7 @@ Technologies used
   lscache vs localstorage.
 -->
 
-## What is AskPDF {Still in draft mode)
+## What is AskPDF { Stable draft mode)
 
 For an introduction AskPDF is a website where a user can upload and chat with their PDF's
 
@@ -72,33 +72,55 @@ Well I new i had to change direction in some sense, since this didn't seem to be
 
 ## Langchain
 
-And langchain is open source framework that makes it easier to set up applications that are built on LLM.
-
-So I used langchain with my OpenAI API, and processed each uploaded PDF as embeddings and stored them in a vector database.
+And langchain is open source framework that makes it easier to set up applications that are built on LLM. So I used langchain with my OpenAI API, and processed each uploaded PDF as embeddings and stored them in a vector database. The reason for using langchain was to simplify the interaction with an LLM. The benefits of using LangChain is that it is model agnostic, meaning that you can quite easily switch out your preferred LLM, which I liked since I at some point want to do some benchmark testing on which LLM performs the best.
 
 
 - Few-shot prompting
 ## Supabase
 
-As a backend as a service i stumbled across supabase which was regarded as a firebase alternative. And after doing some research and reading their documentation, I figured that using supabse could be a smart option so that is what i did. 
-
-My reasoning for choosing supabase whas primarly on the fact that their documentation and tutorials was easy to understand and it seemed like they've got a relative big community. 
+As a backend as a service I stumbled across supabase which was regarded as a firebase alternative. And after doing some research and reading their documentation, I figured that using supabse could be a smart option so that is what i did. My reasoning for choosing supabase whas primarly on the fact that their documentation and tutorials was easy to understand and it seemed like they've got a relative big community. Looking back at the implementation with supabase, it was a easy implementation and a really readable documentation. However for future projects I would probably like to have more control over my backend, and being able to switch database if nessecary. So even though my experience with supabase was pretty good, I just like having full control over my API
 
   ### Supabase vector DB
 
+  Since each documents get's processeds as embeddings, they need to be stored correctly. And this is done via using a vector databse, initally I looked at Pinecone DB, which is a tailored vector database. However I looked into the supabase documentation and found that supabase it self (or more postgres) supported vector databases.
+
 ### Supabase realtime broadcast
+
+Since this application inccorperated a chat element, it was important that we could brodcast realtime changes to the client. OpenAI makes streaming of words possible where each letter and/or word (token) get's streamed one by one to give a more nice look, instead of dumping the answer in one big response. In order to achieve this you'll need to be able to broadcast constant changes from the server side code to the client side, which was done with supabases realtime broadcast. Looking outside of supabase you could also solve this with socket.io. 
 
 ### Supabase enviorments
 
 ## Sendgrid email service
 
+I use sendgrid as my email providing service, came across it doing my internship and it was pretty easy to setup. 
+
 ## Stripe
 
+
+
 ## lscache vs localstorage
+
+I use lscache to limit request to the API on demo version (where user login isn't required), to control amount of request 
+
+```  js
+
+  const index = lscache.get("questions");
+    lscache.set("questions", index + 1, 1440);
+    if (counter == 10 || lscache.get("questions") > 10) {
+      showToast(
+        "Free daily questions limit reached",
+        "Login to start asking more questions! :)"
+      );
+      return;
+    }
+
+```
+The reason why I use lscache is that because you can set a "validation" time, so once that time runs out the specific cache get's removed
 
 # Testing
 
 ## End-To-End testing with Cypress
+I tend to do end to end test with cypress
 
 # Diagrams
 
@@ -110,59 +132,18 @@ My reasoning for choosing supabase whas primarly on the fact that their document
 
 ## Upcoming feature I will be working on for the next release
 
-- [ ] Darkmode https://github.com/Harun8/AskPdf/issues/4
+- [x] Darkmode
 - [ ] Heavy Refactoring
-- [ ] Reduce response times on some api's
+- [x] Reduce response times on some api's
 - [ ] Add OCR recognition for PDFs
+- [ ] Learn TypeScript and rewrite some modules
 
-## Final remarks
-
-### If you made it so far, then thank you for taking your time and reading this. Feel free to star this repo if you've liked it
-
-https://www.allabtai.com/wp-content/uploads/2022/12/big-file-summerize-gpt3.jpg
-
-# NOTE: Right now this readme is only being utilized as notes for myself, which will be changed soon explaining everything about this project
-
-## Note to self
-
-
-Anything older/weaker than the "gpt-3.5-turbo-0125", seems to be useless, on first test
-
-## table schema
-
-![diagram-export-13 1 2024-12 25 23](https://github.com/Harun8/AskPdf/assets/66841357/9321178c-b706-4dd8-bbdf-c744680a5d2d)
 
 ## How I set up my ´To Do Board´ to roll out the first version (beta), so I could get some feedback before opening it up to more users
 
 ![image](https://github.com/Harun8/AskPdf/assets/66841357/82900860-52cc-42d3-8e8a-8e226a724e6b)
 
-### General thoughts through my iterations
 
-Version 1: legacy branch
+## Final remarks
 
-- Used openai chat model
-- Had a timecomplexity of O(N), when it came to processing documents, fine for small documents, very bad for massive documents
-- ^^ Show code example
-
-Version 2: Current one
-
-- Using openai embddings model via langChain
-- Using a vector database
-- Trouble with appending user_id, file_id onto langChain supabaseVectorStore, nothing in documentation and i am following normal practice
-- Trying to figure out how a user who used a OTP can login without OTP the next time they want to log in.
-- Realtime broadcast
-- SendGrid/twillio
-- Vector database with 1500 + dimensions could go up to 3000+
-- Sripe integration (webhooks)
-- Fix ER diagram
-- Supabase realtime broadcast
-- Route 504 timeout from vercel
-- lscache vs localstorage
-
-Using UUID's bad for database performance? https://planetscale.com/blog/the-problem-with-using-a-uuid-primary-key-in-mysql
-
-
-- Streaming responses
-- Authentication and authorization
-- Flow diagram of the chat part
-- sequence diagram
+### If you made it so far, then thank you for taking your time and reading this. Feel free to star this repo if you've liked it, and feel free to msg me if there's anything :)
