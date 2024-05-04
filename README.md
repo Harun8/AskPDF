@@ -64,11 +64,11 @@ async function chatCompletion(chunk, text) {
 
 ```
 
-One of them being that i used the chat completion api for both processing my documents and answeing questions. For small sized documents wit only a few pages this seemed to work fine, but once you increase the input then not only would the performace take a huge hit but each question would be really expensive to compute since i was appending the whole document in to the chat completions API and calling it over a loop based on the chunks of the PDF. So if it was a big PDF then i would have a lot of chunks and a lot of calls to the API.
+One of them being that I used the chat completion api for both processing my documents and answering questions. For small sized documents with only a few pages this seemed to work fine, but once you increase the input then not only would the performace take a huge hit, but each question would be really expensive to compute since I was appending the whole document in to the chat completions API and calling it over a loop based on the chunks of the PDF. So if it was a big PDF then i would have a lot of chunks and a lot of calls to the API.
 
 __So how did I do?__
 
-Well I new i had to change direction in some sense, since this didn't seem to be an long term solution so I went to the OpenAI API documentation, read through their different API's and stumbled across their embedding API. Which was a way to measure the relatedness of text strings in a dimensional space, which could have either 1536 dimensions or 3072. So I read more about it and realised this was a quite better solution. And this is where I came across __LangChain__.
+Well I knew I had to change direction in some sense, since this didn't seem to be an long term solution so I went to the OpenAI API documentation, read through their different API's and stumbled across their embedding API. Which was a way to measure the relatedness of text strings in a dimensional space, which could have either 1536 dimensions or 3072. So I read more about it and realised this was a quite better solution. And this is where I came across __LangChain__.
 
 ## Langchain
 
@@ -124,9 +124,12 @@ I tend to do end to end test with cypress
 
 # Diagrams
 
-## Flow diagram showcasing how the interaction between the pdf and chat works behind the scenes.
+## Flow diagram
 
-## Entity relationship diagram
+This is a simplified flow diagram, showing the activity happening when a user uses the application: 
+
+![image](https://github.com/Harun8/AskPdf/assets/66841357/fe932c7b-524a-4d29-83b8-47becd372808)
+
 
 # What is next? 
 
