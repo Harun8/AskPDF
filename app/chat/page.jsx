@@ -77,7 +77,7 @@ export default function chat() {
           const response = await fetch("/api/abilities", {
             method: "POST",
             headers: {
-              "Content-Type": "application/json", // Specify the content type as JSON
+              "Content-Type": "application/json",
             },
             body: JSON.stringify({
               user_id: session.user.id,
@@ -153,7 +153,6 @@ export default function chat() {
     setConversation((conversation) => [
       ...conversation,
       { type: "user", text: messageText },
-      // { type: "response", text: "", streaming: true }, // Placeholder for streaming response
     ]);
     convHistory.push(messageText);
 
