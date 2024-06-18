@@ -1,17 +1,5 @@
 # [AskPDF](https://askpdfs.io)
 
-<!-- 
-What is askPDF
-Why did i make askPDF
-Technologies used
-  Langchain
-  Supabase
-  Vector DB
-  Realtime broadcast for streaming
-  Sendgrid email service
-  Stripe integration + webhooks
-  lscache vs localstorage.
--->
 
 ## What is AskPDF { Stable draft mode)
 
