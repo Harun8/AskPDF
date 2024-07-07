@@ -1,13 +1,13 @@
 "use client";
 
-// import Forms, { Credentials } from "@/components/Form";
+// import Forms, { FormValues } from "@/components/Form";
 import Forms, { FormValues } from "../../components/Form";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
 import Image from "next/image";
-// import LoginImage from "@/public/login.jpg";
+import LoginImage from "@/public/login.jpg";
 
 export default function LoginPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);

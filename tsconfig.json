@@ -4,12 +4,10 @@
     "module": "commonjs",
     "strict": true,
     "esModuleInterop": true,
-
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "allowJs": true, // Allow JavaScript files to be included
-    "outDir": "./dist" // Output directory for compiled files
-    ,
+    "allowJs": true,
+    "outDir": "./dist",
     "lib": [
       "dom",
       "dom.iterable",
@@ -25,13 +23,15 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "@/components/*": ["components/*"]
+    }
   },
-  "paths": {                           // Add this section
-  "@/*": ["./*"],
-//   "@/components/*": ["components/*"]
-},
   "include": [
+    "./*",
     "app/**/*",
     "components/**/*",
     "cypress/**/*",

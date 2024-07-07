@@ -15,8 +15,8 @@ export type Credentials = {
   isSubmitting: boolean;
   link: string;
   redirect: string;
-  email: string;
-  password: string;
+  // email: string;
+  // password: string;
   onSubmit: (values: FormValues) => void;
 };
 
