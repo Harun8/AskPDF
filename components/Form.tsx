@@ -4,7 +4,23 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Link from "next/link";
 import "@/public/styles/form.css";
-const Forms = (props) => {
+
+export type FormValues = {
+  email: string;
+  password: string;
+};
+export type Credentials = {
+  title: string;
+  showPassword: boolean;
+  isSubmitting: boolean;
+  link: string;
+  redirect: string;
+  email: string;
+  password: string;
+  onSubmit: (values: FormValues) => void;
+};
+
+const Forms = (props: Credentials) => {
   const SignupSchema = Yup.object().shape({
     email: Yup.string()
       .email("Invalid email")

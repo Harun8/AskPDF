@@ -1,0 +1,48 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": true, // Allow JavaScript files to be included
+    "outDir": "./dist" // Output directory for compiled files
+    ,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "noEmit": true,
+    "incremental": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "paths": {                           // Add this section
+  "@/*": ["./*"],
+//   "@/components/*": ["components/*"]
+},
+  "include": [
+    "app/**/*",
+    "components/**/*",
+    "cypress/**/*",
+    "lib/**/*",
+    "public/**/*",
+    "supabase/**/*",
+    "util/**/*",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next"
+  ]
+}

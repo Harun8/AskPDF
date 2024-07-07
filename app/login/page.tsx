@@ -1,12 +1,13 @@
 "use client";
 
-import Forms from "@/components/Form";
+// import Forms, { Credentials } from "@/components/Form";
+import Forms, { FormValues } from "../../components/Form";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
 import Image from "next/image";
-import LoginImage from "@/public/login.jpg";
+// import LoginImage from "@/public/login.jpg";
 
 export default function LoginPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -17,7 +18,7 @@ export default function LoginPage() {
     setIsSubmitting(false);
   }, []);
 
-  const login = async (values) => {
+  const login = async (values: FormValues) => {
     setIsSubmitting(true);
     let { error } = await supabase.auth.signInWithOtp({
       email: values.email,
@@ -39,7 +40,7 @@ export default function LoginPage() {
     <>
       <title>Login | AskPDFs</title>
 
-      <div class=" flex justify-center md:grid md:grid-cols-2 md:gap-1 h-dvh ">
+      <div className=" flex justify-center md:grid md:grid-cols-2 md:gap-1 h-dvh ">
         <div className="">
           <div className="flex justify-center">
             <Forms
