@@ -1,17 +1,5 @@
 # [AskPDF](https://askpdfs.io)
 
-<!-- 
-What is askPDF
-Why did i make askPDF
-Technologies used
-  Langchain
-  Supabase
-  Vector DB
-  Realtime broadcast for streaming
-  Sendgrid email service
-  Stripe integration + webhooks
-  lscache vs localstorage.
--->
 
 ## What is AskPDF { Stable draft mode)
 
@@ -100,7 +88,7 @@ I use sendgrid as my email providing service, came across it doing my internship
 
 ## lscache vs localstorage
 
-I use lscache to limit request to the API on demo version (where user login isn't required), to control amount of request 
+I used lscache to limit requests to the API on demo version (where user login isn't required), in order to control the amount of requests on the free version
 
 ```  js
 
