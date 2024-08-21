@@ -127,7 +127,6 @@ This is a simplified flow diagram, showing the activity happening when a user us
 - [ ] Heavy Refactoring
 - [x] Reduce response times on some api's
 - [ ] Add OCR recognition for PDFs
-- [ ] Learn TypeScript and rewrite some modules
 
 
 ## How I set up my ´To Do Board´ to roll out the first version (beta), so I could get some feedback before opening it up to more users
