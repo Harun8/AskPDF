@@ -55,7 +55,7 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY, // api key
 });
 
-export const maxDuration = 300;
+export const maxDuration = 60; // change if hobby is changed
 export const dynamic = "force-dynamic";
 
 let channelB;

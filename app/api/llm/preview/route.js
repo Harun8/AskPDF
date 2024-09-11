@@ -170,7 +170,7 @@ const client = createClient(
     },
   }
 );
-export const maxDuration = 300;
+export const maxDuration = 60;
 export const dynamic = "force-dynamic";
 
 export default async function handler(req, res) {
