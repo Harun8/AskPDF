@@ -41,7 +41,7 @@
     "lscache": "^1.3.2",
     "lucide-react": "^0.314.0",
     "marked": "^12.0.0",
-    "next": "^14.0.4",
+    "next": "^14.2.9",
     "next-i18next": "^15.2.0",
     "next-themes": "^0.2.1",
     "ngrok": "^5.0.0-beta.2",
