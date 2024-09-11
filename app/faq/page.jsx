@@ -35,10 +35,6 @@ const Accordion = () => {
                 header="What's the difference between the subscriptions?"
                 text="The difference between each subscription is shown in the pricing page"
               />
-              {/* <AccordionItem
-              header=""
-              text="It takes 2-3 weeks to get your first blog post ready. That includes the in-depth research & creation of your monthly content marketing strategy that we do before writing your first blog post, Ipsum available ."
-            /> */}
             </div>
             <div className="w-full px-4 lg:w-1/2">
               <AccordionItem
@@ -49,10 +45,6 @@ const Accordion = () => {
                 header="Can I get a trial period?"
                 text="Yes indeed, for the premium subscription we have a 7-day trial period"
               />
-              {/* <AccordionItem
-              header="How long we deliver your first blog post?"
-              text="It takes 2-3 weeks to get your first blog post ready. That includes the in-depth research & creation of your monthly content marketing strategy that we do before writing your first blog post, Ipsum available ."
-            /> */}
             </div>
           </div>
         </div>

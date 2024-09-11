@@ -9,7 +9,7 @@ import React, { useEffect, useState } from "react";
 
 import Link from "next/link";
 
-export default function Home(props) {
+export default function Home() {
   const [session, setSession] = useState(null);
 
   useEffect(() => {
@@ -80,64 +80,6 @@ export default function Home(props) {
             alt="landing page main image"></Image>
         </div>
       </div>
-
-      {/* <section className=" mt-5 bg-blue-950 dark:bg-blue-950  py-16	">
-        <div className=" flex justify-center">
-          <p className="mx-auto mt-8 text-zinc-100 dark:text-slate-300 font-serif font-bold text-3xl leading-tight">
-            How does it work
-          </p>
-        </div>
-        <div className="mt-12 pb-8 flex flex-col md:flex-row md:justify-center gap-16">
-          <div>
-            <Image
-              className="mx-auto"
-              src={Upload}
-              width={50}
-              height={50}
-              alt="landing page main image"></Image>
-            <p className=" flex justify-center mt-8 text-zinc-100 dark:text-slate-300 font-serif font-bold text-lg leading-tight">
-              Upload your PDF file
-            </p>
-          </div>
-          <div>
-            <Image
-              className="mx-auto"
-              src={Answer}
-              width={50}
-              height={50}
-              alt="landing page main image"></Image>
-            <p className=" flex justify-center mt-8 text-zinc-100 dark:text-slate-300 font-serif font-bold text-lg leading-tight">
-              Ask any question about your PDF
-            </p>
-          </div>
-          <div>
-            <Image
-              className=" mx-auto"
-              src={Pdf}
-              width={50}
-              height={50}
-              alt="landing page main image"></Image>
-            <p className=" flex justify-center mt-8 text-zinc-100 dark:text-slate-300 font-serif font-bold text-lg leading-tight">
-              Let AskPDF find the answer
-            </p>
-          </div>
-        </div>
-      </section> */}
-      {/* 
-      <div className="flex items-end justify-end fixed bottom-0 right-0 mb-4 mr-4 z-10">
-        <div>
-          <a
-            title="Buy me a beer"
-            href="https://www.buymeacoffee.com/scottwindon"
-            target="_blank"
-            className="block w-16 bg-zinc-300 h-16 rounded-full transition-all shadow hover:shadow-lg transform hover:scale-110 hover:rotate-12">
-            <Image
-              className="object-cover object-center w-full h-full rounded-full"
-              src={Coffee}
-            />
-          </a>
-        </div>
-      </div> */}
     </>
   );
 }

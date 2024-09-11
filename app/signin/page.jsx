@@ -1,12 +1,8 @@
 "use client";
-import react from "react";
 import Forms from "@/components/Form";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
-import LoginImage from "@/public/text.jpg";
-import Image from "next/image";
+import { useState } from "react";
 
 const Signin = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);

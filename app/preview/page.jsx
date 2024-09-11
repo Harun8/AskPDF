@@ -1,6 +1,5 @@
 "use client";
 import { Document, Page } from "react-pdf";
-// import pdf from ".../public/pdf";
 import { pdfjs } from "react-pdf";
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.js",
@@ -15,8 +14,6 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { redirect, useRouter } from "next/navigation";
 import { toast } from "sonner";
 import lscache from "lscache";
-
-const supabase = createClientComponentClient();
 
 const { createClient } = require("@supabase/supabase-js");
 
@@ -35,7 +32,6 @@ const client = createClient(
 const Preview = () => {
   const [conversation, setConversation] = useState([]);
   const [numPages, setNumPages] = useState();
-  const [pageNumber, setPageNumber] = useState(1);
   const [pdf, setPdf] = useState(null);
   const params = useParams();
   const router = useRouter();
@@ -85,6 +81,7 @@ const Preview = () => {
     setPdf(data);
   };
 
+  // used if i want another file to preview
   const uploadPdf = async () => {
     try {
       const formData = new FormData();
@@ -148,8 +145,6 @@ const Preview = () => {
 
   const sendMessage = async (messageText) => {
     setCounter((prev) => prev + 1);
-    // const index = Number(localStorage.getItem("questions"));
-    // localStorage.setItem("questions", index + 1);
 
     const index = lscache.get("questions");
     lscache.set("questions", index + 1, 1440);

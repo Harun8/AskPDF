@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Welcome from "@/public/Welcome.svg";
-import { Button } from "@/components/ui/button";
 import { useWindowSize } from "react-use";
 import Confetti from "react-confetti";
 

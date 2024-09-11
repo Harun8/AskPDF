@@ -16,8 +16,6 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY, // api key
 });
 
-// change to post instead of handler??
-let file_title;
 let userId;
 export default async function handler(req, res) {
   try {

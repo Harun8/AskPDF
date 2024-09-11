@@ -3,19 +3,13 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import { Toaster } from "@/components/ui/sonner";
-// import { cookies } from "next/headers";
 import { Inter as FontSans } from "next/font/google";
 import React, { useEffect, useState } from "react";
-// import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { supabase } from "@/lib/supabase";
-// import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import Footer from "@/components/footer";
 import { usePathname } from "next/navigation";
 import Provider from "@/components/provider";
-import { Toast, ToastProvider } from "@/components/ui/toast";
-// import { createServerComponentClient } from "@/lib/supabaseServer";
 import { appWithTranslation } from "next-i18next";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -68,7 +62,6 @@ function RootLayout({ children }) {
             {!isNavVisible && <Nav session={session}></Nav>}
             {children}
             <Analytics></Analytics>
-            {/* <SpeedInsights></SpeedInsights> */}
             {!isFooterVisible && <Footer></Footer>}
           </main>
         </Provider>

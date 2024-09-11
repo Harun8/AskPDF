@@ -1,13 +1,9 @@
 "use client";
 
-// import Forms, { FormValues } from "@/components/Form";
 import Forms, { FormValues } from "../../components/Form";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
-import Image from "next/image";
-import LoginImage from "@/public/login.jpg";
 
 export default function LoginPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -59,14 +55,6 @@ export default function LoginPage() {
               ? "check your email :) (And spam folder!)"
               : "welcome back :)"}{" "}
           </div>
-          {/* <div className="w-full">
-            <Image
-              className="rounded-3xl  object-cover"
-              src={LoginImage}
-              alt="blue image"
-              layout="responsive"
-            />
-          </div> */}
         </div>
       </div>
     </>
