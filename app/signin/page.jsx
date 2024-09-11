@@ -52,7 +52,9 @@ const Signin = () => {
         </div>
         <div className="hidden md:flex md:justify-center md:items-center md:p-12 md:bg-indigo-800	">
           <div className="flex justify-center text-white">
-            {isSubmitting ? "check your email :)" : "hello there :)"}
+            {isSubmitting
+              ? "check your email :) (and spam folder!) "
+              : "hello there :)"}
           </div>
         </div>
       </div>
