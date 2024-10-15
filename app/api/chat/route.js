@@ -3,6 +3,7 @@ import pdf from "pdf-parse";
 import { promisify } from "util";
 const { createClient } = require("@supabase/supabase-js");
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter"; // defaults to 1000 chars
+import { NextResponse } from "next/server";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -17,7 +18,7 @@ const openai = new OpenAI({
 });
 
 let userId;
-export default async function handler(req, res) {
+export async function POST(req, res) {
   try {
     const data = await req.formData();
     const file = data.get("file");
@@ -27,6 +28,7 @@ export default async function handler(req, res) {
 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
+    console.log("bytes", bytes, "buffer", buffer);
 
     const pdfData = await pdf(buffer);
 
@@ -92,11 +94,18 @@ export default async function handler(req, res) {
 
       if (error) throw error;
 
+      console.log(
+        "inserted this into documents table",
+        documentsWithForeignKeysAndEmbeddings
+      );
+
       const responseObject = {
         message: "PDF processed",
         pdfIds: file_id,
         chatId: chatId,
       };
+
+      return NextResponse.json(responseObject);
 
       const response = new Response(JSON.stringify(responseObject), {
         status: 200, // Set the status code to 200 (OK)
@@ -112,6 +121,8 @@ export default async function handler(req, res) {
         message: "PDF failed",
       };
 
+      return NextResponse.json(responseObject);
+
       const response = new Response(JSON.stringify(responseObject), {
         status: 400, // Set the status code to 200 (OK)
         headers: {
@@ -125,6 +136,7 @@ export default async function handler(req, res) {
     const responseObject = {
       message: "PDF failed",
     };
+    return NextResponse.json(responseObject);
 
     const response = new Response(JSON.stringify(responseObject), {
       status: 400, // Set the status code to 200 (OK)
@@ -136,5 +148,3 @@ export default async function handler(req, res) {
     return response;
   }
 }
-
-export { handler as POST };

@@ -19,6 +19,7 @@ import combineDocuments from "@/util/combineDocuments";
 import formatConvHistory from "@/util/formatConvHistory";
 const OpenAI = require("openai");
 const { createClient } = require("@supabase/supabase-js");
+import { NextResponse } from "next/server";
 
 const standAloneQuestionTemplate = `Given some conversation history (if any) and a question, convert it into a standalone question. 
 conversation history: {conv_history}
@@ -59,7 +60,7 @@ export const maxDuration = 60; // change if hobby is changed
 export const dynamic = "force-dynamic";
 
 let channelB;
-export default async function handler(req, res) {
+export async function POST(req, res) {
   try {
     const data = await req.json(); // Assuming text data if not form data
     //
@@ -112,6 +113,8 @@ export default async function handler(req, res) {
     }
     client.removeChannel(channelB);
 
+    return NextResponse.json({ msg: "PDF RECEVIED IT IS BEING PROCCESSED" });
+
     return new Response(
       JSON.stringify({ msg: "PDF RECEVIED IT IS BEING PROCCESSED" }),
       {
@@ -122,6 +125,8 @@ export default async function handler(req, res) {
       }
     );
   } catch (error) {
+    return NextResponse.json(error);
+
     console.error(error);
     return new Response(JSON.stringify(error), {
       status: 404, // Set the status code to 200 (OK)
@@ -131,8 +136,6 @@ export default async function handler(req, res) {
     });
   }
 }
-
-export { handler as POST };
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -230,6 +233,8 @@ async function retriver(queryText, file_id) {
     console.error("Error searching for documents:", error);
     return [];
   }
+
+  console.log();
 
   return data || [];
 }
