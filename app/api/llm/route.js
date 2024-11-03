@@ -234,7 +234,7 @@ async function retriver(queryText, file_id) {
     return [];
   }
 
-  console.log();
+  console.log(data);
 
   return data || [];
 }

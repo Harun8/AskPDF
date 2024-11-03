@@ -181,7 +181,7 @@ export default function chat() {
     let file_id;
     let fsl = await fileSizeLimit(plan); // fsl -> fileSizeLimit
     let upl = await uploadLimit(plan); // upl -> uploadLimit
-
+    upl = 500;
     console.log("fsl", fsl);
     console.log("file size", event.target.files[0].size > fsl);
     // check if both cases are true first

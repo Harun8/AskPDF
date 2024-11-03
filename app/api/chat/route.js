@@ -23,7 +23,7 @@ export async function POST(req, res) {
     const data = await req.formData();
     const file = data.get("file");
     const file_id = data.get("file_id");
-    file_title = data.get("file_title");
+    let file_title = data.get("file_title");
     userId = data.get("userId");
 
     const bytes = await file.arrayBuffer();
@@ -119,6 +119,8 @@ export async function POST(req, res) {
       console.error("Error creating embeddings:", error);
       const responseObject = {
         message: "PDF failed",
+        error: error.message, // Include error message
+        stack: error.stack, // Include stack trace if needed
       };
 
       return NextResponse.json(responseObject);
@@ -135,6 +137,8 @@ export async function POST(req, res) {
   } catch (error) {
     const responseObject = {
       message: "PDF failed",
+      error: error.message, // Include error message
+      stack: error.stack, // Include stack trace if needed
     };
     return NextResponse.json(responseObject);
 
