@@ -16,6 +16,8 @@ import { toast } from "sonner";
 import lscache from "lscache";
 
 const { createClient } = require("@supabase/supabase-js");
+import { useTranslations } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
 
 const client = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -29,7 +31,10 @@ const client = createClient(
   }
 );
 
-const Preview = () => {
+const Preview = ({ params: { locale } }) => {
+  const t = useTranslations("PathnamesPage");
+  setRequestLocale(locale);
+
   const [conversation, setConversation] = useState([]);
   const [numPages, setNumPages] = useState();
   const [pdf, setPdf] = useState(null);

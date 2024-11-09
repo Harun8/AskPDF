@@ -42,6 +42,7 @@
     "marked": "^12.0.0",
     "next": "^14.0.4",
     "next-i18next": "^15.2.0",
+    "next-intl": "^3.25.0",
     "next-themes": "^0.2.1",
     "ngrok": "^5.0.0-beta.2",
     "openai": "^4.24.1",
