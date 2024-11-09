@@ -17,7 +17,7 @@ export default function LoginPage() {
     setIsSubmitting(false);
   }, []);
 
-  const otpAuth = async (values) => {
+  const otpAuth = async (values: any) => {
     setIsSubmitting(true);
     let { error } = await supabase.auth.signInWithOtp({
       email: values.email,
