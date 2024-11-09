@@ -17,7 +17,7 @@ export default function LoginPage() {
     setIsSubmitting(false);
   }, []);
 
-  const otpAuth = async (values: any) => {
+  const otpAuth = async (values) => {
     setIsSubmitting(true);
     let { error } = await supabase.auth.signInWithOtp({
       email: values.email,
@@ -34,7 +34,7 @@ export default function LoginPage() {
       router.refresh();
     }
   };
-  const passwordAuth = async (values: any) => {
+  const passwordAuth = async (values) => {
     setIsSubmitting(true);
     let { error } = await supabase.auth.signInWithPassword({
       email: values.email,
@@ -50,7 +50,7 @@ export default function LoginPage() {
     }
   };
 
-  const authMethod = async (values: any) => {
+  const authMethod = async (values) => {
     let auth = isPassword ? "password" : "otp";
     switch (auth) {
       case "otp":
