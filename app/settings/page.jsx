@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { toast } from "sonner";
 
 export default function Settings() {
   const router = useRouter();
@@ -33,14 +34,30 @@ export default function Settings() {
         id: userId,
       }),
     });
-    const data = await response.json();
 
-    if (data) window.location.href = data.url;
+    if (!response.ok) {
+      showToast("Info", "You don't have a paid membership");
+    } else {
+      const data = await response.json();
+
+      if (data) window.location.href = data.url;
+    }
   };
 
   if (router.pathname === "/login") {
     // Return null or any other placeholder if you are on /login page
     return null;
+  }
+
+  function showToast(title, desc) {
+    toast(title, {
+      description: desc,
+      position: "top-right",
+
+      action: {
+        label: "Understood",
+      },
+    });
   }
 
   return (

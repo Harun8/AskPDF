@@ -181,9 +181,7 @@ export default function chat() {
     let file_id;
     let fsl = await fileSizeLimit(plan); // fsl -> fileSizeLimit
     let upl = await uploadLimit(plan); // upl -> uploadLimit
-    upl = 500;
-    console.log("fsl", fsl);
-    console.log("file size", event.target.files[0].size > fsl);
+
     // check if both cases are true first
     if (uploadCount >= upl && event.target.files[0].size > fsl) {
       showToast(
@@ -202,8 +200,6 @@ export default function chat() {
     }
 
     if (event.target.files[0].size > fsl) {
-      console.log("i got in here");
-
       showToast("File size limit reached!", "The PDF file is over your limit");
       closeModal();
       // setFileOverLimit(true);
@@ -332,7 +328,10 @@ export default function chat() {
           ) : (
             <>
               <div className="flex justify-center mt-48">
-                <button onClick={openModal}> Click me</button>
+                <button data-testid="uploadPDF-btn" onClick={openModal}>
+                  {" "}
+                  Click me
+                </button>
               </div>
 
               <div className="flex justify-center mt-48">

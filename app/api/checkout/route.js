@@ -121,7 +121,7 @@ export async function updateSubscription(event) {
       .update(updatedSubscription)
       .eq("stripe_customer_id", stripe_customer_id);
   } else {
-    console.log("user is not a preivous customer");
+    // user is not a previous customer
     const customer = await stripe.customers.retrieve(stripe_customer_id);
     const name = customer.name;
     const email = customer.email;

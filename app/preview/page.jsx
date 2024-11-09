@@ -190,7 +190,6 @@ const Preview = () => {
 
       action: {
         label: "Understood",
-        onClick: () => console.log("Undo"),
       },
     });
   }

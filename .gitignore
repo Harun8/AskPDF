@@ -6,9 +6,14 @@
 .pnp.js
 .yarn/install-state.gz
 
+
+
 # testing
 /coverage
+/cypress
 
+#scripts
+generatePDF.js
 # next.js
 /.next/
 /out/

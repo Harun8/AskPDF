@@ -17,7 +17,6 @@ export default function Pricing() {
   useEffect(() => {
     const getUser = async () => {
       const { data: session, error } = await supabase.auth.getSession();
-      console.log("data", session);
       if (error || session.session === null) {
         console.error("error is ", error);
         return;

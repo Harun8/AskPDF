@@ -22,6 +22,22 @@ export default async function handler(req, res) {
     .eq("user_id", user.id)
     .single();
 
+  console.log("profile", profile);
+
+  let { stripe_customer_id } = profile;
+
+  if (stripe_customer_id === null) {
+    return new Response(
+      JSON.stringify({ msg: "retrieval of profile row failed.." }),
+      {
+        status: 404, // Set the status code to 200 (OK)
+        headers: {
+          "Content-Type": "application/json", // Set the Content-Type header to 'application/json'
+        },
+      }
+    );
+  }
+
   if (error) {
     return new Response(
       JSON.stringify({ msg: "retrieval of profile row failed.." }),

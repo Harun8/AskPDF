@@ -12,6 +12,7 @@ const TextField = ({ onSendMessage, isDisabled }) => {
   return (
     <div className="flex flex-col justify-end ">
       <textarea
+        data-testid="chat-textfield"
         maxLength={150}
         disabled={isDisabled}
         id="message"
@@ -23,6 +24,7 @@ const TextField = ({ onSendMessage, isDisabled }) => {
           isDisabled ? "Processing your pdf, please wait ..." : "Message AskPDF"
         }></textarea>
       <button
+        data-testid="chat-btn"
         onClick={handleSend}
         className="bg-blue-500 text-white rounded p-2 mt-2">
         Send

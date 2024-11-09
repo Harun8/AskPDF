@@ -223,10 +223,10 @@ async function retriver(queryText, file_id) {
   }
   // Now use the generated embedding as query_embedding in the RPC call
   const { data, error } = await supabase.rpc("match_documents", {
-    query_embedding: queryEmbedding, // Use the generated embedding here
     file_id: file_id,
-    match_count: 10,
     filter: {},
+    match_count: 10,
+    query_embedding: queryEmbedding,
   });
 
   if (error) {

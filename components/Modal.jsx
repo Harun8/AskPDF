@@ -72,6 +72,7 @@ const Modal = ({
                         </div>
 
                         <input
+                          data-testid="pdf-modal"
                           size="100"
                           onChange={(event) => onFileSelect(event)}
                           type="file"

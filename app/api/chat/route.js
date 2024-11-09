@@ -28,7 +28,6 @@ export async function POST(req, res) {
 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    console.log("bytes", bytes, "buffer", buffer);
 
     const pdfData = await pdf(buffer);
 
@@ -58,7 +57,6 @@ export async function POST(req, res) {
       const numericEmbeddings = embeddings.map(
         (embeddingObj) => embeddingObj.embedding
       );
-      console.log("userid", userId);
       const { data: chatData, error: chatError } = await supabase
         .from("chats")
         .insert([{ user_id: userId }]) // Replace with actual data if necessary
@@ -74,6 +72,8 @@ export async function POST(req, res) {
       // Database insertion for each chunk
 
       let chatId = chatData[0].id;
+
+      console.log(userId, file_id, chatId);
 
       const documentsWithForeignKeysAndEmbeddings = output.map(
         (document, index) => ({

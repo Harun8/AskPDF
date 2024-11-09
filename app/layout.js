@@ -41,8 +41,6 @@ function RootLayout({ children }) {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${"theme"}=`);
     const themeIs = parts.pop().split(";").shift();
-
-    console.log("parts", themeIs);
   }, []);
   useEffect(() => {
     // Fetch session on component mount

@@ -60,6 +60,7 @@ const Forms = (props: Credentials) => {
               name="email"
               id="email"
               placeholder="Email"
+              data-testid="email-field"
             />
             {errors.email && touched.email ? (
               <div className="text-red-500">{errors.email}</div>
@@ -79,6 +80,7 @@ const Forms = (props: Credentials) => {
                   name="password"
                   id="password"
                   placeholder="Password"
+                  data-testid="password-field"
                 />
                 {errors.password && touched.password ? (
                   <div className="text-red-500">{errors.password}</div>
@@ -105,7 +107,8 @@ const Forms = (props: Credentials) => {
                 }
                  font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}`}
                 type="submit"
-                disabled={props.isSubmitting}>
+                disabled={props.isSubmitting}
+                data-testid="login-btn">
                 {props.isSubmitting ? "Check your mail" : props.title}
               </button>
               <hr className="mt-6"></hr>

@@ -10,7 +10,6 @@ import Confetti from "react-confetti";
 const Success = () => {
   const [showConfetti, setShowConfetti] = useState(false);
   const { width, height } = useWindowSize();
-  console.log(width, height);
 
   useEffect(() => {
     setShowConfetti(true);
