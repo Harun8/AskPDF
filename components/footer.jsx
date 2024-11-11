@@ -8,7 +8,7 @@ const Footer = () => {
       <footer className="bg-zinc-100  sticky top-[100vh] m-4 dark:bg-gray-800 ">
         <hr className="h-px my-3 bg-gray-200 border-0 dark:bg-gray-700" />
         <div className=" mx-auto max-w-screen-xl   md:flex md:items-center md:justify-between">
-          <p className=" text-base leading-6 text-center font-bold text-red-600">
+          <p className=" text-base leading-6 text-center font-bold text-gray-600">
             © 2024 AskPDF {version}.beta
           </p>
           <div className="flex flex-wrap justify-center mt-3  gap-4">

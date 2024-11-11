@@ -10,8 +10,15 @@ export default getRequestConfig(async ({ requestLocale }) => {
     locale = routing.defaultLocale;
   }
 
+  // messages: (await import(`../messages/${locale}.json`)).default,
+
   return {
     locale,
-    messages: (await import(`../messages/${locale}.json`)).default,
+    messages: (
+      await (locale === "da"
+        ? // When using Turbopack, this will enable HMR for `en`
+          import("../messages/da.json")
+        : import(`../messages/${locale}.json`))
+    ).default,
   };
 });

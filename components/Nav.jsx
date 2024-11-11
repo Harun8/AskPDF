@@ -56,7 +56,7 @@ const Nav = ({ session }) => {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 576 512">
               <path
-                fill="#0587eb"
+                fill="#869ba6"
                 d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"
               />
             </svg>
@@ -69,7 +69,7 @@ const Nav = ({ session }) => {
         <ul className="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 md:flex md:mx-auto md:flex md:items-center md:w-auto md:space-x-6">
           <li>
             <Link
-              className=" text-blue-600 font-bold hover:text-black "
+              className="text-sm font-['system-ui'] text-gray-700 hover:text-gray-500 font-bold"
               href="/">
               Home
             </Link>
@@ -150,7 +150,7 @@ const Nav = ({ session }) => {
             <>
               <li>
                 <Link
-                  className="text-sm text-gray-400 hover:text-gray-500 font-bold"
+                  className="text-sm font-['system-ui'] text-gray-700 hover:text-gray-500 font-bold"
                   href="/preview">
                   Preview
                 </Link>
@@ -199,20 +199,20 @@ const Nav = ({ session }) => {
             </svg>
           </li>
 
-          <li className="relative flex items-center">
+          {/* <li className="relative flex items-center">
             <ThemeSwitcher></ThemeSwitcher>
-          </li>
+          </li> */}
         </ul>
         {!session ? (
           <>
             <Link
-              className="hidden md:inline-block md:ml-auto md:mr-3 py-2 px-6 bg-gray-300 dark:bg-gray-900 hover:bg-gray-200 dark:hover:bg-gray-700 text-sm text-gray-900 dark:text-gray-200 font-bold  rounded-xl transition duration-200"
+              className="hidden md:inline-block md:ml-auto md:mr-3 py-2 px-6 dark:bg-gray-900 hover:bg-gray-200 dark:hover:bg-gray-700 text-sm text-gray-900 dark:text-gray-200 font-bold  rounded-xl transition duration-200"
               href="/login"
               data-testid="login-btn">
               Login
             </Link>
             <Link
-              className="hidden md:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 dark:bg-blue-950 dark:hover:bg-blue-800 text-sm text-white font-bold rounded-xl transition duration-200"
+              className="hidden md:inline-block py-2 px-5 bg-gray-800 hover:bg-gray-600 dark:bg-blue-950 dark:hover:bg-blue-800 text-sm text-white font-bold rounded-lg transition duration-200"
               href="/signin">
               Sign up
             </Link>

@@ -7,6 +7,8 @@ import SaveTime from "@/public/Save-time.svg";
 import { supabase } from "@/lib/supabase";
 import React, { useEffect, useState } from "react";
 
+import "../../public/styles/landingPage.css";
+
 import Link from "next/link";
 
 import { useTranslations } from "next-intl";
@@ -26,8 +28,28 @@ export default function Home() {
   return (
     <>
       <title>AskPDFs</title>
-      <h1>{t("title")}</h1>
-      <div className="flex flex-col md:grid grid-cols-2 mt-18 md:mt-28 mx-10  ">
+      {/* <h1>{t("title")}</h1> */}
+
+      <div class="flex flex-col items-center mt-24 text-center min-h-screen">
+        <h1 class="text-7xl font-bold font-sans mb-4 font-extrabold	 text-gray-800 ">
+          Significantly <br></br>
+          <span>improve learning</span>
+        </h1>
+        <p class="text-gray-500 mb-8">
+          We guarantee you revenue growth within a month.
+        </p>
+
+        <div class="flex space-x-4">
+          <button class="bg-gray-800 text-white font-bold py-3 px-10 rounded-lg hover:bg-gray-800">
+            Start free trial
+          </button>
+          <button class="border border-gray-500 text-gray-950 font-bold py-3 px-10  rounded-lg hover:bg-gray-100">
+            Try the demo
+          </button>
+        </div>
+      </div>
+
+      {/* <div className="flex flex-col md:grid grid-cols-2 mt-18 md:mt-28 mx-10   ">
         <div className="md:ml-12">
           <p className=" dark:text-slate-300 font-serif font-bold  text-3xl md:text-7xl leading-tight">
             <span data-testid="cypress-title" className="">
@@ -84,7 +106,7 @@ export default function Home() {
             height={800}
             alt="landing page main image"></Image>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }
