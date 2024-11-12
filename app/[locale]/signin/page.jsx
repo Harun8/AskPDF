@@ -4,12 +4,14 @@ import { Button } from "@/components/ui/button";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 const Signin = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
   const router = useRouter();
   const supabase = createClientComponentClient();
+  const t = useTranslations();
 
   const otpAuth = async (values) => {
     // setIsSubmitting(true);
@@ -68,9 +70,9 @@ const Signin = () => {
                 isSubmitting={isSubmitting}
                 showPassword={isPassword}
                 onSubmit={authMethod}
-                title="Sign up"
+                title={t("Navbar.signup")}
                 link="login"
-                redirect="Already have an account? Log in"></Forms>
+                redirect={t("login.text")}></Forms>
             </div>
             <div className=" flex justify-center">
               <Button

@@ -31,7 +31,7 @@ const TextField = ({ onSendMessage, isDisabled }) => {
       <button
         data-testid="chat-btn"
         onClick={handleSend}
-        className="bg-gray-500 text-white rounded p-2 mt-2">
+        className="bg-gray-800 text-white rounded p-2 mt-2">
         Send
       </button>
     </div>

@@ -11,6 +11,7 @@ import React, { useEffect, useState } from "react";
 import "../../public/styles/landingPage.css";
 
 import { useTranslations } from "next-intl";
+import { NeonGradientCard } from "@/components/ui/neon-gradient-card";
 // import {Link} from '@/i18n/routing';
 export default function Home() {
   const [session, setSession] = useState(null);
@@ -47,6 +48,15 @@ export default function Home() {
             class="border border-gray-500 text-gray-950 font-bold py-3 px-10  rounded-lg hover:bg-gray-100">
             {t("tryDemo")}
           </Link>
+        </div>
+        <div className=" mt-12 w-[1000px] h-[100px]">
+          <NeonGradientCard
+            neonColors={{
+              firstColor: "#272234 ",
+              secondColor: "#2e6f7c",
+            }}>
+            yoo
+          </NeonGradientCard>
         </div>
       </div>
 

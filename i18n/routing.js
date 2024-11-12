@@ -8,7 +8,7 @@ export const routing = defineRouting({
     "/": "/",
     "/preview": {
       en: "/preview",
-      da: "/previewDA",
+      da: "/preview",
     },
   },
 });

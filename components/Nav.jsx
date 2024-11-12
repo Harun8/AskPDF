@@ -99,7 +99,7 @@ const Nav = ({ session }) => {
                   className="text-sm text-gray-400 hover:text-gray-500 font-bold"
                   href="/chat"
                   data-testid="chat-page-link">
-                  Chat
+                  {t("chat")}
                 </Link>
               </li>
 
@@ -122,7 +122,7 @@ const Nav = ({ session }) => {
                 <Link
                   className="text-sm text-gray-400 hover:text-gray-500 font-bold"
                   href="/mychats">
-                  My chats
+                  {t("myChats")}
                 </Link>
               </li>
               <li className="text-gray-300">
@@ -144,7 +144,7 @@ const Nav = ({ session }) => {
                 <Link
                   className="text-sm text-gray-400 hover:text-gray-500 font-bold"
                   href="/settings">
-                  Settings
+                  {t("settings")}
                 </Link>
               </li>
             </>
@@ -222,7 +222,7 @@ const Nav = ({ session }) => {
         ) : (
           <>
             <button
-              className="hidden md:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 dark:bg-blue-950 dark:hover:bg-blue-800 text-sm text-white font-bold rounded-xl transition duration-200"
+              className="hidden md:inline-block py-2 px-6 bg-gray-700 hover:bg-gray-800 dark:bg-blue-950 dark:hover:bg-blue-800 text-sm text-white font-bold rounded-xl transition duration-200"
               onClick={async (e) => {
                 e.preventDefault();
                 setLoading(true);
@@ -232,7 +232,7 @@ const Nav = ({ session }) => {
                 // if (!error) setSession(null);
               }}
               disabled={loading}>
-              {loading ? "Loading" : "Logout"}
+              {loading ? "Loading" : t("logout")}
             </button>
             {/* <Link
               href="/login">

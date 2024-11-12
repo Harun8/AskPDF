@@ -23,6 +23,10 @@ export async function middleware(req) {
     req.nextUrl.pathname.startsWith(path)
   );
 
+  const { pathname } = req.nextUrl;
+  if (pathname.startsWith("/api")) {
+    return NextResponse.rewrite(new URL(pathname, req.url));
+  }
   // If the request is for a protected route and user is not authenticated, return 401 Unauthorized
   if (isProtectedRoute && !user) {
     return NextResponse.json({ message: "Auth required!" }, { status: 401 });
@@ -36,7 +40,7 @@ export async function middleware(req) {
   if (i18nResponse) {
     return i18nResponse;
   }
-  res.headers.set("x-pathname", req.nextUrl.pathname);
+  res.cookies.set("current-pathname", req.nextUrl.pathname);
 
   // If the user is authenticated or the route is public, continue with the response
   return res;

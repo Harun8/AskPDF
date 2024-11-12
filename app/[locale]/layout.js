@@ -10,7 +10,8 @@ import { supabase } from "@/lib/supabase";
 import Footer from "@/components/footer";
 // import { usePathname } from "next/navigation";
 import Provider from "@/components/provider";
-import { headers } from "next/headers";
+import { cookies } from "next/headers";
+import LayoutWrapper from "@/components/LayoutWrapper";
 
 // import { appWithTranslation } from "next-i18next";
 
@@ -27,24 +28,7 @@ export const fontSans = FontSans({
   variable: "--font-sans",
 });
 
-const hideNav = ["/login", "/signin", "/success"];
-const hideFooter = [
-  "/login",
-  "/signin",
-  "/success",
-  "/mychats",
-  "/chat",
-  "/preview",
-  "/settings",
-];
 async function RootLayout({ children, params: { locale } }) {
-  const headersList = headers();
-  const currentPathname = headersList.get("x-pathname") || "";
-  console.log("headers", currentPathname, headersList);
-  // const [session, setSession] = useState(null);
-
-  const isNavVisible = !hideNav.includes(currentPathname);
-  const isFooterVisible = !hideFooter.includes(currentPathname);
   // const [isMounted, setIsMounted] = useState(false);
 
   // Ensure that the incoming `locale` is valid
@@ -57,36 +41,19 @@ async function RootLayout({ children, params: { locale } }) {
   // Providing all messages to the client
   // side is the easiest way to get started
   const messages = await getMessages();
-  // useEffect(() => {
-  //   const value = `; ${document.cookie}`;
-  //   const parts = value.split(`; ${"theme"}=`);
-  //   const themeIs = parts.pop().split(";").shift();
-  // }, []);
-  // useEffect(() => {
-  //   // Fetch session on component mount
-  //   setSession(supabase.auth.getSession());
-
-  //   // Set up a session state listener for real-time updates
-  //   supabase.auth.onAuthStateChange((_event, session) => {
-  //     setSession(session);
-  //   });
-  // }, []);
 
   return (
-    <html className="" lang={locale}>
+    <html lang={locale}>
       <body className="flex flex-col min-h-screen w-full bg-zinc-100 dark:bg-gray-800">
         <Provider>
           <main className="flex-grow">
             <NextIntlClientProvider messages={messages}>
-              {!isNavVisible && <Nav /*session={session}*/></Nav>}
-              {children}
-
-              <Analytics></Analytics>
-              {!isFooterVisible && <Footer></Footer>}
+              <LayoutWrapper>{children}</LayoutWrapper>
+              <Analytics />
             </NextIntlClientProvider>
           </main>
         </Provider>
-        <Toaster></Toaster>
+        <Toaster />
       </body>
     </html>
   );

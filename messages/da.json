@@ -5,7 +5,11 @@
       "pricing": "Priser",
       "login": "Log ind",
       "signup": "Tilmeld",
-      "faq": "Ofte stillede spørgsmål"
+      "faq": "Ofte stillede spørgsmål",
+      "chat": "Chat",
+      "myChats": "Mine chats",
+      "settings": "Indstillinger",
+      "logout": "Log ud"
     },
 
     "HomePage": {
@@ -16,8 +20,23 @@
         "tryDemo": "Prøv demoen"
 
     },
+
+    "SuccessPage" : {
+      "title": "Du har nu adgang til din AskPDF-plan. Kom i gang nu ved at oprette din konto!",
+      "login": "Log ind med din email nu"
+    
+    },
+    "SettingsPage": {
+      "membership" :"Administrer medlemskab"  
+    },
+
+    
     "preview": {
-      "message": "Send a message to AskPDF"
+      "message": "Send besked til AskPDF"
+    },
+    "chat": {
+      "message": "Klik her for at uploade din PDF",
+      "upload": "Upload din PDF"
     },
 
     "faq": {
@@ -30,16 +49,10 @@
       "text":"Tilmeld dig her, hvis du ikke har en konto",
       "welcomeBack": "Velkommen tilbage :)",
       "checkMail": "Tjek din mail, og spam mappen"
-
-
     },
 
+    "notFound": {
+        "title": "Venligst log ind for at se chatsiden"
 
-
-
-
-    "PathnamesPage": {
-        "title": "Hejsa",
-        "about": "Gå til omkring siden"
       }
   }
