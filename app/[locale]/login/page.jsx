@@ -1,10 +1,11 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import Forms, { FormValues } from "../../components/Form";
+import Forms, { FormValues } from "../../../components/Form";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 export default function LoginPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -12,6 +13,8 @@ export default function LoginPage() {
 
   const router = useRouter();
   const supabase = createClientComponentClient();
+
+  const t = useTranslations();
 
   useEffect(() => {
     setIsSubmitting(false);
@@ -73,8 +76,8 @@ export default function LoginPage() {
               showPassword={isPassword}
               onSubmit={authMethod}
               link="signin"
-              title="Login"
-              redirect="Don't have an account? Sign up?"></Forms>
+              title={t("Navbar.login")}
+              redirect={t("login.text")}></Forms>
           </div>
           <div className=" flex justify-center">
             <Button
@@ -88,8 +91,8 @@ export default function LoginPage() {
           <div className="flex justify-center">
             {" "}
             {isSubmitting
-              ? "check your email :) (And spam folder!)"
-              : "welcome back :)"}{" "}
+              ? `${t("login.checkMail")}`
+              : `${t("login.welcomeBack")}`}{" "}
           </div>
         </div>
       </div>

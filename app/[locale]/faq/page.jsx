@@ -1,7 +1,10 @@
 "use client";
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 
 const Accordion = () => {
+  const t = useTranslations();
+
   return (
     <>
       <title>FaQ | AskPDFs</title>
@@ -12,13 +15,14 @@ const Accordion = () => {
             <div className="w-full px-4">
               <div className="mx-auto mb-[60px] max-w-[520px] text-center lg:mb-20">
                 <span className="mb-2 block text-lg font-bold text-blue-600">
-                  FAQ
+                  {t("Navbar.faq")}
                 </span>
                 <h2 className="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-[40px]/[48px]">
-                  Any Questions? Look Here
+                  {t("faq.anyQuestions")}
                 </h2>
                 <p className="text-base text-body-color dark:text-dark-6">
-                  If you can't find the answer don't hesitate to send a mail to
+                  {t("faq.bodyText")}
+
                   <span className="text-blue-600"> support@askpdfs.io</span>
                 </p>
               </div>

@@ -2,14 +2,13 @@
 
 import Image from "next/image";
 import TypingLight from "@/public/TypingLight.svg";
+import { Link } from "@/i18n/routing";
 
 import SaveTime from "@/public/Save-time.svg";
 import { supabase } from "@/lib/supabase";
 import React, { useEffect, useState } from "react";
 
 import "../../public/styles/landingPage.css";
-
-import Link from "next/link";
 
 import { useTranslations } from "next-intl";
 // import {Link} from '@/i18n/routing';
@@ -32,20 +31,22 @@ export default function Home() {
 
       <div class="flex flex-col items-center mt-24 text-center min-h-screen">
         <h1 class="text-7xl font-bold font-sans mb-4 font-extrabold	 text-gray-800 ">
-          Significantly <br></br>
-          <span>improve learning</span>
+          {t("titleFirst")} <br></br>
+          <span> {t("titleSecond")}</span>
         </h1>
-        <p class="text-gray-500 mb-8">
-          We guarantee you revenue growth within a month.
-        </p>
+        <p class="text-gray-500 mb-8">{t("underTitle")}</p>
 
         <div class="flex space-x-4">
-          <button class="bg-gray-800 text-white font-bold py-3 px-10 rounded-lg hover:bg-gray-800">
-            Start free trial
-          </button>
-          <button class="border border-gray-500 text-gray-950 font-bold py-3 px-10  rounded-lg hover:bg-gray-100">
-            Try the demo
-          </button>
+          <Link
+            href="/pricing"
+            class="bg-gray-800 text-white font-bold py-3 px-10 rounded-lg hover:bg-gray-800">
+            {t("tryAskPDF")}
+          </Link>
+          <Link
+            href="/preview"
+            class="border border-gray-500 text-gray-950 font-bold py-3 px-10  rounded-lg hover:bg-gray-100">
+            {t("tryDemo")}
+          </Link>
         </div>
       </div>
 

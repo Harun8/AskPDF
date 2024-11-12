@@ -4,6 +4,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { useEffect, useState } from "react";
 import Loading from "./loading";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import PricingTable from "@/components/PricingTable";
 
 export default function Pricing() {
   const [plans, setPlans] = useState([]);
@@ -106,15 +107,16 @@ export default function Pricing() {
       <title>Pricing | AskPDFs</title>
 
       {loading ? (
-        <Loading></Loading>
+        // <Loading></Loading>
+        <PricingTable></PricingTable>
       ) : (
         <div className="md:flex md:flex-col md:align-center p-10">
-          <div className="  relative self-center  rounded-lg p-0.5 flex sm:justify-center">
+          {/* <div className="  relative self-center  rounded-lg p-0.5 flex sm:justify-center">
             <h2 className="lg:text-4xl md:text-4xl text-xl leading-6 font-bold dark:text-slate-400 text-slate-900">
               Choose one of our incredible options
             </h2>
-          </div>
-          <div className="mt-6 relative self-center flex flex-col md:flex-row md:justify-center">
+          </div> */}
+          {/* <div className="mt-6 relative self-center flex flex-col md:flex-row md:justify-center">
             <div className="bg-zinc-200 dark:bg-zinc-900 rounded-lg p-0.5  ">
               <button
                 onClick={monthlyPricing}
@@ -140,9 +142,10 @@ export default function Pricing() {
                 save 28%
               </span>
             </div>
-          </div>
+          </div> */}
+          <PricingTable></PricingTable>
 
-          <div className="mt-12 space-y-3 md:mt-16 md:space-y-0 md:grid md:grid-cols-3 md:gap-6 md:max-w-5xl md:mx-auto xl:grid-cols-3">
+          {/* <div className="mt-12 space-y-3 md:mt-16 md:space-y-0 md:grid md:grid-cols-3 md:gap-6 md:max-w-5xl md:mx-auto xl:grid-cols-3">
             <div
               data-testid="cypress-FreePlan"
               className=" bg-zinc-100 dark:bg-gray-900 	 border border-slate-900 rounded-lg shadow-sm divide-y divide-slate-200">
@@ -609,7 +612,7 @@ export default function Pricing() {
                 </ul>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       )}
     </>

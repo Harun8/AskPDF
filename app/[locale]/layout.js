@@ -10,6 +10,8 @@ import { supabase } from "@/lib/supabase";
 import Footer from "@/components/footer";
 // import { usePathname } from "next/navigation";
 import Provider from "@/components/provider";
+import { headers } from "next/headers";
+
 // import { appWithTranslation } from "next-i18next";
 
 import { NextIntlClientProvider } from "next-intl";
@@ -36,11 +38,13 @@ const hideFooter = [
   "/settings",
 ];
 async function RootLayout({ children, params: { locale } }) {
+  const headersList = headers();
+  const currentPathname = headersList.get("x-pathname") || "";
+  console.log("headers", currentPathname, headersList);
   // const [session, setSession] = useState(null);
-  // const pathname = usePathname();
-  // const isNavVisible = hideNav.includes(pathname);
-  // const isFooterVisible = hideFooter.includes(pathname);
 
+  const isNavVisible = !hideNav.includes(currentPathname);
+  const isFooterVisible = !hideFooter.includes(currentPathname);
   // const [isMounted, setIsMounted] = useState(false);
 
   // Ensure that the incoming `locale` is valid
@@ -74,11 +78,11 @@ async function RootLayout({ children, params: { locale } }) {
         <Provider>
           <main className="flex-grow">
             <NextIntlClientProvider messages={messages}>
-              {/*!isNavVisible */ 2 == 2 && <Nav /*session={session}*/></Nav>}
+              {!isNavVisible && <Nav /*session={session}*/></Nav>}
               {children}
 
               <Analytics></Analytics>
-              {/*!isFooterVisible*/ 2 == 2 && <Footer></Footer>}
+              {!isFooterVisible && <Footer></Footer>}
             </NextIntlClientProvider>
           </main>
         </Provider>

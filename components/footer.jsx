@@ -1,7 +1,10 @@
 import packageInfo from "@/package.json";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
+
 const Footer = () => {
   let version = packageInfo.version;
+  const t = useTranslations("Navbar");
 
   return (
     <>
@@ -48,14 +51,14 @@ const Footer = () => {
               <Link
                 href="/preview"
                 className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Preview
+                {t("preview")}
               </Link>
             </div>
             <div className="px-5 py-2">
               <Link
                 href="/pricing"
                 className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Pricing
+                {t("pricing")}
               </Link>
             </div>
 
@@ -63,7 +66,7 @@ const Footer = () => {
               <Link
                 href="/faq"
                 className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                FAQ
+                {t("faq")}
               </Link>
             </div>
 

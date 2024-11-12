@@ -4,7 +4,7 @@ import { Menu } from "@headlessui/react";
 import Image from "next/image";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { useEffect, useState } from "react";
 import { Session } from "@supabase/auth-helpers-nextjs";
 import ToggleBtn from "./ToggleBtn";
@@ -14,6 +14,7 @@ import { Button } from "./ui/button";
 import AskPDF from "@/public/askpdf2.png";
 import { DropDown } from "./smNav";
 import ThemeSwitcher from "./ThemeSwitcher";
+import { useTranslations } from "next-intl";
 
 const Nav = ({ session }) => {
   // const [session, setSession] = useState();
@@ -23,6 +24,7 @@ const Nav = ({ session }) => {
   const router = useRouter();
 
   const supabase = createClientComponentClient();
+  const t = useTranslations("Navbar");
 
   // useEffect(() => {
   //   const getUser = async () => {
@@ -71,7 +73,7 @@ const Nav = ({ session }) => {
             <Link
               className="text-sm font-['system-ui'] text-gray-700 hover:text-gray-500 font-bold"
               href="/">
-              Home
+              {t("home")}
             </Link>
           </li>
 
@@ -152,7 +154,7 @@ const Nav = ({ session }) => {
                 <Link
                   className="text-sm font-['system-ui'] text-gray-700 hover:text-gray-500 font-bold"
                   href="/preview">
-                  Preview
+                  {t("preview")}
                 </Link>
               </li>
               <li className="text-gray-300">
@@ -174,7 +176,7 @@ const Nav = ({ session }) => {
                 <Link
                   className=" text-sm text-red-400 hover:text-red-600 font-bold "
                   href="/pricing">
-                  Pricing
+                  {t("pricing")}
                 </Link>
                 <span className="relative flex h-1 w-1 mb-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
@@ -209,12 +211,12 @@ const Nav = ({ session }) => {
               className="hidden md:inline-block md:ml-auto md:mr-3 py-2 px-6 dark:bg-gray-900 hover:bg-gray-200 dark:hover:bg-gray-700 text-sm text-gray-900 dark:text-gray-200 font-bold  rounded-xl transition duration-200"
               href="/login"
               data-testid="login-btn">
-              Login
+              {t("login")}
             </Link>
             <Link
               className="hidden md:inline-block py-2 px-5 bg-gray-800 hover:bg-gray-600 dark:bg-blue-950 dark:hover:bg-blue-800 text-sm text-white font-bold rounded-lg transition duration-200"
               href="/signin">
-              Sign up
+              {t("signup")}
             </Link>
           </>
         ) : (

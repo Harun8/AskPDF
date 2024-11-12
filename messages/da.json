@@ -1,8 +1,42 @@
 {
-    "HomePage": {
-      "title": "Hejsa",
-      "about": "Gå til omkring siden"
+    "Navbar": {
+      "home": "Hjem",
+      "preview": "Demo",
+      "pricing": "Priser",
+      "login": "Log ind",
+      "signup": "Tilmeld",
+      "faq": "Ofte stillede spørgsmål"
     },
+
+    "HomePage": {
+      "titleFirst": "Forbedr din",
+      "titleSecond": "læring markant",
+      "underTitle": "Opnå mere på kortere tid med Ask PDFs.",
+       "tryAskPDF" :"Prøv Ask PDFs gratis",
+        "tryDemo": "Prøv demoen"
+
+    },
+    "preview": {
+      "message": "Send a message to AskPDF"
+    },
+
+    "faq": {
+      "anyQuestions" : "Har du spørgsmål? Se her",
+      "bodyText": "Hvis du ikke kan finde svaret, er du velkommen til at sende en mail til",
+      "password": "Kodeord"
+    },
+
+    "login": {
+      "text":"Tilmeld dig her, hvis du ikke har en konto",
+      "welcomeBack": "Velkommen tilbage :)",
+      "checkMail": "Tjek din mail, og spam mappen"
+
+
+    },
+
+
+
+
 
     "PathnamesPage": {
         "title": "Hejsa",

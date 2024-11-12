@@ -4,6 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Link from "next/link";
 import "@/public/styles/form.css";
+import { useTranslations } from "next-intl";
 
 export type FormValues = {
   email: string;
@@ -21,6 +22,8 @@ export type Credentials = {
 };
 
 const Forms = (props: Credentials) => {
+  const t = useTranslations();
+
   const SignupSchema = Yup.object().shape({
     email: Yup.string()
       .email("Invalid email")
@@ -72,14 +75,14 @@ const Forms = (props: Credentials) => {
                 <label
                   className=" dark:text-white block text-gray-700 text-sm font-bold mb-2"
                   htmlFor="password">
-                  Password
+                  {t("faq.password")}
                 </label>
                 <Field
                   className=" dark:bg-gray-900 dark:text-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   type="password"
                   name="password"
                   id="password"
-                  placeholder="Password"
+                  placeholder={t("faq.password")}
                   data-testid="password-field"
                 />
                 {errors.password && touched.password ? (

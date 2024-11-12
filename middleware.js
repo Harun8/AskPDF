@@ -36,6 +36,7 @@ export async function middleware(req) {
   if (i18nResponse) {
     return i18nResponse;
   }
+  res.headers.set("x-pathname", req.nextUrl.pathname);
 
   // If the user is authenticated or the route is public, continue with the response
   return res;

@@ -1,0 +1,41 @@
+{
+    "Navbar": {
+      "home": "Home",
+      "preview": "Preview",
+      "pricing": "Pricing",
+      "login": "Login",
+      "signup": "Sign up",
+      "faq": "FAQ"
+    },
+
+    "HomePage": {
+        "titleFirst": "Significantly",
+        "titleSecond": "improve learning",
+        "underTitle": "Achieve more in less time with Ask PDFs.",
+        "tryAskPDF" :"Try AskPDF for free",
+        "tryDemo": "Try the demo"
+      },
+
+      "preview": {
+        "message": "Send besked til AskPDF"
+      },
+
+      "faq": {
+        "anyQuestions" : "Any Questions? Look Here",
+        "bodyText": "If you can't find the answer don't hesitate to send a mail to",
+        "password": "Password"
+  
+    },
+
+      
+    "login": {
+        "text":"Don't have an account? Sign up!",
+        "welcomeBack": "Welcome back :)",
+        "checkMail": "Check your mail, and spam folder"
+      },
+  
+    "PathnamesPage": {
+        "title": "Hejsa",
+        "about": "Gå til omkring siden"
+      }
+  }
