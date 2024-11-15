@@ -1,14 +1,17 @@
 import packageInfo from "@/package.json";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
+
 const Footer = () => {
   let version = packageInfo.version;
+  const t = useTranslations("Navbar");
 
   return (
     <>
       <footer className="bg-zinc-100  sticky top-[100vh] m-4 dark:bg-gray-800 ">
         <hr className="h-px my-3 bg-gray-200 border-0 dark:bg-gray-700" />
         <div className=" mx-auto max-w-screen-xl   md:flex md:items-center md:justify-between">
-          <p className=" text-base leading-6 text-center font-bold text-red-600">
+          <p className=" text-base leading-6 text-center font-bold text-gray-600">
             © 2024 AskPDF {version}.beta
           </p>
           <div className="flex flex-wrap justify-center mt-3  gap-4">
@@ -48,14 +51,14 @@ const Footer = () => {
               <Link
                 href="/preview"
                 className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Preview
+                {t("preview")}
               </Link>
             </div>
             <div className="px-5 py-2">
               <Link
                 href="/pricing"
                 className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                Pricing
+                {t("pricing")}
               </Link>
             </div>
 
@@ -63,7 +66,7 @@ const Footer = () => {
               <Link
                 href="/faq"
                 className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                FAQ
+                {t("faq")}
               </Link>
             </div>
 

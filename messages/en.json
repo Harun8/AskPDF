@@ -1,0 +1,88 @@
+{
+    "Navbar": {
+      "home": "Home",
+      "preview": "Preview",
+      "pricing": "Pricing",
+      "login": "Login",
+      "signup": "Sign up",
+      "faq": "FAQ",
+      "chat": "Chat",
+      "myChats": "Mine chats",
+      "settings": "Indstillinger",
+      "logout": "Logout"
+    },
+
+    "HomePage": {
+        "titleFirst": "Significantly",
+        "titleSecond": "improve learning",
+        "underTitle": "Achieve more in less time with Ask PDFs.",
+        "tryAskPDF" :"Try AskPDF for free",
+        "tryDemo": "Try the demo"
+      },
+
+      "SuccessPage" : {
+        "title": "You can now access to your AskPDF plan, get started now, by creating your account!",
+        "login": "Log in with your email now!"  
+    },
+
+    "SettingsPage": {
+      "membership" :"Manage membership"  
+    },
+
+    "preview": {
+        "message": "Send a message to AskPDF"
+      },
+
+      "chat": {
+        "message": "Click here to upload your PDF"
+      },
+
+      "faq": {
+        "anyQuestions" : "Any Questions? Look Here",
+        "bodyText": "If you can't find the answer don't hesitate to send a mail to",
+        "password": "Password",
+        "whatIsAskPDF": "What is AskPDF?",
+        "askPDFDescription": "AskPDF is a chat application where you can upload and chat with your PDFs",
+        
+        "subscriptionDifference": "What's the difference between the subscriptions?",
+        "subscriptionDifferenceDescription": "The difference between each subscription is shown on the pricing page",
+        
+        "uploadLimit": "Why can't I upload more PDFs?",
+        "uploadLimitDescription": "You've most likely hit your limit",
+        
+        "trialPeriod": "Can I get a trial period?",
+        "trialPeriodDescription": "Yes indeed, for the premium subscription we have a 7-day trial period"
+  
+    },
+
+      
+    "login": {
+      "login": "Login",
+      "signIn": "Sign In",
+        "loginText":"Don't have an account? Sign up!",
+        "signInText": "Already have an account? Log in!",
+
+        "welcomeBack": "Welcome back :)",
+        "checkMail": "Check your mail, and spam folder"
+      },
+  
+      "pricingPage": { 
+        "pdfUploads": "PDF Uploads",
+        "questionsLimit": "Questions limit",
+        "monthlyQuestionsLimit": "Monthly questions limit",
+        "fileSizeLimit": "File size limit",
+        "gpt4": "GPT-4",
+        "newFeatureEarlyAccess": "New feature early access",
+        "customerSupport": "Customer support",
+        "joinAsPremiumUser": "Join as a Premium user",
+        "joinAsUltimateUser": "Join as a Ultimate user",
+        "joinAsAFreeUser": "Sign up to get started",
+        "freeDesc": "An always free option designed for casual users to start interacting with a PDF.",
+        "proDesc" : "For users who want's to extract the most out of their PDF's and maximize their PDF interactions.",
+        "ultimateDesc" :"Advanced PDF features for professional communication needs, including extensive upload options."
+      },
+      "notFound": {
+        "title": "Please sign in to see chat page"
+
+      }
+  }

@@ -1,10 +1,11 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import Forms, { FormValues } from "../../components/Form";
+import Forms, { FormValues } from "../../../components/Form";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 export default function LoginPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -12,6 +13,8 @@ export default function LoginPage() {
 
   const router = useRouter();
   const supabase = createClientComponentClient();
+
+  const t = useTranslations();
 
   useEffect(() => {
     setIsSubmitting(false);
@@ -60,6 +63,24 @@ export default function LoginPage() {
         passwordAuth(values);
     }
   };
+  async function signInWithGoogle() {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        queryParams: {
+          access_type: "offline",
+          prompt: "consent",
+        },
+      },
+    });
+
+    if (error) {
+      console.log(error);
+      redirect("/error");
+    }
+    console.log(data);
+    redirect(data.url);
+  }
 
   return (
     <>
@@ -68,28 +89,24 @@ export default function LoginPage() {
       <div className=" flex justify-center md:grid md:grid-cols-2 md:gap-1 h-dvh ">
         <div className="">
           <div className="flex justify-center">
+            {/* <LoginForm></LoginForm> */}
             <Forms
+              signInWithGoogle={signInWithGoogle}
               isSubmitting={isSubmitting}
-              showPassword={isPassword}
+              showPassword={false}
               onSubmit={authMethod}
               link="signin"
-              title="Login"
-              redirect="Don't have an account? Sign up?"></Forms>
+              title={t("login.login")}
+              redirect={t("login.loginText")}></Forms>
           </div>
-          <div className=" flex justify-center">
-            <Button
-              data-testid="password-btn"
-              onClick={() => setIsPassword((prev) => !prev)}>
-              Login with password
-            </Button>
-          </div>
+          <div className=" flex justify-center"></div>
         </div>
         <div className="hidden md:flex md:justify-center md:items-center md:p-12 md:bg-blue-200 md:dark:bg-blue-900 ">
           <div className="flex justify-center">
             {" "}
             {isSubmitting
-              ? "check your email :) (And spam folder!)"
-              : "welcome back :)"}{" "}
+              ? `${t("login.checkMail")}`
+              : `${t("login.welcomeBack")}`}{" "}
           </div>
         </div>
       </div>
