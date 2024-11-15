@@ -70,17 +70,17 @@ const Signin = () => {
                 isSubmitting={isSubmitting}
                 showPassword={isPassword}
                 onSubmit={authMethod}
-                title={t("Navbar.signup")}
+                title={t("login.signIn")}
                 link="login"
-                redirect={t("login.text")}></Forms>
+                redirect={t("login.signInText")}></Forms>
             </div>
-            <div className=" flex justify-center">
+            {/* <div className=" flex justify-center">
               <Button
                 data-testid="password-btn"
                 onClick={() => setIsPassword((prev) => !prev)}>
                 Show password
               </Button>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="hidden md:flex md:justify-center md:items-center md:p-12 md:bg-indigo-800	">

@@ -42,14 +42,45 @@
     "faq": {
       "anyQuestions" : "Har du spørgsmål? Se her",
       "bodyText": "Hvis du ikke kan finde svaret, er du velkommen til at sende en mail til",
-      "password": "Kodeord"
+      "password": "Kodeord",
+      "whatIsAskPDF": "Hvad er AskPDF?",
+      "askPDFDescription": "AskPDF er en chatapplikation, hvor du kan uploade og chatte med dine PDF'er",
+      
+      "subscriptionDifference": "Hvad er forskellen mellem abonnementerne?",
+      "subscriptionDifferenceDescription": "Forskellen mellem hvert abonnement vises på prissiden",
+      
+      "uploadLimit": "Hvorfor kan jeg ikke uploade flere PDF'er?",
+      "uploadLimitDescription": "Du har sandsynligvis nået din grænse",
+      
+      "trialPeriod": "Kan jeg få en prøveperiode?",
+      "trialPeriodDescription": "Ja, for premium-abonnementet har vi en 7-dages prøveperiode"
     },
 
     "login": {
-      "text":"Tilmeld dig her, hvis du ikke har en konto",
+      "login": "Log ind",
+      "signIn": "Tilmeld",
+      "loginText":"Tilmeld dig her, hvis du ikke har en konto",
+      "signInText": "Log ind her, hvis du allerede har en konto",
       "welcomeBack": "Velkommen tilbage :)",
       "checkMail": "Tjek din mail, og spam mappen"
     },
+    
+
+    "pricingPage": { 
+        "pdfUploads": "PDF Uploads",
+        "questionsLimit": "Spørgsmål begrænsning",
+        "monthlyQuestionsLimit": "Månedlig spørgsmål begrænsning",
+        "fileSizeLimit": "Filstørrelse begrænsning",
+        "gpt4": "GPT-4",
+        "newFeatureEarlyAccess": "Ny feature tidlig adgang",
+        "customerSupport": "Kundesupport",
+        "joinAsPremiumUser": "Bliv Premium-bruger",
+        "joinAsUltimateUser": "Bliv Ultimate-bruger",
+        "joinAsAFreeUser": "Tilmeld dig for at komme i gang",
+        "freeDesc": "En altid gratis mulighed designet til almindelige brugere, der vil begynde at interagere med en PDF.",
+        "proDesc": "For brugere, der ønsker at få mest muligt ud af deres PDF'er og maksimere deres interaktioner med PDF'er.",
+        "ultimateDesc" : "Avancerede PDF-funktioner til professionelle kommunikationsbehov, inklusive omfattende uploadmuligheder."
+      },
 
     "notFound": {
         "title": "Venligst log ind for at se chatsiden"

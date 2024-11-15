@@ -9,6 +9,7 @@ import { supabase } from "@/lib/supabase";
 import React, { useEffect, useState } from "react";
 
 import "../../public/styles/landingPage.css";
+import { TypeAnimation } from "react-type-animation";
 
 import { useTranslations } from "next-intl";
 import { NeonGradientCard } from "@/components/ui/neon-gradient-card";
@@ -55,7 +56,14 @@ export default function Home() {
               firstColor: "#272234 ",
               secondColor: "#2e6f7c",
             }}>
-            yoo
+            <TypeAnimation
+              sequence={["Ask anything", 1000, "Ask PDF", 1000]}
+              wrapper="span"
+              className=" text-gray-800 font-bold font-sans mb-4 font-extrabold	"
+              speed={25}
+              style={{ fontSize: "2em", display: "inline-block" }}
+              repeat={0}
+            />
           </NeonGradientCard>
         </div>
       </div>
