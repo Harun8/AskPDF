@@ -38,7 +38,7 @@ const MyChats = () => {
   }, []);
 
   const getPdfId = (id) => {
-    router.push(`da/chat/${id}`);
+    router.push(`/chat/${id}`);
   };
 
   return (
