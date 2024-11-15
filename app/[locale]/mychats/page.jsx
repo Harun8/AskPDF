@@ -3,6 +3,7 @@ const { createClient } = require("@supabase/supabase-js");
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useTranslations } from "next-intl";
 
 const supabase = createClientComponentClient();
 
@@ -10,6 +11,7 @@ const MyChats = () => {
   const [pdfs, setPdfs] = useState([]);
   const [userId, setUserId] = useState(null);
   const router = useRouter();
+  const t = useTranslations("Navbar");
 
   useEffect(() => {
     const getUser = async () => {
@@ -43,7 +45,9 @@ const MyChats = () => {
     <>
       <title>My chats | AskPDFs</title>
 
-      <p className="flex justify-center font-medium font-4xl">My chats </p>
+      <p className="flex justify-center font-medium font-4xl">
+        {t("myChats")}{" "}
+      </p>
       <div className="flex justify-center text-black dark:text-white">
         <div className="flex justify-center">
           <div className="mt-20">

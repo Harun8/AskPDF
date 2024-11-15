@@ -26,7 +26,7 @@ const ConversationDisplay = ({
               let textColor =
                 msg.type === "user"
                   ? "text-zinc-800 dark:text-slate-400	 bg-zinc-200 dark:bg-gray-800 "
-                  : "text-blue-500 font-semibold	 bg-zinc-200 dark:bg-gray-800 ";
+                  : "text-gray-800 font-bold	 bg-zinc-200 dark:bg-gray-800 ";
               return (
                 <div
                   key={index}

@@ -16,6 +16,7 @@ import { toast } from "sonner";
 import lscache from "lscache";
 
 const { createClient } = require("@supabase/supabase-js");
+import { useTranslations } from "next-intl";
 
 const client = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -29,7 +30,10 @@ const client = createClient(
   }
 );
 
-const Preview = () => {
+const Preview = ({ params: { locale } }) => {
+  const t = useTranslations("PathnamesPage");
+  // setRequestLocale(locale);
+
   const [conversation, setConversation] = useState([]);
   const [numPages, setNumPages] = useState();
   const [pdf, setPdf] = useState(null);
@@ -53,23 +57,28 @@ const Preview = () => {
   }, []);
 
   useEffect(() => {
-    const getInfo = async () => {
-      try {
-        const {
-          data: { session },
-        } = await supabase.auth.getSession();
-
-        if (session) {
-          router.push("/");
-        } else {
-          loadPDF();
-        }
-      } catch (error) {
-        console.error("Error checking authentication", error);
-      }
-    };
-    getInfo();
+    loadPDF();
   }, [params]);
+
+  // update this
+  // useEffect(() => {
+  //   const getInfo = async () => {
+  //     try {
+  //       const {
+  //         data: { session },
+  //       } = await supabase.auth.getSession();
+
+  //       if (session) {
+  //         router.push("/");
+  //       } else {
+  //         loadPDF();
+  //       }
+  //     } catch (error) {
+  //       console.error("Error checking authentication", error);
+  //     }
+  //   };
+  //   getInfo();
+  // }, [params]);
 
   const loadPDF = async () => {
     const { data, error } = await supabase.storage
@@ -198,6 +207,7 @@ const Preview = () => {
       <title>Preview | AskPDFs</title>
 
       <div className="mx-12 flex flex-col lg:grid lg:grid-cols-2">
+        {/* <hi>{t("title")}</hi> */}
         <div className="rounded-lg border dark:border-slate-900	 shadow5 scrollbar scrollbar-thumb-blue-600 scrollbar-thumb-rounded">
           <div className=" p-6 bg-gray h-[800px] overflow-y-auto  ">
             {pdf ? (

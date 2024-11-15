@@ -15,6 +15,7 @@ import TextField from "@/components/TextField";
 import ConversationDisplay from "@/components/ConversationDisplay";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { redirect, useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 import Modal from "@/components/Modal";
 
@@ -63,6 +64,8 @@ export default function chat() {
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
   }
+
+  const t = useTranslations("chat");
 
   useEffect(() => {
     const getAuth = async () => {
@@ -254,7 +257,7 @@ export default function chat() {
               const data = JSON.parse(textResponse); // Try parsing as JSON
               setCurrentPdfId(data.pdfIds);
               setChatId(data.chatId);
-              history.replaceState(data, "convo", `/chat/${data.pdfIds}`);
+              history.replaceState(data, "convo", `da/chat/${data.pdfIds}`);
 
               // router.replace(`/chat/${data.pdfIds[0]}`, undefined, { shallow: true });
             } catch (jsonError) {
@@ -329,15 +332,14 @@ export default function chat() {
             <>
               <div className="flex justify-center mt-48">
                 <button data-testid="uploadPDF-btn" onClick={openModal}>
-                  {" "}
-                  Click me
+                  {t("message")}
                 </button>
               </div>
 
               <div className="flex justify-center mt-48">
                 <Modal
                   processingPDF={processingPDF}
-                  title={"Upload your PDF"}
+                  title={t("upload")}
                   isOpen={isOpen}
                   closeModal={closeModal}
                   openModal={openModal}

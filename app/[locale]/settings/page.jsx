@@ -4,12 +4,14 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 export default function Settings() {
   const router = useRouter();
   const supabase = createClientComponentClient();
 
   const [userId, setUserId] = useState(null);
+  const t = useTranslations("SettingsPage");
 
   useEffect(() => {
     const getUser = async () => {
@@ -66,11 +68,11 @@ export default function Settings() {
 
       <div className="flex justify-center">
         <div className="mt-20">
-          <p className="flex justify-center mb-12 text-lg font-medium">
+          {/* <p className="flex justify-center mb-12 text-lg font-medium">
             Settings page
-          </p>
+          </p> */}
           <Button variant="homepage" onClick={manageBilling}>
-            Manage membership
+            {t("membership")}
           </Button>
         </div>
       </div>
