@@ -1,5 +1,7 @@
 {
     "Navbar": {
+      "english": "English",
+      "danish": "Danish",
       "home": "Home",
       "preview": "Preview",
       "pricing": "Pricing",
