@@ -9,7 +9,8 @@
       "chat": "Chat",
       "myChats": "Mine chats",
       "settings": "Indstillinger",
-      "logout": "Log ud"
+      "logout": "Log ud",
+      "newChat": "New chat"
     },
 
     "HomePage": {

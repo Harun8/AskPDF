@@ -1,9 +1,11 @@
 import { Menu, Transition } from "@headlessui/react";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { Fragment, useEffect, useRef, useState } from "react";
-// import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { useTranslations } from "next-intl";
 
 export function DropDown({ session, logOut }) {
+  const t = useTranslations("Navbar");
+
   return (
     <div className="">
       <Menu as="div" className="z-50 relative inline-block text-left">
@@ -41,7 +43,7 @@ export function DropDown({ session, logOut }) {
                           aria-hidden="true"
                         />
                       )}
-                      New chat
+                      {t("newChat")}
                     </Link>
                   )}
                 </Menu.Item>
@@ -63,7 +65,7 @@ export function DropDown({ session, logOut }) {
                           aria-hidden="true"
                         />
                       )}
-                      My chats
+                      {t("myChats")}
                     </Link>
                   )}
                 </Menu.Item>
@@ -87,7 +89,7 @@ export function DropDown({ session, logOut }) {
                           aria-hidden="true"
                         />
                       )}
-                      Settings
+                      {t("settings")}
                     </Link>
                   )}
                 </Menu.Item>
@@ -111,7 +113,7 @@ export function DropDown({ session, logOut }) {
                           aria-hidden="true"
                         />
                       )}
-                      Log out
+                      {t("logout")}
                     </button>
                   )}
                 </Menu.Item>
@@ -138,7 +140,7 @@ export function DropDown({ session, logOut }) {
                           aria-hidden="true"
                         />
                       )}
-                      Preview
+                      {t("preview")}
                     </Link>
                   )}
                 </Menu.Item>
@@ -160,7 +162,7 @@ export function DropDown({ session, logOut }) {
                           aria-hidden="true"
                         />
                       )}
-                      Pricing
+                      {t("pricing")}
                     </Link>
                   )}
                 </Menu.Item>
@@ -184,7 +186,7 @@ export function DropDown({ session, logOut }) {
                           aria-hidden="true"
                         />
                       )}
-                      Login
+                      {t("login")}
                     </Link>
                   )}
                 </Menu.Item>
@@ -206,7 +208,7 @@ export function DropDown({ session, logOut }) {
                           aria-hidden="true"
                         />
                       )}
-                      Sign up
+                      {t("signup")}
                     </Link>
                   )}
                 </Menu.Item>
