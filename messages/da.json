@@ -68,8 +68,8 @@
     
 
     "pricingPage": { 
-      "monthly" : "Monthly billing",
-      "yearly": "Yearly billing",
+      "monthly" : "Månedligt abonnement",
+      "yearly": "Årligt  abonnement",
       "save": "spar",
       "incl" : "Hvad er inkluderet",
       "pdfUpload": "PDF Upload",
