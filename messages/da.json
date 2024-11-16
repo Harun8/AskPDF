@@ -60,6 +60,8 @@
     },
 
     "login": {
+      "enterMail": "Indtast din e-mail",
+      "orWith": "Eller med",
       "login": "Log ind",
       "signIn": "Tilmeld",
       "loginText":"Tilmeld dig her, hvis du ikke har en konto",

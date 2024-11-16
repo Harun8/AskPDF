@@ -31,22 +31,22 @@ export default function Home() {
       <title>AskPDFs</title>
       {/* <h1>{t("title")}</h1> */}
 
-      <div class="flex flex-col items-center mt-24 text-center min-h-screen">
-        <h1 class="text-7xl font-bold font-sans mb-4 font-extrabold	 text-gray-800 ">
+      <div className="flex flex-col items-center mt-24 text-center min-h-screen">
+        <h1 className="text-7xl font-bold font-sans mb-4 font-extrabold	 text-gray-800 ">
           {t("titleFirst")} <br></br>
           <span> {t("titleSecond")}</span>
         </h1>
-        <p class="text-gray-500 mb-8">{t("underTitle")}</p>
+        <p className="text-gray-500 mb-8">{t("underTitle")}</p>
 
-        <div class="flex space-x-4">
+        <div className="flex space-x-4">
           <Link
             href="/pricing"
-            class="bg-gray-800 text-white font-bold py-3 px-10 rounded-lg hover:bg-gray-800">
+            className="bg-gray-800 text-white font-bold py-3 px-10 rounded-lg hover:bg-gray-800">
             {t("tryAskPDF")}
           </Link>
           <Link
             href="/preview"
-            class="border border-gray-500 text-gray-950 font-bold py-3 px-10  rounded-lg hover:bg-gray-100">
+            className="border border-gray-500 text-gray-950 font-bold py-3 px-10  rounded-lg hover:bg-gray-100">
             {t("tryDemo")}
           </Link>
         </div>

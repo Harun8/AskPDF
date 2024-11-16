@@ -44,7 +44,7 @@ const Forms = (props) => {
               <input
                 type="text"
                 className="input"
-                placeholder="Enter your Email"
+                placeholder={t("login.enterMail")}
               />
             </div>
             {props.showPassword && (
@@ -82,7 +82,7 @@ const Forms = (props) => {
                 {props.redirect}
               </Link>
             </p>
-            <p className="p line">Or With</p>
+            <p className="p line">{t("login.orWith")}</p>
 
             <div className="flex-row">
               <button onClick={props.signInWithGoogle} className="btn google">

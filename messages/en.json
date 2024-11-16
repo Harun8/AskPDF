@@ -61,6 +61,8 @@
 
       
     "login": {
+      "enterMail": "Enter your Email",
+      "orWith": "Or with",
       "login": "Login",
       "signIn": "Sign In",
         "loginText":"Don't have an account? Sign up!",
