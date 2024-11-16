@@ -1,10 +1,7 @@
 "use client";
 
-import Image from "next/image";
-import TypingLight from "@/public/TypingLight.svg";
 import { Link } from "@/i18n/routing";
 
-import SaveTime from "@/public/Save-time.svg";
 import { supabase } from "@/lib/supabase";
 import React, { useEffect, useState } from "react";
 
@@ -13,7 +10,6 @@ import { TypeAnimation } from "react-type-animation";
 
 import { useTranslations } from "next-intl";
 import { NeonGradientCard } from "@/components/ui/neon-gradient-card";
-// import {Link} from '@/i18n/routing';
 export default function Home() {
   const [session, setSession] = useState(null);
 

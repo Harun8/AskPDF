@@ -1,17 +1,11 @@
 "use client";
-import { Menu } from "@headlessui/react";
 
-import Image from "next/image";
-import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
 import { Link } from "@/i18n/routing";
-import { useEffect, useState } from "react";
-import { Session } from "@supabase/auth-helpers-nextjs";
-import ToggleBtn from "./ToggleBtn";
-import Settings from "@/public/settings.svg";
+import { useState } from "react";
+
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { Button } from "./ui/button";
-import AskPDF from "@/public/askpdf2.png";
+
 import { DropDown } from "./smNav";
 import ThemeSwitcher from "./ThemeSwitcher";
 import { useTranslations } from "next-intl";
