@@ -5,7 +5,7 @@ const PricingTable = (props) => {
   const t = useTranslations("pricingPage");
 
   return (
-    <section class="text-gray-700 body-font overflow-hidden border-t border-gray-200">
+    <div class="text-gray-700 body-font overflow-hidden border-t border-gray-200">
       <div class="container flex ml-32 px-5 py-14 mx-auto flex flex-wrap">
         <div class="lg:w-1/4 mt-48 hidden lg:block">
           <div class="mt-px border-t border-gray-300 border-b border-l rounded-tl-lg rounded-bl-lg overflow-hidden">
@@ -412,7 +412,7 @@ const PricingTable = (props) => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

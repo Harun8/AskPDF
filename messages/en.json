@@ -69,6 +69,12 @@
       },
   
       "pricingPage": { 
+        
+        "monthly" : "Monthly billing",
+        "yearly": "Yearly billing",
+        "save": "save",
+        "incl" : "What's included",
+        "pdfUpload": "PDF Upload",
         "pdfUploads": "PDF Uploads",
         "questionsLimit": "Questions limit",
         "monthlyQuestionsLimit": "Monthly questions limit",
