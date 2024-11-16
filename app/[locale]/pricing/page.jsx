@@ -120,7 +120,7 @@ export default function Pricing() {
         <div className="md:flex md:flex-col md:align-center p-10">
           <div className="  relative self-center  rounded-lg p-0.5 flex sm:justify-center">
             <h2 className="lg:text-4xl md:text-4xl text-xl leading-6 font-bold dark:text-slate-400 text-slate-900">
-              Choose one of our incredible options
+              {t("title")}
             </h2>
           </div>
           <div className="mt-6 relative self-center flex flex-col md:flex-row md:justify-center">

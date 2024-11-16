@@ -73,7 +73,7 @@
       },
   
       "pricingPage": { 
-        
+        "title": "Choose one of our incredible options",
         "monthly" : "Monthly billing",
         "yearly": "Yearly billing",
         "save": "save",

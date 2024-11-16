@@ -72,6 +72,7 @@
     
 
     "pricingPage": { 
+      "title": "Vælg en af vores fantastiske muligheder",
       "monthly" : "Månedligt abonnement",
       "yearly": "Årligt  abonnement",
       "save": "spar",
