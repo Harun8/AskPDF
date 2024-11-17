@@ -58,6 +58,25 @@ const Signin = () => {
         passwordAuth(values);
     }
   };
+
+  async function signInWithGoogle() {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        queryParams: {
+          access_type: "offline",
+          prompt: "consent",
+        },
+      },
+    });
+
+    if (error) {
+      console.log(error);
+      redirect("/error");
+    }
+    console.log(data);
+    redirect(data.url);
+  }
   return (
     <>
       <title>Sign up | AskPDFs</title>
@@ -67,6 +86,7 @@ const Signin = () => {
           <div className="flex justify-center">
             <div className="flex justify-center">
               <Forms
+                signInWithGoogle={signInWithGoogle}
                 isSubmitting={isSubmitting}
                 showPassword={isPassword}
                 onSubmit={authMethod}
