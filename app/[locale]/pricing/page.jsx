@@ -168,7 +168,7 @@ export default function Pricing() {
                   </span>
 
                   <span className="text-base font-medium dark:text-slate-100  text-slate-500">
-                    /month
+                    /{t("month")}
                   </span>
                 </p>
                 <a
@@ -312,7 +312,7 @@ export default function Pricing() {
                   </span>
 
                   <span className="text-base font-medium dark:text-slate-100  text-slate-500">
-                    /month
+                    /{t("month")}
                   </span>
                 </p>
                 <span className=" flex justify-end text-xs text-muted">
@@ -470,7 +470,7 @@ export default function Pricing() {
                   </span>
 
                   <span className="text-base font-medium dark:text-slate-100  text-slate-500">
-                    /month
+                    /{t("month")}
                   </span>
                 </p>
                 <span className=" flex justify-end text-xs text-muted">
