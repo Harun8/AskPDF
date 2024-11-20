@@ -6,6 +6,7 @@ import Loading from "./loading";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import PricingTable from "@/components/PricingTable";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 
 export default function Pricing() {
   const [plans, setPlans] = useState([]);
@@ -171,12 +172,12 @@ export default function Pricing() {
                     /{t("month")}
                   </span>
                 </p>
-                <a
+                <Link
                   data-testid="cypress-freeTierBtn"
                   href="/signin"
                   className="mt-8 block w-full dark:bg-slate-700 bg-slate-900 rounded-md py-2 text-sm font-semibold text-white text-center">
                   {t("joinAsAFreeUser")}
-                </a>
+                </Link>
               </div>
               <div className="pt-6 pb-8 px-6">
                 <h3 className="text-sm font-bold dark:text-slate-100  text-slate-900 tracking-wide uppercase">
