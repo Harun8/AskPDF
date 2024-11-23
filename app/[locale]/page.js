@@ -10,6 +10,7 @@ import { TypeAnimation } from "react-type-animation";
 
 import { useTranslations } from "next-intl";
 import { NeonGradientCard } from "@/components/ui/neon-gradient-card";
+import { MarqueeDemo } from "@/components/MarqueeDemo";
 export default function Home() {
   const [session, setSession] = useState(null);
 
@@ -46,6 +47,7 @@ export default function Home() {
             {t("tryDemo")}
           </Link>
         </div>
+        {/* <MarqueeDemo></MarqueeDemo> */}
         <div className=" mt-12 w-[1000px] h-[100px]">
           <NeonGradientCard
             neonColors={{
