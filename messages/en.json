@@ -73,6 +73,7 @@
       },
   
       "pricingPage": { 
+        "billedAnually": "billed annually",
         "month": "month",
         "title": "Choose one of our incredible options",
         "monthly" : "Monthly billing",

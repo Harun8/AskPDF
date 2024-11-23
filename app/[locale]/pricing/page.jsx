@@ -318,7 +318,7 @@ export default function Pricing() {
                 </p>
                 <span className=" flex justify-end text-xs text-muted">
                   {" "}
-                  {!monthly ? "billed annually" : ""}
+                  {!monthly ? t("billedAnually") : ""}
                 </span>
                 <button
                   onClick={
@@ -476,7 +476,7 @@ export default function Pricing() {
                 </p>
                 <span className=" flex justify-end text-xs text-muted">
                   {" "}
-                  {!monthly ? "billed annually" : ""}
+                  {!monthly ? t("billedAnually") : ""}
                 </span>
                 <button
                   onClick={

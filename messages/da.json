@@ -72,6 +72,8 @@
     
 
     "pricingPage": { 
+      "billedAnually": "faktureres årligt",
+
       "month": "måned",
       "title": "Vælg en af vores fantastiske muligheder",
       "monthly" : "Månedligt abonnement",
