@@ -170,11 +170,17 @@ const client = createClient(
     },
   }
 );
-// export const maxDuration = 60;
+export const maxDuration = 60;
 // export const dynamic = "force-dynamic";
 
 export default async function handler(req, res) {
+
+
   try {
+    setTimeout(() => {
+      console.log('Function executed after 15 seconds' )
+    }, 15000); // 15,000 milliseconds = 15 seconds
+  
     const data = await req.json(); // Assuming text data if not form data
 
     const channelB = client.channel(`session-${data.sessionId}`);

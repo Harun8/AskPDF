@@ -36,6 +36,9 @@ async function splitText(text) {
   return await splitter.createDocuments([text]);
 }
 
+export const maxDuration = 60;
+
+
 async function createEmbeddings(documents) {
   const embeddingsPromises = documents.map(async (doc) => {
     let retries = 3;
