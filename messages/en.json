@@ -38,6 +38,7 @@
       },
 
       "chat": {
+        "upload": "Upload your PDF",
         "message": "Click here to upload your PDF"
       },
 
