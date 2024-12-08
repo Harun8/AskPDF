@@ -213,6 +213,7 @@ export default function chat() {
         .from("pdfs")
         .upload(filePath, event.target.files[0]);
       if (error) {
+        console.log("ERRROR", error)
         showToast("Error", error.message);
 
         setDuplicateFileError(true);
@@ -272,7 +273,17 @@ export default function chat() {
         } else {
           setProcessingPDF(false);
 
-          console.error("Response not OK: ", response.status);
+          console.log("i got in hereeee", filePath)
+          const { data, error } = await supabase.storage
+          .from("pdfs").remove([filePath])
+
+          console.log("data", data)
+    
+          showToast("An error occured while trying to process your PDF", "If it happens again contact us");
+          if (error) {
+            showToast("An error occured while trying to delete PDF");
+
+          }
         }
 
         // const result = await response.json();

@@ -28,12 +28,22 @@ async function parsePDF(buffer) {
 }
 
 async function splitText(text) {
+  console.log("text is", text)
   const splitter = new RecursiveCharacterTextSplitter({
     chunkSize: 500,
     separators: ["\n\n", "\n", " ", ""],
     chunkOverlap: 50,
   });
-  return await splitter.createDocuments([text]);
+  console.log("splitter",  await splitter.createDocuments([text]))
+   let result = await splitter.createDocuments([text])
+
+   if (result.length === 0) {
+    return NextResponse.json(
+      { message: "No embedding created " },
+      { status: 400 }
+    );
+  }
+  return result;
 }
 
 export const maxDuration = 60;
@@ -49,6 +59,7 @@ async function createEmbeddings(documents) {
           model: "text-embedding-3-small",
           input: doc.pageContent,
         });
+       
         return response.data[0].embedding;
       } catch (error) {
         if (--retries === 0) throw error;
