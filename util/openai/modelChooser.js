@@ -15,7 +15,7 @@ function modelChooser(plan) {
     plan === "price_1OpYzuBzVPtG7eO2oCFa8Sc7"
   ) {
     // ultimate plan
-    modelChooser = "gpt-4-0125-preview"; // 100 pdf uploads
+    modelChooser = "gpt-4o-mini"; // 100 pdf uploads
   }
 
   return modelChooser;
