@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 
 const supabase = createClientComponentClient();
 
@@ -36,10 +37,8 @@ const MyChats = () => {
     };
     getUser();
   }, []);
+  
 
-  const getPdfId = (id) => {
-    router.push(`/da/chat/${id}`);
-  };
 
   return (
     <>
@@ -53,12 +52,12 @@ const MyChats = () => {
           <div className="mt-20">
             {pdfs.map((pdf) => {
               return (
-                <a
+                <Link
                   className=" cursor-pointer hover:bg-zinc-400 flex justify-start mb-12 text-lg font-medium  bg-zinc-300 dark:bg-zinc-600 rounded p-6"
-                  onClick={() => getPdfId(pdf.id)}
+                  href={`/chat/${pdf.id}`}
                   key={Math.random()}>
                   {pdf.name}
-                </a>
+                </Link>
               );
             })}
           </div>
