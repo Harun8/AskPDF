@@ -47,7 +47,7 @@ const MyChats = () => {
       <p className="flex justify-center font-medium font-4xl">
         {t("myChats")}{" "}
       </p>
-      <div className="flex justify-left text-black dark:text-white">
+      <div className="flex justify-center text-black dark:text-white">
         <div className="flex justify-center ml-20">
           <div className="mt-20">
             {pdfs.map((pdf) => {

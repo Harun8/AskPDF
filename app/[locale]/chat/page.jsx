@@ -258,7 +258,8 @@ export default function chat() {
               const data = JSON.parse(textResponse); // Try parsing as JSON
               setCurrentPdfId(data.pdfIds);
               setChatId(data.chatId);
-              history.replaceState(data, "convo", `da/chat/${data.pdfIds}`);
+              // history.replaceState(data, "convo", `da/chat/${data.pdfIds}`);
+              history.pushState(data, "convo", `chat/${data.pdfIds}`)
 
               // router.replace(`/chat/${data.pdfIds[0]}`, undefined, { shallow: true });
             } catch (jsonError) {
