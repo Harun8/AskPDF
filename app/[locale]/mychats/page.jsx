@@ -51,11 +51,12 @@ const MyChats = () => {
         <div className="flex justify-center">
           <div className="mt-20">
             {pdfs.map((pdf) => {
+              if (pdf.name == ".emptyFolderPlaceholder") return null;
               return (
                 <Link
                   className=" cursor-pointer hover:bg-zinc-400 flex justify-start mb-12 text-lg font-medium  bg-zinc-300 dark:bg-zinc-600 rounded p-6"
                   href={`/chat/${pdf.id}`}
-                  key={Math.random()}>
+                  key={pdf.id}>
                   {pdf.name}
                 </Link>
               );
