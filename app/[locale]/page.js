@@ -12,6 +12,7 @@ import { useTranslations } from "next-intl";
 import { NeonGradientCard } from "@/components/ui/neon-gradient-card";
 import { MarqueeDemo } from "@/components/MarqueeDemo";
 export default function Home() {
+  const [video, setVideo] = useState()
   const [session, setSession] = useState(null);
 
   useEffect(() => {
@@ -20,8 +21,17 @@ export default function Home() {
     supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
+
+    const { data } = supabase
+  .storage
+  .from('PromoVID')
+  .getPublicUrl('VID/FullPromoEN.mp4');
+  setVideo(data.publicUrl);
+
   }, []);
   const t = useTranslations("HomePage");
+
+  
 
   return (
     <>
@@ -48,22 +58,25 @@ export default function Home() {
           </Link>
         </div>
         {/* <MarqueeDemo></MarqueeDemo> */}
-        <div className=" mt-12 w-[1000px] h-[100px]">
-          <NeonGradientCard
-            neonColors={{
-              firstColor: "#272234 ",
-              secondColor: "#2e6f7c",
-            }}>
-            <TypeAnimation
-              sequence={["Ask anything", 1000, "Ask PDF", 1000]}
-              wrapper="span"
-              className=" text-gray-800 font-bold font-sans mb-4 font-extrabold	"
-              speed={25}
-              style={{ fontSize: "2em", display: "inline-block" }}
-              repeat={0}
-            />
-          </NeonGradientCard>
-        </div>
+        <div className="mt-12 w-full max-w-screen-lg mx-auto h-auto">
+  <NeonGradientCard
+    neonColors={{
+      firstColor: "#272234 ",
+      secondColor: "#2e6f7c",
+    }}
+    className="w-full h-auto "
+  >
+    <video
+      autoPlay={true}
+      muted={true}
+      controls
+      className="w-full h-auto rounded-md"
+    >
+      <source src={video} type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </NeonGradientCard>
+</div>
       </div>
 
       {/* <div className="flex flex-col md:grid grid-cols-2 mt-18 md:mt-28 mx-10   ">
