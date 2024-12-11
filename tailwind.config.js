@@ -10,11 +10,24 @@ module.exports = {
   prefix: "",
   theme: {
   	fontFamily: {
-  		sans: ["ui-sans-serif", "system-ui"],
-  		serif: ["ui-serif", "Georgia"],
-  		mono: ["ui-monospace", "SFMono-Regular"],
-  		display: ["Oswald"],
-  		body: ['Open Sans"']
+  		sans: [
+  			'ui-sans-serif',
+  			'system-ui'
+  		],
+  		serif: [
+  			'ui-serif',
+  			'Georgia'
+  		],
+  		mono: [
+  			'ui-monospace',
+  			'SFMono-Regular'
+  		],
+  		display: [
+  			'Oswald'
+  		],
+  		body: [
+  			'Open Sans"'
+  		]
   	},
   	container: {
   		center: 'true',
@@ -69,6 +82,17 @@ module.exports = {
   				to: {
   					transform: 'translateY(calc(-100% - var(--gap)))'
   				}
+  			},
+  			shine: {
+  				'0%': {
+  					'background-position': '0% 0%'
+  				},
+  				'50%': {
+  					'background-position': '100% 100%'
+  				},
+  				to: {
+  					'background-position': '0% 0%'
+  				}
   			}
   		},
   		animation: {
@@ -77,7 +101,8 @@ module.exports = {
   			'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear',
   			'background-position-spin': 'background-position-spin 3000ms infinite alternate',
   			marquee: 'marquee var(--duration) infinite linear',
-  			'marquee-vertical': 'marquee-vertical var(--duration) linear infinite'
+  			'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',
+  			shine: 'shine var(--duration) infinite linear'
   		}
   	}
   },
