@@ -3,7 +3,7 @@ function modelChooser(plan) {
   // change to a switch case when u see this
   if (plan == null) {
     // free plan
-    modelChooser = "gpt-3.5-turbo-0125"; // 1 pdf upload
+    modelChooser = "gpt-4-0125-preview"; // 1 pdf upload 
   } else if (
     plan === "price_1OpYyoBzVPtG7eO2xJAtCiFa" ||
     plan === "price_1OpYlBBzVPtG7eO2D4il1zcz"
