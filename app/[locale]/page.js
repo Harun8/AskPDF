@@ -66,7 +66,18 @@ export default function Home() {
     }}
     className="w-full h-auto "
   >
+      {/* <TypeAnimation
+              sequence={["Ask anything", 1000, "Ask PDF", 1000]}
+              wrapper="span"
+              className=" text-gray-800 font-bold font-sans mb-4 font-extrabold	"
+              speed={25}
+              style={{ fontSize: "2em", display: "inline-block" }}
+              repeat={0}
+            /> */}
+  
     <video
+      key={video} // Ensures the video component reloads when the source changes
+
       autoPlay={true}
       muted={true}
       controls
