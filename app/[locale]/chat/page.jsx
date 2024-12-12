@@ -170,6 +170,7 @@ export default function chat() {
           messageText: messageText,
           conv_history: convHistory,
           file_id: currentPdfId,
+          // pages: numPages
         }),
       });
     } catch (error) {
@@ -233,6 +234,7 @@ export default function chat() {
 
       try {
         setProcessingPDF(true);
+
 
         const formData = new FormData();
         // a web API that allows you to easily construct a set of key/value pairs representing form fields and their values

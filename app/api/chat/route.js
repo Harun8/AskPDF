@@ -24,11 +24,14 @@ async function parsePDF(buffer) {
   return await pdf(buffer);
 }
 
-async function splitText(text) {
+async function splitText(text, chunkSize, chunkOverlap) {
+
+  console.log("inserting chunksize: ", chunkSize)
+  console.log("inserting chunkoverlap: ", chunkOverlap)
   const splitter = new RecursiveCharacterTextSplitter({
-    chunkSize: 500,
+    chunkSize: chunkSize,
     separators: ["\n\n", "\n", " ", ""],
-    chunkOverlap: 50,
+    chunkOverlap: chunkOverlap,
   });
   const result = await splitter.createDocuments([text]);
 
@@ -37,6 +40,17 @@ async function splitText(text) {
   }
   return result;
 }
+
+function getChunkSettings(pageCount) {
+  if (pageCount <= 10) {
+    return { chunkSize: 500, chunkOverlap: 50 };
+  } else if (pageCount <= 50) {
+    return { chunkSize: 1000, chunkOverlap: 100 };
+  } else {
+    return { chunkSize: 2000, chunkOverlap: 200 };
+  }
+}
+
 
 const BATCH_SIZE = 100; // Adjust as needed
 
@@ -99,6 +113,11 @@ async function insertDocuments(documents, embeddings, userId, fileId, chatId) {
 // Main handler
 export const maxDuration = 60;
 
+async function getPageCount(buffer) {
+  const pdfData = await pdf(buffer);
+  return pdfData.numpages;
+}
+
 export async function POST(req) {
   try {
     const data = await req.formData();
@@ -116,9 +135,13 @@ export async function POST(req) {
 
     const buffer = Buffer.from(await file.arrayBuffer());
     const pdfData = await parsePDF(buffer);
+    const pageCount = await getPageCount(buffer);
+    const { chunkSize, chunkOverlap } = getChunkSettings(pageCount);
+
+    console.log("pageCount", pageCount)
 
     // Split PDF text into documents (chunks)
-    const documents = await splitText(pdfData.text);
+    const documents = await splitText(pdfData.text, chunkSize,chunkOverlap);
     if (!documents) {
       return NextResponse.json(
         { message: "No embedding created" },
