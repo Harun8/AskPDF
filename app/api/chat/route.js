@@ -19,56 +19,55 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-// Define maximum allowed file size (e.g., 10MB)
-// const MAX_ALLOWED_SIZE = 10 * 1024 * 1024;
-
 // Helper functions
 async function parsePDF(buffer) {
   return await pdf(buffer);
 }
 
 async function splitText(text) {
-  console.log("text is", text)
   const splitter = new RecursiveCharacterTextSplitter({
     chunkSize: 500,
     separators: ["\n\n", "\n", " ", ""],
     chunkOverlap: 50,
   });
-  console.log("splitter",  await splitter.createDocuments([text]))
-   let result = await splitter.createDocuments([text])
+  const result = await splitter.createDocuments([text]);
 
-   if (result.length === 0) {
-    return NextResponse.json(
-      { message: "No embedding created " },
-      { status: 400 }
-    );
+  if (result.length === 0) {
+    return null;
   }
   return result;
 }
 
-export const maxDuration = 60;
-
+const BATCH_SIZE = 100; // Adjust as needed
 
 async function createEmbeddings(documents) {
-  const embeddingsPromises = documents.map(async (doc) => {
-    let retries = 3;
-    //retry logic with exponential backoff for transient failures
-    while (retries > 0) {
-      try {
-        const response = await openai.embeddings.create({
-          model: "text-embedding-3-small",
-          input: doc.pageContent,
-        });
-       
-        return response.data[0].embedding;
-      } catch (error) {
-        if (--retries === 0) throw error;
-        await new Promise((res) => setTimeout(res, 1000));
-      }
-    }
-  });
-  return await Promise.all(embeddingsPromises);
+  if (!documents || documents.length === 0) {
+    return [];
+  }
+
+  const parallelEmbeddings = [];
+
+  for (let i = 0; i < documents.length; i += BATCH_SIZE) {
+    const batchDocs = documents.slice(i, i + BATCH_SIZE);
+    parallelEmbeddings.push(
+      openai.embeddings.create({
+        model: "text-embedding-3-small",
+        input: batchDocs.map((doc) => doc.pageContent),
+      })
+    );
+  }
+
+  // Run all embedding requests in parallel
+  const results = await Promise.all(parallelEmbeddings);
+
+  // Flatten all results into a single array of embeddings
+  const allEmbeddings = results.flatMap((result) => 
+    result.data.map((item) => item.embedding)
+  );
+
+  return allEmbeddings;
 }
+
 
 async function insertChat(userId) {
   const { data, error } = await supabase
@@ -92,11 +91,14 @@ async function insertDocuments(documents, embeddings, userId, fileId, chatId) {
   const { data, error } = await supabase
     .from("documents")
     .insert(documentsWithForeignKeys);
+
   if (error) throw error;
   return data;
 }
 
 // Main handler
+export const maxDuration = 60;
+
 export async function POST(req) {
   try {
     const data = await req.formData();
@@ -112,15 +114,25 @@ export async function POST(req) {
       );
     }
 
-    // if (file.size > MAX_ALLOWED_SIZE) {
-    //   return NextResponse.json({ message: "File too large" }, { status: 400 });
-    // }
-
     const buffer = Buffer.from(await file.arrayBuffer());
     const pdfData = await parsePDF(buffer);
+
+    // Split PDF text into documents (chunks)
     const documents = await splitText(pdfData.text);
+    if (!documents) {
+      return NextResponse.json(
+        { message: "No embedding created" },
+        { status: 400 }
+      );
+    }
+
+    // Create embeddings in batches
     const embeddings = await createEmbeddings(documents);
+
+    // Insert a new chat row
     const chatId = await insertChat(userId);
+
+    // Insert documents and embeddings into the database
     await insertDocuments(documents, embeddings, userId, file_id, chatId);
 
     return NextResponse.json({

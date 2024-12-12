@@ -43,7 +43,7 @@ export default function Home() {
           {t("titleFirst")} <br></br>
           <span> {t("titleSecond")}</span>
         </h1>
-        <p className="text-gray-500 mb-8">{t("underTitle")}</p>
+        <p className="text-gray-500 mb-8 hover:text-orange-700">{t("underTitle")}</p>
 
         <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
           <Link
