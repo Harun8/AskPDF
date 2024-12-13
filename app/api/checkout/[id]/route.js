@@ -13,8 +13,8 @@ export default async function handler(req, res) {
       mode: "subscription",
       payment_method_types: ["card"],
       line_items: [{ price: body.priceId, quantity: 1 }],
-      success_url: `${SITE_URL}/success`,
-      cancel_url: `${SITE_URL}/pricing`,
+      success_url: `${SITE_URL}/en/success`,
+      cancel_url: `${SITE_URL}/en/pricing`,
     };
 
     // Conditionally add subscription_data if the priceId is the specific one

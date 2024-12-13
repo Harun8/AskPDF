@@ -11,7 +11,6 @@ export default async function handler(req, res) {
   try {
     const { data: prices } = await stripe.prices.list();
     const plans = [];
-    console.log("prices", prices);
 
     for (const price of prices) {
       // const product = await stripe.products.retrieve(price.product);
