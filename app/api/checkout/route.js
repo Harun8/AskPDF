@@ -30,13 +30,25 @@ export default async function handler(req, res) {
   const headersList = headers();
 
   const signature = headersList.get("stripe-signature");
-  const signingSecret = process.env.STRIPE_SIGNING_SECRET;
+  // const signingSecret = process.env.STRIPE_SIGNING_SECRET;
 
   let event;
   let pID;
+  let stripeInstance;
+
   try {
     // const rawbody = await getRawBody(req);
     const rawbody = await req.text();
+
+   const isLiveMode = rawbody.livemode;
+
+    // Dynamically use the correct signing secret
+    const signingSecret = isLiveMode
+      ? process.env.STRIPE_SIGNING_SECRET
+      : process.env.STRIPE_SIGNING_SECRET_TEST;
+
+    stripeInstance = isLiveMode ? stripeLive : stripeTest;
+
     event = stripe.webhooks.constructEvent(rawbody, signature, signingSecret);
   } catch (error) {
     console.log("error in webhooks", error);
