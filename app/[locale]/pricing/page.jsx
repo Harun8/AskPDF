@@ -43,7 +43,9 @@ export default function Pricing() {
         });
 
         const data = await response.json();
-        setPlans(data);
+        console.log(data)
+       const wow =  data.filter((item) => item.price === 1)
+        setPlans(wow);
       } catch (error) {
         console.error(error);
       } finally {
