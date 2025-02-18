@@ -44,8 +44,8 @@ export default function Pricing() {
 
         const data = await response.json();
         console.log(data)
-       const wow =  data.filter((item) => item.price === 1)
-        setPlans(wow);
+       const activePlans =  data.filter((item) => item.price !== 1)
+        setPlans(activePlans);
       } catch (error) {
         console.error(error);
       } finally {
