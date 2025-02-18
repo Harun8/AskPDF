@@ -3,11 +3,11 @@ import getRawBody from "raw-body";
 import Stripe from "stripe";
 const { createClient } = require("@supabase/supabase-js");
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+// export const config = {
+//   api: {
+//     bodyParser: false,
+//   },
+// };
 console.log("CALEEEEEEEEEEEEEDEDEDE")
 
 const supabase = createClient(
