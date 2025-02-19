@@ -45,10 +45,10 @@ const Accordion = () => {
                 header={t("faq.uploadLimit")}
                 text={t("faq.uploadLimitDescription")}
               />
-              <AccordionItem
+              {/* <AccordionItem
                 header={t("faq.trialPeriod")}
                 text={t("faq.trialPeriodDescription")}
-              />
+              /> */}
             </div>
           </div>
         </div>
