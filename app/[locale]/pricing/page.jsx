@@ -19,11 +19,12 @@ export default function Pricing() {
 
   const t = useTranslations("pricingPage");
 
+
   useEffect(() => {
     const getUser = async () => {
       const { data: session, error } = await supabase.auth.getSession();
       if (error || session.session === null) {
-        console.error("error is ", error);
+        // console.error("error is ", error);
         return;
       }
       setUserId(session.user.id);
@@ -300,7 +301,8 @@ export default function Pricing() {
                   Premium
                   <span className="ml-4 text-xl text-gray-900 font-bold ">
                     {" "}
-                    (Most popular){" "}
+                    ({t("mostPopular")})
+
                   </span>
                 </h2>
                 <p className="mt-2 text-base dark:text-slate-100  text-slate-700 leading-tight">

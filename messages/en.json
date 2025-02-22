@@ -74,6 +74,7 @@
       },
   
       "pricingPage": { 
+        "mostPopular": "Most popular",
         "billedAnually": "billed annually",
         "month": "month",
         "title": "Choose one of our incredible options",
