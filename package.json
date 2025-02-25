@@ -1,6 +1,6 @@
 {
   "name": "askpdf",
-  "version": "1.52.7",
+  "version": "1.52.8",
   "private": true,
   "scripts": {
     "dev": "next dev",
