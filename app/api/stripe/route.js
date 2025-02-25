@@ -13,7 +13,6 @@ export default async function handler(req, res) {
       active: true
     });
     const plans = [];
-console.log(prices)
     for (const price of prices) {
       // const product = await stripe.products.retrieve(price.product);
       plans.push({

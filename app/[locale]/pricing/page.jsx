@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Loading from "./loading";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import PricingTable from "@/components/PricingTable";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 
 export default function Pricing() {
@@ -15,14 +15,19 @@ export default function Pricing() {
   const [ultimate, setUltimate] = useState([])
 
   const [monthly, setMonthly] = useState(true);
-  // const [yearly, setYearly] = useState(false); // redundant only need one boolean
+  const [locale, setLocale] = useState("da"); 
   const [loading, setLoading] = useState(true); // Loading state added here
   const supabase = createClientComponentClient();
 
   const [userId, setUserId] = useState(null);
 
   const t = useTranslations("pricingPage");
-  console.log
+  const lng = useLocale()
+  
+  useEffect(()=> {
+    setLocale(lng)
+
+  }, [lng])
 
   useEffect(() => {
     const getUser = async () => {
@@ -68,19 +73,26 @@ export default function Pricing() {
       const { premium, ultimate } = renderPrices(prices); // Pass `plans` as an argument
       setPlans([premium, ultimate]); // Update with filtered values
     }
-  }, [prices, monthly]); // Use only relevant dependencies
+  }, [prices, monthly, locale]); // Use only relevant dependencies
   
+
   const renderPrices = (plans) => {
-    console.log("plans", plans)
     if (monthly) {
-      const premium = plans.find((price) => price.nickname === "premium_dkk_month");
-      const ultimate = plans.find((price) => price.nickname === "ultimate_dkk_month");
-      console.log("Monthly:", premium, ultimate);
+      const premium = locale == "da" 
+      ? plans.find((price) => price.nickname === "premium_dkk_month") :
+      plans.find((price) => price.nickname === "premium_usd_month")
+      ;
+      const ultimate = locale == "da" 
+      ? plans.find((price) => price.nickname === "ultimate_dkk_month") :
+      plans.find((price) => price.nickname === "ultimate_usd_month");
       return { premium, ultimate };
     } else {
-      const premium = plans.find((price) => price.nickname === "premium_dkk_year");
-      const ultimate = plans.find((price) => price.nickname === "ultimate_dkk_year");
-      console.log("Yearly:", premium, ultimate);
+      const premium = locale == "da" 
+      ? plans.find((price) => price.nickname === "premium_dkk_year") :
+      plans.find((price) => price.nickname === "premium_usd_year");
+      const ultimate = locale == "da" ?
+       plans.find((price) => price.nickname === "ultimate_dkk_year") :
+       plans.find((price) => price.nickname === "ultimate_usd_year");
       return { premium, ultimate };
     }
   };
@@ -132,7 +144,6 @@ export default function Pricing() {
   }
 
   const monthlyPricing = async () => {
-    console.log("monthly pricing called")
     setMonthly((prev) => !prev);
     // setYearly(false);
   };
@@ -343,9 +354,10 @@ export default function Pricing() {
                 </p>
                 <p className="mt-8">
                   <span className="text-4xl font-bold dark:text-slate-100  text-slate-900 tracking-tighter">
-                    {plans.length > 0 && monthly
-                      ? plans[0].price
-                      : plans[0].price / 12}
+                  {plans.length > 0 && monthly
+  ? parseFloat(plans[0]?.price).toFixed(0)
+  : (parseFloat(plans[0]?.price) / 12).toFixed(0)}
+
                     {t("currency")}
                   </span>
 
@@ -501,9 +513,9 @@ export default function Pricing() {
                 </p>
                 <p className="mt-8">
                   <span className="text-4xl font-bold dark:text-slate-100  text-slate-900 tracking-tighter">
-                    {plans.length > 0 && monthly
-                      ? plans[1].price
-                      : plans[1].price / 12}
+                  {plans.length > 0 && monthly
+  ? parseFloat(plans[1]?.price).toFixed(0)
+  : (parseFloat(plans[1]?.price) / 12).toFixed(0)}
                       {t("currency")}
 
                   </span>

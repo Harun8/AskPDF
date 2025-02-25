@@ -74,7 +74,7 @@
       },
   
       "pricingPage": { 
-        "currency": "kr",
+        "currency": "$",
         "mostPopular": "Most popular",
         "billedAnually": "billed annually",
         "month": "month",
