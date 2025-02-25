@@ -74,6 +74,7 @@
       },
   
       "pricingPage": { 
+        "currency": "$",
         "mostPopular": "Most popular",
         "billedAnually": "billed annually",
         "month": "month",

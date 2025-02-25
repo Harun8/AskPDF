@@ -28,6 +28,14 @@ export const fontSans = FontSans({
   variable: "--font-sans",
 });
 
+export const metadata = {
+  title: "AskPDFs",
+  description: "Ask anything, AskPDFs",
+  twitter: {
+    card: "summary_large_image"
+  }
+}
+
 async function RootLayout({ children, params: { locale } }) {
   // const [isMounted, setIsMounted] = useState(false);
 

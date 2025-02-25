@@ -10,15 +10,19 @@ import { Link } from "@/i18n/routing";
 
 export default function Pricing() {
   const [plans, setPlans] = useState([]);
+  const [prices,setPrices] = useState([])
+  const [premium, setPremium] = useState([])
+  const [ultimate, setUltimate] = useState([])
+
   const [monthly, setMonthly] = useState(true);
-  const [yearly, setYearly] = useState(false);
+  // const [yearly, setYearly] = useState(false); // redundant only need one boolean
   const [loading, setLoading] = useState(true); // Loading state added here
   const supabase = createClientComponentClient();
 
   const [userId, setUserId] = useState(null);
 
   const t = useTranslations("pricingPage");
-
+  console.log
 
   useEffect(() => {
     const getUser = async () => {
@@ -44,17 +48,44 @@ export default function Pricing() {
         });
 
         const data = await response.json();
-        console.log(data)
-       const activePlans =  data.filter((item) => item.price !== 1)
-        setPlans(activePlans);
+
+        console.log("data is", data)
+        setPrices(data)
+
+        setPlans(data);
       } catch (error) {
         console.error(error);
       } finally {
         setLoading(false);
+
       }
     }
     getPrices();
   }, []);
+
+  useEffect(() => {
+    if (plans.length > 0) {
+      const { premium, ultimate } = renderPrices(prices); // Pass `plans` as an argument
+      setPlans([premium, ultimate]); // Update with filtered values
+    }
+  }, [prices, monthly]); // Use only relevant dependencies
+  
+  const renderPrices = (plans) => {
+    console.log("plans", plans)
+    if (monthly) {
+      const premium = plans.find((price) => price.nickname === "premium_dkk_month");
+      const ultimate = plans.find((price) => price.nickname === "ultimate_dkk_month");
+      console.log("Monthly:", premium, ultimate);
+      return { premium, ultimate };
+    } else {
+      const premium = plans.find((price) => price.nickname === "premium_dkk_year");
+      const ultimate = plans.find((price) => price.nickname === "ultimate_dkk_year");
+      console.log("Yearly:", premium, ultimate);
+      return { premium, ultimate };
+    }
+  };
+  
+  
 
   async function onCheckout(planId, plan) {
     // if user is logged in and has a session
@@ -101,13 +132,14 @@ export default function Pricing() {
   }
 
   const monthlyPricing = async () => {
-    setMonthly(true);
-    setYearly(false);
+    console.log("monthly pricing called")
+    setMonthly((prev) => !prev);
+    // setYearly(false);
   };
-  const yearlyPricing = async () => {
-    setYearly(true);
-    setMonthly(false);
-  };
+  // const yearlyPricing = async () => {
+  //   // setYearly(true);
+  //   setMonthly(false);
+  // };
 
   return (
     <>
@@ -139,11 +171,11 @@ export default function Pricing() {
                 {t("monthly")}
               </button>
               <button
-                onClick={yearlyPricing}
+                onClick={monthlyPricing}
                 type="button"
                 className={`${`relative w-1/2 rounded-md py-2 text-xs md:text-sm  font-medium whitespace-nowrap
             focus:outline-none sm:w-auto sm:px-8 ${
-              yearly ? "bg-slate-50  dark:bg-slate-800" : ""
+              !monthly ? "bg-slate-50  dark:bg-slate-800" : ""
             } border-slate-50 text-slate-900 dark:text-slate-200 shadow-sm`}`}>
                 {t("yearly")}
               </button>
@@ -168,7 +200,8 @@ export default function Pricing() {
                 </p>
                 <p className="mt-8">
                   <span className="text-4xl font-bold dark:text-slate-100  text-slate-900 tracking-tighter">
-                    0 kr
+                    0{t("currency")}
+
                   </span>
 
                   <span className="text-base font-medium dark:text-slate-100  text-slate-500">
@@ -311,9 +344,9 @@ export default function Pricing() {
                 <p className="mt-8">
                   <span className="text-4xl font-bold dark:text-slate-100  text-slate-900 tracking-tighter">
                     {plans.length > 0 && monthly
-                      ? plans[3].price
-                      : plans[2].price / 12}
-                    kr{" "}
+                      ? plans[0].price
+                      : plans[0].price / 12}
+                    {t("currency")}
                   </span>
 
                   <span className="text-base font-medium dark:text-slate-100  text-slate-500">
@@ -470,8 +503,9 @@ export default function Pricing() {
                   <span className="text-4xl font-bold dark:text-slate-100  text-slate-900 tracking-tighter">
                     {plans.length > 0 && monthly
                       ? plans[1].price
-                      : plans[0].price / 12}{" "}
-                    kr
+                      : plans[1].price / 12}
+                      {t("currency")}
+
                   </span>
 
                   <span className="text-base font-medium dark:text-slate-100  text-slate-500">

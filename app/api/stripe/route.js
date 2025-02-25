@@ -9,9 +9,11 @@ export default async function handler(req, res) {
   //   const data = await req.json(); // Assuming text data if not form data
 
   try {
-    const { data: prices } = await stripe.prices.list();
+    const { data: prices } = await stripe.prices.list({
+      active: true
+    });
     const plans = [];
-
+console.log(prices)
     for (const price of prices) {
       // const product = await stripe.products.retrieve(price.product);
       plans.push({
@@ -19,6 +21,7 @@ export default async function handler(req, res) {
         id: price.id,
         price: price.unit_amount / 100,
         interval: price.recurring.interval,
+        nickname: price.nickname
       });
     }
 
