@@ -11,6 +11,7 @@ import { TypeAnimation } from "react-type-animation";
 import { useTranslations } from "next-intl";
 import { NeonGradientCard } from "@/components/ui/neon-gradient-card";
 import { MarqueeDemo } from "@/components/MarqueeDemo";
+import Testimonial from "@/components/Testimonial";
 export default function Home() {
   const [video, setVideo] = useState()
   const [session, setSession] = useState(null);
@@ -88,6 +89,10 @@ export default function Home() {
     </video>
   </NeonGradientCard>
 </div>
+      </div>
+      <div className="mt-22">
+
+      <Testimonial></Testimonial>
       </div>
 
       {/* <div className="flex flex-col md:grid grid-cols-2 mt-18 md:mt-28 mx-10   ">

@@ -13,6 +13,14 @@
       "settings": "Settings",
       "logout": "Logout",
       "newChat": "Ny chat"
+    },
+
+    "Testimonial": {
+      "title": "Loved my many",
+      "Magnus": "AskPDFs.io has completely transformed how I interact with documents. The AI-powered search and summarization make finding information effortless. It's a game-changer for research and productivity!",
+      "Anna": "I love how intuitive and fast AskPDFs.io is! It saves me hours by instantly answering questions from long PDFs. Whether for work or study, this tool is a must-have!",
+      "Harun": "No more endless scrolling through PDFs! AskPDFs.io gives me precise answers in seconds. It's reliable, efficient, and incredibly easy to use. Highly recommended!",
+      "underTitle": "and many more.."
 
     },
 

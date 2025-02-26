@@ -15,6 +15,14 @@
       "newChat": "New chat"
     },
 
+    "Testimonial": {
+      "title": "Elsket af mange",
+      "Magnus": "AskPDFs.io har fuldstændig ændret måden, jeg arbejder med dokumenter på. Den AI-drevne søgning og opsummering gør det let at finde information. Det er en gamechanger for research og produktivitet!",
+      "Anna": "Jeg elsker, hvor intuitivt og hurtigt AskPDFs.io er! Det sparer mig timer ved straks at besvare spørgsmål fra lange PDF'er. Uanset om det er til arbejde eller studie, er dette værktøj et must-have!",
+      "Harun": "Ikke mere endeløs scrolling gennem PDF'er! AskPDFs.io giver mig præcise svar på sekunder. Det er pålideligt, effektivt og utroligt nemt at bruge. Kan klart anbefales!",
+      "underTitle": "og mange flere.."
+    },
+
     "HomePage": {
       "titleFirst": "Forbedr din",
       "titleSecond": "læring markant",
