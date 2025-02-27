@@ -34,11 +34,35 @@ export default function Home() {
   
   return (
     <>
-       <Head>
-        <title>Best PDF AI Tool - AskPDFs</title>
-        <meta name="description" content="AskPDFs is the best AI-powered tool to analyze and summarize PDFs instantly." />
-        <meta name="keywords" content="AI PDF analysis, PDF summarizer, AI document reader" />
-      </Head>
+<Head>
+<script type="application/ld+json">
+{JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "AskPDFs AI PDF Analyzer",
+  "description": "Instantly analyze, summarize, and extract insights from PDFs with AI-powered AskPDFs.",
+  // "thumbnailUrl": "https://www.askpdfs.io/video-thumbnail.jpg",
+  "uploadDate": "2024-02-27",
+  "contentUrl": video,
+  "embedUrl": "https://www.askpdfs.io"
+})}
+</script>
+
+    <title>AskPDFs - AI PDF Analyzer & Summarizer</title>
+    <meta name="description" content="AskPDFs is the fastest AI tool for analyzing, summarizing, and extracting insights from PDFs. Get instant answers from any document." />
+    <meta name="keywords" content="AI PDF analysis, PDF summarizer, AI document reader, extract text from PDF, AI-powered PDF tool" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="AskPDFs - AI PDF Analyzer & Summarizer" />
+    <meta property="og:description" content="Revolutionize your document workflow with AskPDFs – the AI-powered PDF analyzer and summarizer." />
+    <meta property="og:url" content="https://www.askpdfs.io/" />
+    <meta property="og:type" content="website" />
+    {/* <meta property="og:image" content="https://www.askpdfs.io/preview.jpg" /> */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AskPDFs - AI PDF Analyzer & Summarizer" />
+    <meta name="twitter:description" content="AskPDFs is the best AI tool for analyzing and summarizing PDFs instantly." />
+    {/* <meta name="twitter:image" content="https://www.askpdfs.io/preview.jpg" /> */}
+</Head>
+
       <title>AskPDFs</title>
       {/* <h1>{t("title")}</h1> */}
 
@@ -47,11 +71,12 @@ export default function Home() {
           {t("titleFirst")} <br></br>
           <span> {t("titleSecond")}</span>
         </h1>
-        <p className="text-gray-500 mb-8 hover:text-orange-700">{t("underTitle")}</p>
+        <h2 className="text-gray-500 mb-8 hover:text-orange-700">{t("underTitle")}</h2>
 
         <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
           <Link
             href="/pricing"
+            prefetch={true}
             className="bg-gray-800 text-white font-bold py-3 px-10 rounded-lg hover:bg-gray-800">
             {t("tryAskPDF")}
           </Link>
