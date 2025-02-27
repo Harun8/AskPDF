@@ -70,18 +70,21 @@ export default function Home() {
     className="w-full h-auto "
   >
 
-    {/* <video
-      key={video} // Ensures the video component reloads when the source changes
-      width={600}
-      height={600}
-      autoPlay={true}
-      muted={true}
-      controls
-      className="w-full h-auto rounded-md"
-    >
-      <source src={video} type="video/mp4" />
-      Your browser does not support the video tag.
-    </video> */}
+<video 
+    key={video} 
+    width={600} 
+    height={600} 
+    autoPlay={true} 
+    muted={true} 
+    controls 
+    className="w-full h-auto rounded-md"
+    loading="lazy" // Lazy load
+    playsInline // Avoid fullscreen autoplay on mobile
+>
+    <source src={video} type="video/mp4" />
+    Your browser does not support the video tag.
+</video>
+
   </NeonGradientCard>
 </div>
       </div>
