@@ -70,7 +70,7 @@ export default function Home() {
     className="w-full h-auto "
   >
 
-    <video
+    {/* <video
       key={video} // Ensures the video component reloads when the source changes
       width={600}
       height={600}
@@ -81,7 +81,7 @@ export default function Home() {
     >
       <source src={video} type="video/mp4" />
       Your browser does not support the video tag.
-    </video>
+    </video> */}
   </NeonGradientCard>
 </div>
       </div>
