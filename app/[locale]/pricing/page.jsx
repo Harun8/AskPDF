@@ -251,7 +251,7 @@ export default function Pricing() {
                       1 {t("pdfUpload")}
                     </span>
                   </li>
-                  <li className="flex space-x-3">
+                  {/* <li className="flex space-x-3">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="flex-shrink-0 h-5 w-5 text-green-400"
@@ -270,7 +270,7 @@ export default function Pricing() {
                     <span className="text-base dark:text-slate-100  text-slate-700">
                       50 {t("monthlyQuestionsLimit")}
                     </span>
-                  </li>
+                  </li> */}
                   <li className="flex space-x-3">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -404,7 +404,7 @@ export default function Pricing() {
                       50 {t("pdfUploads")}
                     </span>
                   </li>
-                  <li className="flex space-x-3">
+                  {/* <li className="flex space-x-3">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="flex-shrink-0 h-5 w-5 text-green-400"
@@ -423,7 +423,7 @@ export default function Pricing() {
                     <span className="text-base dark:text-slate-100  text-slate-700">
                       100 {t("monthlyQuestionsLimit")}
                     </span>
-                  </li>
+                  </li> */}
                   <li className="flex space-x-3">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -560,10 +560,10 @@ export default function Pricing() {
                       <path d="M5 12l5 5l10 -10"></path>
                     </svg>
                     <span className="text-base dark:text-slate-100  text-slate-700">
-                      100 {t("pdfUploads")}
+                      {t("unlimited")}
                     </span>
                   </li>
-                  <li className="flex space-x-3">
+                  {/* <li className="flex space-x-3">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="flex-shrink-0 h-5 w-5 text-green-400"
@@ -582,7 +582,7 @@ export default function Pricing() {
                     <span className="text-base dark:text-slate-100  text-slate-700">
                       200 {t("monthlyQuestionsLimit")}
                     </span>
-                  </li>
+                  </li> */}
                   <li className="flex space-x-3">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://askpdfs.io/sitemap.xml

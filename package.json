@@ -1,6 +1,6 @@
 {
   "name": "askpdf",
-  "version": "1.53.2",
+  "version": "1.54.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -49,6 +49,7 @@
     "next": "^14.0.4",
     "next-i18next": "^15.2.0",
     "next-intl": "^3.25.0",
+    "next-sitemap": "^4.2.3",
     "next-themes": "^0.2.1",
     "ngrok": "^5.0.0-beta.2",
     "openai": "^4.24.1",

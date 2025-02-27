@@ -92,7 +92,9 @@
         "save": "save",
         "incl" : "What's included",
         "pdfUpload": "PDF Upload",
-        "pdfUploads": "PDF Uploads",
+        "pdfUploads": "PDF Uploads/month",
+        "unlimited": "Unlimited uploads",
+
         "questionsLimit": "Questions limit",
         "monthlyQuestionsLimit": "Monthly questions limit",
         "fileSizeLimit": "File size limit",
