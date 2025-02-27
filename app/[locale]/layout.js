@@ -20,6 +20,7 @@ import { getMessages } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
+import { SidebarProvider } from "@/components/ui/sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -54,12 +55,16 @@ async function RootLayout({ children, params: { locale } }) {
     <html lang={locale}>
       <body className="flex flex-col min-h-screen w-full bg-zinc-100 dark:bg-gray-800">
         <Provider>
+          <SidebarProvider>
+            
+
           <main className="flex-grow">
             <NextIntlClientProvider messages={messages}>
               <LayoutWrapper>{children}</LayoutWrapper>
               <Analytics />
             </NextIntlClientProvider>
           </main>
+          </SidebarProvider>
         </Provider>
         <Toaster />
       </body>

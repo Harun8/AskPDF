@@ -92,7 +92,7 @@ export default function Home() {
       </div>
       <div className="mt-22">
 
-      <Testimonial></Testimonial>
+      {/* <Testimonial></Testimonial> */}
       </div>
 
       {/* <div className="flex flex-col md:grid grid-cols-2 mt-18 md:mt-28 mx-10   ">
