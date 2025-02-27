@@ -5,11 +5,7 @@ import { Link } from "@/i18n/routing";
 import dynamic from "next/dynamic";
 import { supabase } from "@/lib/supabase";
 import React, { useEffect, useState } from "react";
-
-// import "../../public/styles/landingPage.css";
-
 import { useTranslations } from "next-intl";
-// import { NeonGradientCard } from "@/components/ui/neon-gradient-card";
 import Head from "next/head";
 
 

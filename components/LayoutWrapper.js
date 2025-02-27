@@ -34,20 +34,34 @@ export default function LayoutWrapper({ children }) {
   const isNavVisible = !matchesLocalizedPath(pathname, hideNavPaths);
   const isFooterVisible = !matchesLocalizedPath(pathname, hideFooterPaths);
 
+  // useEffect(() => {
+  //   const value = `; ${document.cookie}`;
+  //   const parts = value.split(`; ${"theme"}=`);
+  //   const themeIs = parts.pop().split(";").shift();
+  // }, []);
   useEffect(() => {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${"theme"}=`);
-    const themeIs = parts.pop().split(";").shift();
-  }, []);
-  useEffect(() => {
-    // Fetch session on component mount
-    setSession(supabase.auth.getSession());
 
-    // Set up a session state listener for real-time updates
-    supabase.auth.onAuthStateChange((_event, session) => {
+    const fetchSession = async () => {
+      const { data, error } = await supabase.auth.getSession();
+      if (!error) setSession(data.session);
+    };
+    fetchSession();
+
+
+  }, []);
+
+  useEffect(() => {
+        // Set up a session state listener for real-time updates
+
+    const { data: subscription } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
+  
+    return () => {
+      subscription?.subscription.unsubscribe();
+    };
   }, []);
+  
 
   return (
     <>
