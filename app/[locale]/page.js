@@ -7,10 +7,13 @@ import { supabase } from "@/lib/supabase";
 import React, { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import Head from "next/head";
+import { NeonGradientCard } from "@/components/ui/neon-gradient-card";
+import Testimonial from "@/components/Testimonial";
+import Faq from "@/components/Faq";
 
 
 
-const NeonGradientCard = dynamic(() => import("@/components/ui/neon-gradient-card"), { ssr: false });
+const ShineBorder = dynamic(() => import("@/components/ui/shine-border"), { ssr: false });
 export default function Home() {
   const [video, setVideo] = useState()
   const [session, setSession] = useState(null);
@@ -71,7 +74,7 @@ export default function Home() {
           {t("titleFirst")} <br></br>
           <span> {t("titleSecond")}</span>
         </h1>
-        <h2 className="text-gray-500 mb-8 hover:text-orange-700">{t("underTitle")}</h2>
+        <p className="text-gray-500 mb-8 hover:text-orange-700">{t("underTitle")}</p>
 
         <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
           <Link
@@ -87,13 +90,14 @@ export default function Home() {
           </Link>
         </div>
         <div className="mt-12 w-full max-w-screen-lg mx-auto h-auto">
-  <NeonGradientCard
+  {/* <NeonGradientCard
     neonColors={{
       firstColor: "#ffffff ",
       secondColor: "#2e6f7c",
-    }}
-    className="w-full h-auto "
-  >
+      }}
+      className="w-full h-auto "
+      > */}
+      <ShineBorder>
 
 <video 
     key={video} 
@@ -110,12 +114,16 @@ export default function Home() {
     Your browser does not support the video tag.
 </video>
 
-  </NeonGradientCard>
+
+  </ShineBorder>
+  {/* </NeonGradientCard> */}
 </div>
-      </div>
-      <div className="mt-22">
 
       </div>
+
+<Testimonial></Testimonial>
+
+<Faq></Faq>
 
     </>
   );

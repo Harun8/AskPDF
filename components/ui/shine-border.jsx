@@ -12,10 +12,10 @@ import { cn } from "@/lib/utils";
  * @param children contains react node elements.
  */
 export default function ShineBorder({
-  borderRadius = 8,
-  borderWidth = 1,
+  borderRadius = 10,
+  borderWidth = 2,
   duration = 14,
-  color = "#000000",
+  color = "#2e6f7c",
   className,
   children
 }) {

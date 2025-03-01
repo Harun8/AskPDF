@@ -28,7 +28,45 @@
       "titleSecond": "læring markant",
       "underTitle": "Opnå mere på kortere tid med Ask PDFs.",
        "tryAskPDF" :"Prøv Ask PDFs gratis",
-        "tryDemo": "Prøv demoen"
+        "tryDemo": "Prøv demoen",
+        "reviews": [
+    { "name": "Lærere" },
+    { "name": "Studerende" },
+    { "name": "Softwareingeniører" },
+    { "name": "Rekrutteringsspecialister" },
+    { "name": "Forskere" },
+    { "name": "Dataingeniører" },
+    { "name": "Journalister" },
+    { "name": "Juridiske fagfolk" },
+    { "name": "Læger og sundhedspersonale" },
+    { "name": "Forfattere og redaktører" },
+    { "name": "Forretningsanalytikere" },
+    { "name": "Konsulenter" },
+    { "name": "Finansanalytikere" },
+    { "name": "Advokater" },
+    { "name": "Universitetsprofessorer" },
+    { "name": "Iværksættere og startups" },
+    { "name": "Marketingfolk" },
+    { "name": "Bibliotekarer og arkivarer" },
+    { "name": "Ledere og chefer" },
+    { "name": "Offentligt ansatte" },
+    { "name": "Ejendomsmæglere" },
+    { "name": "NGO-arbejdere" },
+    { "name": "Produktchefer" },
+    { "name": "UX/UI-designere" },
+    { "name": "HR-chefer" },
+    { "name": "Revisorer" },
+    { "name": "Oversættere" },
+    { "name": "Direktører og virksomhedsejere" },
+    { "name": "Ph.d.-studerende og akademikere" },
+    { "name": "Tekniske skribenter" },
+    { "name": "Compliance-medarbejdere" },
+    { "name": "IT-sikkerhedseksperter" },
+    { "name": "Maskinlæringseksperter" },
+    { "name": "Freelancere og selvstændige" },
+    { "name": "Sundhedsadministratorer" },
+    { "name": "Driftsledere" }
+  ]
 
     },
 
@@ -51,20 +89,30 @@
     },
 
     "faq": {
+      "faq": "Ofte stillede spørgsmål",
+
       "anyQuestions" : "Har du spørgsmål? Se her",
       "bodyText": "Hvis du ikke kan finde svaret, er du velkommen til at sende en mail til",
       "password": "Kodeord",
       "whatIsAskPDF": "Hvad er AskPDF?",
-      "askPDFDescription": "AskPDF er en chatapplikation, hvor du kan uploade og chatte med dine PDF'er",
-      
+      "askPDFDescription": "AskPDF er en innovativ AI-drevet platform, der transformerer måden du arbejder med PDF-dokumenter på. Upload blot din PDF og begynd at stille spørgsmål - vores avancerede AI vil analysere indholdet og give øjeblikkelige, præcise svar.",      
       "subscriptionDifference": "Hvad er forskellen mellem abonnementerne?",
-      "subscriptionDifferenceDescription": "Forskellen mellem hvert abonnement vises på prissiden",
+      "subscriptionDifferenceDescription": "Forskellen mellem hvert abonnement kan ses på prissiden",
       
       "uploadLimit": "Hvorfor kan jeg ikke uploade flere PDF'er?",
       "uploadLimitDescription": "Du har sandsynligvis nået din grænse",
       
       "trialPeriod": "Kan jeg få en prøveperiode?",
-      "trialPeriodDescription": "Ja, for premium-abonnementet har vi en 7-dages prøveperiode"
+      "trialPeriodDescription": "Ja, for premium-abonnementet har vi en 7-dages prøveperiode",
+         "fileFormat": "Hvilke filformater understøttes?",
+        "fileFormatDescription": "AskPDFs understøtter i øjeblikket PDF-filer. Vi sikrer kompatibilitet med de fleste PDF-versioner og strukturer, herunder søgbare PDF'er.",
+        
+        "dataPrivacy": "Hvordan beskyttes mine data?",
+        "dataPrivacyDescription": "Vi tager databeskyttelse alvorligt. Dine uploadede PDF'er behandles sikkert. Alle data er krypteret under overførsel, og vi deler ikke dine oplysninger med tredjeparter.",
+        
+        "accuracy": "Hvor nøjagtige er AI-svarene?",
+        "accuracyDescription": "Vores AI-model giver meget nøjagtige svar baseret på indholdet af din PDF. Som med ethvert AI-system anbefaler vi dog at verificere kritiske oplysninger mod det originale dokument. Nøjagtigheden afhænger af faktorer som dokumentkvalitet og tydeligheden af de stillede spørgsmål."
+
     },
 
     "login": {
