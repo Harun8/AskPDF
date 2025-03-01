@@ -97,7 +97,7 @@ export default function Home() {
       }}
       className="w-full h-auto "
       > */}
-      <ShineBorder>
+      <ShineBorder className="w-full h-auto rounded-md">
 
 <video 
     key={video} 
