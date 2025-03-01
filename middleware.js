@@ -6,7 +6,10 @@ import { NextResponse } from "next/server";
 const routing = {
   locales: ["en", "da"],
   defaultLocale: "en",
+  localeDetection: true, // Enable automatic locale detection
+  localePrefix: "always" // Add this line to ensure locale is always in URL
 };
+
 
 export async function middleware(req) {
   const res = NextResponse.next();
