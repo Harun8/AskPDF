@@ -7,12 +7,11 @@ const ReviewCard = ({ img, name, username, body }) => {
     <figure
       className={cn(
         "relative cursor-pointer overflow-hidden rounded-xl p-4",
-        "bg-gray-950/[.01] hover:bg-gray-950/[.05]",
         "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]"
       )}>
       <div className="flex flex-row items-center gap-2">
         <div className="flex flex-col">
-          <figcaption className="text-xl font-serif text-white font-black dark:text-white tracking-wide">
+          <figcaption className="text-xl font-serif text-zinc-100 font-black dark:text-white tracking-wide">
             {name}
           </figcaption>
         </div>
@@ -28,7 +27,7 @@ export function MarqueeDemo() {
   const secondRow = reviews.slice(Math.ceil(reviews.length / 2));
 
   return (
-    <div className="relative flex p-8 flex-col items-center justify-center overflow-hidden rounded-lg md:shadow-xl">
+    <div className="relative flex p-8 flex-col items-center justify-center overflow-hidden">
       <Marquee pauseOnHover className="[--duration:150s]">
         {firstRow.map((review, index) => (
           <ReviewCard key={review.name + index} {...review} />

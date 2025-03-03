@@ -9,7 +9,7 @@ const Testimonial = () => {
     <>
       <section className=" bg-slate-950">
         <div className="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-          <h2 className="text-center text-4xl font-bold tracking-tight text-gray-600 sm:text-5xl">
+          <h2 className="text-center text-sm font-bold tracking-tight text-gray-400 sm:text-5xl">
             {t("title")}
           </h2>
 

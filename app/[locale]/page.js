@@ -10,6 +10,7 @@ import Head from "next/head";
 import { NeonGradientCard } from "@/components/ui/neon-gradient-card";
 import Testimonial from "@/components/Testimonial";
 import Faq from "@/components/Faq";
+import HowToUse from "@/components/HowToUse";
 
 
 
@@ -123,7 +124,9 @@ export default function Home() {
 
 <Testimonial></Testimonial>
 
+{/* <HowToUse></HowToUse> */}
 <Faq></Faq>
+
 
     </>
   );
