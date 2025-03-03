@@ -7,6 +7,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import PricingTable from "@/components/PricingTable";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
+import { NumberTicker } from "@/components/magicui/number-ticker";
 
 export default function Pricing() {
   const [plans, setPlans] = useState([]);
@@ -354,9 +355,21 @@ export default function Pricing() {
                 </p>
                 <p className="mt-8">
                   <span className="text-4xl font-bold dark:text-slate-100  text-slate-900 tracking-tighter">
-                  {plans.length > 0 && monthly
-  ? parseFloat(plans[0]?.price).toFixed(0)
-  : (parseFloat(plans[0]?.price) / 12).toFixed(0)}
+{plans.length > 0 && monthly ? (
+  <NumberTicker
+  value={parseFloat(plans[0]?.price).toFixed(0)}
+  duration={10}
+  format={(value) => parseFloat(value).toFixed(0)}  
+  ></NumberTicker>
+
+) : (
+
+    <NumberTicker
+      value={(parseFloat(plans[0]?.price) / 12).toFixed(0)}
+      duration={10}
+      format={(value) => parseFloat(value).toFixed(0)}  
+ > </NumberTicker>
+)}
 
                     {t("currency")}
                   </span>
@@ -513,9 +526,21 @@ export default function Pricing() {
                 </p>
                 <p className="mt-8">
                   <span className="text-4xl font-bold dark:text-slate-100  text-slate-900 tracking-tighter">
-                  {plans.length > 0 && monthly
-  ? parseFloat(plans[1]?.price).toFixed(0)
-  : (parseFloat(plans[1]?.price) / 12).toFixed(0)}
+                  {plans.length > 0 && monthly ? (
+  <NumberTicker
+  value={parseFloat(plans[1]?.price).toFixed(0)}
+  duration={10}
+  format={(value) => parseFloat(value).toFixed(0)}  
+  ></NumberTicker>
+
+) : (
+
+    <NumberTicker
+      value={(parseFloat(plans[1]?.price) / 12).toFixed(0)}
+      duration={10}
+      format={(value) => parseFloat(value).toFixed(0)}  
+ > </NumberTicker>
+)}
                       {t("currency")}
 
                   </span>
