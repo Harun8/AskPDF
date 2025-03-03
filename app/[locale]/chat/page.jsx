@@ -227,6 +227,7 @@ export default function chat() {
 
         setPdf(event.target.files[0]); // call method
 
+        console.log("file_id", data.id)
         file_id = data.id;
         setFileId(data.id);
         // Handle success
