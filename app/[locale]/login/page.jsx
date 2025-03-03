@@ -10,6 +10,7 @@ import { useTranslations } from "next-intl";
 export default function LoginPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
+  const [buttonCliked, setButtonClicked] = useState(false);
 
   const router = useRouter();
   const supabase = createClientComponentClient();
@@ -22,6 +23,7 @@ export default function LoginPage() {
 
   const otpAuth = async (values) => {
     setIsSubmitting(true);
+    setButtonClicked(true);
     let { error } = await supabase.auth.signInWithOtp({
       email: values.email,
       // password: values.password,
@@ -106,7 +108,7 @@ export default function LoginPage() {
         <div className="hidden md:flex md:justify-center md:items-center md:p-12 md:bg-blue-200 md:dark:bg-blue-900 ">
           <div className="flex justify-center">
             {" "}
-            {isSubmitting
+            {buttonCliked
               ? `${t("login.checkMail")}`
               : `${t("login.welcomeBack")}`}{" "}
           </div>
