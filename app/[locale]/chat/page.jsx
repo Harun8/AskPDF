@@ -227,7 +227,6 @@ export default function chat() {
 
         setPdf(event.target.files[0]); // call method
 
-        console.log("file_id", data.id)
         file_id = data.id;
         setFileId(data.id);
         // Handle success
@@ -277,11 +276,9 @@ export default function chat() {
         } else {
           setProcessingPDF(false);
 
-          console.log("i got in hereeee", filePath)
           const { data, error } = await supabase.storage
           .from("pdfs").remove([filePath])
 
-          console.log("data", data)
     
           showToast("An error occured while trying to process your PDF", "If it happens again contact us");
           if (error) {
