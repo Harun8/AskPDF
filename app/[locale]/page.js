@@ -121,8 +121,8 @@ export default function Home() {
 </div>
 
       </div>
-
 <Testimonial></Testimonial>
+
 
 {/* <HowToUse></HowToUse> */}
 <Faq></Faq>

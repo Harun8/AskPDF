@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { MarqueeDemo } from "./MarqueeDemo";
+import { Gallery } from "./Gallery";
 
 const Testimonial = () => {
 
@@ -19,7 +20,9 @@ const Testimonial = () => {
           </p>
         </div>
         </div>
+      {/* <Gallery></Gallery> */}
       </section>
+
     </>
   );
 };
