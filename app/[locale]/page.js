@@ -1,20 +1,22 @@
 "use client";
 
-import Image from "next/image";
-import TypingLight from "@/public/TypingLight.svg";
 import { Link } from "@/i18n/routing";
 
-import SaveTime from "@/public/Save-time.svg";
+import dynamic from "next/dynamic";
 import { supabase } from "@/lib/supabase";
 import React, { useEffect, useState } from "react";
-
-import "../../public/styles/landingPage.css";
-import { TypeAnimation } from "react-type-animation";
-
 import { useTranslations } from "next-intl";
+import Head from "next/head";
 import { NeonGradientCard } from "@/components/ui/neon-gradient-card";
-// import {Link} from '@/i18n/routing';
+import Testimonial from "@/components/Testimonial";
+import Faq from "@/components/Faq";
+import HowToUse from "@/components/HowToUse";
+
+
+
+const ShineBorder = dynamic(() => import("@/components/ui/shine-border"), { ssr: false });
 export default function Home() {
+  const [video, setVideo] = useState()
   const [session, setSession] = useState(null);
 
   useEffect(() => {
@@ -23,109 +25,109 @@ export default function Home() {
     supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
+
+    const { data } = supabase
+  .storage
+  .from('PromoVID')
+  .getPublicUrl('VID/FullPromoEN.mp4');
+  setVideo(data.publicUrl);
+
   }, []);
   const t = useTranslations("HomePage");
 
+  
   return (
     <>
+<Head>
+<script type="application/ld+json">
+{JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "AskPDFs AI PDF Analyzer",
+  "description": "Instantly analyze, summarize, and extract insights from PDFs with AI-powered AskPDFs.",
+  // "thumbnailUrl": "https://www.askpdfs.io/video-thumbnail.jpg",
+  "uploadDate": "2024-02-27",
+  "contentUrl": video,
+  "embedUrl": "https://www.askpdfs.io"
+})}
+</script>
+
+    <title>AskPDFs - AI PDF Analyzer & Summarizer</title>
+    <meta name="description" content="AskPDFs is the fastest AI tool for analyzing, summarizing, and extracting insights from PDFs. Get instant answers from any document." />
+    <meta name="keywords" content="AI PDF analysis, PDF summarizer, AI document reader, extract text from PDF, AI-powered PDF tool" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="AskPDFs - AI PDF Analyzer & Summarizer" />
+    <meta property="og:description" content="Revolutionize your document workflow with AskPDFs – the AI-powered PDF analyzer and summarizer." />
+    <meta property="og:url" content="https://www.askpdfs.io/" />
+    <meta property="og:type" content="website" />
+    {/* <meta property="og:image" content="https://www.askpdfs.io/preview.jpg" /> */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AskPDFs - AI PDF Analyzer & Summarizer" />
+    <meta name="twitter:description" content="AskPDFs is the best AI tool for analyzing and summarizing PDFs instantly." />
+    {/* <meta name="twitter:image" content="https://www.askpdfs.io/preview.jpg" /> */}
+</Head>
+
       <title>AskPDFs</title>
       {/* <h1>{t("title")}</h1> */}
 
-      <div class="flex flex-col items-center mt-24 text-center min-h-screen">
-        <h1 class="text-7xl font-bold font-sans mb-4 font-extrabold	 text-gray-800 ">
+      <div className="flex flex-col items-center mt-24 text-center min-h-screen">
+        <h1 className=" text-4xl md:text-7xl font-bold font-sans mb-4 font-extrabold	 text-gray-800 ">
           {t("titleFirst")} <br></br>
           <span> {t("titleSecond")}</span>
         </h1>
-        <p class="text-gray-500 mb-8">{t("underTitle")}</p>
+        <p className="text-gray-500 mb-8 hover:text-orange-700">{t("underTitle")}</p>
 
-        <div class="flex space-x-4">
+        <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
           <Link
             href="/pricing"
-            class="bg-gray-800 text-white font-bold py-3 px-10 rounded-lg hover:bg-gray-800">
+            prefetch={true}
+            className="bg-gray-800 text-white font-bold py-3 px-10 rounded-lg hover:bg-gray-800">
             {t("tryAskPDF")}
           </Link>
           <Link
             href="/preview"
-            class="border border-gray-500 text-gray-950 font-bold py-3 px-10  rounded-lg hover:bg-gray-100">
+            className="border border-gray-500 text-gray-950 font-bold py-3 px-10  rounded-lg hover:bg-gray-100">
             {t("tryDemo")}
           </Link>
         </div>
-        <div className=" mt-12 w-[1000px] h-[100px]">
-          <NeonGradientCard
-            neonColors={{
-              firstColor: "#272234 ",
-              secondColor: "#2e6f7c",
-            }}>
-            <TypeAnimation
-              sequence={["Ask anything", 1000, "Ask PDF", 1000]}
-              wrapper="span"
-              className=" text-gray-800 font-bold font-sans mb-4 font-extrabold	"
-              speed={25}
-              style={{ fontSize: "2em", display: "inline-block" }}
-              repeat={0}
-            />
-          </NeonGradientCard>
-        </div>
+        <div className="mt-12 w-full max-w-screen-lg mx-auto h-auto">
+  {/* <NeonGradientCard
+    neonColors={{
+      firstColor: "#ffffff ",
+      secondColor: "#2e6f7c",
+      }}
+      className="w-full h-auto "
+      > */}
+      <ShineBorder className="w-full h-auto rounded-md">
+
+<video 
+    key={video} 
+    width={600} 
+    height={600} 
+    autoPlay={true} 
+    muted={true} 
+    controls 
+    className="w-full h-auto rounded-md"
+    loading="lazy" // Lazy load
+    playsInline // Avoid fullscreen autoplay on mobile
+>
+    <source src={video} type="video/mp4" />
+    Your browser does not support the video tag.
+</video>
+
+
+  </ShineBorder>
+  {/* </NeonGradientCard> */}
+</div>
+
       </div>
+<Testimonial></Testimonial>
 
-      {/* <div className="flex flex-col md:grid grid-cols-2 mt-18 md:mt-28 mx-10   ">
-        <div className="md:ml-12">
-          <p className=" dark:text-slate-300 font-serif font-bold  text-3xl md:text-7xl leading-tight">
-            <span data-testid="cypress-title" className="">
-              Learn quicker <br /> with,
-            </span>
-            <span className="text-blue-600"> AskPDF</span>
-          </p>
-          <p className="font-base font-medium text-medium md:text-xl mt-6 leading-relaxed	 ">
-            Optimize your PDF experience with{" "}
-            <span className="text-blue-600"> AskPDF</span>: the smart solution
-            that transforms your documents into responsive knowledge bases. Just
-            upload, ask, and instantly get the answers you need. <br />
-            Streamline your study or work sessions with{" "}
-            <span className="text-blue-600"> AskPDF</span> where PDF's come to
-            talk!
-          </p>
 
-          <div className="mt-16 flex items-start">
-            <Link
-              className=" inline-flex items-center justify-center whitespace-nowrap rounded-md
-               text-sm font-medium ring-offset-white transition-colors
-                focus-visible:outline-none focus-visible:ring-2 
-                focus-visible:ring-slate-950 focus-visible:ring-offset-2 
-                disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-slate-950
-                 dark:focus-visible:ring-slate-300 bg-blue-700 text-white 
-                 	 hover:bg-blue-900  h-11 rounded-none p-7"
-              href="pricing">
-              Try AskPDF for free
-            </Link>
+{/* <HowToUse></HowToUse> */}
+<Faq></Faq>
 
-            <Link
-              prefetch={true}
-              className="   hover:text-red-500 dark:text-slate-300 dark:hover:text-red-500 hover:font-bold ml-6 my-auto font-semibold text-lg "
-              href={session ? "/chat" : "/preview"}>
-              <div className=" flex items-center">
-                {session ? "Start chatting now" : "Try the demo"}
-              </div>
-            </Link>
-          </div>
-          <div className=" flex justify-end">
-            <Image
-              className=" md:w-1/3 md:h-1/3"
-              src={SaveTime}
-              width={350}
-              height={350}
-              alt="landing page main image"></Image>
-          </div>
-        </div>
-        <div className="  ">
-          <Image
-            className="hidden md:flex md:justify-center"
-            src={TypingLight}
-            width={800}
-            height={800}
-            alt="landing page main image"></Image>
-        </div>
-      </div> */}
+
     </>
   );
 }

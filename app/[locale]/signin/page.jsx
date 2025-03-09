@@ -14,30 +14,13 @@ const Signin = () => {
   const t = useTranslations();
 
   const otpAuth = async (values) => {
-    // setIsSubmitting(true);
-    // let { error } = await supabase.auth.signInWithOtp({
-    //   email: values.email,
-    //   password: values.password,
-    //   // options: {
-    //   //   emailRedirectTo: "http://localhost:3000/auth/callback",
-    //   // },
-    // });
-    // if (error) {
-    //   setIsSubmitting(false);
-    //   console.error("error", error);
-    // } else {
-    //   setIsSubmitting(false);
-    //   router.refresh();
-    // }
-  };
-  const passwordAuth = async (values) => {
     setIsSubmitting(true);
-    let { error } = await supabase.auth.signUp({
+    let { error } = await supabase.auth.signInWithOtp({
       email: values.email,
       password: values.password,
-      options: {
-        emailRedirectTo: "http://localhost:3000/auth/callback",
-      },
+      // options: {
+      //   emailRedirectTo: "http://localhost:3000/auth/callback",
+      // },
     });
     if (error) {
       setIsSubmitting(false);
@@ -47,29 +30,66 @@ const Signin = () => {
       router.refresh();
     }
   };
+  // const passwordAuth = async (values) => {
+  //   setIsSubmitting(true);
+  //   let { error } = await supabase.auth.signUp({
+  //     email: values.email,
+  //     password: values.password,
+  //     options: {
+  //       emailRedirectTo: "http://localhost:3000/auth/callback",
+  //     },
+  //   });
+  //   if (error) {
+  //     setIsSubmitting(false);
+  //     console.error("error", error);
+  //   } else {
+  //     setIsSubmitting(false);
+  //     router.refresh();
+  //   }
+  // };
 
-  const authMethod = async (values) => {
-    let auth = isPassword ? "password" : "otp";
-    switch (auth) {
-      case "otp":
-        otpAuth(values);
-        break;
-      case "password":
-        passwordAuth(values);
+  // const authMethod = async (values) => {
+  //   let auth = isPassword ? "password" : "otp";
+  //   switch (auth) {
+  //     case "otp":
+  //       otpAuth(values);
+  //       break;
+  //     case "password":
+  //       passwordAuth(values);
+  //   }
+  // };
+
+  async function signInWithGoogle() {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        queryParams: {
+          access_type: "offline",
+          prompt: "consent",
+        },
+      },
+    });
+
+    if (error) {
+      console.log(error);
+      redirect("/error");
     }
-  };
+    console.log(data);
+    redirect(data.url);
+  }
   return (
     <>
       <title>Sign up | AskPDFs</title>
 
-      <div class="flex justify-center md:grid md:grid-cols-2 md:gap-1 h-dvh">
+      <div className="flex justify-center md:grid md:grid-cols-2 md:gap-1 h-dvh">
         <div className="">
           <div className="flex justify-center">
             <div className="flex justify-center">
               <Forms
+                signInWithGoogle={signInWithGoogle}
                 isSubmitting={isSubmitting}
                 showPassword={isPassword}
-                onSubmit={authMethod}
+                onSubmit={otpAuth}
                 title={t("login.signIn")}
                 link="login"
                 redirect={t("login.signInText")}></Forms>

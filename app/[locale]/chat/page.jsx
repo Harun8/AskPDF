@@ -170,6 +170,7 @@ export default function chat() {
           messageText: messageText,
           conv_history: convHistory,
           file_id: currentPdfId,
+          // pages: numPages
         }),
       });
     } catch (error) {
@@ -182,8 +183,8 @@ export default function chat() {
     event.stopPropagation();
     let filePath;
     let file_id;
-    let fsl = await fileSizeLimit(plan); // fsl -> fileSizeLimit
-    let upl = await uploadLimit(plan); // upl -> uploadLimit
+    let fsl = fileSizeLimit(plan); // fsl -> fileSizeLimit
+    let upl = uploadLimit(plan); // upl -> uploadLimit
 
     // check if both cases are true first
     if (uploadCount >= upl && event.target.files[0].size > fsl) {
@@ -213,6 +214,7 @@ export default function chat() {
         .from("pdfs")
         .upload(filePath, event.target.files[0]);
       if (error) {
+        console.log("ERRROR", error)
         showToast("Error", error.message);
 
         setDuplicateFileError(true);
@@ -232,6 +234,7 @@ export default function chat() {
 
       try {
         setProcessingPDF(true);
+
 
         const formData = new FormData();
         // a web API that allows you to easily construct a set of key/value pairs representing form fields and their values
@@ -257,7 +260,8 @@ export default function chat() {
               const data = JSON.parse(textResponse); // Try parsing as JSON
               setCurrentPdfId(data.pdfIds);
               setChatId(data.chatId);
-              history.replaceState(data, "convo", `da/chat/${data.pdfIds}`);
+              // history.replaceState(data, "convo", `da/chat/${data.pdfIds}`);
+              history.pushState(data, "convo", `chat/${data.pdfIds}`)
 
               // router.replace(`/chat/${data.pdfIds[0]}`, undefined, { shallow: true });
             } catch (jsonError) {
@@ -272,7 +276,15 @@ export default function chat() {
         } else {
           setProcessingPDF(false);
 
-          console.error("Response not OK: ", response.status);
+          const { data, error } = await supabase.storage
+          .from("pdfs").remove([filePath])
+
+    
+          showToast("An error occured while trying to process your PDF", "If it happens again contact us");
+          if (error) {
+            showToast("An error occured while trying to delete PDF");
+
+          }
         }
 
         // const result = await response.json();

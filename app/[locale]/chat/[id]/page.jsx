@@ -95,21 +95,9 @@ const ChatPage = () => {
 
         if (session) {
           setUserId(session.user.id);
-          const response = await fetch(`/api/chat/${params.id}`, {
-            method: "POST",
-            body: JSON.stringify({
-              userID: session.user.id,
-            }),
-          });
 
-          if (!response.ok) {
-            throw new Error("API call failed");
-          }
-          if (response.ok) {
-            const data = await response.json();
-            currentPdfId = params.id;
-            fetchPdfUrl(params.id);
-          }
+          currentPdfId = params.id;
+          fetchPdfUrl(params.id);
         } else {
           router.push("/");
         }

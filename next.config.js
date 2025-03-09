@@ -8,10 +8,16 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ["pdf-parse"],
   },
-  // i18n: {
-  //   defaultLocale: "en",
-  //   locales: ["en", "da"],
-  // },
+  async headers() {
+    return [
+      {
+        source: "/videos/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=604800" }, // Cache videos for 7 days
+        ],
+      },
+    ];
+  },
   webpack: (config) => {
     config.resolve.alias.canvas = false;
     config.module.rules.push({

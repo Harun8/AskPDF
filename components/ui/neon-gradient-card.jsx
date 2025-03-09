@@ -79,4 +79,4 @@ const NeonGradientCard = ({
   );
 };
 
-export { NeonGradientCard };
+export default NeonGradientCard;

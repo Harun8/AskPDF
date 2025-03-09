@@ -8,6 +8,7 @@ const { createClient } = require("@supabase/supabase-js");
 //     bodyParser: false,
 //   },
 // };
+console.log("CALEEEEEEEEEEEEEDEDEDE")
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -25,6 +26,12 @@ const adminAuthClient = supabase.auth.admin;
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2023-10-16",
 });
+
+console.log("Stipe_secret_key: ", process.env.STRIPE_SECRET_KEY)
+console.log("Stripe_signing_secret: ", process.env.STRIPE_SIGNING_SECRET);
+console.log("supabase_url ", process.env.NEXT_PUBLIC_SUPABASE_URL)
+console.log("supabase_service_key_role ", process.env.SERVICE_KEY_ROLE)
+
 
 export default async function handler(req, res) {
   const headersList = headers();

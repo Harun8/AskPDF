@@ -81,12 +81,41 @@ const Preview = ({ params: { locale } }) => {
   // }, [params]);
 
   const loadPDF = async () => {
+    // Check if the PDF is already cached in localStorage
+    const cachedPdf = localStorage.getItem("cachedPreviewPDF");
+
+    if (cachedPdf) {
+      // Parse the base64 string and convert it back into a Blob for rendering
+      const byteCharacters = atob(cachedPdf);
+      const byteNumbers = new Array(byteCharacters.length)
+        .fill(null)
+        .map((_, i) => byteCharacters.charCodeAt(i));
+      const byteArray = new Uint8Array(byteNumbers);
+
+      const blob = new Blob([byteArray], { type: "application/pdf" });
+      setPdf(blob);
+      return;
+    }
+
+    // Fetch the PDF from Supabase if not cached
     const { data, error } = await supabase.storage
       .from("previewPDF")
       .download(`preview/Cuckoo.pdf`);
 
-    if (error) throw new Error(error.message);
+    if (error) {
+      console.error("Error fetching PDF:", error);
+      return;
+    }
 
+    // Cache the PDF in localStorage
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const base64String = reader.result.split(",")[1]; // Get the base64 string
+      localStorage.setItem("cachedPreviewPDF", base64String);
+    };
+    reader.readAsDataURL(data); // Convert the Blob to a base64 string
+
+    // Set the PDF for display
     setPdf(data);
   };
 

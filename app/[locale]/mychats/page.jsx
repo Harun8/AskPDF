@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 
 const supabase = createClientComponentClient();
 
@@ -36,10 +37,8 @@ const MyChats = () => {
     };
     getUser();
   }, []);
+  
 
-  const getPdfId = (id) => {
-    router.push(`/chat/${id}`);
-  };
 
   return (
     <>
@@ -49,16 +48,17 @@ const MyChats = () => {
         {t("myChats")}{" "}
       </p>
       <div className="flex justify-center text-black dark:text-white">
-        <div className="flex justify-center">
+        <div className="flex justify-center ml-20">
           <div className="mt-20">
             {pdfs.map((pdf) => {
+              if (pdf.name == ".emptyFolderPlaceholder") return null;
               return (
-                <a
+                <Link
                   className=" cursor-pointer hover:bg-zinc-400 flex justify-start mb-12 text-lg font-medium  bg-zinc-300 dark:bg-zinc-600 rounded p-6"
-                  onClick={() => getPdfId(pdf.id)}
-                  key={Math.random()}>
+                  href={`/chat/${pdf.id}`}
+                  key={pdf.id}>
                   {pdf.name}
-                </a>
+                </Link>
               );
             })}
           </div>

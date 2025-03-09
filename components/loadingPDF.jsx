@@ -2,13 +2,13 @@ import "@/public/styles/loadingPdf.css";
 
 const LoadingPDF = () => {
   return (
-    <div class="loader">
-      <div class="book-wrapper">
+    <div className="loader">
+      <div className="book-wrapper">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="white"
           viewBox="0 0 126 75"
-          class="book">
+          className="book">
           <rect
             stroke-width="5"
             stroke="#e05452"
@@ -49,7 +49,7 @@ const LoadingPDF = () => {
           xmlns="http://www.w3.org/2000/svg"
           fill="#ffffff74"
           viewBox="0 0 65 75"
-          class="book-page">
+          className="book-page">
           <path
             stroke-linecap="round"
             stroke-width="4"

@@ -14,7 +14,7 @@ const Footer = () => {
           <p className=" text-base leading-6 text-center font-bold text-gray-600">
             © 2024 AskPDF {version}.beta
           </p>
-          <div className="flex flex-wrap justify-center mt-3  gap-4">
+          {/* <div className="flex flex-wrap justify-center mt-3  gap-4">
             <Link
               href="https://www.linkedin.com/in/harun-abdi-25aa73164/"
               className="text-gray-400 hover:text-blue-500">
@@ -44,7 +44,7 @@ const Footer = () => {
                   clipRule="evenodd"></path>
               </svg>
             </Link>
-          </div>
+          </div> */}
 
           <div className="flex flex-wrap justify-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
             <div className="px-5 py-2">

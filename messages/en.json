@@ -1,5 +1,7 @@
 {
     "Navbar": {
+      "english": "English",
+      "danish": "Danish",
       "home": "Home",
       "preview": "Preview",
       "pricing": "Pricing",
@@ -7,9 +9,19 @@
       "signup": "Sign up",
       "faq": "FAQ",
       "chat": "Chat",
-      "myChats": "Mine chats",
-      "settings": "Indstillinger",
-      "logout": "Logout"
+      "myChats": "My chats",
+      "settings": "Settings",
+      "logout": "Logout",
+      "newChat": "Ny chat"
+    },
+
+    "Testimonial": {
+      "title": "Loved by many",
+      "Magnus": "AskPDFs.io has completely transformed how I interact with documents. The AI-powered search and summarization make finding information effortless. It's a game-changer for research and productivity!",
+      "Anna": "I love how intuitive and fast AskPDFs.io is! It saves me hours by instantly answering questions from long PDFs. Whether for work or study, this tool is a must-have!",
+      "Harun": "No more endless scrolling through PDFs! AskPDFs.io gives me precise answers in seconds. It's reliable, efficient, and incredibly easy to use. Highly recommended!",
+      "underTitle": "and many more.."
+
     },
 
     "HomePage": {
@@ -17,7 +29,45 @@
         "titleSecond": "improve learning",
         "underTitle": "Achieve more in less time with Ask PDFs.",
         "tryAskPDF" :"Try AskPDF for free",
-        "tryDemo": "Try the demo"
+        "tryDemo": "Try the demo", 
+        "reviews": [
+          { "name": "Teachers" },
+          { "name": "Students" },
+          { "name": "Software Engineers" },
+          { "name": "Talent Acquisition" },
+          { "name": "Researchers" },
+          { "name": "Data Engineers" },
+          { "name": "Journalists" },
+          { "name": "Legal Professionals" },
+          { "name": "Doctors and Healthcare Workers" },
+          { "name": "Writers and Editors" },
+          { "name": "Business Analysts" },
+          { "name": "Consultants" },
+          { "name": "Financial Analysts" },
+          { "name": "Lawyers" },
+          { "name": "University Professors" },
+          { "name": "Entrepreneurs and Startups" },
+          { "name": "Marketing Specialists" },
+          { "name": "Librarians and Archivists" },
+          { "name": "Executives and Managers" },
+          { "name": "Public Sector Employees" },
+          { "name": "Real Estate Agents" },
+          { "name": "NGO Workers" },
+          { "name": "Product Managers" },
+          { "name": "UX/UI Designers" },
+          { "name": "HR Managers" },
+          { "name": "Accountants" },
+          { "name": "Translators" },
+          { "name": "Directors and Business Owners" },
+          { "name": "Ph.D. Students and Academics" },
+          { "name": "Technical Writers" },
+          { "name": "Compliance Officers" },
+          { "name": "Cybersecurity Experts" },
+          { "name": "Machine Learning Experts" },
+          { "name": "Freelancers and Self-Employed" },
+          { "name": "Healthcare Administrators" },
+          { "name": "Operations Managers" }
+        ]
       },
 
       "SuccessPage" : {
@@ -34,16 +84,19 @@
       },
 
       "chat": {
+        "upload": "Upload your PDF",
         "message": "Click here to upload your PDF"
       },
 
       "faq": {
+        "faq": "Frequently Asked Questions",
+
         "anyQuestions" : "Any Questions? Look Here",
         "bodyText": "If you can't find the answer don't hesitate to send a mail to",
         "password": "Password",
         "whatIsAskPDF": "What is AskPDF?",
-        "askPDFDescription": "AskPDF is a chat application where you can upload and chat with your PDFs",
-        
+        "askPDFDescription": "AskPDF is an innovative AI-powered platform that transforms how you interact with PDF documents. Simply upload your PDF and start asking questions - our advanced AI will analyze the content and provide instant, accurate answers.",
+
         "subscriptionDifference": "What's the difference between the subscriptions?",
         "subscriptionDifferenceDescription": "The difference between each subscription is shown on the pricing page",
         
@@ -51,12 +104,22 @@
         "uploadLimitDescription": "You've most likely hit your limit",
         
         "trialPeriod": "Can I get a trial period?",
-        "trialPeriodDescription": "Yes indeed, for the premium subscription we have a 7-day trial period"
-  
+        "trialPeriodDescription": "Yes indeed, for the premium subscription we have a 7-day trial period",
+        
+        "fileFormat": "What file formats are supported?",
+        "fileFormatDescription": "AskPDFs currently supports PDF files. We ensure compatibility with most PDF versions and structures, including searchable PDFs.",
+        
+        "dataPrivacy": "How is my data protected?",
+        "dataPrivacyDescription": "We take data privacy seriously. Your uploaded PDFs are processed securely. All data is encrypted in transit and we do not share your information with third parties.",
+        
+        "accuracy": "How accurate are the AI responses?",
+        "accuracyDescription": "Our AI model provides highly accurate responses based on the content of your PDF. However, as with any AI system, we recommend verifying critical information against the original document. The accuracy depends on factors like document quality and clarity of the questions asked."
     },
 
       
     "login": {
+      "enterMail": "Enter your Email",
+      "orWith": "Or with",
       "login": "Login",
       "signIn": "Sign In",
         "loginText":"Don't have an account? Sign up!",
@@ -67,7 +130,19 @@
       },
   
       "pricingPage": { 
-        "pdfUploads": "PDF Uploads",
+        "currency": "$",
+        "mostPopular": "Most popular",
+        "billedAnually": "billed annually",
+        "month": "month",
+        "title": "Choose one of our incredible options",
+        "monthly" : "Monthly billing",
+        "yearly": "Yearly billing",
+        "save": "save",
+        "incl" : "What's included",
+        "pdfUpload": "PDF Upload",
+        "pdfUploads": "PDF Uploads/month",
+        "unlimited": "Unlimited uploads",
+
         "questionsLimit": "Questions limit",
         "monthlyQuestionsLimit": "Monthly questions limit",
         "fileSizeLimit": "File size limit",

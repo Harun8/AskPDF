@@ -5,7 +5,9 @@ import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
+import Sidebar from "@/components/Sidebar";
 
+ 
 export default function Settings() {
   const router = useRouter();
   const supabase = createClientComponentClient();
@@ -62,11 +64,17 @@ export default function Settings() {
     });
   }
 
+
   return (
     <>
+
       <title>Settings | AskPDFs</title>
+      <div>
+        {/* <Sidebar></Sidebar> */}
+      </div>
 
       <div className="flex justify-center">
+     
         <div className="mt-20">
           {/* <p className="flex justify-center mb-12 text-lg font-medium">
             Settings page

@@ -3,7 +3,7 @@ function modelChooser(plan) {
   // change to a switch case when u see this
   if (plan == null) {
     // free plan
-    modelChooser = "gpt-3.5-turbo-0125"; // 1 pdf upload
+    modelChooser = "gpt-4-0125-preview"; // 1 pdf upload 
   } else if (
     plan === "price_1OpYyoBzVPtG7eO2xJAtCiFa" ||
     plan === "price_1OpYlBBzVPtG7eO2D4il1zcz"
@@ -15,7 +15,7 @@ function modelChooser(plan) {
     plan === "price_1OpYzuBzVPtG7eO2oCFa8Sc7"
   ) {
     // ultimate plan
-    modelChooser = "gpt-4-0125-preview"; // 100 pdf uploads
+    modelChooser = "gpt-4o-mini"; // 100 pdf uploads
   }
 
   return modelChooser;

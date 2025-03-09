@@ -1,20 +1,16 @@
 "use client";
-import { Menu } from "@headlessui/react";
 
-import Image from "next/image";
-import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
 import { Link } from "@/i18n/routing";
-import { useEffect, useState } from "react";
-import { Session } from "@supabase/auth-helpers-nextjs";
-import ToggleBtn from "./ToggleBtn";
-import Settings from "@/public/settings.svg";
+import { useState } from "react";
+// import { useTransition } from "react"; // try this maybe
+
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { Button } from "./ui/button";
-import AskPDF from "@/public/askpdf2.png";
+
 import { DropDown } from "./smNav";
 import ThemeSwitcher from "./ThemeSwitcher";
 import { useTranslations } from "next-intl";
+import LocaleBtn from "./LocaleBtn";
 
 const Nav = ({ session }) => {
   // const [session, setSession] = useState();
@@ -147,6 +143,21 @@ const Nav = ({ session }) => {
                   {t("settings")}
                 </Link>
               </li>
+              <svg
+                  xmlns="http://www.w3.org/2000/svg "
+                  fill="none"
+                  stroke="currentColor"
+                  className="w-4 h-4 current-fill text-gray-300"
+                  viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+                  />
+                </svg>
+                 <LocaleBtn></LocaleBtn>
+
             </>
           ) : (
             <>
@@ -183,28 +194,30 @@ const Nav = ({ session }) => {
                   <span className="relative inline-flex rounded-full h-1 w-1 bg-red-500"></span>
                 </span>
               </li>
+              <li className="text-gray-300">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  stroke="currentColor"
+                  className="w-4 h-4 current-fill"
+                  viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+                  />
+                </svg>
+              </li>
+              <LocaleBtn></LocaleBtn>
             </>
           )}
-          <li className="text-gray-300">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              stroke="currentColor"
-              className="w-4 h-4 current-fill"
-              viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
-              />
-            </svg>
-          </li>
 
           {/* <li className="relative flex items-center">
             <ThemeSwitcher></ThemeSwitcher>
           </li> */}
         </ul>
+
         {!session ? (
           <>
             <Link
