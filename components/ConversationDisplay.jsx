@@ -1,5 +1,9 @@
+import Image from "next/image";
 import LoadingPDF from "./loadingPDF";
 import ProcessingPDF from "./processingPDF";
+
+import AskPDFs from "@/public/askpdf2.png";
+import user from "@/public/user.png";
 
 const ConversationDisplay = ({
   conversation,
@@ -29,10 +33,30 @@ const ConversationDisplay = ({
                   : "text-gray-800 font-bold	 bg-zinc-200 dark:bg-gray-800 ";
               return (
                 <div
-                  key={index}
-                  className={` whitespace-pre-line mt-4 mb-4 pl-4  py-4 ml-2 mr-2 flex justify-start rounded-lg ${textColor}`}>
-                  {msg.text}{" "}
-                </div>
+                key={index}
+                className={`relative whitespace-pre-line mt-4 mb-4 pl-4 py-4 ml-2 mr-2 flex ${
+                  msg.type === "user" ? "justify-start" : "justify-start items-center"
+                } rounded-lg ${textColor}`}>
+                {msg.type !== "user" && (
+                  <Image
+                    src={AskPDFs}
+                    width={25}
+                    height={25}
+                    className="absolute top-0 left-0 mt-4 ml-1 "
+                    alt="AskPDFs Logo"
+                  />
+                )}
+               {msg.type == "user" && (
+                  <Image
+                    src={user}
+                    width={25}
+                    height={25}
+                    className="absolute top-0 left-0 mt-4 ml-1 "
+                    alt="AskPDFs Logo"
+                  />   
+                )}
+                <span className="ml-4">{msg.text}</span>
+              </div>
               );
             })}
             {showThinkingAnimation && (
