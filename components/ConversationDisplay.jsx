@@ -29,16 +29,17 @@ const ConversationDisplay = ({
             {conversation.map((msg, index) => {
               let textColor =
                 msg.type === "user"
-                  ? "text-zinc-800 dark:text-slate-400	 bg-zinc-200 dark:bg-gray-800 "
-                  : "text-gray-800 font-bold	 bg-zinc-200 dark:bg-gray-800 ";
+                  ? "text-zinc-800 dark:text-slate-400 dark:bg-gray-800 "
+                  : "text-gray-800 font-bold	 dark:bg-gray-800 ";
               return (
                 <div
                 key={index}
                 className={`relative whitespace-pre-line mt-4 mb-4 pl-4 py-4 ml-2 mr-2 flex ${
                   msg.type === "user" ? "justify-start" : "justify-start items-center"
-                } rounded-lg ${textColor}`}>
+                } rounded-md ${textColor}`}>
                 {msg.type !== "user" && (
                   <Image
+                  priority={true}
                     src={AskPDFs}
                     width={25}
                     height={25}
@@ -48,6 +49,8 @@ const ConversationDisplay = ({
                 )}
                {msg.type == "user" && (
                   <Image
+                  priority={true}
+
                     src={user}
                     width={25}
                     height={25}
@@ -60,7 +63,7 @@ const ConversationDisplay = ({
               );
             })}
             {showThinkingAnimation && (
-              <div className="mt-4 mb-4 pl-4 py-4 ml-2 mr-2 flex justify-start rounded-lg bg-zinc-200 dark:bg-gray-800">
+              <div className="mt-4 mb-4 pl-4 py-4 ml-2 mr-2 flex justify-start rounded-lg  dark:bg-gray-800">
                 <LoadingPDF />
               </div>
             )}
