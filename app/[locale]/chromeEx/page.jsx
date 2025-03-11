@@ -1,7 +1,31 @@
-import React from 'react'
+"use client";
+
+
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import React, { useEffect } from 'react'
 
 const ChromeEx = () => {
+
+  const supabase = createClientComponentClient();
+  
+  useEffect(()=> {
+    async function sendSession () {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      window.postMessage({ 
+        type: 'LOGIN_SUCCESS', 
+        target: 'CHROME_EXTENSION',
+        session: { session }
+      }, '*');
+    }
+
+    sendSession()
+  }, [])
+
   return (
+    
     
           <div className="flex justify-center">
          
