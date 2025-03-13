@@ -26,7 +26,6 @@ const Forms = (props) => {
         initialValues={{ email: "", password: "" }}
         validationSchema={SignupSchema}
         onSubmit={(values) => {
-          console.log("Form submitted with values:", values);
           props.onSubmit(values); // Call the parent onSubmit function
         }}>
         {({ errors, touched }) => (

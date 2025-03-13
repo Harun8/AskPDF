@@ -74,7 +74,6 @@ const Signin = () => {
       console.log(error);
       redirect("/error");
     }
-    console.log(data);
     redirect(data.url);
   }
   return (
