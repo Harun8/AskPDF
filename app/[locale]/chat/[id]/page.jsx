@@ -235,10 +235,11 @@ const ChatPage = () => {
             processingPDF={false}
             showThinkingAnimation={showThinkingAnimation}
             conversation={conversation}
+            sendMessage={sendMessage}  
           />
-          <TextField onSendMessage={sendMessage}></TextField>
+  
         </div>
-        <div className="mt-4"></div>
+        {/* <div className="mt-4"></div> */}
       </div>
     </div>
   );

@@ -374,13 +374,13 @@ export default function chat() {
               showThinkingAnimation={showThinkingAnimation}
               conversation={conversation}
             />
-            <TextField
+            {/* <TextField
               isDisabled={processingPDF}
-              onSendMessage={sendMessage}></TextField>
+              onSendMessage={sendMessage}></TextField> */}
           </div>
         </div>
 
-        <div className="mt-4"></div>
+        {/* <div className="mt-4"></div> */}
       </div>
     </>
   );
