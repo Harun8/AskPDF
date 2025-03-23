@@ -13,7 +13,7 @@ const ConversationDisplay = ({
   sendMessage
 }) => {
   return (
-    <div className="flex flex-col h-[600px] border-4 dark:border-gray-950 rounded-lg shadow-xl dark:bg-gray-900">
+    <div className="flex flex-col h-[800px] border-4 dark:border-gray-950 rounded-lg shadow-xl dark:bg-gray-900">
       {/* Conversation messages */}
       <div className="flex-grow overflow-y-auto">
         {processingPDF && (
