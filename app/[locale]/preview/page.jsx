@@ -266,7 +266,7 @@ const Preview = ({ params: { locale } }) => {
               showThinkingAnimation={showThinkingAnimation}
               conversation={conversation}
             />
-            <TextField onSendMessage={sendMessage}></TextField>
+            {/* <TextField onSendMessage={sendMessage}></TextField> */}
             <div className=""></div>
           </div>
         </div>
