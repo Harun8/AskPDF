@@ -12,7 +12,7 @@ const Faq = () => {
         </h3>
         <div class="grid max-w-5xl mx-auto mt-6 divide-y divide-gray-200 dark:divide-gray-700">
             <details class="group py-4">
-                <summary class="flex items-center justify-between font-medium list-none cursor-pointer">
+                <summary class="flex items-center text-black justify-between font-medium list-none cursor-pointer">
                     <span>{t("faq.whatIsAskPDF")}</span>
                     <span class="transition group-open:rotate-180">
                         <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor"
@@ -22,7 +22,7 @@ const Faq = () => {
                         </svg>
                     </span>
                 </summary>
-                <p class="mt-3 text-gray-600 group-open:animate-fadeIn dark:text-gray-300">
+                <p class="mt-3 text-black group-open:animate-fadeIn dark:text-gray-300">
                 {t("faq.askPDFDescription")}
                 </p>
             </details>
@@ -38,7 +38,7 @@ const Faq = () => {
                         </svg>
                     </span>
                 </summary>
-                <p class="mt-3 text-gray-600 group-open:animate-fadeIn dark:text-gray-300">
+                <p class="mt-3 text-black group-open:animate-fadeIn dark:text-gray-300">
                 {t("faq.subscriptionDifferenceDescription")}
                 </p>
             </details>
@@ -54,7 +54,7 @@ const Faq = () => {
                         </svg>
                     </span>
                 </summary>
-                <p class="mt-3 text-gray-600 group-open:animate-fadeIn dark:text-gray-300">
+                <p class="mt-3 text-black group-open:animate-fadeIn dark:text-gray-300">
                 {t("faq.uploadLimitDescription")}
                 </p>
             </details>
@@ -70,7 +70,7 @@ const Faq = () => {
                         </svg>
                     </span>
                 </summary>
-                <p class="mt-3 text-gray-600 group-open:animate-fadeIn dark:text-gray-300">
+                <p class="mt-3 text-black group-open:animate-fadeIn dark:text-gray-300">
                     {t("faq.fileFormatDescription")}
                 </p>
             </details>
@@ -86,7 +86,7 @@ const Faq = () => {
                         </svg>
                     </span>
                 </summary>
-                <p class="mt-3 text-gray-600 group-open:animate-fadeIn dark:text-gray-300">
+                <p class="mt-3 text-black group-open:animate-fadeIn dark:text-gray-300">
                     {t("faq.dataPrivacyDescription")}
                 </p>
             </details>
@@ -102,7 +102,7 @@ const Faq = () => {
                         </svg>
                     </span>
                 </summary>
-                <p class="mt-3 text-gray-600 group-open:animate-fadeIn dark:text-gray-300">
+                <p class="mt-3 text-black group-open:animate-fadeIn dark:text-gray-300">
                     {t("faq.accuracyDescription")}
                 </p>
             </details>

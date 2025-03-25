@@ -68,9 +68,20 @@ export default function LoginPage() {
   //   }
   // };
   async function signInWithGoogle() {
+    const currentUrl = new URL(window.location.href);
+    const source = currentUrl.searchParams.get('source');
+  
+    // Set the base URL for redirection
+    const baseUrl = 'http://localhost:3000';
+  
+    // Define the redirect URL based on the source
+    const redirectTo = source === 'extension'
+      ? `${baseUrl}/`
+      : `${baseUrl}/en/chromeEx`;
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
+        // redirectTo: redirectTo,
         queryParams: {
           access_type: "offline",
           prompt: "consent",
@@ -82,7 +93,6 @@ export default function LoginPage() {
       console.log(error);
       redirect("/error");
     }
-    console.log(data);
     redirect(data.url);
   }
 

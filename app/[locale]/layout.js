@@ -45,7 +45,7 @@ async function RootLayout({ children, params: { locale } }) {
 
   return (
     <html lang={locale}>
-      <body className="flex flex-col min-h-screen w-full bg-zinc-100 dark:bg-gray-800">
+      <body className="flex flex-col min-h-screen w-full bg-zinc-100  dark:bg-gray-800">
         <Provider>
             
 

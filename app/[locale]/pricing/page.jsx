@@ -55,7 +55,6 @@ export default function Pricing() {
 
         const data = await response.json();
 
-        console.log("data is", data)
         setPrices(data)
 
         setPlans(data);

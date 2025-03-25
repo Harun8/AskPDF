@@ -70,8 +70,8 @@ export default function Home() {
       <title>AskPDFs</title>
       {/* <h1>{t("title")}</h1> */}
 
-      <div className="flex flex-col items-center mt-24 text-center min-h-screen">
-        <h1 className=" text-4xl md:text-7xl font-bold font-sans mb-4 font-extrabold	 text-gray-800 ">
+      <div className="flex flex-col bg-blue-950 items-center  text-center min-h-screen">
+        <h1 className=" text-4xl md:text-7xl mt-24 font-bold font-sans mb-4 font-extrabold	 text-yellow-50 ">
           {t("titleFirst")} <br></br>
           <span> {t("titleSecond")}</span>
         </h1>
@@ -81,12 +81,12 @@ export default function Home() {
           <Link
             href="/pricing"
             prefetch={true}
-            className="bg-gray-800 text-white font-bold py-3 px-10 rounded-lg hover:bg-gray-800">
+            className="bg-orange-600 text-white font-bold py-3 px-10 rounded-lg hover:bg-orange-800">
             {t("tryAskPDF")}
           </Link>
           <Link
             href="/preview"
-            className="border border-gray-500 text-gray-950 font-bold py-3 px-10  rounded-lg hover:bg-gray-100">
+            className="border border-gray-500 text-white font-bold py-3 px-10  rounded-lg hover:bg-blue-800">
             {t("tryDemo")}
           </Link>
         </div>

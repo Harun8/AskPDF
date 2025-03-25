@@ -1,6 +1,5 @@
 function uploadLimit(plan) {
-  console.log("plan", typeof plan)
-  if (plan === "") console.log("plan is an empty string mannn")
+  if (plan === "") console.log("no plan")
   let uploadLimit;
   // change to a switch case when u see this
   if (plan === null || plan  === "") {

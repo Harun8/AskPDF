@@ -45,7 +45,7 @@ const Nav = ({ session }) => {
 
   return (
     <>
-      <nav className="relative px-4 py-4 flex justify-between items-center bg-zinc-100 dark:bg-gray-800">
+      <nav className="relative px-4 py-4 flex justify-between items-center bg-zinc-50 dark:bg-gray-800">
         <div className="ml-6">
           <Link href="/">
             <svg
