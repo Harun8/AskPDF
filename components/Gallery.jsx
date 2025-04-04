@@ -39,7 +39,7 @@ useEffect(() => {
 }, []);
 
   return (
-    <section className="">
+    <section className="mb-12">
       <div className="container mx-auto px-4">
         <div className="columns-2 gap-4 sm:columns-3">
           <ClientTweetCard className="mb-4 size-full rounded-lg object-contain" id="1897358566140600832"></ClientTweetCard>
