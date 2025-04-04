@@ -3,7 +3,7 @@ import { ClientTweetCard } from "./magicui/ClientTweetCard";
 import { useEffect } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-const images = Array.from({ length: 4 }, (_, i) => {
+const images = Array.from({ length: 5 }, (_, i) => {
   const isLandscape = i % 2 === 0;
   const width = isLandscape ? 800 : 600;
   const height = isLandscape ? 600 : 800;
