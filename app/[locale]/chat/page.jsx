@@ -243,7 +243,7 @@ export default function chat() {
         formData.append("file_id", file_id);
         formData.append("userId", userId);
 
-        const response = await fetch("/api/chat", {
+        const response = await fetch("api/chat", {
           method: "POST",
           body: formData,
         });
