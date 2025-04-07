@@ -373,6 +373,8 @@ export default function chat() {
               processingPDF={processingPDF}
               showThinkingAnimation={showThinkingAnimation}
               conversation={conversation}
+              sendMessage={sendMessage}  
+
             />
             {/* <TextField
               isDisabled={processingPDF}
