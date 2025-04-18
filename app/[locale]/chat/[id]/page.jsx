@@ -267,7 +267,9 @@ const ChatPage = () => {
                   })}
               </Document>
             ) : (
-              <h1>no file</h1>
+              <div className="flex justify-center mt-48">
+              <h1 className="text-gray-600">loading file ...</h1>
+              </div>
             )}
           </div>
         </div>
