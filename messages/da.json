@@ -85,7 +85,10 @@
     },
     "chat": {
       "message": "Klik her for at uploade din PDF",
-      "upload": "Upload din PDF"
+      "upload": "Upload din PDF",
+      "myChats": "Mine chats",
+      "newChat": "Ny Chat"
+
     },
 
     "faq": {

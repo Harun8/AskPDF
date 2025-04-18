@@ -16,6 +16,7 @@ import ConversationDisplay from "@/components/ConversationDisplay";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { redirect, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
 
 import Modal from "@/components/Modal";
 
@@ -23,6 +24,7 @@ import { toast } from "sonner";
 
 import { fileSizeLimit } from "@/util/fileSizeLimit";
 import { uploadLimit } from "@/util/uploadLimit";
+import { Button } from "@/components/ui/button";
 
 const supabase = createClientComponentClient();
 
@@ -64,6 +66,7 @@ export default function chat() {
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
   }
+  const params = useParams();
 
   const t = useTranslations("chat");
 
@@ -321,8 +324,40 @@ export default function chat() {
     <>
       <title>AskPDFs</title>
 
+      <header className="sticky top-0 z-10 backdrop-blur-lg bg-zinc-100/80 dark:bg-blue-900/80 border-b dark:border-blue-800">
+  <div className="w-full flex items-center justify-between px-4 py-3">
+    {/* Left Section */}
+    <div className="flex items-center">
+      <div className="mr-6 pl-0">
+        <svg
+          className="cursor-pointer"
+          onClick={() => router.push(`/${params.locale}/`)}
+          xmlns="http://www.w3.org/2000/svg"
+          width={25}
+          height={25}
+          viewBox="0 0 448 512"
+        >
+          <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
+        </svg>
+      </div>
+      {/* <h2 className="font-semibold">{title}</h2> */}
+    </div>
+
+    {/* Right Section */}
+    <div className="flex items-center gap-2 mr-8">
+
+            <Button
+        variant="newChat"
+        size="newChat"
+        onClick={() => router.push(`/${params.locale}/mychats`)}
+      >
+        {t("myChats")}
+      </Button>
+    </div>
+  </div>
+</header>
       <div className="mx-12 mx-12 flex flex-col lg:grid lg:grid-cols-2">
-        <div className="rounded-lg border shadow5 ">
+        <div className="rounded-lg border-4 shadow5 ">
           {pdf ? (
             <div className=" p-12 bg-gray h-[800px] overflow-y-auto  ">
               <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>

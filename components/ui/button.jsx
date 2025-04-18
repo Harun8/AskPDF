@@ -21,6 +21,7 @@ const buttonVariants = cva(
         ghost:
           "hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-50",
         link: "text-slate-900 underline-offset-4 hover:underline dark:text-slate-50",
+        newChat: "bg-blue-400 text-white	hover:bg-blue-900"
       },
       size: {
         default: "h-10 px-4 py-2",
@@ -28,6 +29,7 @@ const buttonVariants = cva(
         lg: "h-11 rounded-md px-8",
         xlg: "h-11 rounded-none p-7",
         icon: "h-10 w-10",
+        newChat: "h-11 rounded-md px-12"
       },
     },
     defaultVariants: {

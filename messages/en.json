@@ -85,7 +85,9 @@
 
       "chat": {
         "upload": "Upload your PDF",
-        "message": "Click here to upload your PDF"
+        "message": "Click here to upload your PDF",
+      "myChats": "My Chats",
+      "newChat": "New Chat"
       },
 
       "faq": {

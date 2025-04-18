@@ -9,17 +9,29 @@ const TextField = ({ onSendMessage, isDisabled }) => {
   const t = useTranslations("preview");
 
   const [message, setMessage] = useState("");
-  const handleSend = () => {
-    if (message.trim()) {
-      onSendMessage(message); // Send the message to the API
-      setMessage("");
+  const handleSendEnter = (e) => {
+    if (e.key === "Enter" ) {
+      if (message.trim()) {
+        onSendMessage(message); // Send the message to the API
+        setMessage("");
+      }
+
     }
   };
 
+  const handleSend = () => {
+      if (message.trim()) {
+        onSendMessage(message); // Send the message to the API
+        setMessage("");
+      
+
+    }
+  };
   return (
     <div className="flex flex-col justify-end relative m-6">
       <div className="relative">
         <textarea
+          onKeyDown={handleSendEnter}
           data-testid="chat-textfield"
           maxLength={150}
           disabled={isDisabled}
@@ -36,7 +48,7 @@ const TextField = ({ onSendMessage, isDisabled }) => {
         ></textarea>
           <button
           data-testid="chat-btn"
-          onClick={handleSend}
+          onMouseDown={handleSend}
           disabled={isDisabled || !message.trim()}
           className="absolute top-1/2 right-2 transform -translate-y-1/2 text-white rounded p-2 "
         >
