@@ -100,6 +100,8 @@ export default function Home() {
       > */}
       <ShineBorder className="w-full h-auto rounded-md">
 
+        {video ? (
+
 <video 
     key={video} 
     width={600} 
@@ -111,9 +113,16 @@ export default function Home() {
     loading="lazy" // Lazy load
     playsInline // Avoid fullscreen autoplay on mobile
 >
-    <source src={video} type="video/mp4" />
-    Your browser does not support the video tag.
+<source src={video} type="video/mp4" />
+Your browser does not support the video tag.
 </video>
+        ) : (
+
+          <p className="text-gray-400">Loading video...</p> // Show a loading message while fetching the video URL
+
+
+        )}
+
 
 
   </ShineBorder>

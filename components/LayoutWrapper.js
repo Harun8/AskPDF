@@ -9,22 +9,31 @@ import { supabase } from "@/lib/supabase";
 
 // Define the locales and paths that should hide Nav or Footer
 const locales = ["en", "da"];
-const hideNavPaths = ["/login", "/signin", "/success", "/chromeEx"];
+const hideNavPaths = ["/login", "/signin", "/success", "/chromeEx", "/chat", "/chat/*"];
 const hideFooterPaths = [
   "/login",
   "/signin",
   "/success",
   "/mychats",
   "/chat",
+  "/chat/*",
   "/preview",
   "/settings",
   "/chromeEx",
 ];
 
 // Helper function to check if the pathname matches any hide path with a locale prefix
+// Helper function to check if the pathname matches any hide path with a locale prefix
 function matchesLocalizedPath(pathname, paths) {
   return paths.some((path) =>
-    locales.some((locale) => pathname === `/${locale}${path}`)
+    locales.some((locale) => {
+      // Check if the path starts with /chat/ for dynamic routes
+      const localizedPath = `/${locale}${path}`;
+      if (localizedPath === `/${locale}/chat`) {
+        return pathname.startsWith(localizedPath); // Match both /chat and /chat/:id
+      }
+      return pathname === localizedPath;
+    })
   );
 }
 
