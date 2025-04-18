@@ -1,7 +1,7 @@
 # [AskPDF](https://askpdfs.io)
 
 
-## What is AskPDF { Stable draft mode)
+## What is AskPDF { legacy documentation A LOT HAVE CHANGED)
 
 For an introduction AskPDF is a website where a user can upload and chat with their PDF's
 
