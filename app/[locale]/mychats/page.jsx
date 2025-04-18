@@ -54,6 +54,7 @@ const MyChats = () => {
               if (pdf.name == ".emptyFolderPlaceholder") return null;
               return (
                 <Link
+                prefetch={true}
                   className=" cursor-pointer hover:bg-zinc-400 flex justify-start mb-12 text-lg font-medium  bg-zinc-300 dark:bg-zinc-600 rounded p-6"
                   href={`/chat/${pdf.id}`}
                   key={pdf.id}>
