@@ -18,6 +18,8 @@ const ShineBorder = dynamic(() => import("@/components/ui/shine-border"), { ssr:
 export default function Home() {
   const [video, setVideo] = useState()
   const [session, setSession] = useState(null);
+  
+  const t = useTranslations("HomePage");
 
   useEffect(() => {
     setSession(supabase.auth.getSession());
@@ -25,15 +27,19 @@ export default function Home() {
     supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
+    const getVideo = async () =>  {
 
-    const { data } = supabase
-  .storage
-  .from('PromoVID')
-  .getPublicUrl('VID/FullPromoEN.mp4');
-  setVideo(data.publicUrl);
+      const { data } = await supabase
+    .storage
+    .from('PromoVID').getPublicUrl('VID/FullPromoEN.mp4');
+    // .getPublicUrl('VID/FullPromoEN.mp4');
+    setVideo(data.publicUrl);
+
+    }
+
+    getVideo()
 
   }, []);
-  const t = useTranslations("HomePage");
 
   
   return (
