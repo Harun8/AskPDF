@@ -1,9 +1,32 @@
-import React from 'react';
-
+import { supabase } from "@/lib/supabase";
+import React, { useEffect, useState } from "react";
 const HowToUse = () => {
+    const [video, setVideo] = useState()
+    const [session, setSession] = useState(null);
+
+    useEffect(() => {
+      setSession(supabase.auth.getSession());
+  
+      supabase.auth.onAuthStateChange((_event, session) => {
+        setSession(session);
+      });
+      const getVideo = async () =>  {
+  
+        const { data } = await supabase
+      .storage
+      .from('PromoVID').getPublicUrl('VID/FullPromoEN.mp4');
+      // .getPublicUrl('VID/FullPromoEN.mp4');
+      setVideo(data.publicUrl);
+  
+      }
+  
+      getVideo()
+  
+    }, []);
+  
   return (
     <>
-      <section id="works" className="relative bg-slate-950 py-10 sm:py-16 lg:py-24">
+      {/* <section id="works" className="relative bg-blue-950 py-10 sm:py-16 lg:py-24">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-4xl text-white font-extrabold mx-auto md:text-6xl lg:text-5xl">How does it work?</h2>
@@ -55,7 +78,42 @@ const HowToUse = () => {
           </div>
         </div>
         <div className="absolute inset-0 m-auto max-w-xs h-[357px] blur-[118px] sm:max-w-md md:max-w-lg"></div>
-      </section>
+      </section> */}
+
+<section class="bg-blue-950 dark:bg-gray-900">
+    <div class="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
+        <div class="font-light text-gray-500 sm:text-lg dark:text-gray-400">
+            <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-zinc-200 dark:text-white">Effortless Insights from Your PDFs</h2>
+            <p class="mb-4">Unlock clear and instant understanding from your documents. AskPDFs.io intelligently transforms dense PDFs into concise, actionable insights. Whether you're researching, learning, or problem-solving, our tool simplifies complex information, enabling you to grasp key points quickly and effortlessly.</p>
+            <p>Skip manual skimming and endless scrolling. Save time, boost productivity, and stay ahead with AskPDFs.io—your personal assistant for instant document clarity.</p>
+        </div>
+        <div class="">
+        {video ? (
+
+<video 
+    key={video} 
+    width={600} 
+    height={600} 
+    autoPlay={true} 
+    muted={true} 
+    controls 
+    className="w-full h-auto rounded-md"
+    loading="lazy" // Lazy load
+    playsInline // Avoid fullscreen autoplay on mobile
+>
+<source src={video} type="video/mp4" />
+Your browser does not support the video tag.
+</video>
+        ) : (
+
+          <p className="text-gray-400">Loading video...</p> // Show a loading message while fetching the video URL
+
+
+        )}
+
+        </div>
+    </div>
+</section>
     </>
   );
 };
