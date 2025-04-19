@@ -30,12 +30,12 @@ const ConversationDisplay = ({
           return (
             <div
               key={index}
-              className={`relative whitespace-pre-line mt-4 mb-4 pl-4 py-4 ml-2 mr-2 flex ${
+              className={`relative whitespace-pre-line mt-4 mb-4 pl-4 py-4 mr-2 flex ${
                 msg.type === "user"
-                  ? "justify-start"
+                  ? "justify-end mr-12 "
                   : "justify-start items-center"
               } rounded-md ${textColor}`}>
-              {msg.type !== "user" && (
+              {/* {msg.type !== "user" && (
                 <Image
                   priority={true}
                   fetchPriority="eager"
@@ -45,8 +45,8 @@ const ConversationDisplay = ({
                   className="absolute top-0 left-0 mt-4 ml-1"
                   alt="AskPDFs Logo"
                 />
-              )}
-              {msg.type === "user" && (
+              )} */}
+              {/* {msg.type === "user" && (
                 <Image
                   priority={true}
                   fetchPriority="eager"
@@ -56,8 +56,9 @@ const ConversationDisplay = ({
                   className="absolute top-0 left-0 mt-4 ml-1"
                   alt="User Logo"
                 />
-              )}
-              <span className="ml-4">{msg.text}</span>
+              )} */}
+              
+              <span className={`ml-4 ${msg.type == "user" ? "bg-zinc-200/50 rounded-xl p-3" : ""}`}>{msg.text}</span>
             </div>
           );
         })}
