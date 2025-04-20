@@ -27,6 +27,7 @@ import { uploadLimit } from "@/util/uploadLimit";
 import { Button } from "@/components/ui/button";
 import PDFUpload from "@/components/PDF-upload";
 import ChatNav from "@/components/ChatNav";
+import { conversationLogic, useConversationLogic } from "@/util/streaming/chat-util";
 
 const supabase = createClientComponentClient();
 
@@ -64,7 +65,7 @@ export default function chat() {
   const [currentResponse, setCurrentResponse] = useState("");
   const [processingPDF, setProcessingPDF] = useState(false);
 
-  const router = useRouter();
+  const router = useRouter(); 
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
   }
@@ -113,6 +114,14 @@ export default function chat() {
 
   const convHistory = [];
   const channelA = client.channel(`session-${userId}`);
+  
+  useConversationLogic(
+    channelA, 
+    setShowThinkingAnimation,
+    setCurrentResponse,
+    setConversation,
+    conversation
+  )
   useEffect(() => {
     // Correctly initialize currentResponse within the scope it will be used
 

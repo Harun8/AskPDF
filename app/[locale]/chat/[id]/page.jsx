@@ -6,8 +6,8 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   import.meta.url
 ).toString();
 
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useParams } from "next/navigation"; 
+import { useEffect, useMemo, useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import ConversationDisplay from "@/components/ConversationDisplay";
 import TextField from "@/components/TextField";
@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import ChatNav from "@/components/ChatNav";
+import { conversationLogic, useConversationLogic } from "@/util/streaming/chat-util";
 
 const { createClient } = require("@supabase/supabase-js");
 
@@ -143,44 +144,51 @@ const ChatPage = () => {
   const convHistory = [];
   const channelA = client.channel(`session-${userId}`);
 
-  useEffect(() => {
-    // Correctly initialize currentResponse within the scope it will be used
+  useConversationLogic(
+      channelA, 
+      setShowThinkingAnimation,
+      setCurrentResponse,
+      setConversation,
+      conversation
+    )
+  // useEffect(() => {
+  //   // Correctly initialize currentResponse within the scope it will be used
 
-    channelA
-      .on("broadcast", { event: "acknowledge" }, (payload) => {
-        if (payload.payload) {
-          setShowThinkingAnimation(false);
-        }
-        setCurrentResponse((prev) => (prev += payload.payload.message));
+  //   channelA
+  //     .on("broadcast", { event: "acknowledge" }, (payload) => {
+  //       if (payload.payload) {
+  //         setShowThinkingAnimation(false);
+  //       }
+  //       setCurrentResponse((prev) => (prev += payload.payload.message));
 
-        setConversation((conversation) => {
-          const newConversation = [...conversation];
-          const lastIndex = newConversation.length - 1;
+  //       setConversation((conversation) => {
+  //         const newConversation = [...conversation];
+  //         const lastIndex = newConversation.length - 1;
 
-          // Ensure the last message is of type 'response' before updating
-          if (
-            newConversation[lastIndex] &&
-            newConversation[lastIndex].type === "response"
-          ) {
-            newConversation[lastIndex] = {
-              ...newConversation[lastIndex],
-              text: newConversation[lastIndex].text + payload.payload.message,
-            };
-          } else {
-            // If the last message is not a 'response', append a new response message
-            newConversation.push({
-              type: "response",
-              text: payload.payload.message,
-            });
-          }
+  //         // Ensure the last message is of type 'response' before updating
+  //         if (
+  //           newConversation[lastIndex] &&
+  //           newConversation[lastIndex].type === "response"
+  //         ) {
+  //           newConversation[lastIndex] = {
+  //             ...newConversation[lastIndex],
+  //             text: newConversation[lastIndex].text + payload.payload.message,
+  //           };
+  //         } else {
+  //           // If the last message is not a 'response', append a new response message
+  //           newConversation.push({
+  //             type: "response",
+  //             text: payload.payload.message,
+  //           });
+  //         }
 
-          return newConversation;
-        });
-      })
-      .subscribe();
+  //         return newConversation;
+  //       });
+  //     })
+  //     .subscribe();
 
-    return () => {};
-  }, [conversation]); // Empty dependency array to run once on mount
+  //   return () => {};
+  // }, [conversation]); // Empty dependency array to run once on mount
 
   const sendMessage = async (messageText) => {
     setCurrentResponse("");

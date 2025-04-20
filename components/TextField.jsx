@@ -10,7 +10,7 @@ import { Tooltip,
   TooltipTrigger,
  } from "./ui/tooltip";
 
-const TextField = ({ onSendMessage, isDisabled, question, isTextDisabled}) => {
+const TextField = ({ onSendMessage, isDisabled, question, isTextDisabled, showThinkingAnimation}) => {
   const t = useTranslations("preview");
 
 
@@ -63,7 +63,7 @@ const TextField = ({ onSendMessage, isDisabled, question, isTextDisabled}) => {
           <button
           data-testid="chat-btn"
           onMouseDown={handleSend}
-          disabled={isTextDisabled || !message.trim()}
+          disabled={showThinkingAnimation || isTextDisabled || !message.trim()}
           className="absolute text-black cursor-pointer dark:hover:text-gray-400 dark:text-white top-1/2 right-2 transform -translate-y-1/2  rounded p-2 "
         >
           
