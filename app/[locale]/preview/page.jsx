@@ -234,6 +234,38 @@ const Preview = ({ params: { locale } }) => {
   return (
     <>
       <title>Preview | AskPDFs</title>
+      <header className="sticky top-0 z-10 backdrop-blur-lg bg-zinc-100/80 dark:bg-slate-800 border-b dark:border-gray-950">
+        <div className="w-full flex items-center justify-between px-4 py-3">
+          {/* Left Section */}
+          <div className="flex items-center">
+            <div className="mr-6 pl-0">
+              <svg
+                        className="cursor-pointer"
+                        onClick={() => router.push(`/${params.locale}/`)}
+                xmlns="http://www.w3.org/2000/svg"
+                width={25}
+                height={25}
+                viewBox="0 0 448 512"
+              >
+                <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
+              </svg>
+            </div>
+            <h2 className="font-semibold">Coukoo Hashing for Undergraduates</h2>
+          </div>
+      
+          {/* Right Section */}
+          {/* <div className="flex items-center gap-2 mr-8">
+      
+                  <Button
+              variant="newChat"
+              size="newChat"
+              onClick={() => router.push(`/${params.locale}/chat`)}
+            >
+              {t("newChat")}
+            </Button>
+          </div> */}
+        </div>
+      </header>
 
       <div className="mx-12 flex flex-col lg:grid lg:grid-cols-2">
         {/* <hi>{t("title")}</hi> */}

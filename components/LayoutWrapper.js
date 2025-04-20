@@ -9,7 +9,7 @@ import { supabase } from "@/lib/supabase";
 
 // Define the locales and paths that should hide Nav or Footer
 const locales = ["en", "da"];
-const hideNavPaths = ["/login", "/signin", "/success", "/chromeEx", "/chat", "/chat/*"];
+const hideNavPaths = ["/login", "/signin", "/success", "/chromeEx", "/chat", "/chat/*", "/preview"];
 const hideFooterPaths = [
   "/login",
   "/signin",

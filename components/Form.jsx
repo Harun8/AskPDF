@@ -29,9 +29,9 @@ const Forms = (props) => {
           props.onSubmit(values); // Call the parent onSubmit function
         }}>
         {({ errors, touched }) => (
-          <Form className="form  dark:bg-gray-800  rounded w-96 px-8 pt-6 pb-8 mb-4 align-middle mt-60">
+          <Form className="form  dark:bg-gray-900  rounded w-96 px-8 pt-6 pb-8 mb-4 align-middle mt-60">
             <div className="flex-row">
-              <button onClick={props.signInWithGoogle} className="btn google">
+              <button onClick={props.signInWithGoogle} className="btn google dark:bg-black">
                 <svg
                   version="1.1"
                   width="20"
@@ -60,7 +60,10 @@ c28.047,0,54.323-7.582,76.87-20.818L416.253,455.624z"></path>
 c-66.729,0-123.429,42.957-143.965,102.724l-83.397-68.276h-0.014C71.23,56.123,157.06,0,256,0
 C318.115,0,375.068,22.126,419.404,58.936z"></path>
                 </svg>
+                <p className="dark:text-white">
+
                 Google
+                </p>
               </button>
               {/* <button className="btn apple">
                 <svg
@@ -82,10 +85,10 @@ C318.115,0,375.068,22.126,419.404,58.936z"></path>
               </button> */}
             </div>
 
-            <p className="p line">{t("login.orWith")}</p>
+            <p className="p line text-black dark:text-white">{t("login.orWith")}</p>
 
             <div className="flex-column">
-              <label>Email </label>
+              <label className="dark:text-white">Email </label>
             </div>
 
             <div className="inputForm">
@@ -102,14 +105,14 @@ C318.115,0,375.068,22.126,419.404,58.936z"></path>
                 name="email"
                 htmlfor="email"
                 type="text"
-                className="input"
+                className="input "
                 placeholder={t("login.enterMail")}
               />
             </div>
             {props.showPassword && (
               <>
                 <div className="flex-column">
-                  <label>Password </label>
+                  <label className="dark:text-white ">Password </label>
                 </div>
                 <div className="inputForm">
                   <svg

@@ -56,7 +56,7 @@ const LocaleBtn = () => {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
-            fill="white"
+            fill="#5dade2"
             aria-hidden="true"
             data-slot="icon"
             className="h-6 w-6 text-slate-600 transition-colors group-hover:text-slate-900">

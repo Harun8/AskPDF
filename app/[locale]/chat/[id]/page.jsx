@@ -215,8 +215,8 @@ const ChatPage = () => {
   console.log(params.locale)
   return (
     <>
-<header className="sticky top-0 z-10 backdrop-blur-lg bg-zinc-100/80 dark:bg-blue-900/80 border-b dark:border-blue-800">
-  <div className="w-full flex items-center justify-between px-4 py-3">
+      <header className="sticky top-0 z-10 backdrop-blur-lg bg-zinc-100/80 dark:bg-slate-800 border-b dark:border-gray-950">
+      <div className="w-full flex items-center justify-between px-4 py-3">
     {/* Left Section */}
     <div className="flex items-center">
       <div className="mr-6 pl-0">

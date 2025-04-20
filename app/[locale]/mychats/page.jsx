@@ -43,11 +43,13 @@ const MyChats = () => {
   return (
     <>
       <title>My chats | AskPDFs</title>
+    <div className="dark:bg-blue-950/60">
 
-      <p className="flex justify-center font-medium font-4xl">
+
+      <p className="flex justify-center font-medium  font-4xl">
         {t("myChats")}{" "}
       </p>
-      <div className="flex justify-center text-black dark:text-white">
+      <div className="flex justify-center text-black  dark:text-white">
         <div className="flex justify-center ml-20">
           <div className="mt-20">
             {pdfs.map((pdf) => {
@@ -55,9 +57,9 @@ const MyChats = () => {
               return (
                 <Link
                 prefetch={true}
-                  className=" cursor-pointer hover:bg-zinc-400 flex justify-start mb-12 text-lg font-medium  bg-zinc-300 dark:bg-zinc-600 rounded p-6"
-                  href={`/chat/${pdf.id}`}
-                  key={pdf.id}>
+                className=" cursor-pointer hover:bg-zinc-400 flex justify-start mb-12 text-lg font-medium  bg-zinc-300 dark:bg-zinc-600 rounded p-6"
+                href={`/chat/${pdf.id}`}
+                key={pdf.id}>
                   {pdf.name}
                 </Link>
               );
@@ -65,6 +67,7 @@ const MyChats = () => {
           </div>
         </div>
       </div>
+            </div>
     </>
   );
 };

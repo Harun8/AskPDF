@@ -324,7 +324,7 @@ export default function chat() {
     <>
       <title>AskPDFs</title>
 
-      <header className="sticky top-0 z-10 backdrop-blur-lg bg-zinc-100/80 dark:bg-blue-900/80 border-b dark:border-blue-800">
+      <header className="sticky top-0 z-10 backdrop-blur-lg bg-zinc-100/80 dark:bg-slate-800 border-b dark:border-gray-950">
   <div className="w-full flex items-center justify-between px-4 py-3">
     {/* Left Section */}
     <div className="flex items-center">
@@ -357,7 +357,7 @@ export default function chat() {
   </div>
 </header>
       <div className="mx-12 mx-12 flex flex-col lg:grid lg:grid-cols-2">
-        <div className="rounded-lg border-4 shadow5 ">
+        <div className="rounded-lg border-4 dark:border-gray-950 shadow5 ">
           {pdf ? (
             <div className=" p-12 bg-gray h-[800px] overflow-y-auto  ">
               <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>

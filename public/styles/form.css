@@ -88,9 +88,18 @@
   background-color: #252727;
 }
 
+::placeholder {
+  color: red;
+  opacity: 1; /* Firefox */
+}
+
+::-ms-input-placeholder { /* Edge 12 -18 */
+  color: red;
+}
+
 .p {
   text-align: center;
-  color: black;
+  /* color: black; */
   font-size: 14px;
   margin: 5px 0;
 }

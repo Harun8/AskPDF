@@ -25,8 +25,8 @@ const ConversationDisplay = ({
         {conversation.map((msg, index) => {
           let textColor =
             msg.type === "user"
-              ? "text-zinc-800 dark:text-slate-400 dark:bg-gray-800"
-              : "text-gray-800 font-bold dark:bg-gray-800";
+              ? "text-zinc-800 dark:text-gray-200  "
+              : "text-gray-800 dark:text-gray-300 font-bold ";
           return (
             <div
               key={index}
@@ -58,13 +58,13 @@ const ConversationDisplay = ({
                 />
               )} */}
               
-              <span className={`ml-4 ${msg.type == "user" ? "bg-zinc-200/50 rounded-xl p-3" : ""}`}>{msg.text}</span>
+              <span className={`ml-4 ${msg.type == "user" ? " rounded-xl p-3" : ""}`}>{msg.text}</span>
             </div>
           );
         })}
 
         {showThinkingAnimation && (
-          <div className="mt-4 mb-4 pl-4 py-4 ml-2 mr-2 flex justify-start rounded-lg dark:bg-gray-800">
+          <div className="mt-4 mb-4 pl-4 py-4 ml-2 mr-2 flex justify-start rounded-lg ">
             <LoadingPDF />
           </div>
         )}

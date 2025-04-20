@@ -7,7 +7,7 @@ const ReviewCard = ({ img, name, username, body }) => {
     <figure
       className={cn(
         "relative cursor-pointer overflow-hidden rounded-xl p-4",
-        "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]"
+        ""
       )}>
       <div className="flex flex-row items-center gap-2">
         <div className="flex flex-col">
