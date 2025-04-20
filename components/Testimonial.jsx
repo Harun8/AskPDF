@@ -8,9 +8,9 @@ const Testimonial = () => {
   
   return (
     <>
-      <section className=" py-2 bg-blue-950">
+      <section className=" py-2 dark:bg-slate-950 bg-zinc-200">
         <div className="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-          <h2 className="text-center text-sm font-bold tracking-tight text-gray-400 sm:text-5xl">
+          <h2 className="text-center text-sm font-bold tracking-tight text-blue-950 dark:text-gray-400 sm:text-5xl">
             {t("title")}
           </h2>
 

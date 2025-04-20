@@ -267,9 +267,9 @@ const Preview = ({ params: { locale } }) => {
         </div>
       </header>
 
-      <div className="mx-12 flex flex-col lg:grid lg:grid-cols-2">
+      <div className="mx-12 flex flex-col lg:grid lg:grid-cols-2 dark:bg-slate-800">
         {/* <hi>{t("title")}</hi> */}
-        <div className="rounded-lg border dark:border-slate-900	 shadow5 scrollbar scrollbar-thumb-blue-600 scrollbar-thumb-rounded">
+        <div className="rounded-lg border dark:border-slate-900 dark:bg-slate-800	 shadow5 scrollbar scrollbar-thumb-blue-600 scrollbar-thumb-rounded">
           <div className=" p-6 bg-gray h-[800px] overflow-y-auto  ">
             {pdf ? (
               <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>
@@ -292,7 +292,7 @@ const Preview = ({ params: { locale } }) => {
           </div>
         </div>
 
-        <div className="">
+        <div className=" dark:bg-slate-800">
           <div className="">
             <ConversationDisplay
               showThinkingAnimation={showThinkingAnimation}

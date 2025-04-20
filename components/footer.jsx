@@ -8,11 +8,11 @@ const Footer = () => {
 
   return (
     <>
-      <footer className=" sticky top-[100vh] m-4 bg-zinc-100 dark:bg-gray-800 ">
+      <footer className=" sticky top-[100vh] m-4  rounded-xl ">
         <hr className="h-px my-3 bg-gray-200 border-0 dark:bg-gray-700" />
         <div className=" mx-auto max-w-screen-xl   md:flex md:items-center md:justify-between">
-          <p className=" text-base leading-6 text-center font-bold text-gray-600">
-            © 2024 AskPDF {version}.beta
+          <p className=" text-base leading-6 text-center font-bold dark:text-gray-200 text-gray-600">
+            © 2024 AskPDF {version}
           </p>
           {/* <div className="flex flex-wrap justify-center mt-3  gap-4">
             <Link
@@ -50,14 +50,14 @@ const Footer = () => {
             <div className="px-5 py-2">
               <Link
                 href="/preview"
-                className="text-base leading-6 text-gray-500 hover:text-gray-900">
+                className="text-base leading-6 text-gray-500 hover:text-gray-900 dark:text-gray-200">
                 {t("preview")}
               </Link>
             </div>
             <div className="px-5 py-2">
               <Link
                 href="/pricing"
-                className="text-base leading-6 text-gray-500 hover:text-gray-900">
+                className="text-base leading-6 text-gray-500 hover:text-gray-900 dark:text-gray-200">
                 {t("pricing")}
               </Link>
             </div>
@@ -65,7 +65,7 @@ const Footer = () => {
             <div className="px-5 py-2">
               <Link
                 href="/faq"
-                className="text-base leading-6 text-gray-500 hover:text-gray-900">
+                className="text-base leading-6 text-gray-500 hover:text-gray-900 dark:text-gray-200">
                 {t("faq")}
               </Link>
             </div>

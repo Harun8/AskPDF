@@ -76,8 +76,8 @@ export default function Home() {
       <title>AskPDFs</title>
       {/* <h1>{t("title")}</h1> */}
 
-      <div className="flex flex-col bg-blue-950 items-center  text-center min-h-screen">
-        <h1 className=" text-4xl md:text-7xl mt-24 font-bold font-sans mb-4 font-extrabold	 text-yellow-50 ">
+      <div className="flex flex-col bg-zinc-50 dark:bg-blue-950 items-center  text-center min-h-screen">
+        <h1 className=" text-4xl md:text-7xl mt-24 font-bold font-sans mb-4 font-extrabold text-blue-900	dark:text-yellow-50 ">
           {t("titleFirst")} <br></br>
           <span> {t("titleSecond")}</span>
         </h1>
@@ -92,11 +92,11 @@ export default function Home() {
           </Link>
           <Link
             href="/preview"
-            className="border border-gray-500 text-white font-bold py-3 px-10  rounded-lg hover:bg-blue-800">
+            className="border border-gray-500 text-white font-bold py-3 px-10 bg-blue-950 rounded-lg hover:bg-blue-800">
             {t("tryDemo")}
           </Link>
         </div>
-        <div className="mt-12 w-full max-w-screen-lg mx-auto h-auto">
+        <div className="mt-12 w-full max-w-screen-lg mb-8 mx-auto h-auto">
   {/* <NeonGradientCard
     neonColors={{
       firstColor: "#ffffff ",

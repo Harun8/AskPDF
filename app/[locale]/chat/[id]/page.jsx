@@ -217,7 +217,7 @@ const ChatPage = () => {
     <>
       <header className="sticky top-0 z-10 backdrop-blur-lg bg-zinc-100/80 dark:bg-slate-800 border-b dark:border-gray-950">
       <div className="w-full flex items-center justify-between px-4 py-3">
-    {/* Left Section */}
+    {/* Left Section */} 
     <div className="flex items-center">
       <div className="mr-6 pl-0">
         <svg
@@ -249,7 +249,7 @@ const ChatPage = () => {
 </header>
 
       <div className="mx-12 flex flex-col lg:grid lg:grid-cols-2">
-        <div className="rounded-lg border shadow5">
+        <div className="rounded-lg border dark:border-gray-950 shadow5">
           <div className="p-4 bg-gray h-[800px] overflow-y-auto">
             {pdf ? (
               <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>

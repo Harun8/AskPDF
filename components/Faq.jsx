@@ -5,14 +5,14 @@ const Faq = () => {
       const t = useTranslations();
     
   return (
-    <div class="dark:bg-gray-800 bg-zinc-100">
+    <div class="dark:bg-blue-950 bg-zinc-100">
     <div class="w-full max-w-3xl px-2 mx-auto py-12 dark:bg-transparent dark:text-gray-200">
-        <h3 class="mt-3 text-xl font-bold text-gray-800 md:text-2xl dark:text-gray-100 flex justify-center">
+        <h3 class="mt-3 text-2xl font-bold text-gray-800 md:text-2xl dark:text-gray-100 flex justify-center">
         {t("faq.faq")}
         </h3>
         <div class="grid max-w-5xl mx-auto mt-6 divide-y divide-gray-200 dark:divide-gray-700">
             <details class="group py-4">
-                <summary class="flex items-center text-black justify-between font-medium list-none cursor-pointer">
+                <summary class="flex items-center text-black dark:text-white justify-between font-medium list-none cursor-pointer">
                     <span>{t("faq.whatIsAskPDF")}</span>
                     <span class="transition group-open:rotate-180">
                         <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor"
