@@ -64,7 +64,7 @@ const TextField = ({ onSendMessage, isDisabled, question }) => {
           data-testid="chat-btn"
           onMouseDown={handleSend}
           disabled={isDisabled || !message.trim()}
-          className="absolute text-black cursor-pointer dark:hover:text-gray-200 dark:text-white top-1/2 right-2 transform -translate-y-1/2  rounded p-2 "
+          className="absolute text-black cursor-pointer dark:hover:text-gray-400 dark:text-white top-1/2 right-2 transform -translate-y-1/2  rounded p-2 "
         >
           
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="size-6">

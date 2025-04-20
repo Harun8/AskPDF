@@ -25,6 +25,7 @@ import { toast } from "sonner";
 import { fileSizeLimit } from "@/util/fileSizeLimit";
 import { uploadLimit } from "@/util/uploadLimit";
 import { Button } from "@/components/ui/button";
+import PDFUpload from "@/components/PDF-upload";
 
 const supabase = createClientComponentClient();
 
@@ -375,9 +376,11 @@ export default function chat() {
           ) : (
             <>
               <div className="flex justify-center mt-48">
-                <button data-testid="uploadPDF-btn" onClick={openModal}>
+
+                <PDFUpload openModal={openModal}></PDFUpload>
+                {/* <button data-testid="uploadPDF-btn" onClick={openModal}>
                   {t("message")}
-                </button>
+                </button> */}
               </div>
 
               <div className="flex justify-center mt-48">
