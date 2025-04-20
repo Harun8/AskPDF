@@ -78,7 +78,7 @@ const TextField = ({ onSendMessage, isDisabled, question }) => {
     <TooltipTrigger asChild>
       <button 
         data-testid="chat-btn"
-        onMouseDown={handleSend}
+        // onMouseDown={handleSend}
         disabled={isDisabled || !message.trim()}
         className="absolute top-1/2 right-2 mr-8 transform -translate-y-1/2 text-purple-400 dark:text-purple-400 rounded p-2 hover:text-red-200"
       >
