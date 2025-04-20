@@ -106,7 +106,7 @@ const ConversationDisplay = ({
 
       {/* TextField at the bottom */}
       <div className=" border-gray-300 dark:border-gray-700">
-        <TextField showThinkingAnimation={showThinkingAnimation} question={question} onSendMessage={sendMessage} isTextDisabled={isTextDisabled}  isDisabled={processingPDF} />
+        <TextField  question={question} onSendMessage={sendMessage} isTextDisabled={isTextDisabled}  isDisabled={processingPDF} />
       </div>
     </div>
   );
