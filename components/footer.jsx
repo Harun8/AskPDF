@@ -8,8 +8,8 @@ const Footer = () => {
 
   return (
     <>
-      <footer className=" sticky top-[100vh] m-4  rounded-xl ">
-        <hr className="h-px my-3 bg-gray-200 border-0 dark:bg-gray-700" />
+      <footer className="sticky p-4 dark:bg-blue-950 ">
+        <hr className=" bg-gray-200 border-0 dark:bg-red-700" />
         <div className=" mx-auto max-w-screen-xl   md:flex md:items-center md:justify-between">
           <p className=" text-base leading-6 text-center font-bold dark:text-gray-200 text-gray-600">
             © 2023 AskPDF {version}
