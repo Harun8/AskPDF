@@ -386,6 +386,8 @@ export default function chat() {
         <div className="flex flex-col justify-between h-full">
           <div className="flex-grow overflow-y-auto">
             <ConversationDisplay
+                              isTextDisabled={isTextDisabled}
+
               processingPDF={processingPDF}
               showThinkingAnimation={showThinkingAnimation}
               conversation={conversation}

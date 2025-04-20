@@ -18,7 +18,8 @@ const ConversationDisplay = ({
   conversation,
   showThinkingAnimation,
   processingPDF,
-  sendMessage
+  sendMessage,
+  isTextDisabled
 }, props) => {
 
   const [question, setQuestion] = useState("")
@@ -30,6 +31,8 @@ const ConversationDisplay = ({
   
   const t = useTranslations("chat")
   const questions = t.raw("questions")
+
+  console.log("isTextDisabled ", isTextDisabled)
   return (
     <div className="flex flex-col h-[800px] border-4 dark:border-gray-950 rounded-lg shadow-xl dark:bg-gray-900">
      
@@ -100,9 +103,10 @@ const ConversationDisplay = ({
         )}
       </div>
 
+
       {/* TextField at the bottom */}
       <div className=" border-gray-300 dark:border-gray-700">
-        <TextField question={question} onSendMessage={sendMessage}  isDisabled={processingPDF} />
+        <TextField question={question} onSendMessage={sendMessage} isTextDisabled={isTextDisabled}  isDisabled={processingPDF} />
       </div>
     </div>
   );

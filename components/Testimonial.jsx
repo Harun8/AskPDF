@@ -20,7 +20,7 @@ const Testimonial = () => {
           </p>
         </div>
         </div>
-      {/* <Gallery></Gallery> */}
+      <Gallery></Gallery>
       </section>
 
     </>
