@@ -45,7 +45,7 @@
   
   .custom-file-upload {
     font-size: 1.1em;
-    color: #ffffff;
+    /* color: #ffffff; */
     text-align: center;
     margin-top: 20px;
     padding: 15px 25px;
@@ -59,10 +59,10 @@
     width: 220px;
   }
   
-  .custom-file-upload:hover {
-    background: rgba(255, 255, 255, 0.4);
+  /* .custom-file-upload:hover {
+    background: rgba(214, 14, 14, 0.4);
   }
-  
+   */
   .custom-file-upload input[type="file"] {
     display: none;
   }

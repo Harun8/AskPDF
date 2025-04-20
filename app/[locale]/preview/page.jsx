@@ -17,6 +17,7 @@ import lscache from "lscache";
 
 const { createClient } = require("@supabase/supabase-js");
 import { useTranslations } from "next-intl";
+import ChatNav from "@/components/ChatNav";
 
 const client = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -231,39 +232,15 @@ const Preview = ({ params: { locale } }) => {
       },
     });
   }
-  return (
+  return ( 
     <>
       <title>Preview | AskPDFs</title>
-      <header className="sticky top-0 z-10 backdrop-blur-lg bg-zinc-100/80 dark:bg-slate-800 border-b dark:border-gray-950">
-        <div className="w-full flex items-center justify-between px-4 py-3">
-          {/* Left Section */}
-          <div className="flex items-center">
-          <div className="mr-6 pl-0 dark:text-white text-black cursor-pointer">
-      <svg
-        onClick={() => router.push(`/${params.locale}/`)}
 
-      xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
-</svg>
-
-      </div>
-            <h2 className="font-semibold">Coukoo Hashing for Undergraduates</h2>
-          </div>
-      
-          {/* Right Section */}
-          {/* <div className="flex items-center gap-2 mr-8">
-      
-                  <Button
-              variant="newChat"
-              size="newChat"
-              onClick={() => router.push(`/${params.locale}/chat`)}
-            >
-              {t("newChat")}
-            </Button>
-          </div> */}
-        </div>
-      </header>
-
+      <ChatNav
+       showBtn={false}
+       title="Coukoo Hashing for Undergraduates"
+       
+       ></ChatNav>
       <div className="mx-12 flex flex-col lg:grid lg:grid-cols-2 dark:bg-slate-800">
         {/* <hi>{t("title")}</hi> */}
         <div className="rounded-lg border dark:border-slate-900 dark:bg-slate-800	 shadow5 scrollbar scrollbar-thumb-blue-600 scrollbar-thumb-rounded">

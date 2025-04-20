@@ -12,8 +12,8 @@ const PDFUpload = ({openModal}) => {
     <div class="top"></div>
     <div class="bottom"></div>
   </div>
-  <label class="custom-file-upload">
-    <input className='text-md' onClick={openModal} class="title" type="button" />
+  <label class="custom-file-upload  hover:bg-zinc-200 dark:hover:bg-zinc-800">
+    <input  onClick={openModal} class="title text-md text-black dark:text-white" type="button" />
     {t("message")}
   </label>
 </div>

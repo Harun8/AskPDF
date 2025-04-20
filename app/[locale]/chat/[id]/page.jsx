@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import ChatNav from "@/components/ChatNav";
 
 const { createClient } = require("@supabase/supabase-js");
 
@@ -214,37 +215,16 @@ const ChatPage = () => {
 
   console.log(params.locale)
   return (
-    <>
-      <header className="sticky top-0 z-10 backdrop-blur-lg bg-zinc-100/80 dark:bg-slate-800 border-b dark:border-gray-950">
-      <div className="w-full flex items-center justify-between px-4 py-3">
-    {/* Left Section */} 
-    <div className="flex items-center">
-    <div className="mr-6 pl-0 dark:text-white text-black cursor-pointer">
-      <svg
-        onClick={() => router.push(`/${params.locale}/`)}
-
-      xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
-</svg>
-
-      </div>
-      <h2 className="font-semibold">{title}</h2>
-    </div>
-
-    {/* Right Section */}
-    <div className="flex items-center gap-2 mr-8">
-
-            <Button
-        variant="newChat"
-        size="newChat"
-        onClick={() => router.push(`/${params.locale}/chat`)}
-      >
-        {t("newChat")}
-      </Button>
-    </div>
-  </div>
-</header>
-
+    <> 
+          <ChatNav
+       showBtn={true}
+       btnTitle={t("newChat")}
+       redirect="chat"
+       
+       title={title}
+       
+       ></ChatNav>
+       
       <div className="mx-12 flex flex-col lg:grid lg:grid-cols-2">
         <div className="rounded-lg border dark:border-gray-950 shadow5">
           <div className="p-4 bg-gray h-[800px] overflow-y-auto">
