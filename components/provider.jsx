@@ -15,7 +15,7 @@ const Provider = ({ children }, props) => {
   }
 
   return (
-    <ThemeProvider defaultTheme="light" enableSystem={true} attribute="class">
+    <ThemeProvider defaultTheme="dark" enableSystem={true} attribute="class">
       {children}
     </ThemeProvider>
   );
