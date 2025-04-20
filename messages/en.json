@@ -80,14 +80,23 @@
     },
 
     "preview": {
-        "message": "Send a message to AskPDFs"
+        "message": "Send a message to AskPDFs",
+        "featureAlert": "Enchance your questions! Feature coming soon"
       },
 
       "chat": {
         "upload": "Upload your PDF",
         "message": "Click here to upload your PDF",
       "myChats": "My Chats",
-      "newChat": "New Chat"
+      "newChat": "New Chat",
+      "title": "Ask any questions",
+
+      "questions":  [
+        {"text": "Summarize this document in a few sentences."},
+        {"text": "What are the key points or main arguments in this document?"},
+        {"text":"Who is the author of this document"},
+        {"text":"Can you provide a bullet-point summary of this document?"}
+      ]
       },
 
       "faq": {

@@ -57,7 +57,7 @@ const MyChats = () => {
               return (
                 <Link
                 prefetch={true}
-                className=" cursor-pointer hover:bg-zinc-400 flex justify-start mb-12 text-lg font-medium  bg-zinc-300 dark:bg-zinc-600 rounded p-6"
+                className=" cursor-pointer hover:bg-zinc-400 dark:hover:bg-zinc-700 flex justify-start mb-12 text-lg font-medium  bg-zinc-300 dark:bg-zinc-600 rounded p-6"
                 href={`/chat/${pdf.id}`}
                 key={pdf.id}>
                   {pdf.name}
