@@ -7,7 +7,7 @@ const ThemeSwitcher = () => {
   const { systemTheme, theme, setTheme } = useTheme();
 
   const renderThemeChanger = () => {
-    // setTheme("dark");
+    setTheme("dark");
     let currentTheme = theme === "system" ? systemTheme : theme;
 
     if (currentTheme === "dark") {
