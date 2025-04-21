@@ -50,7 +50,7 @@ const TextField = ({ onSendMessage, isDisabled, question, isTextDisabled }) => {
           rows="1"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          className="resize-none block w-full p-2.5 pr-12 text-sm dark:text-gray-300 text-gray-700 text-bold dark:bg-gray-800 rounded-xl border border-gray-300 dark:border-gray-950 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="resize-none block w-full p-2.5 pr-12 text-sm dark:text-gray-300 text-gray-700 text-bold dark:bg-gray-800 rounded-xl border border-gray-900 dark:border-gray-950 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder={
             isDisabled
               ? "Processing your pdf, please wait ..."

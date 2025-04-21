@@ -33,18 +33,33 @@ async function RootLayout({ children, params: { locale } }) {
   // const [isMounted, setIsMounted] = useState(false);
 
   // Ensure that the incoming `locale` is valid
-  if (!routing.locales.includes(locale)) {
+  if (!routing.locales.includes(locale)) {  
     notFound();
   }
 
-  setRequestLocale(locale);
+  setRequestLocale(locale); 
 
   // Providing all messages to the client
   // side is the easiest way to get started
   const messages = await getMessages();
 
+  const themeScript = `
+  (function() {
+    try {
+      var theme = document.cookie.replace(/(?:(?:^|.*;\\s*)theme\\s*\\=\\s*([^;]*).*$)|^.*$/, "$1");
+      if (!theme && window.localStorage) theme = localStorage.getItem("theme");
+      if (!theme) theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.classList.add(theme);
+    } catch(e) {}
+  })();
+  `;
+
   return (
-    <html lang={locale}>
+    <html lang={locale} className={inter.className}>
+            <head>
+        {/* runs before CSS / hydration */}
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="flex flex-col min-h-screen w-full bg-zinc-100  dark:bg-slate-800">
         <Provider>
             
