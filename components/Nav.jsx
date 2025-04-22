@@ -222,13 +222,13 @@ const Nav = ({ session }) => {
         {!session ? (
           <>
             <Link
-              className="hidden md:inline-block md:ml-auto md:mr-3 py-2 px-6 bg-blue-500 dark:bg-blue-500 hover:bg-gray-400 dark:hover:bg-gray-700 text-sm text-white dark:text-gray-200 font-bold  rounded-xl transition duration-200"
+              className="hidden md:inline-block md:ml-auto md:mr-3 py-2 px-6 bg-blue-500 dark:bg-blue-500 hover:bg-blue-400 dark:hover:bg-blue-700 text-sm text-white dark:text-gray-200 font-bold  rounded-xl transition duration-200"
               href="/login"
               data-testid="login-btn">
               {t("login")}
             </Link>
             <Link
-              className="hidden md:inline-block py-2 px-5 bg-gray-800 hover:bg-gray-600 dark:bg-gray-800 dark:hover:bg-blue-800 text-sm text-white font-bold rounded-lg transition duration-200"
+              className="hidden md:inline-block py-2 px-5 bg-gray-800 hover:bg-gray-600 dark:bg-zinc-200 dark:hover:bg-zinc-400 text-sm text-white dark:text-zinc-800 font-bold rounded-lg transition duration-200"
               href="/signin">
               {t("signup")}
             </Link>
