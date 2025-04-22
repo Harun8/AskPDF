@@ -20,6 +20,7 @@ const hideFooterPaths = [
   "/preview",
   "/settings",
   "/chromeEx",
+  "/pricing"
 ];
 
 // Helper function to check if the pathname matches any hide path with a locale prefix
