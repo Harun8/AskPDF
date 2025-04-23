@@ -188,23 +188,23 @@ export default function chat() {
     } else {
       let fileObj = event.target.files[0]
       console.log("fileObj", fileObj)
-      if (!isValidKey(fileObj.name)) {
-        let c = titleFixer(fileObj.name)
-        console.log("c", c)
-        fileObj = {
-          lastModified: fileObj.lastModified,
-          name:c,
-          size: fileObj.size,
-          type: fileObj.type,
-          webkitRelativePath: fileObj.webkitRelativePath
-        }
+      // if (!isValidKey(fileObj.name)) {
+      //   let c = titleFixer(fileObj.name)
+      //   console.log("c", c)
+      //   fileObj = {
+      //     lastModified: fileObj.lastModified,
+      //     name:c,
+      //     size: fileObj.size,
+      //     type: fileObj.type,
+      //     webkitRelativePath: fileObj.webkitRelativePath
+      //   }
 
-        console.log("newfileobj", fileObj)
+      //   console.log("newfileobj", fileObj)
 
 
 
-      }
-      filePath = `${userId}/${fileObj.name}`;
+      // }
+      filePath = `${userId}/${fileObj}`;
       const { data, error } = await supabase.storage
         .from("pdfs")
         .upload(filePath, fileObj);
