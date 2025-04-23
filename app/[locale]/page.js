@@ -87,7 +87,7 @@ export default function Home() {
           <Link
             href="/pricing"
             prefetch={true}
-            className="bg-orange-600 text-white font-bold py-3 px-10 rounded-lg hover:bg-orange-800">
+            className="bg-gray-900 dark:bg-zinc-200 dark:text-gray-950 dark:hover:bg-zinc-400 text-white font-bold py-3 px-10 rounded-lg hover:bg-gray-800">
             {t("tryAskPDF")}
           </Link>
           <Link

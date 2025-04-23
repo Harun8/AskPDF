@@ -236,7 +236,7 @@ const Nav = ({ session }) => {
         ) : (
           <>
             <button
-              className="hidden md:inline-block py-2 px-6 dark:bg-red-500 bg-red-500 hover:bg-red-600 dark:bg-blue-950 dark:hover:bg-blue-800 text-sm text-white font-bold rounded-xl transition duration-200"
+              className="hidden md:inline-block py-2 px-6 dark:bg-gray-950 bg-black hover:bg-red-600 dark:bg-blue-950 dark:hover:bg-red-800 text-sm text-white font-bold rounded-xl transition duration-200"
               onClick={async (e) => {
                 e.preventDefault();
                 setLoading(true);
