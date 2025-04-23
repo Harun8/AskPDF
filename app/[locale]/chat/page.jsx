@@ -28,6 +28,7 @@ import { Button } from "@/components/ui/button";
 import PDFUpload from "@/components/PDF-upload";
 import ChatNav from "@/components/ChatNav";
 import { conversationLogic, useConversationLogic } from "@/util/streaming/chat-util";
+import titleFixer, { isValidKey } from "@/util/titleFixer";
 
 const supabase = createClientComponentClient();
 
@@ -170,7 +171,7 @@ export default function chat() {
       );
       closeModal();
       return;
-    }
+    } 
 
     if (uploadCount >= upl) {
       // setIsOverPDFCount(true);
@@ -185,14 +186,33 @@ export default function chat() {
       // setFileOverLimit(true);
       event.target.value = "";
     } else {
-      filePath = `${userId}/${event.target.files[0].name}`;
+      let fileObj = event.target.files[0]
+      console.log("fileObj", fileObj)
+      if (!isValidKey(fileObj.name)) {
+        let c = titleFixer(fileObj.name)
+        console.log("c", c)
+        fileObj = {
+          lastModified: fileObj.lastModified,
+          name:c,
+          size: fileObj.size,
+          type: fileObj.type,
+          webkitRelativePath: fileObj.webkitRelativePath
+        }
+
+        console.log("newfileobj", fileObj)
+
+
+
+      }
+      filePath = `${userId}/${fileObj.name}`;
       const { data, error } = await supabase.storage
         .from("pdfs")
-        .upload(filePath, event.target.files[0]);
+        .upload(filePath, fileObj);
       if (error) {
         console.log("ERRROR", error)
         showToast("Error", error.message);
 
+   
         setDuplicateFileError(true);
         // Handle error
         console.error(error.message);
