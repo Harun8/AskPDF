@@ -74,7 +74,6 @@ export default function Home() {
 </Head>
 
       <title>AskPDFs</title>
-      {/* <h1>{t("title")}</h1> */}
 
       <div className="flex flex-col bg-zinc-50 dark:bg-blue-950 items-center  text-center min-h-screen">
         <h1 className=" text-4xl md:text-7xl mt-24 font-bold font-sans mb-4 font-extrabold text-blue-900	dark:text-yellow-50 ">
