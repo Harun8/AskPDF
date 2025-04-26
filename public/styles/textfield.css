@@ -1,0 +1,15 @@
+@keyframes borderColorChange {
+  0% {
+    border-color: #db2777; /* pink-600 */
+  }
+  50% {
+    border-color: #2563eb; /* blue-600 */
+  }
+  100% {
+    border-color: #db2777; /* pink-600 */
+  }
+}
+
+.animate-border-color {
+  animation: borderColorChange 3s infinite;
+}

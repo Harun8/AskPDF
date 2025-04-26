@@ -9,15 +9,39 @@ import { Tooltip,
   TooltipProvider,
   TooltipTrigger,
  } from "./ui/tooltip";
+ import "../public/styles/textfield.css"
+ import {
+  animate,
+  stagger,
+} from 'animejs';
+import ShineBorder from "./ui/shine-border";
 
 const TextField = ({ onSendMessage, isDisabled, question, isTextDisabled }) => {
+  const [enhancePrompt, setEnhancePrompt] = useState(false)
   const t = useTranslations("preview");
 
 
   useEffect(()=> {
     console.log("picked question changed", question)
     setMessage(question)
+
   }, [question])
+
+  // useEffect(() => {
+  //   const textWrapper = document.querySelector('.ml3');
+  //   if (textWrapper) {
+  //     textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+      
+  //     animate('.ml3 .letter', {
+  //       opacity: [0, 1],
+  //       easing: "easeInOutQuad",
+  //       duration: 6000,
+  //       delay: stagger(400, { start: 0 }),
+  //       direction: 'alternate',
+  //       loop: true
+  //     });
+  //   }
+  // }, []);
 
   const [message, setMessage] = useState("");
   const handleSendEnter = (e) => {
@@ -38,8 +62,36 @@ const TextField = ({ onSendMessage, isDisabled, question, isTextDisabled }) => {
 
     }
   };
+
+  const updatePrompt = async() => {
+
+    if (!message.trim()) return;
+
+    try {
+      setEnhancePrompt(true)
+     const response = await fetch("/api/llm/enhance", {
+        method: "POST",
+        body: JSON.stringify({
+          prompt: message,
+        }),
+      })
+      const data = await response.json()
+      console.log("data", response, data)
+
+      setTimeout(()=> {
+        setMessage(data.data)
+        setEnhancePrompt(false)
+
+      }, 4000)
+    } catch (error) {
+      console.log("error", error)
+    } finally{
+    }
+  }
   return (
     <div className="flex flex-col justify-end relative m-6">
+
+
       <div className="relative">
         <textarea
           onKeyDown={handleSendEnter}
@@ -50,13 +102,15 @@ const TextField = ({ onSendMessage, isDisabled, question, isTextDisabled }) => {
           rows="1"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          className="resize-none block w-full p-2.5 pr-12 text-sm dark:text-gray-300 text-gray-700 text-bold dark:bg-gray-800 rounded-xl border border-gray-900 dark:border-gray-950 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className={`resize-none block w-full p-2.5 pr-12 text-sm dark:text-gray-300 text-gray-700 
+            text-bold dark:bg-gray-800 rounded-xl border border-gray-900 dark:bg-gray-700
+             dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500${enhancePrompt ? " animate-border-color border-2" : " dark:border-gray-950 border-gray-900"}`}
           placeholder={
             isDisabled
-              ? "Processing your pdf, please wait ..."
-              : `${t("message")}`
+            ? "Processing your pdf, please wait ..."
+            : `${t("message")}`
           }
-        ></textarea>
+          ></textarea>
         <div>
           </div>
 
@@ -74,11 +128,11 @@ const TextField = ({ onSendMessage, isDisabled, question, isTextDisabled }) => {
  
         </button>
 <TooltipProvider>
-  <Tooltip delayDuration={200}>
+  <Tooltip defaultOpen={true} delayDuration={200}>
     <TooltipTrigger asChild>
       <button 
         data-testid="chat-btn"
-        // onMouseDown={handleSend}
+        onMouseDown={updatePrompt}
         disabled={isDisabled || !message.trim()}
         className="absolute top-1/2 right-2 mr-8 transform -translate-y-1/2 text-purple-400 dark:text-purple-400 rounded p-2 hover:text-red-200"
       >
@@ -99,7 +153,7 @@ const TextField = ({ onSendMessage, isDisabled, question, isTextDisabled }) => {
       </button>
     </TooltipTrigger>
     <TooltipContent>
-      <p className="text-orange-400 font-bold dark">{t("featureAlert")}</p>
+      <p className="dark:text-yellow-400 text-yellow-800  font-extrabold">{t("featureAlert")}</p>
     </TooltipContent>
   </Tooltip>
 </TooltipProvider>
