@@ -11,6 +11,7 @@ import { NeonGradientCard } from "@/components/ui/neon-gradient-card";
 import Testimonial from "@/components/Testimonial";
 import Faq from "@/components/Faq";
 import HowToUse from "@/components/HowToUse";
+import { useQuery } from "@tanstack/react-query";
 
 
 
@@ -27,19 +28,38 @@ export default function Home() {
     supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
-    const getVideo = async () =>  {
+    // const getVideo = async () =>  {
 
-      const { data } = await supabase
-    .storage
-    .from('PromoVID').getPublicUrl('VID/FullPromoEN.mp4');
-    // .getPublicUrl('VID/FullPromoEN.mp4');
-    setVideo(data.publicUrl);
+    //   const { data } = await supabase
+    // .storage
+    // .from('PromoVID').getPublicUrl('VID/FullPromoEN.mp4');
+    // // .getPublicUrl('VID/FullPromoEN.mp4');
+    // setVideo(data.publicUrl);
 
-    }
+    // }
 
-    getVideo()
+    // getVideo()
 
   }, []);
+
+  const {data, isLoading, error} = useQuery({
+    queryKey: ["promoVid"],
+    queryFn: async() => {
+      const { data } =  supabase
+      .storage
+      .from('PromoVID').getPublicUrl('VID/FullPromoEN.mp4');
+
+      return data
+    }
+  })
+
+  useEffect(()=> {
+    if (data) {
+
+      setVideo(data.publicUrl);
+    }
+
+  },[data])
 
   
   return (
