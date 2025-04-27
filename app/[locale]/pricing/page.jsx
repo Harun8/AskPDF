@@ -8,16 +8,13 @@ import PricingTable from "@/components/PricingTable";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { NumberTicker } from "@/components/magicui/number-ticker";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Pricing() {
   const [plans, setPlans] = useState([]);
   const [prices,setPrices] = useState([])
-  const [premium, setPremium] = useState([])
-  const [ultimate, setUltimate] = useState([])
-
   const [monthly, setMonthly] = useState(true);
   const [locale, setLocale] = useState("da"); 
-  const [loading, setLoading] = useState(true); // Loading state added here
   const supabase = createClientComponentClient();
 
   const [userId, setUserId] = useState(null);
@@ -43,30 +40,46 @@ export default function Pricing() {
     getUser();
   }, []);
 
-  // const [mont]
-  useEffect(() => {
-    async function getPrices() {
-      try {
-        setLoading(true);
+  const {data, isLoading, error} = useQuery({
+    queryKey: ["stripe"],
+    queryFn: async () => {
+      const response = await fetch(`/api/stripe`, {
+        method: "GET",
+      });
+      const data = await response.json();
 
-        const response = await fetch(`/api/stripe`, {
-          method: "GET",
-        });
-
-        const data = await response.json();
-
-        setPrices(data)
-
-        setPlans(data);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-
-      }
+      return data;
     }
-    getPrices();
-  }, []);
+  })
+
+
+  useEffect(() => {
+    if (data) {
+      setPrices(data);
+      setPlans(data);
+    }
+  }, [data]);
+
+  // useEffect(() => {
+  //   async function getPrices() {
+
+     
+  //     try {
+  //       setLoading(true);
+
+   
+
+
+
+  //     } catch (error) {
+  //       console.error(error);
+  //     } finally {
+  //       setLoading(false);
+
+  //     }
+  //   }
+  //   getPrices();
+  // }, []);
 
   useEffect(() => {
     if (plans.length > 0) {
@@ -156,7 +169,7 @@ export default function Pricing() {
     <>
       <title>Pricing | AskPDFs</title>
 
-      {!plans || plans.length === 0 ? (
+      {isLoading ? (
         <Loading></Loading>
       ) : (
         // <PricingTable

@@ -13,6 +13,7 @@ import { getMessages } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
+import Providers from "../providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -61,6 +62,9 @@ async function RootLayout({ children, params: { locale } }) {
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className="flex flex-col min-h-screen w-full bg-zinc-100  dark:bg-slate-800">
+        <Providers>
+
+
         <Provider>
             
 
@@ -72,6 +76,7 @@ async function RootLayout({ children, params: { locale } }) {
           </main>
         </Provider>
         <Toaster />
+        </Providers>
       </body>
     </html>
   );
