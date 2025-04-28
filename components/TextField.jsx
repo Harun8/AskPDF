@@ -127,7 +127,7 @@ const TextField = ({ onSendMessage, isDisabled, question, isTextDisabled }) => {
 
  
         </button>
-<TooltipProvider>
+{/* <TooltipProvider>
   <Tooltip defaultOpen={true} delayDuration={200}>
     <TooltipTrigger asChild>
       <button 
@@ -156,7 +156,7 @@ const TextField = ({ onSendMessage, isDisabled, question, isTextDisabled }) => {
       <p className="dark:text-yellow-400 text-yellow-800  font-extrabold">{t("featureAlert")}</p>
     </TooltipContent>
   </Tooltip>
-</TooltipProvider>
+</TooltipProvider> */}
 
 
       </div>
