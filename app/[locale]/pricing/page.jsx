@@ -40,17 +40,17 @@ export default function Pricing() {
     getUser();
   }, []);
 
-  const {data, isLoading, error} = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["stripe"],
     queryFn: async () => {
-      const response = await fetch(`/api/stripe`, {
-        method: "GET",
-      });
+      const response = await fetch(`/api/stripe`, { method: "GET" });
       const data = await response.json();
-
       return data;
-    }
+    },
+    staleTime: Infinity, // <--- here!
+    cacheTime: Infinity, // <--- here!
   })
+  
 
 
   useEffect(() => {
