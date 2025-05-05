@@ -31,7 +31,7 @@ const isProtectedRoute = protectedPaths.some(path => {
   // Sub-path match but exclude specific exceptions
   if (pathname.startsWith(`${path}/`)) {
     // Exclude specific paths that don't need protection
-    if (path === "/api/llm" && pathname === "/api/llm/preview") {
+    if (path === "/api/llm" && pathname === "/api/llm/preview" || pathname ==="/api/llm/enhance") {
       return false;
     }
     return true;
