@@ -25,14 +25,12 @@ const ConversationDisplay = ({
   const [question, setQuestion] = useState("")
   
   const updateText = (txt) => {
-    console.log("clicked msg", txt )
     setQuestion(txt)
   }
   
   const t = useTranslations("chat")
   const questions = t.raw("questions")
 
-  console.log("isTextDisabled ", isTextDisabled)
   return (
     <div className="flex flex-col h-[800px] border-4 dark:border-gray-950 rounded-lg shadow-xl dark:bg-gray-900">
      

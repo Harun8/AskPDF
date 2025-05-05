@@ -17,6 +17,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import ChatNav from "@/components/ChatNav";
 import { conversationLogic, useConversationLogic } from "@/util/streaming/chat-util";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 const { createClient } = require("@supabase/supabase-js");
 
@@ -152,6 +153,28 @@ const ChatPage = () => {
       conversation
     )
 
+    
+    const sendMessageMutation = useMutation({
+      mutationFn: async ( messageText) => {
+        const response = await fetch("/api/llm", {
+          method: "POST",
+          body: JSON.stringify({
+            sessionId: userId,
+            plan,
+            messageText,
+            conv_history: convHistory,
+            file_id: params.id,
+          }),
+        });
+    
+        if (!response.ok) {
+          throw new Error("Request failed");
+        }
+    
+        return response.json();
+      },
+    });
+
   const sendMessage = async (messageText) => {
     setCurrentResponse("");
     client.removeChannel(channelA);
@@ -165,18 +188,10 @@ const ChatPage = () => {
 
     convHistory.push(messageText);
     try {
-      setShowThinkingAnimation(true);
-      const response = await fetch("/api/llm", {
-        method: "POST",
-        body: JSON.stringify({
-          sessionId: userId,
+      setShowThinkingAnimation(true); 
 
-          plan: plan,
-          messageText: messageText,
-          conv_history: convHistory,
-          file_id: params.id,
-        }),
-      });
+      await sendMessageMutation.mutateAsync(messageText)
+
     } catch (error) {
       console.error(error);
       return;

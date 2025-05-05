@@ -22,7 +22,6 @@ const TextField = ({ onSendMessage, isDisabled, question, isTextDisabled }) => {
 
 
   useEffect(()=> {
-    console.log("picked question changed", question)
     setMessage(question)
 
   }, [question])
