@@ -7,7 +7,6 @@ import { Analytics } from "@vercel/analytics/react";
 import Provider from "@/components/provider";
 import LayoutWrapper from "@/components/LayoutWrapper";
 
-
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { routing } from "@/i18n/routing";
@@ -26,19 +25,19 @@ export const metadata = {
   title: "AskPDFs",
   description: "Ask anything, AskPDFs",
   twitter: {
-    card: "summary_large_image"
-  }
-}
+    card: "summary_large_image",
+  },
+};
 
 async function RootLayout({ children, params: { locale } }) {
   // const [isMounted, setIsMounted] = useState(false);
 
   // Ensure that the incoming `locale` is valid
-  if (!routing.locales.includes(locale)) {  
+  if (!routing.locales.includes(locale)) {
     notFound();
   }
 
-  setRequestLocale(locale); 
+  setRequestLocale(locale);
 
   // Providing all messages to the client
   // side is the easiest way to get started
@@ -57,25 +56,21 @@ async function RootLayout({ children, params: { locale } }) {
 
   return (
     <html lang={locale} className={inter.className}>
-            <head>
+      <head>
         {/* runs before CSS / hydration */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className="flex flex-col min-h-screen w-full bg-zinc-100  dark:bg-slate-800">
         <Providers>
-
-
-        <Provider>
-            
-
-          <main className="flex-grow">
-            <NextIntlClientProvider messages={messages}>
-              <LayoutWrapper>{children}</LayoutWrapper>
-              <Analytics />
-            </NextIntlClientProvider>
-          </main>
-        </Provider>
-        <Toaster />
+          <Provider>
+            <main className="flex-grow">
+              <NextIntlClientProvider messages={messages}>
+                <LayoutWrapper>{children}</LayoutWrapper>
+                <Analytics />
+              </NextIntlClientProvider>
+            </main>
+          </Provider>
+          <Toaster />
         </Providers>
       </body>
     </html>

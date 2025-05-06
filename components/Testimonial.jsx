@@ -3,26 +3,24 @@ import { MarqueeDemo } from "./MarqueeDemo";
 import { Gallery } from "./Gallery";
 
 const Testimonial = () => {
+  const t = useTranslations("Testimonial");
 
-    const t = useTranslations("Testimonial");
-  
   return (
     <>
-      <section className=" py-2 dark:bg-slate-950 bg-zinc-200">
+      <section className=" py-2 dark:bg-slate-950 ">
         <div className="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-          <h2 className="text-center text-sm font-bold tracking-tight text-blue-950 dark:text-gray-400 sm:text-5xl">
+          <h2 className="text-center text-sm font-bold tracking-tight text-stone-500">
             {t("title")}
           </h2>
 
-   <MarqueeDemo></MarqueeDemo>
-        <div className="flex justify-center text-sm italic font-light text-zinc-600">
-          <p>             {t("underTitle")}
-          </p>
+          <MarqueeDemo></MarqueeDemo>
+          <div className="flex justify-center text-sm italic font-light text-zinc-600">
+            {/* <p>             {t("underTitle")}
+          </p> */}
+          </div>
         </div>
-        </div>
-      {/* <Gallery></Gallery> */}
+        {/* <Gallery></Gallery> */}
       </section>
-
     </>
   );
 };

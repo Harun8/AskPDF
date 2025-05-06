@@ -7,10 +7,12 @@ import { useState } from "react";
 
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-import { DropDown } from "./smNav";
+// import { DropDown } from "./smNav";
 import ThemeSwitcher from "./ThemeSwitcher";
 import { useTranslations } from "next-intl";
 import LocaleBtn from "./LocaleBtn";
+import { Button } from "./ui/button";
+import DropDown from "./DropDown";
 
 const Nav = ({ session }) => {
   // const [session, setSession] = useState();
@@ -39,13 +41,196 @@ const Nav = ({ session }) => {
   // console.log("session", session);
 
   const logOut = async () => {
+    console.log("called logout");
     const { error } = await supabase.auth.signOut();
     window.location.href = "/";
   };
 
   return (
     <>
-      <nav className="relative px-4 py-4 flex justify-between items-center bg-zinc-50 dark:bg-blue-950 ">
+      <header className="container mx-auto px-6 py-12 text-center ">
+        <nav className="flex justify-between items-center mb-8">
+          <svg
+            className="cursor-pointer"
+            width={25}
+            height={25}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 576 512"
+          >
+            <path
+              fill="#5dade2"
+              d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"
+            />
+          </svg>
+
+          {session ? (
+            <>
+              {/* <li>
+                <Link
+                  className="text-sm text-gray-700 dark:text-zinc-200 hover:text-gray-500 font-bold"
+                  href="/chat"
+                  data-testid="chat-page-link">
+                  {t("chat")}
+                </Link>
+              </li> */}
+
+              {/* <li className="text-gray-300">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  stroke="currentColor"
+                  className="w-4 h-4 current-fill"
+                  viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+                  />
+                </svg>
+              </li> */}
+              {/* <li> */}
+              {/* <Link
+                  className="text-sm text-gray-700 dark:text-zinc-200 hover:text-gray-500 font-bold"
+                  href="/chat"
+                  data-testid="chat-page-link">
+                  {t("chat")}
+                </Link> */}
+              <li className="relative flex items-center">
+                <Link
+                  className=" text-sm text-blue-400 hover:text-blue-600 font-bold "
+                  href="/chat"
+                >
+                  {t("newChat")}
+                </Link>
+                <span className="relative flex h-1 w-1 mb-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-1 w-1 bg-blue-500"></span>
+                </span>
+              </li>
+
+              {/* </li> */}
+              {/* <li className="text-gray-300">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  stroke="currentColor"
+                  className="w-4 h-4 current-fill"
+                  viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+                  />
+                </svg>
+              </li> */}
+              {/* <li> */}
+              {/* <Link
+                  className="text-sm text-gray-700 dark:text-zinc-200 hover:text-gray-500 font-bold"
+                  href="/settings">
+                  {t("settings")}
+                </Link> */}
+              {/* </li> */}
+              {/* <svg
+                  xmlns="http://www.w3.org/2000/svg "
+                  fill="none"
+                  stroke="currentColor"
+                  className="w-4 h-4 current-fill text-gray-300"
+                  viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+                  />
+                </svg> */}
+              {/* <LocaleBtn></LocaleBtn> */}
+            </>
+          ) : (
+            <>
+              {/* <li>
+                <Link
+                  className="text-sm font-['system-ui'] text-gray-700 dark:text-zinc-200 hover:text-gray-500 font-bold"
+                  href="/preview">
+                  {t("preview")}
+                </Link>
+              </li>
+              <li className="text-gray-300">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  stroke="currentColor"
+                  className="w-4 h-4 current-fill"
+                  viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+                  />
+                </svg>
+              </li> */}
+              {/* <li className="relative flex items-center">
+                <Link
+                  className=" text-sm text-red-400 hover:text-red-600 font-bold "
+                  href="/pricing">
+                  {t("pricing")}
+                </Link>
+                <span className="relative flex h-1 w-1 mb-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-1 w-1 bg-red-500"></span>
+                </span>
+              </li>
+              <li className="text-gray-300">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  stroke="currentColor"
+                  className="w-4 h-4 current-fill"
+                  viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+                  />
+                </svg>
+              </li> */}
+              <LocaleBtn></LocaleBtn>
+            </>
+          )}
+          {!session ? (
+            <>
+              <Link className="" href="/login" data-testid="login-btn">
+                <Button variant="nav" size="nav">
+                  {t("getStarted")}{" "}
+                </Button>
+              </Link>
+            </>
+          ) : (
+            <>
+              {/* <DropDown logOut={logOut} session={session}></DropDown> */}
+
+              <DropDown logOut={logOut}></DropDown>
+
+              {/* <button
+              className="hidden md:inline-block py-2 px-6 dark:bg-gray-950 bg-black hover:bg-red-600 dark:bg-blue-950 dark:hover:bg-red-800 text-sm text-white font-bold rounded-xl transition duration-200"
+              onClick={async (e) => {
+                e.preventDefault();
+                setLoading(true);
+                const { error } = await supabase.auth.signOut();
+                setLoading(false);
+                router.refresh();
+              }}
+              disabled={loading}>
+              {loading ? "Loading" : t("logout")}
+            </button> */}
+            </>
+          )}
+        </nav>
+      </header>
+      {/* <nav className="relative px-4 py-4 flex justify-between items-center bg-zinc-50 dark:bg-blue-950 ">
         <div className="ml-6">
           <Link href="/">
             <svg
@@ -243,15 +428,11 @@ const Nav = ({ session }) => {
                 const { error } = await supabase.auth.signOut();
                 setLoading(false);
                 router.refresh();
-                // if (!error) setSession(null);
               }}
               disabled={loading}>
               {loading ? "Loading" : t("logout")}
             </button>
-            {/* <Link
-              href="/login">
-              Login
-            </Link> */}
+
           </>
         )}
       </nav>
@@ -282,7 +463,7 @@ const Nav = ({ session }) => {
             </button>
           </div>
         </nav>
-      </div>
+      </div> */}
     </>
   );
 };

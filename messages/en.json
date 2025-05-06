@@ -12,7 +12,11 @@
       "myChats": "My chats",
       "settings": "Settings",
       "logout": "Log out",
-      "newChat": "Ny chat"
+      "newChat": "Ny chat",
+      "lng": "Language",
+      "profile": "My Profile",
+      "getStarted": "Get Started"
+
     },
 
     "Testimonial": {
@@ -25,9 +29,21 @@
     },
 
     "HomePage": {
-        "titleFirst": "Significantly",
-        "titleSecond": "improve learning",
-        "underTitle": "Achieve more in less time with Ask PDFs.",
+        "title": "Chat With Your PDFs in",
+        "titleSecond": "Seconds",
+        "underTitle": "Transform your static documents into interactive conversations with AI-powered ",
+        "underTitle2": "document chat",
+        "startChatting": "Start Chatting",
+        "learn": "Learn more",
+        "serviceTitle1": "Manage and chat with your PDFs",
+        "serviceTitle2" :"all in one place",
+        "review1Title": "What’s New — Smarter Questions, Better Answers",
+        "review1Text":"We’re always improving to help you get the most out of your PDFs. From tools that enhance your questions for clearer, sharper answers to smoother navigation and helpful modules, everything is built to make your experience easier and faster.",
+        "review2Title": "Instant PDF Upload — Start the Conversation in Seconds",
+        "review2Text":"Drag and drop your PDFs or select files from your device—no complicated setup required. Our streamlined uploader auto-processes your document so you can begin asking questions right away",
+        "review3Title": "Context-Aware Dialogue — Conversations That Remember",
+        "review3Text": "Enjoy a chat experience that understands context across pages and chapters. Whether you refer back to an earlier section or dive into a new topic, the system maintains continuity so you get coherent, relevant answers every time.",
+         
         "tryAskPDF" :"Try AskPDFs for free",
         "tryDemo": "Try the demo", 
         "reviews": [

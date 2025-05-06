@@ -1,175 +1,183 @@
 {
-    "Navbar": {
-      "english": "Engelsk",
-      "danish": "Dansk",
-      "home": "Hjem",
-      "preview": "Demo",
-      "pricing": "Priser",
-      "login": "Log ind",
-      "signup": "Tilmeld",
-      "faq": "Ofte stillede spørgsmål",
-      "chat": "Chat",
-      "myChats": "Mine chats",
-      "settings": "Indstillinger",
-      "logout": "Log ud",
-      "newChat": "New chat"
-    },
+  "Navbar": {
+    "english": "Engelsk",
+    "danish": "Dansk",
+    "home": "Hjem",
+    "preview": "Demo",
+    "pricing": "Priser",
+    "login": "Log ind",
+    "signup": "Tilmeld",
+    "faq": "Ofte stillede spørgsmål",
+    "chat": "Chat",
+    "myChats": "Mine chats",
+    "settings": "Indstillinger",
+    "logout": "Log ud",
+    "newChat": "New chat",
+    "lng": "Sprog",
+    "profile": "Min profil",
+    "getStarted": "Kom i gang"
+  },
 
-    "Testimonial": {
-      "title": "Elsket af mange",
-      "Magnus": "AskPDFs.io har fuldstændig ændret måden, jeg arbejder med dokumenter på. Den AI-drevne søgning og opsummering gør det let at finde information. Det er en gamechanger for research og produktivitet!",
-      "Anna": "Jeg elsker, hvor intuitivt og hurtigt AskPDFs.io er! Det sparer mig timer ved straks at besvare spørgsmål fra lange PDF'er. Uanset om det er til arbejde eller studie, er dette værktøj et must-have!",
-      "Harun": "Ikke mere endeløs scrolling gennem PDF'er! AskPDFs.io giver mig præcise svar på sekunder. Det er pålideligt, effektivt og utroligt nemt at bruge. Kan klart anbefales!",
-      "underTitle": "og mange flere.."
-    },
+  "Testimonial": {
+    "title": "Gør arbejdet lettere for folk hos: ",
+    "Magnus": "AskPDFs.io har fuldstændig ændret måden, jeg arbejder med dokumenter på. Den AI-drevne søgning og opsummering gør det let at finde information. Det er en gamechanger for research og produktivitet!",
+    "Anna": "Jeg elsker, hvor intuitivt og hurtigt AskPDFs.io er! Det sparer mig timer ved straks at besvare spørgsmål fra lange PDF'er. Uanset om det er til arbejde eller studie, er dette værktøj et must-have!",
+    "Harun": "Ikke mere endeløs scrolling gennem PDF'er! AskPDFs.io giver mig præcise svar på sekunder. Det er pålideligt, effektivt og utroligt nemt at bruge. Kan klart anbefales!",
+    "underTitle": "og mange flere.."
+  },
 
-    "HomePage": {
-      "titleFirst": "Forbedr din",
-      "titleSecond": "læring markant",
-      "underTitle": "Opnå mere på kortere tid med Ask PDFs.",
-       "tryAskPDF" :"Prøv Ask PDFs gratis",
-        "tryDemo": "Prøv demoen",
-        "reviews": [
-    { "name": "Lærere" },
-    { "name": "Studerende" },
-    { "name": "Softwareingeniører" },
-    { "name": "Rekrutteringsspecialister" },
-    { "name": "Forskere" },
-    { "name": "Dataingeniører" },
-    { "name": "Journalister" },
-    { "name": "Juridiske fagfolk" },
-    { "name": "Læger og sundhedspersonale" },
-    { "name": "Forfattere og redaktører" },
-    { "name": "Forretningsanalytikere" },
-    { "name": "Konsulenter" },
-    { "name": "Finansanalytikere" },
-    { "name": "Advokater" },
-    { "name": "Universitetsprofessorer" },
-    { "name": "Iværksættere og startups" },
-    { "name": "Marketingfolk" },
-    { "name": "Bibliotekarer og arkivarer" },
-    { "name": "Ledere og chefer" },
-    { "name": "Offentligt ansatte" },
-    { "name": "Ejendomsmæglere" },
-    { "name": "NGO-arbejdere" },
-    { "name": "Produktchefer" },
-    { "name": "UX/UI-designere" },
-    { "name": "HR-chefer" },
-    { "name": "Revisorer" },
-    { "name": "Oversættere" },
-    { "name": "Direktører og virksomhedsejere" },
-    { "name": "Ph.d.-studerende og akademikere" },
-    { "name": "Tekniske skribenter" },
-    { "name": "Compliance-medarbejdere" },
-    { "name": "IT-sikkerhedseksperter" },
-    { "name": "Maskinlæringseksperter" },
-    { "name": "Freelancere og selvstændige" },
-    { "name": "Sundhedsadministratorer" },
-    { "name": "Driftsledere" }
-  ]
+  "HomePage": {
+    "title": "Chat med dine PDF'er på få",
+    "titleSecond": "Sekunder",
+    "underTitle": "Forvandl dine statiske dokumenter til interaktive samtaler med AI-drevet ",
+    "underTitle2": " dokumentchat",
+    "startChatting": "Chat nu",
+    "learn": "Læs mere",
+    "serviceTitle1": "Administrér og chat med dine PDF'er",
+    "serviceTitle2": "alt samlet ét sted",
+    "review1Title": "Hvad er nyt — Smartere spørgsmål, bedre svar",
+    "review1Text": "Vi forbedrer os hele tiden for at hjælpe dig med at få mest muligt ud af dine PDF'er. Fra værktøjer, der gør dine spørgsmål skarpere og klarere, til mere gnidningsfri navigation og nyttige moduler, alt er designet til at gøre din oplevelse nemmere og hurtigere.",
+    "review2Title": "Simpelt PDF-upload — Start samtalen på få sekunder",
+    "review2Text": "Træk og slip dine PDF'er eller vælg filer fra din enhed, ingen kompliceret opsætning kræves. Vores strømlinede program behandler automatisk dit dokument, så du kan begynde at stille spørgsmål med det samme.",
+    "review3Title": "Kontekstbevidst dialog — Samtaler der husker",
+    "review3Text": "Få en chatoplevelse, der forstår sammenhængen på tværs af sider og kapitler. Uanset om du henviser til en tidligere sektion eller dykker ned i et nyt emne, bevarer systemet kontinuiteten, så du altid får sammenhængende og relevante svar.",
+    "tryAskPDF": "Prøv Ask PDFs gratis",
+    "tryDemo": "Prøv demoen",
+    "reviews": [
+      { "name": "Lærere" },
+      { "name": "Studerende" },
+      { "name": "Softwareingeniører" },
+      { "name": "Rekrutteringsspecialister" },
+      { "name": "Forskere" },
+      { "name": "Dataingeniører" },
+      { "name": "Journalister" },
+      { "name": "Juridiske fagfolk" },
+      { "name": "Læger og sundhedspersonale" },
+      { "name": "Forfattere og redaktører" },
+      { "name": "Forretningsanalytikere" },
+      { "name": "Konsulenter" },
+      { "name": "Finansanalytikere" },
+      { "name": "Advokater" },
+      { "name": "Universitetsprofessorer" },
+      { "name": "Iværksættere og startups" },
+      { "name": "Marketingfolk" },
+      { "name": "Bibliotekarer og arkivarer" },
+      { "name": "Ledere og chefer" },
+      { "name": "Offentligt ansatte" },
+      { "name": "Ejendomsmæglere" },
+      { "name": "NGO-arbejdere" },
+      { "name": "Produktchefer" },
+      { "name": "UX/UI-designere" },
+      { "name": "HR-chefer" },
+      { "name": "Revisorer" },
+      { "name": "Oversættere" },
+      { "name": "Direktører og virksomhedsejere" },
+      { "name": "Ph.d.-studerende og akademikere" },
+      { "name": "Tekniske skribenter" },
+      { "name": "Compliance-medarbejdere" },
+      { "name": "IT-sikkerhedseksperter" },
+      { "name": "Maskinlæringseksperter" },
+      { "name": "Freelancere og selvstændige" },
+      { "name": "Sundhedsadministratorer" },
+      { "name": "Driftsledere" }
+    ]
+  },
 
-    },
+  "SuccessPage": {
+    "title": "Du har nu adgang til din AskPDF-plan. Kom i gang nu ved at oprette din konto!",
+    "login": "Log ind med din email nu"
+  },
+  "SettingsPage": {
+    "membership": "Administrer medlemskab"
+  },
 
-    "SuccessPage" : {
-      "title": "Du har nu adgang til din AskPDF-plan. Kom i gang nu ved at oprette din konto!",
-      "login": "Log ind med din email nu"
-    
-    },
-    "SettingsPage": {
-      "membership" :"Administrer medlemskab"  
-    },
-
-    
-    "preview": {
-      "message": "Send besked til AskPDFs",
-      "featureAlert": "Gør dine spørgsmål endnu skarpere. Prøv det nu!"
-    },
-    "chat": {
-      "message": "Upload din PDF",
-      "upload": "Upload din PDF",
-      "myChats": "Mine chats",
-      "newChat": "Ny Chat",
-      "title": "Hvad vil du gerne vide?",
-"questions": [
-  { "text": "Opsummer dette dokument i et par sætninger." },
-  { "text": "Hvad er de vigtigste pointer eller hovedargumenter i dette dokument?" },
-  { "text": "Hvem er forfatteren af dette dokument?" },
-  { "text": "Kan du give en punktopstillet opsummering af dette dokument?" }
-]
-
-
-    },
-
-    "faq": {
-      "faq": "Ofte stillede spørgsmål",
-
-      "anyQuestions" : "Har du spørgsmål? Se her",
-      "bodyText": "Hvis du ikke kan finde svaret, er du velkommen til at sende en mail til",
-      "password": "Kodeord",
-      "whatIsAskPDF": "Hvad er AskPDF?",
-      "askPDFDescription": "AskPDF er en innovativ AI-drevet platform, der transformerer måden du arbejder med PDF-dokumenter på. Upload blot din PDF og begynd at stille spørgsmål - vores avancerede AI vil analysere indholdet og give øjeblikkelige, præcise svar.",      
-      "subscriptionDifference": "Hvad er forskellen mellem abonnementerne?",
-      "subscriptionDifferenceDescription": "Forskellen mellem hvert abonnement kan ses på prissiden",
-      
-      "uploadLimit": "Hvorfor kan jeg ikke uploade flere PDF'er?",
-      "uploadLimitDescription": "Du har sandsynligvis nået din grænse",
-      
-      "trialPeriod": "Kan jeg få en prøveperiode?",
-      "trialPeriodDescription": "Ja, for premium-abonnementet har vi en 7-dages prøveperiode",
-         "fileFormat": "Hvilke filformater understøttes?",
-        "fileFormatDescription": "AskPDFs understøtter i øjeblikket PDF-filer. Vi sikrer kompatibilitet med de fleste PDF-versioner og strukturer, herunder søgbare PDF'er.",
-        
-        "dataPrivacy": "Hvordan beskyttes mine data?",
-        "dataPrivacyDescription": "Vi tager databeskyttelse alvorligt. Dine uploadede PDF'er behandles sikkert. Alle data er krypteret under overførsel, og vi deler ikke dine oplysninger med tredjeparter.",
-        
-        "accuracy": "Hvor nøjagtige er AI-svarene?",
-        "accuracyDescription": "Vores AI-model giver meget nøjagtige svar baseret på indholdet af din PDF. Som med ethvert AI-system anbefaler vi dog at verificere kritiske oplysninger mod det originale dokument. Nøjagtigheden afhænger af faktorer som dokumentkvalitet og tydeligheden af de stillede spørgsmål."
-
-    },
-
-    "login": {
-      "enterMail": "Indtast din e-mail",
-      "orWith": "Eller med",
-      "login": "Log ind",
-      "signIn": "Tilmeld",
-      "loginText":"Tilmeld dig her, hvis du ikke har en konto",
-      "signInText": "Log ind her, hvis du allerede har en konto",
-      "welcomeBack": "Velkommen tilbage :)",
-      "checkMail": "Tjek din mail, og spam mappen"
-    },
-    
-
-    "pricingPage": { 
-      "currency": "kr",
-      "mostPopular": "Mest populære",
-
-      "billedAnually": "faktureres årligt",
-
-      "month": "måned",
-      "title": "Vælg en af vores fantastiske muligheder",
-      "monthly" : "Månedligt abonnement",
-      "yearly": "Årligt  abonnement",
-      "save": "spar",
-      "incl" : "Hvad er inkluderet",
-      "pdfUpload": "PDF Upload",
-      "unlimited": "Ubegrænset uploads",
-        "pdfUploads": "PDF Uploads/måneden",
-        "questionsLimit": "Spørgsmål begrænsning",
-        "monthlyQuestionsLimit": "Månedlig spørgsmål begrænsning",
-        "fileSizeLimit": "Filstørrelse begrænsning",
-        "gpt4": "GPT-4",
-        "newFeatureEarlyAccess": "Ny feature tidlig adgang",
-        "customerSupport": "Kundesupport",
-        "joinAsPremiumUser": "Bliv Premium-bruger",
-        "joinAsUltimateUser": "Bliv Ultimate-bruger",
-        "joinAsAFreeUser": "Tilmeld dig for at komme i gang",
-        "freeDesc": "En altid gratis mulighed designet til almindelige brugere, der vil begynde at interagere med en PDF.",
-        "proDesc": "For brugere, der ønsker at få mere ud af deres PDF'er og maksimere deres interaktioner med PDF'er.",
-        "ultimateDesc" : "Avancerede PDF-funktioner til professionelle, inklusiv omfattende uploadmuligheder."
+  "preview": {
+    "message": "Send besked til AskPDFs",
+    "featureAlert": "Gør dine spørgsmål endnu skarpere. Prøv det nu!"
+  },
+  "chat": {
+    "message": "Upload din PDF",
+    "upload": "Upload din PDF",
+    "myChats": "Mine chats",
+    "newChat": "Ny Chat",
+    "title": "Hvad vil du gerne vide?",
+    "questions": [
+      { "text": "Opsummer dette dokument i et par sætninger." },
+      {
+        "text": "Hvad er de vigtigste pointer eller hovedargumenter i dette dokument?"
       },
+      { "text": "Hvem er forfatteren af dette dokument?" },
+      { "text": "Kan du give en punktopstillet opsummering af dette dokument?" }
+    ]
+  },
 
-    "notFound": {
-        "title": "Venligst log ind for at se chatsiden"
+  "faq": {
+    "faq": "Ofte stillede spørgsmål",
 
-      }
+    "anyQuestions": "Har du spørgsmål? Se her",
+    "bodyText": "Hvis du ikke kan finde svaret, er du velkommen til at sende en mail til",
+    "password": "Kodeord",
+    "whatIsAskPDF": "Hvad er AskPDF?",
+    "askPDFDescription": "AskPDF er en innovativ AI-drevet platform, der transformerer måden du arbejder med PDF-dokumenter på. Upload blot din PDF og begynd at stille spørgsmål - vores avancerede AI vil analysere indholdet og give øjeblikkelige, præcise svar.",
+    "subscriptionDifference": "Hvad er forskellen mellem abonnementerne?",
+    "subscriptionDifferenceDescription": "Forskellen mellem hvert abonnement kan ses på prissiden",
+
+    "uploadLimit": "Hvorfor kan jeg ikke uploade flere PDF'er?",
+    "uploadLimitDescription": "Du har sandsynligvis nået din grænse",
+
+    "trialPeriod": "Kan jeg få en prøveperiode?",
+    "trialPeriodDescription": "Ja, for premium-abonnementet har vi en 7-dages prøveperiode",
+    "fileFormat": "Hvilke filformater understøttes?",
+    "fileFormatDescription": "AskPDFs understøtter i øjeblikket PDF-filer. Vi sikrer kompatibilitet med de fleste PDF-versioner og strukturer, herunder søgbare PDF'er.",
+
+    "dataPrivacy": "Hvordan beskyttes mine data?",
+    "dataPrivacyDescription": "Vi tager databeskyttelse alvorligt. Dine uploadede PDF'er behandles sikkert. Alle data er krypteret under overførsel, og vi deler ikke dine oplysninger med tredjeparter.",
+
+    "accuracy": "Hvor nøjagtige er AI-svarene?",
+    "accuracyDescription": "Vores AI-model giver meget nøjagtige svar baseret på indholdet af din PDF. Som med ethvert AI-system anbefaler vi dog at verificere kritiske oplysninger mod det originale dokument. Nøjagtigheden afhænger af faktorer som dokumentkvalitet og tydeligheden af de stillede spørgsmål."
+  },
+
+  "login": {
+    "enterMail": "Indtast din e-mail",
+    "orWith": "Eller med",
+    "login": "Log ind",
+    "signIn": "Tilmeld",
+    "loginText": "Tilmeld dig her, hvis du ikke har en konto",
+    "signInText": "Log ind her, hvis du allerede har en konto",
+    "welcomeBack": "Velkommen tilbage :)",
+    "checkMail": "Tjek din mail, og spam mappen"
+  },
+
+  "pricingPage": {
+    "currency": "kr",
+    "mostPopular": "Mest populære",
+
+    "billedAnually": "faktureres årligt",
+
+    "month": "måned",
+    "title": "Vælg en af vores fantastiske muligheder",
+    "monthly": "Månedligt abonnement",
+    "yearly": "Årligt  abonnement",
+    "save": "spar",
+    "incl": "Hvad er inkluderet",
+    "pdfUpload": "PDF Upload",
+    "unlimited": "Ubegrænset uploads",
+    "pdfUploads": "PDF Uploads/måneden",
+    "questionsLimit": "Spørgsmål begrænsning",
+    "monthlyQuestionsLimit": "Månedlig spørgsmål begrænsning",
+    "fileSizeLimit": "Filstørrelse begrænsning",
+    "gpt4": "GPT-4",
+    "newFeatureEarlyAccess": "Ny feature tidlig adgang",
+    "customerSupport": "Kundesupport",
+    "joinAsPremiumUser": "Bliv Premium-bruger",
+    "joinAsUltimateUser": "Bliv Ultimate-bruger",
+    "joinAsAFreeUser": "Tilmeld dig for at komme i gang",
+    "freeDesc": "En altid gratis mulighed designet til almindelige brugere, der vil begynde at interagere med en PDF.",
+    "proDesc": "For brugere, der ønsker at få mere ud af deres PDF'er og maksimere deres interaktioner med PDF'er.",
+    "ultimateDesc": "Avancerede PDF-funktioner til professionelle, inklusiv omfattende uploadmuligheder."
+  },
+
+  "notFound": {
+    "title": "Venligst log ind for at se chatsiden"
   }
+}
