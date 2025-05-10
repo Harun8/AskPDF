@@ -17,6 +17,7 @@ import Gradient from "../../public/gradient.jpg";
 import Image from "next/image";
 import Pricing from "./pricing/page";
 import { Gallery } from "@/components/Gallery";
+import videoFrame from "../../public/videoframe.jpg";
 
 const ShineBorder = dynamic(() => import("@/components/ui/shine-border"), {
   ssr: false,
@@ -117,7 +118,7 @@ export default function Home() {
 
       <title>AskPDFs</title>
 
-      <div className="container mx-auto text-center">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-screen-md sm:max-w-screen-lg md:max-w-screen-xl lg:max-w-screen-2xl text-center">
         <h1 className="text-6xl md:text-6xl font-bold font-black py-2">
           {t("title")}
         </h1>
@@ -180,7 +181,13 @@ export default function Home() {
               Your browser does not support the video tag.
             </video>
           ) : (
-            <p className="text-gray-400">Loading video...</p> // Show a loading message while fetching the video URL
+            <p> loading video</p>
+            // <Image
+            //   className="w-full rounded-3xl"
+            //   src={videoFrame}
+            //   height={600}
+            //   width={600}
+            // ></Image>
           )}
 
           {/* </ShineBorder>     */}

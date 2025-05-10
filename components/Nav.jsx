@@ -43,14 +43,20 @@ const Nav = ({ session }) => {
   const logOut = async () => {
     console.log("called logout");
     const { error } = await supabase.auth.signOut();
+    if (error) console.log(error);
     window.location.href = "/";
   };
 
+  function home() {
+    window.location.href = "/";
+  }
+
   return (
     <>
-      <header className="container mx-auto px-6 py-12 text-center ">
+      <header className="max-w-screen-lg mx-auto px-6 py-12 text-center ">
         <nav className="flex justify-between items-center mb-8">
           <svg
+            onClick={home}
             className="cursor-pointer"
             width={25}
             height={25}
@@ -74,28 +80,8 @@ const Nav = ({ session }) => {
                 </Link>
               </li> */}
 
-              {/* <li className="text-gray-300">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  stroke="currentColor"
-                  className="w-4 h-4 current-fill"
-                  viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
-                  />
-                </svg>
-              </li> */}
               {/* <li> */}
-              {/* <Link
-                  className="text-sm text-gray-700 dark:text-zinc-200 hover:text-gray-500 font-bold"
-                  href="/chat"
-                  data-testid="chat-page-link">
-                  {t("chat")}
-                </Link> */}
+
               <li className="relative flex items-center">
                 <Link
                   className=" text-sm text-blue-400 hover:text-blue-600 font-bold "
@@ -108,23 +94,16 @@ const Nav = ({ session }) => {
                   <span className="relative inline-flex rounded-full h-1 w-1 bg-blue-500"></span>
                 </span>
               </li>
+              {/* <Link
+                className="text-sm text-gray-700 dark:text-zinc-200 hover:text-gray-500 font-bold"
+                href="/myChats"
+                data-testid="chat-page-link"
+              >
+                {t("myChats")}
+              </Link> */}
 
               {/* </li> */}
-              {/* <li className="text-gray-300">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  stroke="currentColor"
-                  className="w-4 h-4 current-fill"
-                  viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
-                  />
-                </svg>
-              </li> */}
+
               {/* <li> */}
               {/* <Link
                   className="text-sm text-gray-700 dark:text-zinc-200 hover:text-gray-500 font-bold"

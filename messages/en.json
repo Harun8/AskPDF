@@ -1,190 +1,186 @@
 {
-    "Navbar": {
-      "english": "English",
-      "danish": "Danish",
-      "home": "Home",
-      "preview": "Preview",
-      "pricing": "Pricing",
-      "login": "Login",
-      "signup": "Sign up",
-      "faq": "FAQ",
-      "chat": "Chat",
-      "myChats": "My chats",
-      "settings": "Settings",
-      "logout": "Log out",
-      "newChat": "Ny chat",
-      "lng": "Language",
-      "profile": "My Profile",
-      "getStarted": "Get Started"
+  "Navbar": {
+    "english": "English",
+    "danish": "Danish",
+    "home": "Home",
+    "preview": "Preview",
+    "pricing": "Pricing",
+    "login": "Login",
+    "signup": "Sign up",
+    "faq": "FAQ",
+    "chat": "Chat",
+    "myChats": "My chats",
+    "settings": "Settings",
+    "logout": "Log out",
+    "newChat": "Ny chat",
+    "lng": "Language",
+    "profile": "My Profile",
+    "getStarted": "Get Started"
+  },
 
-    },
+  "Testimonial": {
+    "title": "Making life easier for people at:",
+    "Magnus": "AskPDFs.io has completely transformed how I interact with documents. The AI-powered search and summarization make finding information effortless. It's a game-changer for research and productivity!",
+    "Anna": "I love how intuitive and fast AskPDFs.io is! It saves me hours by instantly answering questions from long PDFs. Whether for work or study, this tool is a must-have!",
+    "Harun": "No more endless scrolling through PDFs! AskPDFs.io gives me precise answers in seconds. It's reliable, efficient, and incredibly easy to use. Highly recommended!",
+    "underTitle": "and many more.."
+  },
 
-    "Testimonial": {
-      "title": "Loved by many",
-      "Magnus": "AskPDFs.io has completely transformed how I interact with documents. The AI-powered search and summarization make finding information effortless. It's a game-changer for research and productivity!",
-      "Anna": "I love how intuitive and fast AskPDFs.io is! It saves me hours by instantly answering questions from long PDFs. Whether for work or study, this tool is a must-have!",
-      "Harun": "No more endless scrolling through PDFs! AskPDFs.io gives me precise answers in seconds. It's reliable, efficient, and incredibly easy to use. Highly recommended!",
-      "underTitle": "and many more.."
+  "HomePage": {
+    "title": "Chat With Your PDFs in",
+    "titleSecond": "Seconds",
+    "underTitle": "Transform your static documents into interactive conversations with AI-powered ",
+    "underTitle2": "document chat",
+    "startChatting": "Start Chatting",
+    "learn": "Learn more",
+    "serviceTitle1": "Manage and chat with your PDFs",
+    "serviceTitle2": "all in one place",
+    "review1Title": "What’s New — Smarter Questions, Better Answers",
+    "review1Text": "We’re always improving to help you get the most out of your PDFs. From tools that enhance your questions for clearer, sharper answers to smoother navigation and helpful modules, everything is built to make your experience easier and faster.",
+    "review2Title": "Instant PDF Upload — Start the Conversation in Seconds",
+    "review2Text": "Drag and drop your PDFs or select files from your device—no complicated setup required. Our streamlined uploader auto-processes your document so you can begin asking questions right away",
+    "review3Title": "Context-Aware Dialogue — Conversations That Remember",
+    "review3Text": "Enjoy a chat experience that understands context across pages and chapters. Whether you refer back to an earlier section or dive into a new topic, the system maintains continuity so you get coherent, relevant answers every time.",
 
-    },
+    "tryAskPDF": "Try AskPDFs for free",
+    "tryDemo": "Try the demo",
+    "reviews": [
+      { "name": "Teachers" },
+      { "name": "Students" },
+      { "name": "Software Engineers" },
+      { "name": "Talent Acquisition" },
+      { "name": "Researchers" },
+      { "name": "Data Engineers" },
+      { "name": "Journalists" },
+      { "name": "Legal Professionals" },
+      { "name": "Doctors and Healthcare Workers" },
+      { "name": "Writers and Editors" },
+      { "name": "Business Analysts" },
+      { "name": "Consultants" },
+      { "name": "Financial Analysts" },
+      { "name": "Lawyers" },
+      { "name": "University Professors" },
+      { "name": "Entrepreneurs and Startups" },
+      { "name": "Marketing Specialists" },
+      { "name": "Librarians and Archivists" },
+      { "name": "Executives and Managers" },
+      { "name": "Public Sector Employees" },
+      { "name": "Real Estate Agents" },
+      { "name": "NGO Workers" },
+      { "name": "Product Managers" },
+      { "name": "UX/UI Designers" },
+      { "name": "HR Managers" },
+      { "name": "Accountants" },
+      { "name": "Translators" },
+      { "name": "Directors and Business Owners" },
+      { "name": "Ph.D. Students and Academics" },
+      { "name": "Technical Writers" },
+      { "name": "Compliance Officers" },
+      { "name": "Cybersecurity Experts" },
+      { "name": "Machine Learning Experts" },
+      { "name": "Freelancers and Self-Employed" },
+      { "name": "Healthcare Administrators" },
+      { "name": "Operations Managers" }
+    ]
+  },
 
-    "HomePage": {
-        "title": "Chat With Your PDFs in",
-        "titleSecond": "Seconds",
-        "underTitle": "Transform your static documents into interactive conversations with AI-powered ",
-        "underTitle2": "document chat",
-        "startChatting": "Start Chatting",
-        "learn": "Learn more",
-        "serviceTitle1": "Manage and chat with your PDFs",
-        "serviceTitle2" :"all in one place",
-        "review1Title": "What’s New — Smarter Questions, Better Answers",
-        "review1Text":"We’re always improving to help you get the most out of your PDFs. From tools that enhance your questions for clearer, sharper answers to smoother navigation and helpful modules, everything is built to make your experience easier and faster.",
-        "review2Title": "Instant PDF Upload — Start the Conversation in Seconds",
-        "review2Text":"Drag and drop your PDFs or select files from your device—no complicated setup required. Our streamlined uploader auto-processes your document so you can begin asking questions right away",
-        "review3Title": "Context-Aware Dialogue — Conversations That Remember",
-        "review3Text": "Enjoy a chat experience that understands context across pages and chapters. Whether you refer back to an earlier section or dive into a new topic, the system maintains continuity so you get coherent, relevant answers every time.",
-         
-        "tryAskPDF" :"Try AskPDFs for free",
-        "tryDemo": "Try the demo", 
-        "reviews": [
-          { "name": "Teachers" },
-          { "name": "Students" },
-          { "name": "Software Engineers" },
-          { "name": "Talent Acquisition" },
-          { "name": "Researchers" },
-          { "name": "Data Engineers" },
-          { "name": "Journalists" },
-          { "name": "Legal Professionals" },
-          { "name": "Doctors and Healthcare Workers" },
-          { "name": "Writers and Editors" },
-          { "name": "Business Analysts" },
-          { "name": "Consultants" },
-          { "name": "Financial Analysts" },
-          { "name": "Lawyers" },
-          { "name": "University Professors" },
-          { "name": "Entrepreneurs and Startups" },
-          { "name": "Marketing Specialists" },
-          { "name": "Librarians and Archivists" },
-          { "name": "Executives and Managers" },
-          { "name": "Public Sector Employees" },
-          { "name": "Real Estate Agents" },
-          { "name": "NGO Workers" },
-          { "name": "Product Managers" },
-          { "name": "UX/UI Designers" },
-          { "name": "HR Managers" },
-          { "name": "Accountants" },
-          { "name": "Translators" },
-          { "name": "Directors and Business Owners" },
-          { "name": "Ph.D. Students and Academics" },
-          { "name": "Technical Writers" },
-          { "name": "Compliance Officers" },
-          { "name": "Cybersecurity Experts" },
-          { "name": "Machine Learning Experts" },
-          { "name": "Freelancers and Self-Employed" },
-          { "name": "Healthcare Administrators" },
-          { "name": "Operations Managers" }
-        ]
-      },
+  "SuccessPage": {
+    "title": "You can now access to your AskPDF plan, get started now, by creating your account!",
+    "login": "Log in with your email now!"
+  },
 
-      "SuccessPage" : {
-        "title": "You can now access to your AskPDF plan, get started now, by creating your account!",
-        "login": "Log in with your email now!"  
-    },
+  "SettingsPage": {
+    "membership": "Manage membership"
+  },
 
-    "SettingsPage": {
-      "membership" :"Manage membership"  
-    },
+  "preview": {
+    "message": "Send a message to AskPDFs",
+    "featureAlert": "Enchance your questions. Try it now!"
+  },
 
-    "preview": {
-        "message": "Send a message to AskPDFs",
-        "featureAlert": "Enchance your questions. Try it now!"
-      },
+  "chat": {
+    "upload": "Upload your PDF",
+    "message": "Upload your PDF",
+    "myChats": "My Chats",
+    "newChat": "New Chat",
+    "title": "Ask any questions",
 
-      "chat": {
-        "upload": "Upload your PDF",
-        "message": "Upload your PDF",
-      "myChats": "My Chats",
-      "newChat": "New Chat",
-      "title": "Ask any questions",
+    "questions": [
+      { "text": "Summarize this document in a few sentences." },
+      { "text": "What are the key points or main arguments in this document?" },
+      { "text": "Who is the author of this document" },
+      { "text": "Can you provide a bullet-point summary of this document?" }
+    ]
+  },
 
-      "questions":  [
-        {"text": "Summarize this document in a few sentences."},
-        {"text": "What are the key points or main arguments in this document?"},
-        {"text":"Who is the author of this document"},
-        {"text":"Can you provide a bullet-point summary of this document?"}
-      ]
-      },
+  "faq": {
+    "faq": "Frequently Asked Questions",
 
-      "faq": {
-        "faq": "Frequently Asked Questions",
+    "anyQuestions": "Any Questions? Look Here",
+    "bodyText": "If you can't find the answer don't hesitate to send a mail to",
+    "password": "Password",
+    "whatIsAskPDF": "What is AskPDF?",
+    "askPDFDescription": "AskPDF is an innovative AI-powered platform that transforms how you interact with PDF documents. Simply upload your PDF and start asking questions - our advanced AI will analyze the content and provide instant, accurate answers.",
 
-        "anyQuestions" : "Any Questions? Look Here",
-        "bodyText": "If you can't find the answer don't hesitate to send a mail to",
-        "password": "Password",
-        "whatIsAskPDF": "What is AskPDF?",
-        "askPDFDescription": "AskPDF is an innovative AI-powered platform that transforms how you interact with PDF documents. Simply upload your PDF and start asking questions - our advanced AI will analyze the content and provide instant, accurate answers.",
+    "subscriptionDifference": "What's the difference between the subscriptions?",
+    "subscriptionDifferenceDescription": "The difference between each subscription is shown on the pricing page",
 
-        "subscriptionDifference": "What's the difference between the subscriptions?",
-        "subscriptionDifferenceDescription": "The difference between each subscription is shown on the pricing page",
-        
-        "uploadLimit": "Why can't I upload more PDFs?",
-        "uploadLimitDescription": "You've most likely hit your limit",
-        
-        "trialPeriod": "Can I get a trial period?",
-        "trialPeriodDescription": "Yes indeed, for the premium subscription we have a 7-day trial period",
-        
-        "fileFormat": "What file formats are supported?",
-        "fileFormatDescription": "AskPDFs currently supports PDF files. We ensure compatibility with most PDF versions and structures, including searchable PDFs.",
-        
-        "dataPrivacy": "How is my data protected?",
-        "dataPrivacyDescription": "We take data privacy seriously. Your uploaded PDFs are processed securely. All data is encrypted in transit and we do not share your information with third parties.",
-        
-        "accuracy": "How accurate are the AI responses?",
-        "accuracyDescription": "Our AI model provides highly accurate responses based on the content of your PDF. However, as with any AI system, we recommend verifying critical information against the original document. The accuracy depends on factors like document quality and clarity of the questions asked."
-    },
+    "uploadLimit": "Why can't I upload more PDFs?",
+    "uploadLimitDescription": "You've most likely hit your limit",
 
-      
-    "login": {
-      "enterMail": "Enter your Email",
-      "orWith": "Or with",
-      "login": "Login",
-      "signIn": "Sign In",
-        "loginText":"Don't have an account? Sign up!",
-        "signInText": "Already have an account? Log in!",
+    "trialPeriod": "Can I get a trial period?",
+    "trialPeriodDescription": "Yes indeed, for the premium subscription we have a 7-day trial period",
 
-        "welcomeBack": "Welcome back :)",
-        "checkMail": "Check your mail, and spam folder"
-      },
-  
-      "pricingPage": { 
-        "currency": "$",
-        "mostPopular": "Most popular",
-        "billedAnually": "billed annually",
-        "month": "month",
-        "title": "Choose one of our incredible options",
-        "monthly" : "Monthly billing",
-        "yearly": "Yearly billing",
-        "save": "save",
-        "incl" : "What's included",
-        "pdfUpload": "PDF Upload",
-        "pdfUploads": "PDF Uploads/month",
-        "unlimited": "Unlimited uploads",
+    "fileFormat": "What file formats are supported?",
+    "fileFormatDescription": "AskPDFs currently supports PDF files. We ensure compatibility with most PDF versions and structures, including searchable PDFs.",
 
-        "questionsLimit": "Questions limit",
-        "monthlyQuestionsLimit": "Monthly questions limit",
-        "fileSizeLimit": "File size limit",
-        "gpt4": "GPT-4",
-        "newFeatureEarlyAccess": "New feature early access",
-        "customerSupport": "Customer support",
-        "joinAsPremiumUser": "Join as a Premium user",
-        "joinAsUltimateUser": "Join as a Ultimate user",
-        "joinAsAFreeUser": "Sign up to get started",
-        "freeDesc": "An always free option designed for casual users to start interacting with a PDF.",
-        "proDesc" : "For users who want's to extract the most out of their PDF's and maximize their PDF interactions.",
-        "ultimateDesc" :"Advanced PDF features for professional communication needs, including extensive upload options."
-      },
-      "notFound": {
-        "title": "Please sign in to see chat page"
+    "dataPrivacy": "How is my data protected?",
+    "dataPrivacyDescription": "We take data privacy seriously. Your uploaded PDFs are processed securely. All data is encrypted in transit and we do not share your information with third parties.",
 
-      }
+    "accuracy": "How accurate are the AI responses?",
+    "accuracyDescription": "Our AI model provides highly accurate responses based on the content of your PDF. However, as with any AI system, we recommend verifying critical information against the original document. The accuracy depends on factors like document quality and clarity of the questions asked."
+  },
+
+  "login": {
+    "enterMail": "Enter your Email",
+    "orWith": "Or with",
+    "login": "Login",
+    "signIn": "Sign In",
+    "loginText": "Don't have an account? Sign up!",
+    "signInText": "Already have an account? Log in!",
+
+    "welcomeBack": "Welcome back :)",
+    "checkMail": "Check your mail, and spam folder"
+  },
+
+  "pricingPage": {
+    "currency": "$",
+    "mostPopular": "Most popular",
+    "billedAnually": "billed annually",
+    "month": "month",
+    "title": "Choose one of our incredible options",
+    "monthly": "Monthly billing",
+    "yearly": "Yearly billing",
+    "save": "save",
+    "incl": "What's included",
+    "pdfUpload": "PDF Upload",
+    "pdfUploads": "PDF Uploads/month",
+    "unlimited": "Unlimited uploads",
+
+    "questionsLimit": "Questions limit",
+    "monthlyQuestionsLimit": "Monthly questions limit",
+    "fileSizeLimit": "File size limit",
+    "gpt4": "GPT-4",
+    "newFeatureEarlyAccess": "New feature early access",
+    "customerSupport": "Customer support",
+    "joinAsPremiumUser": "Join as a Premium user",
+    "joinAsUltimateUser": "Join as a Ultimate user",
+    "joinAsAFreeUser": "Sign up to get started",
+    "freeDesc": "An always free option designed for casual users to start interacting with a PDF.",
+    "proDesc": "For users who want's to extract the most out of their PDF's and maximize their PDF interactions.",
+    "ultimateDesc": "Advanced PDF features for professional communication needs, including extensive upload options."
+  },
+  "notFound": {
+    "title": "Please sign in to see chat page"
   }
+}

@@ -27,7 +27,10 @@ import { uploadLimit } from "@/util/uploadLimit";
 import { Button } from "@/components/ui/button";
 import PDFUpload from "@/components/PDF-upload";
 import ChatNav from "@/components/ChatNav";
-import { conversationLogic, useConversationLogic } from "@/util/streaming/chat-util";
+import {
+  conversationLogic,
+  useConversationLogic,
+} from "@/util/streaming/chat-util";
 import titleFixer, { isValidKey } from "@/util/titleFixer";
 
 const supabase = createClientComponentClient();
@@ -66,13 +69,13 @@ export default function chat() {
   const [currentResponse, setCurrentResponse] = useState("");
   const [processingPDF, setProcessingPDF] = useState(false);
 
-  const router = useRouter(); 
+  const router = useRouter();
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
   }
   const params = useParams();
 
-  const t = useTranslations("chat"); 
+  const t = useTranslations("chat");
 
   useEffect(() => {
     const getAuth = async () => {
@@ -115,14 +118,14 @@ export default function chat() {
 
   const convHistory = [];
   const channelA = client.channel(`session-${userId}`);
-  
+
   useConversationLogic(
-    channelA, 
+    channelA,
     setShowThinkingAnimation,
     setCurrentResponse,
     setConversation,
     conversation
-  )
+  );
 
   const sendMessage = async (messageText) => {
     setCurrentResponse("");
@@ -171,7 +174,7 @@ export default function chat() {
       );
       closeModal();
       return;
-    } 
+    }
 
     if (uploadCount >= upl) {
       // setIsOverPDFCount(true);
@@ -186,31 +189,27 @@ export default function chat() {
       // setFileOverLimit(true);
       event.target.value = "";
     } else {
-      let fileObj = event.target.files[0]
+      let fileObj = event.target.files[0];
       // console.log("event.target.files[0]", event.target.files[0], event)
       // console.log("fileObj", fileObj)
       if (!isValidKey(fileObj.name)) {
-        let c = titleFixer(fileObj.name)
-        console.log("c", c)
+        let c = titleFixer(fileObj.name);
+        console.log("c", c);
         fileObj = new File([fileObj], c, {
           type: fileObj.type,
           lastModified: fileObj.lastModified,
         });
 
         // console.log("newfileobj", fileObj)
-
-
-
       }
       filePath = `${userId}/${fileObj.name}`;
       const { data, error } = await supabase.storage
         .from("pdfs")
         .upload(filePath, fileObj);
       if (error) {
-        console.log("ERRROR", error)
+        console.log("ERRROR", error);
         showToast("Error", error.message);
 
-   
         setDuplicateFileError(true);
         // Handle error
         console.error(error.message);
@@ -228,7 +227,6 @@ export default function chat() {
 
       try {
         setProcessingPDF(true);
-
 
         const formData = new FormData();
         // a web API that allows you to easily construct a set of key/value pairs representing form fields and their values
@@ -255,7 +253,7 @@ export default function chat() {
               setCurrentPdfId(data.pdfIds);
               setChatId(data.chatId);
               // history.replaceState(data, "convo", `da/chat/${data.pdfIds}`);
-              history.pushState(data, "convo", `chat/${data.pdfIds}`)
+              history.pushState(data, "convo", `chat/${data.pdfIds}`);
 
               // router.replace(`/chat/${data.pdfIds[0]}`, undefined, { shallow: true });
             } catch (jsonError) {
@@ -271,13 +269,15 @@ export default function chat() {
           setProcessingPDF(false);
 
           const { data, error } = await supabase.storage
-          .from("pdfs").remove([filePath])
+            .from("pdfs")
+            .remove([filePath]);
 
-    
-          showToast("An error occured while trying to process your PDF", "If it happens again contact us");
+          showToast(
+            "An error occured while trying to process your PDF",
+            "If it happens again contact us"
+          );
           if (error) {
             showToast("An error occured while trying to delete PDF");
-
           }
         }
 
@@ -316,13 +316,11 @@ export default function chat() {
       <title>AskPDFs</title>
 
       <ChatNav
-       showBtn={true}
-       btnTitle={t("myChats")}
-       redirect="mychats"
-      //  title={title}
-       
-       ></ChatNav>
-      
+        showBtn={true}
+        btnTitle={t("myChats")}
+        redirect="mychats"
+        //  title={title}
+      ></ChatNav>
 
       <div className="mx-12 mx-12 flex flex-col lg:grid lg:grid-cols-2">
         <div className="rounded-lg border-4 dark:border-gray-950 shadow5 ">
@@ -346,7 +344,6 @@ export default function chat() {
           ) : (
             <>
               <div className="flex justify-center mt-48">
-
                 <PDFUpload openModal={openModal}></PDFUpload>
                 {/* <button data-testid="uploadPDF-btn" onClick={openModal}>
                   {t("message")}
@@ -360,7 +357,8 @@ export default function chat() {
                   isOpen={isOpen}
                   closeModal={closeModal}
                   openModal={openModal}
-                  onFileSelect={onFileSelect}></Modal>
+                  onFileSelect={onFileSelect}
+                ></Modal>
               </div>
             </>
           )}
@@ -375,13 +373,11 @@ export default function chat() {
         <div className="flex flex-col justify-between h-full">
           <div className="flex-grow overflow-y-auto">
             <ConversationDisplay
-                              isTextDisabled={isTextDisabled}
-
+              isTextDisabled={isTextDisabled}
               processingPDF={processingPDF}
               showThinkingAnimation={showThinkingAnimation}
               conversation={conversation}
-              sendMessage={sendMessage}  
-
+              sendMessage={sendMessage}
             />
             {/* <TextField
               isDisabled={processingPDF}

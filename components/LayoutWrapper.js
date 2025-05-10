@@ -9,7 +9,15 @@ import { supabase } from "@/lib/supabase";
 
 // Define the locales and paths that should hide Nav or Footer
 const locales = ["en", "da"];
-const hideNavPaths = ["/login", "/signin", "/success", "/chromeEx", "/chat", "/chat/*", "/preview"];
+const hideNavPaths = [
+  "/login",
+  "/signin",
+  "/success",
+  "/chromeEx",
+  "/chat",
+  "/chat/*",
+  "/preview",
+];
 const hideFooterPaths = [
   "/login",
   "/signin",
@@ -20,7 +28,7 @@ const hideFooterPaths = [
   "/preview",
   "/settings",
   "/chromeEx",
-  "/pricing"
+  "/pricing",
 ];
 
 // Helper function to check if the pathname matches any hide path with a locale prefix
@@ -51,28 +59,26 @@ export default function LayoutWrapper({ children }) {
   //   const themeIs = parts.pop().split(";").shift();
   // }, []);
   useEffect(() => {
-
     const fetchSession = async () => {
       const { data, error } = await supabase.auth.getSession();
       if (!error) setSession(data.session);
     };
     fetchSession();
-
-
   }, []);
 
   useEffect(() => {
-        // Set up a session state listener for real-time updates
+    // Set up a session state listener for real-time updates
 
-    const { data: subscription } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
-  
+    const { data: subscription } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setSession(session);
+      }
+    );
+
     return () => {
       subscription?.subscription.unsubscribe();
     };
   }, []);
-  
 
   return (
     <>
