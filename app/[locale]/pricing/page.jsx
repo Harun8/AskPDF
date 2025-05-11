@@ -12,20 +12,19 @@ import { useQuery } from "@tanstack/react-query";
 
 export default function Pricing() {
   const [plans, setPlans] = useState([]);
-  const [prices,setPrices] = useState([])
+  const [prices, setPrices] = useState([]);
   const [monthly, setMonthly] = useState(true);
-  const [locale, setLocale] = useState("da"); 
+  const [locale, setLocale] = useState("da");
   const supabase = createClientComponentClient();
 
   const [userId, setUserId] = useState(null);
 
   const t = useTranslations("pricingPage");
-  const lng = useLocale()
-  
-  useEffect(()=> {
-    setLocale(lng)
+  const lng = useLocale();
 
-  }, [lng])
+  useEffect(() => {
+    setLocale(lng);
+  }, [lng]);
 
   useEffect(() => {
     const getUser = async () => {
@@ -34,9 +33,9 @@ export default function Pricing() {
         // console.error("error is ", error);
         return;
       }
-      console.log("session", session)
+      console.log("session", session);
 
-      console.log("session", session.user.id)
+      console.log("session", session.user.id);
       setUserId(session.user.id);
     };
 
@@ -52,9 +51,7 @@ export default function Pricing() {
     },
     staleTime: Infinity, // <--- here!
     cacheTime: Infinity, // <--- here!
-  })
-  
-
+  });
 
   useEffect(() => {
     if (data) {
@@ -66,13 +63,8 @@ export default function Pricing() {
   // useEffect(() => {
   //   async function getPrices() {
 
-     
   //     try {
   //       setLoading(true);
-
-   
-
-
 
   //     } catch (error) {
   //       console.error(error);
@@ -90,30 +82,30 @@ export default function Pricing() {
       setPlans([premium, ultimate]); // Update with filtered values
     }
   }, [prices, monthly, locale]); // Use only relevant dependencies
-  
 
   const renderPrices = (plans) => {
     if (monthly) {
-      const premium = locale == "da" 
-      ? plans.find((price) => price.nickname === "premium_dkk_month") :
-      plans.find((price) => price.nickname === "premium_usd_month")
-      ;
-      const ultimate = locale == "da" 
-      ? plans.find((price) => price.nickname === "ultimate_dkk_month") :
-      plans.find((price) => price.nickname === "ultimate_usd_month");
+      const premium =
+        locale == "da"
+          ? plans.find((price) => price.nickname === "premium_dkk_month")
+          : plans.find((price) => price.nickname === "premium_usd_month");
+      const ultimate =
+        locale == "da"
+          ? plans.find((price) => price.nickname === "ultimate_dkk_month")
+          : plans.find((price) => price.nickname === "ultimate_usd_month");
       return { premium, ultimate };
     } else {
-      const premium = locale == "da" 
-      ? plans.find((price) => price.nickname === "premium_dkk_year") :
-      plans.find((price) => price.nickname === "premium_usd_year");
-      const ultimate = locale == "da" ?
-       plans.find((price) => price.nickname === "ultimate_dkk_year") :
-       plans.find((price) => price.nickname === "ultimate_usd_year");
+      const premium =
+        locale == "da"
+          ? plans.find((price) => price.nickname === "premium_dkk_year")
+          : plans.find((price) => price.nickname === "premium_usd_year");
+      const ultimate =
+        locale == "da"
+          ? plans.find((price) => price.nickname === "ultimate_dkk_year")
+          : plans.find((price) => price.nickname === "ultimate_usd_year");
       return { premium, ultimate };
     }
   };
-  
-  
 
   async function onCheckout(planId, plan) {
     // if user is logged in and has a session
@@ -169,7 +161,6 @@ export default function Pricing() {
   // };
 
   return (
-
     <>
       <title>Pricing | AskPDFs</title>
 
@@ -195,7 +186,8 @@ export default function Pricing() {
                 className={`${`relative w-1/2 rounded-md py-2 text-xs md:text-sm  font-medium whitespace-nowrap
             focus:outline-none sm:w-auto sm:px-8 ${
               monthly ? "bg-slate-50 dark:bg-slate-800 " : ""
-            } border-slate-50 text-slate-900  dark:text-slate-200 shadow-sm`}`}>
+            } border-slate-50 text-slate-900  dark:text-slate-200 shadow-sm`}`}
+              >
                 {t("monthly")}
               </button>
               <button
@@ -204,7 +196,8 @@ export default function Pricing() {
                 className={`${`relative w-1/2 rounded-md py-2 text-xs md:text-sm  font-medium whitespace-nowrap
             focus:outline-none sm:w-auto sm:px-8 ${
               !monthly ? "bg-slate-50  dark:bg-slate-800" : ""
-            } border-slate-50 text-slate-900 dark:text-slate-200 shadow-sm`}`}>
+            } border-slate-50 text-slate-900 dark:text-slate-200 shadow-sm`}`}
+              >
                 {t("yearly")}
               </button>
             </div>
@@ -218,7 +211,8 @@ export default function Pricing() {
           <div className="mt-12 space-y-3 md:mt-16 md:space-y-0 md:grid md:grid-cols-3 md:gap-6 md:max-w-5xl md:mx-auto xl:grid-cols-3">
             <div
               data-testid="cypress-FreePlan"
-              className=" bg-stone-200 dark:bg-gray-900 	 border  rounded-3xl shadow-sm divide-y divide-slate-200">
+              className=" bg-stone-200 dark:bg-gray-900 	 border  rounded-3xl shadow-sm divide-y divide-slate-200"
+            >
               <div className="p-6">
                 <h2 className="text-xl leading-6 font-bold dark:text-slate-100 text-slate-900">
                   Starter
@@ -229,19 +223,19 @@ export default function Pricing() {
                 <p className="mt-8">
                   <span className="text-4xl font-bold dark:text-slate-100  text-slate-900 tracking-tighter">
                     0{t("currency")}
-
                   </span>
 
                   <span className="text-base font-medium dark:text-slate-100  text-slate-500">
                     /{t("month")}
                   </span>
-                  
-                <Link
-                  data-testid="cypress-freeTierBtn"
-                  href="/signin"
-                  className="mt-8 block w-full dark:bg-slate-700 bg-stone-600 rounded-md py-2 text-sm font-semibold text-white text-center">
-                  {t("joinAsAFreeUser")}
-                </Link>
+
+                  <Link
+                    data-testid="cypress-freeTierBtn"
+                    href="/signin"
+                    className="mt-8 block w-full dark:bg-slate-700 bg-stone-600 rounded-md py-2 text-sm font-semibold text-white text-center"
+                  >
+                    {t("joinAsAFreeUser")}
+                  </Link>
                 </p>
               </div>
               <div className="pt-6 pb-8 px-6">
@@ -250,19 +244,41 @@ export default function Pricing() {
                 </h3>
                 <ul role="list" className="mt-4 space-y-3">
                   <li className="flex space-x-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
-</svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="size-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z"
+                      />
+                    </svg>
 
                     <span className="text-base dark:text-slate-100  text-slate-700">
                       1 {t("pdfUpload")}
                     </span>
                   </li>
-                
+
                   <li className="flex space-x-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
-</svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="size-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z"
+                      />
+                    </svg>
 
                     <span className="text-base dark:text-slate-100  text-slate-700">
                       5MB {t("fileSizeLimit")}
@@ -315,19 +331,15 @@ export default function Pricing() {
                   </li> */}
                 </ul>
               </div>
-              
-
             </div>
 
-            <div               className=" bg-stone-200 dark:bg-gray-900 	 border  rounded-3xl shadow-sm divide-y divide-slate-200">
-            
+            <div className=" bg-stone-300 dark:bg-gray-900 	 border  rounded-3xl shadow-sm divide-y divide-slate-200">
               <div className="p-6">
                 <h2 className="text-xl leading-6 font-bold dark:text-slate-100 text-slate-900">
                   Premium
                   <span className="ml-4 text-xl text-gray-900 font-bold ">
                     {" "}
                     ({t("mostPopular")})
-
                   </span>
                 </h2>
                 <p className="mt-2 text-base dark:text-slate-100  text-slate-700 leading-tight">
@@ -335,23 +347,23 @@ export default function Pricing() {
                 </p>
                 <p className="mt-8">
                   <span className="text-4xl font-bold dark:text-slate-100  text-slate-900 tracking-tighter">
-{plans.length > 0 && monthly ? (
-  <NumberTicker
-  value={parseFloat(plans[0]?.price).toFixed(0)}
-  duration={10}
-  // direction="down"
-  // startValue={50}
-  format={(value) => parseFloat(value).toFixed(0)}  
-  ></NumberTicker>
-
-) : (
-
-    <NumberTicker
-      value={(parseFloat(plans[0]?.price) / 12).toFixed(0)}
-      duration={10}
-      format={(value) => parseFloat(value).toFixed(0)}  
- > </NumberTicker>
-)}
+                    {plans.length > 0 && monthly ? (
+                      <NumberTicker
+                        value={parseFloat(plans[0]?.price).toFixed(0)}
+                        duration={10}
+                        // direction="down"
+                        // startValue={50}
+                        format={(value) => parseFloat(value).toFixed(0)}
+                      ></NumberTicker>
+                    ) : (
+                      <NumberTicker
+                        value={(parseFloat(plans[0]?.price) / 12).toFixed(0)}
+                        duration={10}
+                        format={(value) => parseFloat(value).toFixed(0)}
+                      >
+                        {" "}
+                      </NumberTicker>
+                    )}
 
                     {t("currency")}
                   </span>
@@ -370,7 +382,8 @@ export default function Pricing() {
                       ? () => onCheckout(plans[0].id, plans[0].name)
                       : () => onCheckout(plans[0].id, plans[0].name)
                   }
-                  className="  mt-8 block w-full dark:bg-slate-700 bg-stone-600 rounded-md py-2 text-sm font-semibold text-white text-center">
+                  className="  mt-8 block w-full dark:bg-slate-700 bg-stone-600 rounded-md py-2 text-sm font-semibold text-white text-center"
+                >
                   {t("joinAsPremiumUser")}
                 </button>
               </div>
@@ -380,9 +393,20 @@ export default function Pricing() {
                 </h3>
                 <ul role="list" className="mt-4 space-y-3">
                   <li className="flex space-x-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
-</svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="size-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z"
+                      />
+                    </svg>
 
                     <span className="text-base dark:text-slate-100  text-slate-700">
                       50 {t("pdfUploads")}
@@ -390,23 +414,44 @@ export default function Pricing() {
                   </li>
 
                   <li className="flex space-x-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
-</svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="size-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z"
+                      />
+                    </svg>
 
                     <span className="text-base dark:text-slate-100  text-slate-700">
                       10MB {t("fileSizeLimit")}
                     </span>
                   </li>
                   <li className="flex space-x-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
-</svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="size-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z"
+                      />
+                    </svg>
 
                     <span className="text-base dark:text-slate-100  text-slate-700">
                       GPT-4
                     </span>
-                    
                   </li>
                   {/* <li className="flex space-x-3">
                     <svg
@@ -425,20 +470,29 @@ export default function Pricing() {
                     </span>
                   </li> */}
                   <li className="flex space-x-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
-</svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="size-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z"
+                      />
+                    </svg>
 
                     <span className="text-base dark:text-slate-100  text-slate-700">
                       {t("customerSupport")} (email)
                     </span>
                   </li>
                 </ul>
-
               </div>
             </div>
-            <div               className=" bg-stone-200 dark:bg-gray-900 	 border  rounded-3xl shadow-sm divide-y divide-slate-200">
-    
+            <div className=" bg-stone-200 dark:bg-gray-900 	 border  rounded-3xl shadow-sm divide-y divide-slate-200">
               <div className="p-6">
                 <h2 className="text-xl leading-6 font-bold dark:text-slate-100 text-slate-900">
                   Ultimate
@@ -448,23 +502,22 @@ export default function Pricing() {
                 </p>
                 <p className="mt-8">
                   <span className="text-4xl font-bold dark:text-slate-100  text-slate-900 tracking-tighter">
-                  {plans.length > 0 && monthly ? (
-  <NumberTicker
-  value={parseFloat(plans[1]?.price).toFixed(0)}
-  duration={10}
-  format={(value) => parseFloat(value).toFixed(0)}  
-  ></NumberTicker>
-
-) : (
-
-    <NumberTicker
-      value={(parseFloat(plans[1]?.price) / 12).toFixed(0)}
-      duration={10}
-      format={(value) => parseFloat(value).toFixed(0)}  
- > </NumberTicker>
-)}
-                      {t("currency")}
-
+                    {plans.length > 0 && monthly ? (
+                      <NumberTicker
+                        value={parseFloat(plans[1]?.price).toFixed(0)}
+                        duration={10}
+                        format={(value) => parseFloat(value).toFixed(0)}
+                      ></NumberTicker>
+                    ) : (
+                      <NumberTicker
+                        value={(parseFloat(plans[1]?.price) / 12).toFixed(0)}
+                        duration={10}
+                        format={(value) => parseFloat(value).toFixed(0)}
+                      >
+                        {" "}
+                      </NumberTicker>
+                    )}
+                    {t("currency")}
                   </span>
 
                   <span className="text-base font-medium dark:text-slate-100  text-slate-500">
@@ -481,7 +534,8 @@ export default function Pricing() {
                       ? () => onCheckout(plans[1].id, plans[1].name)
                       : () => onCheckout(plans[1].id, plans[1].name)
                   }
-                  className="mt-8 block w-full dark:bg-slate-700 bg-stone-600 rounded-md py-2 text-sm font-semibold text-white text-center">
+                  className="mt-8 block w-full dark:bg-slate-700 bg-stone-600 rounded-md py-2 text-sm font-semibold text-white text-center"
+                >
                   {t("joinAsUltimateUser")}
                 </button>
               </div>
@@ -491,73 +545,148 @@ export default function Pricing() {
                 </h3>
                 <ul role="list" className="mt-4 space-y-3">
                   <li className="flex space-x-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
-</svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="size-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z"
+                      />
+                    </svg>
 
                     <span className="text-base dark:text-slate-100  text-slate-700">
                       {t("unlimited")}
                     </span>
                   </li>
-                
+
                   <li className="flex space-x-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
-</svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="size-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z"
+                      />
+                    </svg>
 
                     <span className="text-base dark:text-slate-100  text-slate-700">
                       50MB {t("fileSizeLimit")}
                     </span>
                   </li>
                   <li className="flex space-x-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
-</svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="size-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z"
+                      />
+                    </svg>
 
                     <span className="text-base dark:text-slate-100  text-slate-700">
                       GPT-4
                     </span>
                   </li>
                   <li className="flex space-x-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
-</svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="size-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z"
+                      />
+                    </svg>
 
                     <span className="text-base dark:text-slate-100  text-slate-700">
                       {t("newFeatureEarlyAccess")}
                     </span>
                   </li>
                   <li className="flex space-x-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
-</svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="size-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z"
+                      />
+                    </svg>
 
                     <span className="text-base dark:text-slate-100  text-slate-700">
                       {t("customerSupport")} (email)
                     </span>
                   </li>
                   <li className="flex space-x-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
-</svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="size-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z"
+                      />
+                    </svg>
 
                     <span className="text-base dark:text-slate-100  text-slate-700">
                       Google docs integration
                     </span>
                   </li>
                   <li className="flex space-x-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
-</svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="size-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z"
+                      />
+                    </svg>
 
                     <span className="text-base dark:text-slate-100  text-slate-700">
-                     Enhance prompt
+                      Enhance prompt
                     </span>
                   </li>
-
                 </ul>
               </div>
-              
             </div>
           </div>
         </div>

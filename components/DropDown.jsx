@@ -34,20 +34,13 @@ const DropDown = ({ logOut }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="size-6 hover:text-zinc-400 cursor-pointer"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"
-          />
-        </svg>
+        <img
+          className="cursor-pointer"
+          width={50}
+          height={50}
+          src="https://api.dicebear.com/9.x/adventurer/svg?seed=Sophia"
+          alt="avatar"
+        />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>{t("profile")}</DropdownMenuLabel>
@@ -62,7 +55,7 @@ const DropDown = ({ logOut }) => {
           <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
         </DropdownMenuItem> */}
           <Link
-            className=" dark:text-zinc-200 hover:text-gray-500 "
+            className="dark:text-zinc-200 hover:text-gray-500 "
             href="/mychats"
           >
             <DropdownMenuItem>
