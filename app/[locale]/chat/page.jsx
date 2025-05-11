@@ -32,6 +32,7 @@ import {
   useConversationLogic,
 } from "@/util/streaming/chat-util";
 import titleFixer, { isValidKey } from "@/util/titleFixer";
+import DropDown from "@/components/DropDown";
 
 const supabase = createClientComponentClient();
 

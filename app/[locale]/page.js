@@ -201,7 +201,7 @@ export default function Home() {
  </div> */}
 
       <section id="services" className="bg-gray-50 py-16">
-        <div className="container mx-auto px-6">
+        <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-screen-md sm:max-w-screen-lg md:max-w-screen-xl lg:max-w-screen-2xl text-center">
           <h2 className="text-md text-zinc-400 mb-4 text-center">Services</h2>
           <p className="text-5xl font-bold font-black py-6 text-center">
             {t("serviceTitle1")} <br /> {t("serviceTitle2")}
