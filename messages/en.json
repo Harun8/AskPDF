@@ -44,7 +44,6 @@
 
     "tryAskPDF": "Try AskPDFs for free",
     "tryDemo": "Try the demo",
-    "enhance": "Enhance prompt",
 
     "reviews": [
       { "name": "Teachers" },
@@ -168,6 +167,7 @@
     "pdfUpload": "PDF Upload",
     "pdfUploads": "PDF Uploads/month",
     "unlimited": "Unlimited uploads",
+    "enhance": "Enhance prompt",
 
     "questionsLimit": "Questions limit",
     "monthlyQuestionsLimit": "Monthly questions limit",
