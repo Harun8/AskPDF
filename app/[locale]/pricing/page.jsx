@@ -645,7 +645,7 @@ export default function Pricing() {
                       {t("customerSupport")} (email)
                     </span>
                   </li>
-                  <li className="flex space-x-3">
+                  {/* <li className="flex space-x-3">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -664,7 +664,7 @@ export default function Pricing() {
                     <span className="text-base dark:text-slate-100  text-slate-700">
                       Google docs integration
                     </span>
-                  </li>
+                  </li> */}
                   <li className="flex space-x-3">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -682,7 +682,7 @@ export default function Pricing() {
                     </svg>
 
                     <span className="text-base dark:text-slate-100  text-slate-700">
-                      Enhance prompt
+                      {t("enhance")}
                     </span>
                   </li>
                 </ul>

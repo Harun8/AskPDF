@@ -43,6 +43,7 @@
     "review3Text": "Få en chatoplevelse, der forstår sammenhængen på tværs af sider og kapitler. Uanset om du henviser til en tidligere sektion eller dykker ned i et nyt emne, bevarer systemet kontinuiteten, så du altid får sammenhængende og relevante svar.",
     "tryAskPDF": "Prøv Ask PDFs gratis",
     "tryDemo": "Prøv demoen",
+    "enchance": "Forbedr prompten",
     "reviews": [
       { "name": "Lærere" },
       { "name": "Studerende" },

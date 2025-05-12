@@ -44,6 +44,8 @@
 
     "tryAskPDF": "Try AskPDFs for free",
     "tryDemo": "Try the demo",
+    "enhance": "Enhance prompt",
+
     "reviews": [
       { "name": "Teachers" },
       { "name": "Students" },
