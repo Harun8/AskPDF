@@ -6,7 +6,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   import.meta.url
 ).toString();
 
-import { useParams } from "next/navigation"; 
+import { useParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import ConversationDisplay from "@/components/ConversationDisplay";
@@ -16,7 +16,10 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import ChatNav from "@/components/ChatNav";
-import { conversationLogic, useConversationLogic } from "@/util/streaming/chat-util";
+import {
+  conversationLogic,
+  useConversationLogic,
+} from "@/util/streaming/chat-util";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 const { createClient } = require("@supabase/supabase-js");
@@ -45,7 +48,7 @@ const ChatPage = () => {
   const [uploadCount, setUploadCount] = useState(null);
   const [showThinkingAnimation, setShowThinkingAnimation] = useState(false);
   const [currentResponse, setCurrentResponse] = useState("");
-  const [title, setTitle] = useState("")
+  const [title, setTitle] = useState("");
 
   const router = useRouter();
   let currentPdfId;
@@ -127,8 +130,8 @@ const ChatPage = () => {
       .eq("id", file_id);
 
     if (error) throw new Error(error.message);
-    console.log(data[0].path_tokens[1].split(".pdf")[0])
-    setTitle(data[0].path_tokens[1].split(".pdf")[0])
+    console.log(data[0].path_tokens[1].split(".pdf")[0]);
+    setTitle(data[0].path_tokens[1].split(".pdf")[0]);
 
     if (data) {
       const { data: download, error } = await supabase.storage
@@ -137,7 +140,7 @@ const ChatPage = () => {
 
       if (error) throw new Error(error.message);
 
-      console.log(download)
+      console.log(download);
       setPdf(download);
     }
   }
@@ -146,34 +149,35 @@ const ChatPage = () => {
   const channelA = client.channel(`session-${userId}`);
 
   useConversationLogic(
-      channelA, 
-      setShowThinkingAnimation,
-      setCurrentResponse,
-      setConversation,
-      conversation
-    )
+    channelA,
+    setShowThinkingAnimation,
+    setCurrentResponse,
+    setConversation,
+    conversation
+  );
 
-    
-    const sendMessageMutation = useMutation({
-      mutationFn: async ( messageText) => {
-        const response = await fetch("/api/llm", {
-          method: "POST",
-          body: JSON.stringify({
-            sessionId: userId,
-            plan,
-            messageText,
-            conv_history: convHistory,
-            file_id: params.id,
-          }),
-        });
-    
-        if (!response.ok) {
-          throw new Error("Request failed");
-        }
-    
-        return response.json();
-      },
-    });
+  const sendMessageMutation = useMutation({
+    mutationFn: async (messageText) => {
+      const response = await fetch("/api/llm", {
+        method: "POST",
+        body: JSON.stringify({
+          sessionId: userId,
+          plan,
+          messageText,
+          conv_history: convHistory,
+          file_id: params.id,
+        }),
+      });
+
+      if (!response.ok) {
+        setShowThinkingAnimation(false);
+
+        throw new Error("Request failed");
+      }
+
+      return response.json();
+    },
+  });
 
   const sendMessage = async (messageText) => {
     setCurrentResponse("");
@@ -188,28 +192,25 @@ const ChatPage = () => {
 
     convHistory.push(messageText);
     try {
-      setShowThinkingAnimation(true); 
+      setShowThinkingAnimation(true);
 
-      await sendMessageMutation.mutateAsync(messageText)
-
+      await sendMessageMutation.mutateAsync(messageText);
     } catch (error) {
       console.error(error);
       return;
     }
   };
 
-  console.log(params.locale)
+  console.log(params.locale);
   return (
-    <> 
-          <ChatNav
-       showBtn={true}
-       btnTitle={t("newChat")}
-       redirect="chat"
-       
-       title={title}
-       
-       ></ChatNav>
-       
+    <>
+      <ChatNav
+        showBtn={true}
+        btnTitle={t("newChat")}
+        redirect="chat"
+        title={title}
+      ></ChatNav>
+
       <div className="mx-12 flex flex-col lg:grid lg:grid-cols-2">
         <div className="rounded-lg border dark:border-gray-950 shadow5">
           <div className="p-4 bg-gray h-[800px] overflow-y-auto">
@@ -230,7 +231,7 @@ const ChatPage = () => {
               </Document>
             ) : (
               <div className="flex justify-center mt-48">
-              <h1 className="text-gray-600">loading file ...</h1>
+                <h1 className="text-gray-600">loading file ...</h1>
               </div>
             )}
           </div>

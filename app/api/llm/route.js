@@ -12,6 +12,7 @@ import formatConvHistory from "@/util/formatConvHistory";
 const OpenAI = require("openai");
 const { createClient } = require("@supabase/supabase-js");
 import { NextResponse } from "next/server";
+import { checkAndIncrementQuota } from "@/util/ratelimiter";
 
 const standAloneQuestionTemplate = `Given some conversation history (if any) and a question, convert it into a standalone question. 
 conversation history: {conv_history}
@@ -55,6 +56,22 @@ let channelB;
 export async function POST(req, res) {
   try {
     const data = await req.json(); // Assuming text data if not form data
+    const { ok, remaining } = await checkAndIncrementQuota(
+      data.sessionId,
+      "messages",
+      1
+    );
+    if (!ok) {
+      return new Response(
+        JSON.stringify({ msg: "Message-quota exceeded for today." }),
+        {
+          status: 429, // Set the status code to 200 (OK)
+          headers: {
+            "Content-Type": "application/json", // Set the Content-Type header to 'application/json'
+          },
+        }
+      );
+    }
     //
 
     channelB = client.channel(`session-${data.sessionId}`);
