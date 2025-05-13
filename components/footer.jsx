@@ -8,10 +8,10 @@ const Footer = () => {
 
   return (
     <>
-      <footer className="sticky p-4 dark:bg-blue-950 ">
-        <hr className=" bg-gray-200 border-0 dark:bg-red-700" />
+      <footer className="sticky p-4  ">
+        <hr className=" bg-gray-200 border-0 " />
         <div className=" mx-auto max-w-screen-xl   md:flex md:items-center md:justify-between">
-          <p className=" text-base leading-6 text-center font-bold dark:text-gray-200 text-gray-600">
+          <p className=" text-base leading-6 text-center font-bold  text-gray-600">
             © 2023 AskPDF {version}
           </p>
           {/* <div className="flex flex-wrap justify-center mt-3  gap-4">
@@ -46,18 +46,20 @@ const Footer = () => {
             </Link>
           </div> */}
 
-          <div className="flex flex-wrap justify-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+          <div className="flex flex-wrap justify-center mt-3 text-sm font-medium text-gray-500  sm:mt-0">
             <div className="px-5 py-2">
               <Link
                 href="/preview"
-                className="text-base leading-6 text-gray-500 hover:text-gray-900 dark:text-gray-200">
+                className="text-base leading-6 text-gray-500 hover:text-gray-900 "
+              >
                 {t("preview")}
               </Link>
             </div>
             <div className="px-5 py-2">
               <Link
                 href="/pricing"
-                className="text-base leading-6 text-gray-500 hover:text-gray-900 dark:text-gray-200">
+                className="text-base leading-6 text-gray-500 hover:text-gray-900 "
+              >
                 {t("pricing")}
               </Link>
             </div>
@@ -65,7 +67,8 @@ const Footer = () => {
             <div className="px-5 py-2">
               <Link
                 href="/faq"
-                className="text-base leading-6 text-gray-500 hover:text-gray-900 dark:text-gray-200">
+                className="text-base leading-6 text-gray-500 hover:text-gray-900 "
+              >
                 {t("faq")}
               </Link>
             </div>
