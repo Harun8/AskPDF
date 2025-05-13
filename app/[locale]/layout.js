@@ -44,15 +44,19 @@ async function RootLayout({ children, params: { locale } }) {
   const messages = await getMessages();
 
   const themeScript = `
-  (function() {
-    try {
-      var theme = document.cookie.replace(/(?:(?:^|.*;\\s*)theme\\s*\\=\\s*([^;]*).*$)|^.*$/, "$1");
-      if (!theme && window.localStorage) theme = localStorage.getItem("theme");
-      if (!theme) theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
-      document.documentElement.classList.add(theme);
-    } catch(e) {}
-  })();
-  `;
+(function() {
+  try {
+    document.documentElement.classList.remove("dark");
+    document.documentElement.classList.add("light");
+    if (window.localStorage) {
+      localStorage.setItem("theme", "light");
+    }
+    document.cookie = "theme=light; path=/; max-age=31536000";
+  } catch(e) {
+    console.error("Theme script error:", e);
+  }
+})();
+`;
 
   return (
     <html lang={locale} className={inter.className}>
