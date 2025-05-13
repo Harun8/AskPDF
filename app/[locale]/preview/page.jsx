@@ -1,6 +1,6 @@
 "use client";
 import { Document, Page } from "react-pdf";
-import { pdfjs } from "react-pdf"; 
+import { pdfjs } from "react-pdf";
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.js",
   import.meta.url
@@ -145,12 +145,12 @@ const Preview = ({ params: { locale } }) => {
   // This function does not need to be async since you're not awaiting it here
 
   useConversationLogic(
-    channelA, 
+    channelA,
     setShowThinkingAnimation,
     setCurrentResponse,
     setConversation,
     conversation
-  )
+  );
   const sendMessage = async (messageText) => {
     setCounter((prev) => prev + 1);
 
@@ -201,18 +201,17 @@ const Preview = ({ params: { locale } }) => {
       },
     });
   }
-  return ( 
+  return (
     <>
       <title>Preview | AskPDFs</title>
 
       <ChatNav
-       showBtn={false}
-       title="Coukoo Hashing for Undergraduates"
-       
-       ></ChatNav>
-      <div className="mx-12 flex flex-col lg:grid lg:grid-cols-2 dark:bg-slate-800">
+        showBtn={false}
+        title="Coukoo Hashing for Undergraduates"
+      ></ChatNav>
+      <div className="mx-12 flex flex-col lg:grid lg:grid-cols-2">
         {/* <hi>{t("title")}</hi> */}
-        <div className="rounded-lg border dark:border-slate-900 dark:bg-slate-800	 shadow5 scrollbar scrollbar-thumb-blue-600 scrollbar-thumb-rounded">
+        <div className="rounded-lg border shadow5 scrollbar scrollbar-thumb-blue-600 scrollbar-thumb-rounded">
           <div className=" p-6 bg-gray h-[800px] overflow-y-auto  ">
             {pdf ? (
               <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>
@@ -235,13 +234,12 @@ const Preview = ({ params: { locale } }) => {
           </div>
         </div>
 
-        <div className=" dark:bg-slate-800">
+        <div className="">
           <div className="">
             <ConversationDisplay
               showThinkingAnimation={showThinkingAnimation}
               conversation={conversation}
-              sendMessage={sendMessage}  
-
+              sendMessage={sendMessage}
             />
             {/* <TextField onSendMessage={sendMessage}></TextField> */}
             <div className=""></div>

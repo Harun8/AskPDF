@@ -48,7 +48,7 @@ async function RootLayout({ children, params: { locale } }) {
     try {
       var theme = document.cookie.replace(/(?:(?:^|.*;\\s*)theme\\s*\\=\\s*([^;]*).*$)|^.*$/, "$1");
       if (!theme && window.localStorage) theme = localStorage.getItem("theme");
-      if (!theme) theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      if (!theme) theme = window.matchMedia("(prefers-color-scheme: light)").matches ? "dark" : "light";
       document.documentElement.classList.add(theme);
     } catch(e) {}
   })();
@@ -60,7 +60,7 @@ async function RootLayout({ children, params: { locale } }) {
         {/* runs before CSS / hydration */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className="flex flex-col min-h-screen w-full bg-zinc-100  dark:bg-slate-800">
+      <body className="flex flex-col min-h-screen w-full bg-zinc-100">
         <Providers>
           <Provider>
             <main className="flex-grow">

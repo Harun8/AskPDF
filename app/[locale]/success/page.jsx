@@ -29,9 +29,10 @@ const Success = () => {
             src={Welcome}
             alt="Welcome"
             width={400}
-            height={400}></Image>
+            height={400}
+          ></Image>
           <div>
-            <Link className="dark:text-white   rounded " href="/signin ">
+            <Link className=" rounded " href="/signin ">
               {t("title")}
             </Link>
 
@@ -39,7 +40,8 @@ const Success = () => {
               {/* css Taking from btn comp change so i can just use the btn */}
               <Link
                 href="/login"
-                className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-slate-950 dark:focus-visible:ring-slate-300 bg-blue-700 text-white	hover:bg-blue-900 h-11 rounded-none p-7">
+                className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-blue-700 text-white	hover:bg-blue-900 h-11 rounded-none p-7"
+              >
                 {t("login")}
               </Link>
             </div>

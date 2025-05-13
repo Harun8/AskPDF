@@ -15,7 +15,8 @@ export default function Loading() {
           {[...Array(3)].map((_, index) => (
             <Skeleton
               key={index}
-              className="bg-zinc-100 dark:bg-gray-900 border border-slate-900 rounded-lg shadow-sm divide-y divide-slate-200">
+              className="bg-zinc-100  border border-slate-900 rounded-lg shadow-sm divide-y divide-slate-200"
+            >
               {/* Card Header */}
               <div className="p-6">
                 <Skeleton className="bg-zinc-300 text-xl h-4 w-[250px]" />

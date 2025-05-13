@@ -174,19 +174,19 @@ export default function Pricing() {
 
         <div className="md:flex md:flex-col md:align-center p-10">
           <div className="  relative self-center  rounded-lg p-0.5 flex sm:justify-center">
-            <h2 className="lg:text-4xl md:text-4xl text-xl leading-6 font-bold dark:text-slate-400 text-slate-900">
+            <h2 className="lg:text-4xl md:text-4xl text-xl leading-6 font-bold text-slate-900">
               {t("title")}
             </h2>
           </div>
           <div className="mt-6 relative self-center flex flex-col md:flex-row md:justify-center">
-            <div className="bg-zinc-200 dark:bg-zinc-900 rounded-lg p-0.5  ">
+            <div className="bg-zinc-200 rounded-lg p-0.5  ">
               <button
                 onClick={monthlyPricing}
                 type="button"
                 className={`${`relative w-1/2 rounded-md py-2 text-xs md:text-sm  font-medium whitespace-nowrap
             focus:outline-none sm:w-auto sm:px-8 ${
-              monthly ? "bg-slate-50 dark:bg-slate-800 " : ""
-            } border-slate-50 text-slate-900  dark:text-slate-200 shadow-sm`}`}
+              monthly ? "bg-slate-50 " : ""
+            } border-slate-50 text-slate-900  shadow-sm`}`}
               >
                 {t("monthly")}
               </button>
@@ -195,14 +195,14 @@ export default function Pricing() {
                 type="button"
                 className={`${`relative w-1/2 rounded-md py-2 text-xs md:text-sm  font-medium whitespace-nowrap
             focus:outline-none sm:w-auto sm:px-8 ${
-              !monthly ? "bg-slate-50  dark:bg-slate-800" : ""
-            } border-slate-50 text-slate-900 dark:text-slate-200 shadow-sm`}`}
+              !monthly ? "bg-slate-50 " : ""
+            } border-slate-50 text-slate-900 shadow-sm`}`}
               >
                 {t("yearly")}
               </button>
             </div>
             <div className="grid justify-items-end md:flex  md:items-center">
-              <span className=" bg-stone-400 dark:bg-green-900 font-bold rounded-full text-xs px-6  py-2 ml-3">
+              <span className=" bg-stone-400 font-bold rounded-full text-xs px-6  py-2 ml-3">
                 {t("save")} 28%
               </span>
             </div>
@@ -211,35 +211,35 @@ export default function Pricing() {
           <div className="mt-12 space-y-3 md:mt-16 md:space-y-0 md:grid md:grid-cols-3 md:gap-6 md:max-w-5xl md:mx-auto xl:grid-cols-3">
             <div
               data-testid="cypress-FreePlan"
-              className=" bg-stone-200 dark:bg-gray-900 	 border  rounded-3xl shadow-sm divide-y divide-slate-200"
+              className=" bg-stone-200 border  rounded-3xl shadow-sm divide-y divide-slate-200"
             >
               <div className="p-6">
-                <h2 className="text-xl leading-6 font-bold dark:text-slate-100 text-slate-900">
+                <h2 className="text-xl leading-6 font-bold  text-slate-900">
                   Starter
                 </h2>
-                <p className="mt-2 text-base dark:text-slate-100  text-slate-700 leading-tight">
+                <p className="mt-2 text-base   text-slate-700 leading-tight">
                   {t("freeDesc")}
                 </p>
                 <p className="mt-8">
-                  <span className="text-4xl font-bold dark:text-slate-100  text-slate-900 tracking-tighter">
+                  <span className="text-4xl font-bold   text-slate-900 tracking-tighter">
                     0{t("currency")}
                   </span>
 
-                  <span className="text-base font-medium dark:text-slate-100  text-slate-500">
+                  <span className="text-base font-medium   text-slate-500">
                     /{t("month")}
                   </span>
 
                   <Link
                     data-testid="cypress-freeTierBtn"
                     href="/signin"
-                    className="mt-8 block w-full dark:bg-slate-700 bg-stone-600 rounded-md py-2 text-sm font-semibold text-white text-center"
+                    className="mt-8 block w-full bg-stone-600 rounded-md py-2 text-sm font-semibold text-white text-center"
                   >
                     {t("joinAsAFreeUser")}
                   </Link>
                 </p>
               </div>
               <div className="pt-6 pb-8 px-6">
-                <h3 className="text-sm font-bold dark:text-slate-100  text-slate-900 tracking-wide uppercase">
+                <h3 className="text-sm font-bold   text-slate-900 tracking-wide uppercase">
                   {t("incl")}
                 </h3>
                 <ul role="list" className="mt-4 space-y-3">
@@ -259,7 +259,7 @@ export default function Pricing() {
                       />
                     </svg>
 
-                    <span className="text-base dark:text-slate-100  text-slate-700">
+                    <span className="text-base   text-slate-700">
                       1 {t("pdfUpload")}
                     </span>
                   </li>
@@ -280,7 +280,7 @@ export default function Pricing() {
                       />
                     </svg>
 
-                    <span className="text-base dark:text-slate-100  text-slate-700">
+                    <span className="text-base   text-slate-700">
                       5MB {t("fileSizeLimit")}
                     </span>
                   </li>
@@ -295,7 +295,7 @@ export default function Pricing() {
                         d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
                       />
                     </svg>
-                    <span className="text-base dark:text-slate-100  text-slate-700">
+                    <span className="text-base   text-slate-700">
                       GPT-4
                     </span>
                   </li>
@@ -310,7 +310,7 @@ export default function Pricing() {
                         d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
                       />
                     </svg>
-                    <span className="text-base dark:text-slate-100  text-slate-700">
+                    <span className="text-base   text-slate-700">
                       {t("newFeatureEarlyAccess")}
                     </span>
                   </li>
@@ -325,7 +325,7 @@ export default function Pricing() {
                         d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
                       />
                     </svg>
-                    <span className="text-base dark:text-slate-100  text-slate-700">
+                    <span className="text-base   text-slate-700">
                       {t("customerSupport")}
                     </span>
                   </li> */}
@@ -333,20 +333,20 @@ export default function Pricing() {
               </div>
             </div>
 
-            <div className=" bg-stone-300 dark:bg-gray-900 	 border  rounded-3xl shadow-sm divide-y divide-slate-200">
+            <div className=" bg-stone-300 border  rounded-3xl shadow-sm divide-y divide-slate-200">
               <div className="p-6">
-                <h2 className="text-xl leading-6 font-bold dark:text-slate-100 text-slate-900">
+                <h2 className="text-xl leading-6 font-bold  text-slate-900">
                   Premium
                   <span className="ml-4 text-xl text-gray-900 font-bold ">
                     {" "}
                     ({t("mostPopular")})
                   </span>
                 </h2>
-                <p className="mt-2 text-base dark:text-slate-100  text-slate-700 leading-tight">
+                <p className="mt-2 text-base   text-slate-700 leading-tight">
                   {t("proDesc")}
                 </p>
                 <p className="mt-8">
-                  <span className="text-4xl font-bold dark:text-slate-100  text-slate-900 tracking-tighter">
+                  <span className="text-4xl font-bold   text-slate-900 tracking-tighter">
                     {plans.length > 0 && monthly ? (
                       <NumberTicker
                         value={parseFloat(plans[0]?.price).toFixed(0)}
@@ -368,7 +368,7 @@ export default function Pricing() {
                     {t("currency")}
                   </span>
 
-                  <span className="text-base font-medium dark:text-slate-100  text-slate-500">
+                  <span className="text-base font-medium   text-slate-500">
                     /{t("month")}
                   </span>
                 </p>
@@ -382,13 +382,13 @@ export default function Pricing() {
                       ? () => onCheckout(plans[0].id, plans[0].name)
                       : () => onCheckout(plans[0].id, plans[0].name)
                   }
-                  className="  mt-8 block w-full dark:bg-slate-700 bg-stone-600 rounded-md py-2 text-sm font-semibold text-white text-center"
+                  className="  mt-8 block w-full bg-stone-600 rounded-md py-2 text-sm font-semibold text-white text-center"
                 >
                   {t("joinAsPremiumUser")}
                 </button>
               </div>
               <div className="pt-6 pb-8 px-6">
-                <h3 className="text-sm font-bold dark:text-slate-100  text-slate-900 tracking-wide uppercase">
+                <h3 className="text-sm font-bold   text-slate-900 tracking-wide uppercase">
                   {t("incl")}
                 </h3>
                 <ul role="list" className="mt-4 space-y-3">
@@ -408,7 +408,7 @@ export default function Pricing() {
                       />
                     </svg>
 
-                    <span className="text-base dark:text-slate-100  text-slate-700">
+                    <span className="text-base   text-slate-700">
                       50 {t("pdfUploads")}
                     </span>
                   </li>
@@ -429,7 +429,7 @@ export default function Pricing() {
                       />
                     </svg>
 
-                    <span className="text-base dark:text-slate-100  text-slate-700">
+                    <span className="text-base   text-slate-700">
                       10MB {t("fileSizeLimit")}
                     </span>
                   </li>
@@ -449,9 +449,7 @@ export default function Pricing() {
                       />
                     </svg>
 
-                    <span className="text-base dark:text-slate-100  text-slate-700">
-                      GPT-4
-                    </span>
+                    <span className="text-base   text-slate-700">GPT-4</span>
                   </li>
                   {/* <li className="flex space-x-3">
                     <svg
@@ -465,7 +463,7 @@ export default function Pricing() {
                       />
                     </svg>
 
-                    <span className="text-base dark:text-slate-100  text-slate-700">
+                    <span className="text-base   text-slate-700">
                       {t("newFeatureEarlyAccess")}
                     </span>
                   </li> */}
@@ -485,23 +483,23 @@ export default function Pricing() {
                       />
                     </svg>
 
-                    <span className="text-base dark:text-slate-100  text-slate-700">
+                    <span className="text-base   text-slate-700">
                       {t("customerSupport")} (email)
                     </span>
                   </li>
                 </ul>
               </div>
             </div>
-            <div className=" bg-stone-200 dark:bg-gray-900 	 border  rounded-3xl shadow-sm divide-y divide-slate-200">
+            <div className=" bg-stone-200 border  rounded-3xl shadow-sm divide-y divide-slate-200">
               <div className="p-6">
-                <h2 className="text-xl leading-6 font-bold dark:text-slate-100 text-slate-900">
+                <h2 className="text-xl leading-6 font-bold  text-slate-900">
                   Ultimate
                 </h2>
-                <p className="mt-2 text-base dark:text-slate-100  text-slate-700 leading-tight">
+                <p className="mt-2 text-base   text-slate-700 leading-tight">
                   {t("ultimateDesc")}
                 </p>
                 <p className="mt-8">
-                  <span className="text-4xl font-bold dark:text-slate-100  text-slate-900 tracking-tighter">
+                  <span className="text-4xl font-bold   text-slate-900 tracking-tighter">
                     {plans.length > 0 && monthly ? (
                       <NumberTicker
                         value={parseFloat(plans[1]?.price).toFixed(0)}
@@ -520,7 +518,7 @@ export default function Pricing() {
                     {t("currency")}
                   </span>
 
-                  <span className="text-base font-medium dark:text-slate-100  text-slate-500">
+                  <span className="text-base font-medium   text-slate-500">
                     /{t("month")}
                   </span>
                 </p>
@@ -534,13 +532,13 @@ export default function Pricing() {
                       ? () => onCheckout(plans[1].id, plans[1].name)
                       : () => onCheckout(plans[1].id, plans[1].name)
                   }
-                  className="mt-8 block w-full dark:bg-slate-700 bg-stone-600 rounded-md py-2 text-sm font-semibold text-white text-center"
+                  className="mt-8 block w-full bg-stone-600 rounded-md py-2 text-sm font-semibold text-white text-center"
                 >
                   {t("joinAsUltimateUser")}
                 </button>
               </div>
               <div className="pt-6 pb-8 px-6">
-                <h3 className="text-sm font-bold dark:text-slate-100  text-slate-900 tracking-wide uppercase">
+                <h3 className="text-sm font-bold   text-slate-900 tracking-wide uppercase">
                   {t("incl")}
                 </h3>
                 <ul role="list" className="mt-4 space-y-3">
@@ -560,7 +558,7 @@ export default function Pricing() {
                       />
                     </svg>
 
-                    <span className="text-base dark:text-slate-100  text-slate-700">
+                    <span className="text-base   text-slate-700">
                       {t("unlimited")}
                     </span>
                   </li>
@@ -581,7 +579,7 @@ export default function Pricing() {
                       />
                     </svg>
 
-                    <span className="text-base dark:text-slate-100  text-slate-700">
+                    <span className="text-base   text-slate-700">
                       50MB {t("fileSizeLimit")}
                     </span>
                   </li>
@@ -601,9 +599,7 @@ export default function Pricing() {
                       />
                     </svg>
 
-                    <span className="text-base dark:text-slate-100  text-slate-700">
-                      GPT-4
-                    </span>
+                    <span className="text-base   text-slate-700">GPT-4</span>
                   </li>
                   <li className="flex space-x-3">
                     <svg
@@ -621,7 +617,7 @@ export default function Pricing() {
                       />
                     </svg>
 
-                    <span className="text-base dark:text-slate-100  text-slate-700">
+                    <span className="text-base   text-slate-700">
                       {t("newFeatureEarlyAccess")}
                     </span>
                   </li>
@@ -641,7 +637,7 @@ export default function Pricing() {
                       />
                     </svg>
 
-                    <span className="text-base dark:text-slate-100  text-slate-700">
+                    <span className="text-base   text-slate-700">
                       {t("customerSupport")} (email)
                     </span>
                   </li>
@@ -661,7 +657,7 @@ export default function Pricing() {
                       />
                     </svg>
 
-                    <span className="text-base dark:text-slate-100  text-slate-700">
+                    <span className="text-base   text-slate-700">
                       Google docs integration
                     </span>
                   </li> */}
@@ -681,7 +677,7 @@ export default function Pricing() {
                       />
                     </svg>
 
-                    <span className="text-base dark:text-slate-100  text-slate-700">
+                    <span className="text-base   text-slate-700">
                       {t("enhance")}
                     </span>
                   </li>

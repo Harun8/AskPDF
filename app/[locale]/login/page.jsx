@@ -69,15 +69,14 @@ export default function LoginPage() {
   // };
   async function signInWithGoogle() {
     const currentUrl = new URL(window.location.href);
-    const source = currentUrl.searchParams.get('source');
-  
+    const source = currentUrl.searchParams.get("source");
+
     // Set the base URL for redirection
-    const baseUrl = 'http://localhost:3000';
-  
+    const baseUrl = "http://localhost:3000";
+
     // Define the redirect URL based on the source
-    const redirectTo = source === 'extension'
-      ? `${baseUrl}/`
-      : `${baseUrl}/en/chromeEx`;
+    const redirectTo =
+      source === "extension" ? `${baseUrl}/` : `${baseUrl}/en/chromeEx`;
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
@@ -111,11 +110,12 @@ export default function LoginPage() {
               onSubmit={otpAuth}
               link="signin"
               title={t("login.login")}
-              redirect={t("login.loginText")}></Forms>
+              redirect={t("login.loginText")}
+            ></Forms>
           </div>
           <div className=" flex justify-center"></div>
         </div>
-        <div className="hidden md:flex md:justify-center md:items-center md:p-12 md:bg-blue-200 md:dark:bg-blue-900 ">
+        <div className="hidden md:flex md:justify-center md:items-center md:p-12 md:bg-blue-200  ">
           <div className="flex justify-center">
             {" "}
             {buttonCliked

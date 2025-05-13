@@ -37,37 +37,34 @@ const MyChats = () => {
     };
     getUser();
   }, []);
-  
-
 
   return (
     <>
       <title>My chats | AskPDFs</title>
-    <div className="dark:bg-blue-950/60">
-
-
-      <p className="flex justify-center font-medium  font-4xl">
-        {t("myChats")}{" "}
-      </p>
-      <div className="flex justify-center text-black  dark:text-white">
-        <div className="flex justify-center ml-20">
-          <div className="mt-20">
-            {pdfs.map((pdf) => {
-              if (pdf.name == ".emptyFolderPlaceholder") return null;
-              return (
-                <Link
-                prefetch={true}
-                className=" cursor-pointer hover:bg-zinc-400 dark:hover:bg-zinc-700 flex justify-start mb-12 text-lg font-medium  bg-zinc-300 dark:bg-zinc-600 rounded p-6"
-                href={`/chat/${pdf.id}`}
-                key={pdf.id}>
-                  {pdf.name}
-                </Link>
-              );
-            })}
+      <div className="">
+        <p className="flex justify-center font-medium  font-4xl">
+          {t("myChats")}{" "}
+        </p>
+        <div className="flex justify-center text-black  ">
+          <div className="flex justify-center ml-20">
+            <div className="mt-20">
+              {pdfs.map((pdf) => {
+                if (pdf.name == ".emptyFolderPlaceholder") return null;
+                return (
+                  <Link
+                    prefetch={true}
+                    className=" cursor-pointer hover:bg-zinc-400  flex justify-start mb-12 text-lg font-medium  bg-zinc-300 rounded p-6"
+                    href={`/chat/${pdf.id}`}
+                    key={pdf.id}
+                  >
+                    {pdf.name}
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
-            </div>
     </>
   );
 };

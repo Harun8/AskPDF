@@ -54,10 +54,7 @@ const DropDown = ({ logOut }) => {
           Billing
           <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
         </DropdownMenuItem> */}
-          <Link
-            className="dark:text-zinc-200 hover:text-gray-500 "
-            href="/mychats"
-          >
+          <Link className=" hover:text-gray-500 " href="/mychats">
             <DropdownMenuItem>
               {t("myChats")}
 

@@ -324,7 +324,7 @@ export default function chat() {
       ></ChatNav>
 
       <div className="mx-12 mx-12 flex flex-col lg:grid lg:grid-cols-2">
-        <div className="rounded-lg border-4 dark:border-gray-950 shadow5 ">
+        <div className="rounded-lg border-4  shadow5 ">
           {pdf ? (
             <div className=" p-12 bg-gray h-[800px] overflow-y-auto  ">
               <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>

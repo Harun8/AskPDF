@@ -139,7 +139,7 @@ export default function Home() {
           </Link>
 
           <Link
-            className="text-sm font-['system-ui'] text-gray-700 dark:text-zinc-200 hover:text-gray-500 font-bold"
+            className="text-sm font-['system-ui'] text-gray-700 hover:text-gray-500 font-bold"
             href="/faq"
           >
             <Button onClick={console.log("hest")} variant="nav2" size="newChat">

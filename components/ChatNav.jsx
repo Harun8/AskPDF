@@ -11,11 +11,11 @@ const ChatNav = ({ title, showBtn, btnTitle, redirect }) => {
 
   const t = useTranslations("chat");
   return (
-    <header className="sticky top-0 z-10 backdrop-blur-lg bg-zinc-100/80 dark:bg-slate-800 border-b dark:border-gray-950">
+    <header className="sticky top-0 z-10 backdrop-blur-lg bg-zinc-100/80 border-b">
       <div className="w-full flex items-center justify-between px-4 py-3">
         {/* Left Section */}
         <div className="flex items-center">
-          <div className="mr-6 pl-0 dark:text-white dark:hover:text-zinc-400 text-black cursor-pointer">
+          <div className="mr-6 pl-0 text-black cursor-pointer">
             <svg
               onClick={() => router.push(`/${params.locale}/`)}
               xmlns="http://www.w3.org/2000/svg"
