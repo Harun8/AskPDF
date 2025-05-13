@@ -48,7 +48,7 @@ async function RootLayout({ children, params: { locale } }) {
     try {
       var theme = document.cookie.replace(/(?:(?:^|.*;\\s*)theme\\s*\\=\\s*([^;]*).*$)|^.*$/, "$1");
       if (!theme && window.localStorage) theme = localStorage.getItem("theme");
-      if (!theme) theme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "light";
+      if (!theme) theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
       document.documentElement.classList.add(theme);
     } catch(e) {}
   })();

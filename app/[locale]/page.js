@@ -119,7 +119,7 @@ export default function Home() {
       <title>AskPDFs</title>
 
       <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-screen-md sm:max-w-screen-lg md:max-w-screen-xl lg:max-w-screen-2xl text-center">
-        <h1 className="text-6xl md:text-6xl font-bold font-black py-2">
+        <h1 className="text-6xl md:text-6xl font-bold text-black font-black py-2">
           {t("title")}
         </h1>
         <h1 className="text-6xl md:text-6xl font-bold">{t("titleSecond")}</h1>
