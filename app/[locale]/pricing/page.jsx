@@ -156,7 +156,7 @@ export default function Pricing() {
   //   // setYearly(false);
   // };
 
-  // forhindre i automatisk ændring af button, hvis man doubleklikker på yearly eller monthly buttons
+  // forhindre i automatisk ændring af button, hvis man doubleklikker på yearly eller monthly
   const monthlyPricing = async () => {
     setMonthly(true);
 };
@@ -249,7 +249,8 @@ const yearlyPricing = async () => {
                   <Link
                     data-testid="cypress-freeTierBtn"
                     href="/signin"
-                    className="mt-8 block w-full dark:bg-slate-700 bg-stone-600 rounded-md py-2 text-sm font-semibold text-white text-center"
+                    // ændrede mt-8 til 9 for at matche premium, da premium boksen ikke kunne matche de andre bokse ift. afstand
+                    className="mt-9 block w-full dark:bg-slate-700 bg-stone-600 rounded-md py-2 text-sm font-semibold text-white text-center"
                   >
                     {t("joinAsAFreeUser")}
                   </Link>
@@ -389,9 +390,9 @@ const yearlyPricing = async () => {
                     /{t("month")}
                   </span>
                 </p>
-                <span className=" flex justify-end text-xs text-muted">
-                  {" "}
-                  {!monthly ? t("billedAnually") : ""}
+                {/* h-0 */}
+                <span className={`flex justify-end text-xs text-muted h-0 ${monthly ? "invisible" : "visible"}`}>
+                  {t("billedAnually")}
                 </span>
                 <button
                   onClick={
@@ -399,7 +400,7 @@ const yearlyPricing = async () => {
                       ? () => onCheckout(plans[0].id, plans[0].name)
                       : () => onCheckout(plans[0].id, plans[0].name)
                   }
-                  className="  mt-8 block w-full dark:bg-slate-700 bg-stone-600 rounded-md py-2 text-sm font-semibold text-white text-center"
+                  className="mt-8 block w-full dark:bg-slate-700 bg-stone-600 rounded-md py-2 text-sm font-semibold text-white text-center"
                 >
                   {t("joinAsPremiumUser")}
                 </button>
@@ -541,9 +542,9 @@ const yearlyPricing = async () => {
                     /{t("month")}
                   </span>
                 </p>
-                <span className=" flex justify-end text-xs text-muted">
-                  {" "}
-                  {!monthly ? t("billedAnually") : ""}
+                {/* tilføjelse af h-1 for at matche med de andre*/}
+                <span className={`flex justify-end text-xs text-muted h-1 ${monthly ? "invisible" : "visible"}`}>
+                {t("billedAnually")}
                 </span>
                 <button
                   onClick={
