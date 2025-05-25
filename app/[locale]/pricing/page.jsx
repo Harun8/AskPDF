@@ -151,10 +151,19 @@ export default function Pricing() {
     }
   }
 
+  // const monthlyPricing = async () => {
+  //   setMonthly((prev) => !prev);
+  //   // setYearly(false);
+  // };
+
+  // forhindre i automatisk ændring af button, hvis man doubleklikker på yearly eller monthly buttons
   const monthlyPricing = async () => {
-    setMonthly((prev) => !prev);
-    // setYearly(false);
-  };
+    setMonthly(true);
+};
+
+const yearlyPricing = async () => {
+    setMonthly(false);
+};
   // const yearlyPricing = async () => {
   //   // setYearly(true);
   //   setMonthly(false);
@@ -178,41 +187,49 @@ export default function Pricing() {
               {t("title")}
             </h2>
           </div>
-          <div className="mt-6 relative self-center flex flex-col md:flex-row md:justify-center">
-            <div className="bg-zinc-200 dark:bg-zinc-900 rounded-lg p-0.5  ">
-              <button
-                onClick={monthlyPricing}
-                type="button"
-                className={`${`relative w-1/2 rounded-md py-2 text-xs md:text-sm  font-medium whitespace-nowrap
-            focus:outline-none sm:w-auto sm:px-8 ${
-              monthly ? "bg-slate-50 dark:bg-slate-800 " : ""
-            } border-slate-50 text-slate-900  dark:text-slate-200 shadow-sm`}`}
-              >
-                {t("monthly")}
-              </button>
-              <button
-                onClick={monthlyPricing}
-                type="button"
-                className={`${`relative w-1/2 rounded-md py-2 text-xs md:text-sm  font-medium whitespace-nowrap
-            focus:outline-none sm:w-auto sm:px-8 ${
-              !monthly ? "bg-slate-50  dark:bg-slate-800" : ""
-            } border-slate-50 text-slate-900 dark:text-slate-200 shadow-sm`}`}
-              >
-                {t("yearly")}
-              </button>
-            </div>
-            <div className="grid justify-items-end md:flex  md:items-center">
-              <span className=" bg-stone-400 dark:bg-green-900 font-bold rounded-full text-xs px-6  py-2 ml-3">
-                {t("save")} 28%
-              </span>
-            </div>
-          </div>
+         <div className="flex items-center justify-center mt-4 space-x-4">
+  <div className="inline-flex rounded-md bg-zinc-200 dark:bg-zinc-900 p-0.5">
+    <button
+      onClick={monthlyPricing}
+      className={`w-fit text-center rounded-md py-2 px-10 text-xs md:text-sm font-medium focus:outline-none ${
+        monthly
+          ? "bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-200"
+          : "text-slate-500 dark:text-slate-500"
+      }`}
+    >
+      {t("monthly")}
+    </button>
+    <button
+      onClick={yearlyPricing}
+      className={`w-fit text-center rounded-md py-2 px-10 text-xs md:text-sm font-medium focus:outline-none ${
+        !monthly
+          ? "bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-200"
+          : "text-slate-500 dark:text-slate-500"
+      }`}
+    >
+      {t("yearly")}
+    </button>
+  </div>
+  <span className="bg-stone-400 dark:bg-green-900 font-bold rounded-full text-xs px-6 py-2">
+    {t("save")} 28%
+  </span>
+</div>
+
+{/* /* <div className="grid justify-items-end md:flex  md:items-center"> */}
+{/* <span className="ml-4 bg-stone-400 dark:bg-green-900 font-bold rounded-full text-xs px-6 py-2">
+{t("save")} 28%
+</span>
+{/* <span className="mt-12 space-y-3 md:mt-16 md:space-y-0 md:grid md:grid-cols-3 md:gap-6 md:max-w-5xl md:mx-auto xl:grid-cols-3">
+
+
+</span> */}
 
           <div className="mt-12 space-y-3 md:mt-16 md:space-y-0 md:grid md:grid-cols-3 md:gap-6 md:max-w-5xl md:mx-auto xl:grid-cols-3">
             <div
               data-testid="cypress-FreePlan"
               className=" bg-stone-200 dark:bg-gray-900 	 border  rounded-3xl shadow-sm divide-y divide-slate-200"
             >
+
               <div className="p-6">
                 <h2 className="text-xl leading-6 font-bold dark:text-slate-100 text-slate-900">
                   Starter
