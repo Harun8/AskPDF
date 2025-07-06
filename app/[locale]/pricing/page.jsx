@@ -210,7 +210,8 @@ const yearlyPricing = async () => {
       {t("yearly")}
     </button>
   </div>
-  <span className="bg-stone-400 dark:bg-green-900 font-bold rounded-full text-xs px-6 py-2">
+  
+  <span className="bg-green-500 dark:bg-green-600 text-white font-bold rounded-full text-xs md:text-sm px-4 py-2 shadow-lg animate-bounce transition-all duration-300">
     {t("save")} 28%
   </span>
 </div>
@@ -368,7 +369,9 @@ const yearlyPricing = async () => {
                     {plans.length > 0 && monthly ? (
                       <NumberTicker
                         value={parseFloat(plans[0]?.price).toFixed(0)}
-                        duration={10}
+                        duration={1}
+                        ease="linear"
+
                         // direction="down"
                         // startValue={50}
                         format={(value) => parseFloat(value).toFixed(0)}
@@ -376,7 +379,9 @@ const yearlyPricing = async () => {
                     ) : (
                       <NumberTicker
                         value={(parseFloat(plans[0]?.price) / 12).toFixed(0)}
-                        duration={10}
+                        duration={1}
+                        ease="linear"
+
                         format={(value) => parseFloat(value).toFixed(0)}
                       >
                         {" "}
