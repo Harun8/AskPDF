@@ -117,30 +117,31 @@
   "faq": {
     "faq": "Frequently Asked Questions",
 
-    "anyQuestions": "Any Questions? Look Here",
-    "bodyText": "If you can't find the answer don't hesitate to send a mail to",
-    "password": "Password",
-    "whatIsAskPDF": "What is AskPDF?",
-    "askPDFDescription": "AskPDF is an innovative AI-powered platform that transforms how you interact with PDF documents. Simply upload your PDF and start asking questions - our advanced AI will analyze the content and provide instant, accurate answers.",
+   
+  "anyQuestions": "Any questions? See here",
+  "bodyText": "If you can’t find the answer, feel free to send an email to",
+  "password": "Password",
+  "whatIsAskPDF": "What is AskPDF?",
+  "askPDFDescription": "AskPDF is an innovative AI-powered platform that transforms the way you work with PDF documents. Simply upload your PDF and start asking questions – our advanced AI will analyze the content and provide instant, precise answers.",
+  "subscriptionDifference": "What is the difference between the subscriptions?",
+  "subscriptionDifferenceDescription": "Starter is free and gives access to 1 PDF without advanced features. Premium allows multiple uploads, GPT-4, and support. Ultimate offers unlimited access, large files, early features, and the best AI experience. Our recommendation: choose Starter if you just want to try the platform for free. Choose Premium if you use the PDF assistant regularly and want stronger AI. Choose Ultimate if you need unlimited usage, large files, and access to all features.",
+  
+  "uploadLimit": "Why can’t I upload more PDFs?",
+  "uploadLimitDescription": "This may mean you’ve reached your upload limit.",
 
-    "subscriptionDifference": "What's the difference between the subscriptions?",
-    "subscriptionDifferenceDescription": "The difference between each subscription is shown on the pricing page",
+  "trialPeriod": "Can I get a trial period?",
+  "trialPeriodDescription": "Yes, for the Premium subscription we offer a 7-day trial period.",
 
-    "uploadLimit": "Why can't I upload more PDFs?",
-    "uploadLimitDescription": "You've most likely hit your limit",
+  "fileFormat": "Which file formats are supported?",
+  "fileFormatDescription": "AskPDF currently supports PDF files. We ensure compatibility with most PDF versions and structures, including searchable PDFs.",
 
-    "trialPeriod": "Can I get a trial period?",
-    "trialPeriodDescription": "Yes indeed, for the premium subscription we have a 7-day trial period",
+  "dataPrivacy": "How is my data protected?",
+  "dataPrivacyDescription": "We take data protection seriously. Your uploaded PDFs are handled securely. All data is encrypted during transfer, and we do not share your information with third parties.",
 
-    "fileFormat": "What file formats are supported?",
-    "fileFormatDescription": "AskPDFs currently supports PDF files. We ensure compatibility with most PDF versions and structures, including searchable PDFs.",
+  "accuracy": "How accurate are the AI answers?",
+  "accuracyDescription": "Our AI model provides highly accurate answers based on the content of your PDF. However, as with any AI system, we recommend verifying critical information against the original document. Accuracy depends on factors such as document quality and the clarity of the questions asked."
+},
 
-    "dataPrivacy": "How is my data protected?",
-    "dataPrivacyDescription": "We take data privacy seriously. Your uploaded PDFs are processed securely. All data is encrypted in transit and we do not share your information with third parties.",
-
-    "accuracy": "How accurate are the AI responses?",
-    "accuracyDescription": "Our AI model provides highly accurate responses based on the content of your PDF. However, as with any AI system, we recommend verifying critical information against the original document. The accuracy depends on factors like document quality and clarity of the questions asked."
-  },
 
   "login": {
     "enterMail": "Enter your Email",

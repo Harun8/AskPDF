@@ -120,10 +120,11 @@
     "whatIsAskPDF": "Hvad er AskPDF?",
     "askPDFDescription": "AskPDF er en innovativ AI-drevet platform, der transformerer måden du arbejder med PDF-dokumenter på. Upload blot din PDF og begynd at stille spørgsmål - vores avancerede AI vil analysere indholdet og give øjeblikkelige, præcise svar.",
     "subscriptionDifference": "Hvad er forskellen mellem abonnementerne?",
-    "subscriptionDifferenceDescription": "Forskellen mellem hvert abonnement kan ses på prissiden",
+    "subscriptionDifferenceDescription": "Starter er gratis og giver adgang til 1 PDF uden avancerede funktioner. Premium giver adgang til flere uploads, GPT-4 og support. Ultimate giver ubegrænset adgang, store filer, tidlige funktioner og den bedste AI-oplevelse. Vores anbefaling: vælg Starter, hvis du bare vil prøve platformen gratis. Vælg Premium, hvis du bruger PDF-assistenten regelmæssigt og ønsker stærkere AI. Vælg Ultimate, hvis du har behov for ubegrænset brug, store filer og adgang til alle funktioner. ",
+    
 
     "uploadLimit": "Hvorfor kan jeg ikke uploade flere PDF'er?",
-    "uploadLimitDescription": "Du har sandsynligvis nået din grænse",
+    "uploadLimitDescription": "Dette kan betyde, at du har nået din grænse for uploads.",
 
     "trialPeriod": "Kan jeg få en prøveperiode?",
     "trialPeriodDescription": "Ja, for premium-abonnementet har vi en 7-dages prøveperiode",
