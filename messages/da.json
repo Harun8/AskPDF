@@ -135,7 +135,14 @@
     "dataPrivacyDescription": "Vi tager databeskyttelse alvorligt. Dine uploadede PDF'er behandles sikkert. Alle data er krypteret under overførsel, og vi deler ikke dine oplysninger med tredjeparter.",
 
     "accuracy": "Hvor nøjagtige er AI-svarene?",
-    "accuracyDescription": "Vores AI-model giver meget nøjagtige svar baseret på indholdet af din PDF. Som med ethvert AI-system anbefaler vi dog at verificere kritiske oplysninger mod det originale dokument. Nøjagtigheden afhænger af faktorer som dokumentkvalitet og tydeligheden af de stillede spørgsmål."
+    "accuracyDescription": "Vores AI-model giver meget nøjagtige svar baseret på indholdet af din PDF. Som med ethvert AI-system anbefaler vi dog at verificere kritiske oplysninger mod det originale dokument. Nøjagtigheden afhænger af faktorer som dokumentkvalitet og tydeligheden af de stillede spørgsmål.",
+
+    "lastUpdated": "Sidst opdateret:",
+    "giveFeedback": "Giv feedback",
+    "feedbackTitle": "Din feedback",
+    "feedbackPlaceholder": "Skriv din feedback her...",
+    "cancel": "Anuller",
+    "submit": "Send"
   },
 
   "login": {

@@ -139,7 +139,15 @@
   "dataPrivacyDescription": "We take data protection seriously. Your uploaded PDFs are handled securely. All data is encrypted during transfer, and we do not share your information with third parties.",
 
   "accuracy": "How accurate are the AI answers?",
-  "accuracyDescription": "Our AI model provides highly accurate answers based on the content of your PDF. However, as with any AI system, we recommend verifying critical information against the original document. Accuracy depends on factors such as document quality and the clarity of the questions asked."
+  "accuracyDescription": "Our AI model provides highly accurate answers based on the content of your PDF. However, as with any AI system, we recommend verifying critical information against the original document. Accuracy depends on factors such as document quality and the clarity of the questions asked.",
+  
+  "lastUpdated": "Last updated:",
+  "giveFeedback": "Give feedback",
+    "feedbackTitle": "Your feedback",
+    "feedbackPlaceholder": "Write your feedback here...",
+    "cancel": "Cancel",
+    "submit": "Submit"
+
 },
 
 
