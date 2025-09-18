@@ -85,3 +85,7 @@ export default function Settings() {
     </>
   );
 }
+
+// Change of design in the settings page and management of subscription 
+// New nav and boxes for better user interaction and better visualization. 
+

@@ -201,6 +201,9 @@ const ChatPage = () => {
     }
   };
 
+  // Screen should match every type of devices. Make sure to adjust that. 
+  // Could add some details to the UI 
+
   console.log(params.locale);
   return (
     <>

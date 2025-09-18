@@ -39,13 +39,13 @@ const MyChats = () => {
     getUser();
   }, []);
   
-
+// mere design på mychats page. lav en ny skitse i figma eller wireframe
 
   return (
     <>
       <title>My chats | AskPDFs</title>
     <div className="min-h-screen p-6 dark:bg-blue-950/60">
-
+    <div className="max-w-2xl mx-auto">
 
       <h1 className="text-3xl font-bold text-center mt-4 mb-8 dark:text-white">
         {t("myChats")}{" "}
@@ -56,7 +56,11 @@ const MyChats = () => {
   {pdfs.filter(pdf => pdf.name !== ".emptyFolderPlaceholder").length === 0 ? (
     <p className="text-center text-gray-500 dark:text-gray-300">Ingen tidligere chats</p>
   ) : (
-    pdfs.map((pdf) => (
+    <ul>
+    {pdfs
+    .filter(pdf => pdf.name !== ".emptyFolderPlaceholder")
+    .map((pdf, idx, arr) => (
+      <li key={pdf.id}>
       <Link
         prefetch
         key={pdf.id}
@@ -66,15 +70,23 @@ const MyChats = () => {
         <AiFillFilePdf className="text-red-600 text-2xl" />
         <span className="truncate">{pdf.name}</span>
       </Link>
-    ))
+      {idx < arr.length - 1 && (
+        <hr className="my-2 border-indigo-200 dark:border-indigo-700 opacity-60" />
+      )}
+      </li>
+      ))}
+    </ul>
   )}
-</div>
+
+    </div>
 
         </div>
       </div>
             </div>
+          </div>
+          
     </>
-  );
-};
+  )
+}
 
 export default MyChats;

@@ -38,7 +38,7 @@ const Faq = () => {
         }
       }   
         
-    
+    //ændring af design - ny skitse
     
   return (
     <div className="dark:bg-blue-950 bg-zinc-100">
@@ -72,7 +72,7 @@ const Faq = () => {
                 <summary className="flex items-center justify-between font-medium list-none cursor-pointer">
                     <span>{t("faq.subscriptionDifference")}</span>
                     <span className="transition group-open:rotate-180">
-                        <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor"
+                        <svg fill="none" height="24" shapRendering="geometricPrecision" stroke="currentColor"
                             stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24"
                             width="24" className="dark:stroke-gray-400">
                             <path d="M6 9l6 6 6-6"></path>
@@ -90,7 +90,7 @@ const Faq = () => {
                 <summary className="flex items-center justify-between font-medium list-none cursor-pointer">
                     <span>{t("faq.uploadLimit")}</span>
                     <span className="transition group-open:rotate-180">
-                        <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor"
+                        <svg fill="none" height="24" shapeRendering="geometricPrecision" stroke="currentColor"
                             stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24"
                             width="24" className="dark:stroke-gray-400">
                             <path d="M6 9l6 6 6-6"></path>
@@ -108,7 +108,7 @@ const Faq = () => {
                 <summary className="flex items-center justify-between font-medium list-none cursor-pointer">
                     <span>{t("faq.fileFormat")}</span>
                     <span className="transition group-open:rotate-180">
-                        <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor"
+                        <svg fill="none" height="24" shapeRendering="geometricPrecision" stroke="currentColor"
                             stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24"
                             width="24" className="dark:stroke-gray-400">
                             <path d="M6 9l6 6 6-6"></path>
@@ -126,7 +126,7 @@ const Faq = () => {
                 <summary className="flex items-center justify-between font-medium list-none cursor-pointer">
                     <span>{t("faq.dataPrivacy")}</span>
                     <span className="transition group-open:rotate-180">
-                        <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor"
+                        <svg fill="none" height="24" shapeRendering="geometricPrecision" stroke="currentColor"
                             stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24"
                             width="24" className="dark:stroke-gray-400">
                             <path d="M6 9l6 6 6-6"></path>
@@ -144,7 +144,7 @@ const Faq = () => {
                 <summary className="flex items-center justify-between font-medium list-none cursor-pointer">
                     <span>{t("faq.accuracy")}</span>
                     <span className="transition group-open:rotate-180">
-                        <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor"
+                        <svg fill="none" height="24" shapeRendering="geometricPrecision" stroke="currentColor"
                             stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24"
                             width="24" className="dark:stroke-gray-400">
                             <path d="M6 9l6 6 6-6"></path>
