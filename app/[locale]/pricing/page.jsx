@@ -35,8 +35,8 @@ export default function Pricing() {
       }
       console.log("session", session);
 
-      console.log("session", session.user.id);
-      setUserId(session.user.id);
+      console.log("session", session.session.user.id);
+      setUserId(session.session.user.id);
     };
 
     getUser();
