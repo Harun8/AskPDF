@@ -72,7 +72,7 @@ export default function LoginPage() {
     const source = currentUrl.searchParams.get("source");
 
     // Set the base URL for redirection
-    const baseUrl = "https://askpdfs.io" || "http://localhost:3000";
+    const baseUrl = "http://localhost:3000";
 
     // Define the redirect URL based on the source
     const redirectTo =
@@ -80,7 +80,7 @@ export default function LoginPage() {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: redirectTo,
+        // redirectTo: redirectTo,
         queryParams: {
           access_type: "offline",
           prompt: "consent",
